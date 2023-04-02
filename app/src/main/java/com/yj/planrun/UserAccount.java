@@ -7,7 +7,7 @@ public class UserAccount {
     
     private  String idToken;    //Firebase Uid 고유토큰정보
     private String emailId;     //email아이디
-    private String password;    //비밀번호
+    private String password;    //비밀번호  //
 
     public UserAccount(){}//파이어베이스는 빈 생성자를 지정안하면 데이터베이스에서 오류남
 
