@@ -25,7 +25,7 @@ public class MyPageActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //로그아웃하기
                 mFirebaseAuth.signOut();
-                Intent intent = new Intent(MyPageActivity.this, MainActivity.class);
+                Intent intent = new Intent(MyPageActivity.this, StartActivity.class);
                 startActivity(intent);
                 finish();
             }
