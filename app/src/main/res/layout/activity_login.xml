@@ -11,38 +11,85 @@
 
     >
 
-    <ImageView
-        android:layout_width="320dp"
-        android:layout_height="84dp"
-
-        android:src="@drawable/logoname"
-        android:visibility="visible" />
+    <TextView
+        android:textAlignment="center"
+        android:text="Login"
+        android:textSize="50dp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:layout_marginTop="125dp"
+        android:layout_marginBottom="50dp"
+        android:textAllCaps="false"
+        android:letterSpacing="0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
     <EditText
         android:id="@+id/et_email"
         android:layout_width="332dp"
         android:layout_height="wrap_content"
-        android:backgroundTint="#bbb"
-        android:hint="아이디 입력"
+        android:backgroundTint="#ebebeb"
+        android:layout_marginBottom="40dp"
+        android:hint="  Email"
+        android:textColorHint="#CFC0C0C0"
+        android:textStyle="bold"
         android:inputType="textEmailAddress" />
 
     <EditText
         android:id="@+id/et_pwd"
         android:layout_width="332dp"
         android:layout_height="wrap_content"
-        android:hint="비밀번호 입력"
-        android:backgroundTint="#bbb"
+        android:hint="  Password"
+        android:backgroundTint="#ebebeb"
+        android:textStyle="bold"
+        android:textColorHint="#CEC0C0C0"
         android:inputType="textPassword" />
+    <CheckBox
+        android:id="@+id/auto_login"
+        android:text="자동 로그인"
+        android:textColor="@color/white"
+        android:layout_marginBottom="28dp"
+        android:layout_width="332dp"
+        android:layout_height="wrap_content" />
     <Button
         android:id="@+id/btn_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="로그인"/>
-    <Button
-        android:id="@+id/btn_register"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="회원가입"/>
+        android:layout_width="305dp"
+        android:layout_height="58dp"
+        android:layout_marginVertical="1dp"
+        android:backgroundTint="#75a9f9"
+        android:text="Login"
+        android:letterSpacing="0"
+        android:textStyle="bold"
+        android:textAllCaps="false"
+        android:textSize="18dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="7dp"
+        android:gravity="center_horizontal">
 
+        <Button
+            android:id="@+id/btn_findpwd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#00ff0000"
+            android:layout_marginRight="50dp"
+            android:textAllCaps="false"
+            android:textColor="#989eb1"
+            android:textSize="13dp"
+            android:text="Forgot Password?" />
+        <Button
+            android:id="@+id/btn_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#00ff0000"
+            android:textAllCaps="false"
+            android:textColor="#989eb1"
+            android:textSize="13dp"
+            android:text="Sign up" />
+
+    </LinearLayout>
 
 </LinearLayout>
