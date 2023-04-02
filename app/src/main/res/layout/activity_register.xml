@@ -6,41 +6,53 @@
     android:layout_height="match_parent"
     tools:context=".RegisterActivity"
     android:background="@drawable/background"
-    android:orientation="vertical"
-    android:gravity="center_horizontal"
+    android:orientation="vertical">
 
-    >
-
-    <ImageView
-        android:layout_width="320dp"
-        android:layout_height="84dp"
-
-        android:src="@drawable/logoname"
-        android:visibility="visible" />
     <TextView
+        android:textAlignment="center"
+        android:text="Sign up"
+        android:textSize="40dp"
+        android:textColor="#C4FFFFFF"
+        android:textStyle="bold"
+        android:layout_marginTop="200dp"
+        android:layout_marginBottom="50dp"
+        android:layout_marginLeft="40dp"
+        android:textAllCaps="false"
+        android:letterSpacing="0"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="회원가입"
-        android:textSize="20dp"
-        android:textColor="#fff"/>
+        android:layout_height="wrap_content" />
     <EditText
         android:id="@+id/et_email"
-        android:layout_width="match_parent"
+        android:layout_width="332dp"
         android:layout_height="wrap_content"
-        android:hint="email 입력"
-        android:background="#bbb"/>
+        android:backgroundTint="#ebebeb"
+        android:layout_marginLeft="40dp"
+        android:layout_marginBottom="40dp"
+        android:hint="  Email"
+        android:textColorHint="#CFC0C0C0"
+        android:textStyle="bold"
+        android:inputType="textEmailAddress" />
     <EditText
         android:id="@+id/et_pwd"
-        android:layout_width="match_parent"
+        android:layout_width="332dp"
         android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:hint="비밀번호 입력"
-        android:background="#bbb"/>
+        android:layout_marginLeft="40dp"
+        android:hint="  Password"
+        android:backgroundTint="#ebebeb"
+        android:textStyle="bold"
+        android:textColorHint="#CEC0C0C0"
+        android:inputType="textPassword" />
     <Button
         android:id="@+id/btn_register"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="가입"/>
-
+        android:layout_gravity="center_horizontal"
+        android:layout_width="306dp"
+        android:layout_height="58dp"
+        android:layout_marginTop="60dp"
+        android:backgroundTint="#75a9f9"
+        android:textAllCaps="false"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:letterSpacing="0"
+        android:text="Sign up"/>
 
 </LinearLayout>
