@@ -7,26 +7,33 @@
     tools:context=".MainActivity"
     android:background="@drawable/background"
     android:orientation="vertical"
-    android:gravity="center"
-
-    >
+    android:gravity="center" >
 
     <ImageView
-        android:layout_width="272dp"
-        android:layout_height="499dp"
+        android:layout_width="300dp"
+        android:layout_height="600dp"
         android:layout_weight="10"
-        android:src="@drawable/logoname"
+        android:src="@drawable/logoname1"
         android:visibility="visible" />
 
     <Button
         android:id="@+id/btn_login"
-        android:layout_width="230dp"
-        android:layout_height="60dp"
-        android:layout_marginVertical="20dp"
-        android:backgroundTint="#04f"
+        android:layout_width="306dp"
+        android:layout_height="58dp"
+        android:layout_marginVertical="1dp"
+        android:backgroundTint="#75a9f9"
         android:text="Login"
-        android:textSize="23dp" />
-
+        android:letterSpacing="0"
+        android:textStyle="bold"
+        android:textAllCaps="false"
+        android:textSize="18dp" />
+    <TextView
+        android:textAlignment="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="or use one of your social profiles"
+        android:layout_marginBottom="10dp"
+        android:textColor="#989eb1"/>
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="185dp"
@@ -35,15 +42,15 @@
 
         <ImageButton
             android:layout_width="150dp"
-            android:layout_height="50dp"
-            android:layout_marginRight="40dp"
+            android:layout_height="51dp"
+            android:layout_marginRight="10dp"
             android:adjustViewBounds="true"
-            android:background="@drawable/naverbutton"
+            android:background="@drawable/naverbtn"
             android:scaleType="fitCenter" />
 
         <ImageButton
             android:layout_width="150dp"
-            android:layout_height="50dp"
+            android:layout_height="48dp"
             android:adjustViewBounds="true"
             android:background="@drawable/kakaobutton"
             android:scaleType="fitCenter" />
