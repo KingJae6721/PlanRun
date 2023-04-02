@@ -30,6 +30,7 @@
         android:backgroundTint="#ebebeb"
         android:layout_marginBottom="40dp"
         android:hint="  Email"
+        android:textColor="@color/white"
         android:textColorHint="#CFC0C0C0"
         android:textStyle="bold"
         android:inputType="textEmailAddress" />
@@ -41,6 +42,7 @@
         android:hint="  Password"
         android:backgroundTint="#ebebeb"
         android:textStyle="bold"
+        android:textColor="@color/white"
         android:textColorHint="#CEC0C0C0"
         android:inputType="textPassword" />
     <CheckBox

@@ -29,6 +29,7 @@
         android:layout_marginLeft="40dp"
         android:layout_marginBottom="40dp"
         android:hint="  Email"
+        android:textColor="@color/white"
         android:textColorHint="#CFC0C0C0"
         android:textStyle="bold"
         android:inputType="textEmailAddress" />
@@ -38,6 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="40dp"
         android:hint="  Password"
+        android:textColor="@color/white"
         android:backgroundTint="#ebebeb"
         android:textStyle="bold"
         android:textColorHint="#CEC0C0C0"
