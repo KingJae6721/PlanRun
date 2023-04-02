@@ -19,17 +19,18 @@
         android:visibility="visible" />
 
     <EditText
-        android:inputType="textEmailAddress"
-        android:layout_width="match_parent"
+        android:layout_width="332dp"
         android:layout_height="wrap_content"
+        android:backgroundTint="#bbb"
         android:hint="아이디 입력"
-        android:background="#bbb"/>
+        android:inputType="textEmailAddress" />
+
     <EditText
-        android:inputType="textPassword"
-        android:layout_width="match_parent"
+        android:layout_width="332dp"
         android:layout_height="wrap_content"
         android:hint="비밀번호 입력"
-        android:background="#bbb"/>
+        android:backgroundTint="#bbb"
+        android:inputType="textPassword" />
     <Button
         android:id="@+id/btn_login"
         android:layout_width="wrap_content"
