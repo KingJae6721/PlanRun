@@ -19,6 +19,7 @@
         android:visibility="visible" />
 
     <EditText
+        android:id="@+id/et_email"
         android:layout_width="332dp"
         android:layout_height="wrap_content"
         android:backgroundTint="#bbb"
@@ -26,6 +27,7 @@
         android:inputType="textEmailAddress" />
 
     <EditText
+        android:id="@+id/et_pwd"
         android:layout_width="332dp"
         android:layout_height="wrap_content"
         android:hint="비밀번호 입력"

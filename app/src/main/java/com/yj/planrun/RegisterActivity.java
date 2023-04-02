@@ -19,12 +19,12 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class RegisterActivity extends AppCompatActivity {
+public class    RegisterActivity extends AppCompatActivity {
 
-    private  FirebaseAuth mFirebaseAuth; //파이어베이스 인증처리
-    private DatabaseReference mDatabaseRef;
-    private EditText mEtEmail, mEtPwd;
-    private Button mBtnRegister;
+    private  FirebaseAuth mFirebaseAuth;    //파이어베이스 인증처리
+    private DatabaseReference mDatabaseRef; //실시간 데이터베이스
+    private EditText mEtEmail, mEtPwd;      //회원가입 입력필드
+    private Button mBtnRegister;            //회원가입 버튼
 
 
     @Override
@@ -37,9 +37,10 @@ public class RegisterActivity extends AppCompatActivity {
         mFirebaseAuth= FirebaseAuth.getInstance();
         mDatabaseRef= FirebaseDatabase.getInstance().getReference("PlanRun");//루트설정
 
+        mEtEmail = findViewById(R.id.et_email);
         mEtPwd = findViewById(R.id.et_pwd);
         mBtnRegister =findViewById(R.id.btn_register);
-        mEtEmail = findViewById(R.id.et_email);
+
 
         mBtnRegister.setOnClickListener(new View.OnClickListener() {
             
