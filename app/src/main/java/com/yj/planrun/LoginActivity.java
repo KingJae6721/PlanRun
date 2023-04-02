@@ -1,6 +1,7 @@
 package com.yj.planrun;
 
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -22,6 +23,7 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mFirebaseAuth;         //파이어베이스 인증
     private DatabaseReference mDatabaseRef;     //실시간 데이터베이스
     private EditText mEtEmail, mEtPwd;          //로그인 입력필드
+    private Button mBtnFindpwd, mBtnRegister, mBtnLogin;
 
 
     @Override
@@ -35,7 +37,13 @@ public class LoginActivity extends AppCompatActivity {
         mEtEmail = findViewById(R.id.et_email);
         mEtPwd = findViewById(R.id.et_pwd);
 
-        Button mBtnLogin = findViewById(R.id.btn_login);
+        mBtnLogin = findViewById(R.id.btn_login);
+        mBtnFindpwd = findViewById(R.id.btn_findpwd);
+        mBtnRegister = findViewById(R.id.btn_register);
+
+        mBtnRegister.setPaintFlags(mBtnRegister.getPaintFlags()|Paint.UNDERLINE_TEXT_FLAG); // 글자 밑줄 생성 코드
+        mBtnFindpwd.setPaintFlags(mBtnFindpwd.getPaintFlags()|Paint.UNDERLINE_TEXT_FLAG); // 글자 밑줄 생성 코드
+
         mBtnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
