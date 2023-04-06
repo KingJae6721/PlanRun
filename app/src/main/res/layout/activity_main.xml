@@ -6,43 +6,23 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity"
     android:background="@drawable/background"
-    android:orientation="vertical"
-    android:gravity="bottom"
-        >
-    <LinearLayout
-        android:layout_marginBottom="50dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
-        <Button
-            android:layout_weight="1"
-            android:id="@+id/btn_main"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="메인"
-            />
-        <Button
-            android:layout_weight="1"
-            android:id="@+id/btn_calender"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="캘린더"
-            />
-        <Button
-            android:layout_weight="1"
-            android:id="@+id/btn_cmnity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="커뮤니티"
-            />
-        <Button
-            android:layout_weight="1"
-            android:id="@+id/btn_mypage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="마이페이지"
-            />
-    </LinearLayout>
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:id="@+id/containers">
+    </FrameLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigationview"
+        android:layout_width="match_parent"
+        android:layout_height="53dp"
+        android:layout_gravity="bottom"
+        app:itemBackground="@color/white"
+        app:itemIconSize="@dimen/design_bottom_navigation_height"
+        app:labelVisibilityMode="labeled"
+        app:menu="@menu/bottom_menu" />
 
 </LinearLayout>
