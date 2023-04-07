@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,7 +19,8 @@ public class MainActivity extends AppCompatActivity {
     private Button mBtnMain;
     private Button mBtnCalender;
     private Button mBtnCommunity;
-    private Button mBtnMyPage;
+    private final long finishtimeed = 1000;
+    private long presstime = 0;
 
     MainFragment mainFragment; //네비게이션 바(하단바)
     CalendarFragment calendarFragment;
@@ -66,5 +68,20 @@ public class MainActivity extends AppCompatActivity {
             }
         }); //네비게이션 바(하단바) end
 
+    }
+    @Override
+    public void onBackPressed() {
+        long tempTime = System.currentTimeMillis();
+        long intervalTime = tempTime - presstime;
+
+        if (0 <= intervalTime && finishtimeed >= intervalTime)
+        {
+            finishAffinity();
+        }
+        else
+        {
+            presstime = tempTime;
+            Toast.makeText(getApplicationContext(), "한번더 누르시면 앱이 종료됩니다", Toast.LENGTH_SHORT).show();
+        }
     }
 }
