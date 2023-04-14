@@ -27,12 +27,19 @@
         android:layout_height="wrap_content"
         android:backgroundTint="#ebebeb"
         android:layout_marginLeft="40dp"
-        android:layout_marginBottom="40dp"
+
         android:hint="  Email"
         android:textColor="@color/white"
         android:textColorHint="#CFC0C0C0"
         android:textStyle="bold"
         android:inputType="textEmailAddress" />
+    <TextView
+        android:id="@+id/email_condition"
+        android:layout_width="332dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:layout_marginLeft="40dp"/>
+
     <EditText
         android:id="@+id/et_pwd"
         android:layout_width="332dp"
@@ -44,6 +51,16 @@
         android:textStyle="bold"
         android:textColorHint="#CEC0C0C0"
         android:inputType="textPassword" />
+
+    <TextView
+        android:id="@+id/pwd_condition"
+        android:layout_width="332dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"/>
+
+
+
+
     <Button
         android:id="@+id/btn_register"
         android:layout_gravity="center_horizontal"

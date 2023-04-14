@@ -1,10 +1,14 @@
 package com.yj.planrun;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.QuickContactBadge;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -25,8 +29,9 @@ public class    RegisterActivity extends AppCompatActivity {
     private DatabaseReference mDatabaseRef; //실시간 데이터베이스
     private EditText mEtEmail, mEtPwd;      //회원가입 입력필드
     private Button mBtnRegister;            //회원가입 버튼
+    private TextView mPwdCondition,mEmailCondition;
 
-
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate( Bundle savedInstanceState) {
 
@@ -40,7 +45,62 @@ public class    RegisterActivity extends AppCompatActivity {
         mEtEmail = findViewById(R.id.et_email);
         mEtPwd = findViewById(R.id.et_pwd);
         mBtnRegister =findViewById(R.id.btn_register);
+        mPwdCondition = findViewById(R.id.pwd_condition);
+        mEmailCondition = findViewById(R.id.email_condition);
 
+        mEtEmail.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String email = s.toString();
+                String Pattern = "^[_a-zA-Z0-9-]+(\\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*(\\.[a-zA-Z]{2,})$";
+                if (email.matches(Pattern)) {
+                    // 이메일 주소 형식이 올바른 경우
+                    mEmailCondition.setText("조건에 맞습니다.");
+                    mEmailCondition.setTextColor(getResources().getColor(R.color.green));
+                } else {
+                    // 이메일 주소 형식이 올바르지 않은 경우
+                    mEmailCondition.setText("잘못된 이메일 주소입니다.");
+                    mEmailCondition.setTextColor(getResources().getColor(R.color.red));
+                }
+
+            }
+            @Override
+            public void afterTextChanged(Editable s) {}
+        });
+
+        mEtPwd.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String password = s.toString();
+                String pattern = "^(?=.*[0-9])(?=.*[a-z])(?=\\S+$).{8,}$";
+
+                if (password.matches(pattern)) {
+                    mPwdCondition.setText("조건에 맞습니다.");
+                    mPwdCondition.setTextColor(getResources().getColor(R.color.green));
+                } else if (password.length() < 8) {
+                    mPwdCondition.setText("최소 8자 이상이어야 합니다.");
+                    mPwdCondition.setTextColor(getResources().getColor(R.color.red));
+                } else if (!password.matches(".*[0-9].*")) {
+                    mPwdCondition.setText("숫자가 적어도 하나 이상 포함되어야 합니다.");
+                    mPwdCondition.setTextColor(getResources().getColor(R.color.red));
+                } else if (!password.matches(".*[a-z].*")) {
+                    mPwdCondition.setText("소문자가 적어도 하나 이상 포함되어야 합니다.");
+                    mPwdCondition.setTextColor(getResources().getColor(R.color.red));
+                } /*else if (!password.matches(".*[@#$%^&+=!].*")) {
+                    mPwdCondition.setText("특수문자가 적어도 하나 이상 포함되어야 합니다.");
+                    mPwdCondition.setTextColor(getResources().getColor(R.color.red));
+                }*/else {
+                    mPwdCondition.setText("조건에 맞지 않습니다.");
+                    mPwdCondition.setTextColor(getResources().getColor(R.color.red));
+                }
+            }
+            @Override
+            public void afterTextChanged(Editable s) {}
+        });
 
         mBtnRegister.setOnClickListener(new View.OnClickListener() {
             
@@ -50,6 +110,26 @@ public class    RegisterActivity extends AppCompatActivity {
                 //회원가입 처리 시작
                 String strEmail = mEtEmail.getText().toString();
                 String strPwd = mEtPwd.getText().toString();
+
+                //아이디와 비밀번호가 입력되었는지 확인
+                if (strEmail.isEmpty()) {
+                    Toast.makeText(RegisterActivity.this, "아이디를 입력해 주세요", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (strPwd.isEmpty()) {
+                    Toast.makeText(RegisterActivity.this, "비밀번호를 입력해 주세요", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                //이메일 형식이 맞는지 확인
+                if (!isValidEmail(strEmail)) {
+                    Toast.makeText(RegisterActivity.this, "이메일 형식에 맞지 않는 메일 주소입니다", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                //비밀번호 형식이 맞는지 확인
+                if (!isValidPassword(strPwd)) {
+                    Toast.makeText(RegisterActivity.this, "비밀번호 형식이 맞지 않습니다", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 //Firebase Auth진행
                 mFirebaseAuth.createUserWithEmailAndPassword(strEmail, strPwd).addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>()
@@ -77,7 +157,17 @@ public class    RegisterActivity extends AppCompatActivity {
 
             }
         });
-
     }
+    private boolean isValidEmail(String email){
+        String Pattern = "^[_a-zA-Z0-9-]+(\\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*(\\.[a-zA-Z]{2,})$";
+        return email.matches(Pattern);
+    }
+    private boolean isValidPassword(String password) {
+        //정규식               0~9숫자포함    a~z포함    A~Z포함       특수문자포함   공백포함X   8자리이상
+        // String pattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{8,}$";
+        String pattern = "^(?=.*[0-9])(?=.*[a-z])(?=\\S+$).{8,}$";
+        return password.matches(pattern);
+    }
+
 
 }

@@ -29,46 +29,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button mBtnFindpwd, mBtnRegister, mBtnLogin;
     private CheckBox auto_login;
     private String loginId, loginPwd;
-
-
-    protected void onResume(){
-        super.onResume();
-        SharedPreferences sharedPreferences = getSharedPreferences("sharedPreferences", Activity.MODE_PRIVATE);
-        loginId = sharedPreferences.getString("userId", null);
-        loginPwd = sharedPreferences.getString("passwordNo", null);
-
-        if (loginId != null && loginPwd != null) {
-            // 자동 로그인 데이터가 있으면 로그인 시도
-            mFirebaseAuth.signInWithEmailAndPassword(loginId, loginPwd).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if (task.isSuccessful()) {
-                        // 로그인 성공시 자동 로그인 체크박스 상태 저장
-                        if (auto_login.isChecked()) {
-                            SharedPreferences.Editor editor = sharedPreferences.edit();
-                            editor.putString("userId", loginId);
-                            editor.putString("passwordNo", loginPwd);
-                            editor.apply();
-                        }
-
-                        // 로그인 성공시 MyPageActivity.class로 인텐트 전달
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        intent.putExtra("id", loginId);
-                        startActivity(intent);
-                        finish(); // 현재 액티비티 종료
-                    } else {
-                        Toast.makeText(LoginActivity.this, "자동 로그인 실패", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
-        } else {
-            // 자동 로그인 데이터가 없으면 자동 로그인 체크박스 해제
-            if (auto_login != null) {
-                auto_login.setChecked(false);
-            }
-        }
-    }
-
+    private boolean autoLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,9 +65,11 @@ public class LoginActivity extends AppCompatActivity {
                                 SharedPreferences.Editor autoLoginEdit = sharedPreferences.edit();
                                 autoLoginEdit.putString("userId", strEmail);
                                 autoLoginEdit.putString("passwordNo", strPwd);
-                                autoLoginEdit.commit();
+                                autoLoginEdit.putBoolean("checkbox_state", auto_login.isChecked());
+                                autoLoginEdit.apply();
                             }
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                            intent.putExtra("checkbox_state", auto_login.isChecked());
                             startActivity(intent);
                             finish(); //현재 액티비티 파괴
                         } else {
