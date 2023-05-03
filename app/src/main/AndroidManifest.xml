@@ -33,6 +33,9 @@
         <activity android:name=".LoginActivity" />
         <activity android:name=".CalenderActivity" />
         <activity android:name=".RegisterActivity" />
+
     </application>
+
+
 
 </manifest>

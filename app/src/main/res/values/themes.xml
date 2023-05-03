@@ -12,7 +12,9 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <item name="android:windowTranslucentStatus">true</item>
-        <item name="android:windowTranslucentNavigation">true</item>
+        <!--false로 하니 달라졌음 확인해야함-->
+        <item name="android:windowTranslucentNavigation">false</item>
+
         <!-- Customize your theme here. -->
         <item name="windowNoTitle">true</item>
     </style>
