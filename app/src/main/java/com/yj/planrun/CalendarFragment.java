@@ -18,6 +18,10 @@ import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.prolificinteractive.materialcalendarview.CalendarDay;
+import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
+import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 
@@ -25,7 +29,7 @@ public class CalendarFragment extends Fragment {
 
     public String readDay = null;
     public String str = null;
-    public CalendarView calendarView;
+    public MaterialCalendarView calendarView;
     public Button cha_Btn, del_Btn, save_Btn;
     public TextView diaryTextView, textView2, textView3;
     public EditText contextEditText;
@@ -41,15 +45,13 @@ public class CalendarFragment extends Fragment {
         del_Btn = view.findViewById(R.id.del_Btn);
         cha_Btn = view.findViewById(R.id.cha_Btn);
         textView2 = view.findViewById(R.id.textView2);
-        textView3 = view.findViewById(R.id.textView3);
         contextEditText = view.findViewById(R.id.contextEditText);
 
 
-        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener()
-        {
+        calendarView.setOnDateChangedListener(new OnDateSelectedListener() {
             @Override
-            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth)
-            {
+            public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
+                int year = 0, month = 0, dayOfMonth = 0;
                 diaryTextView.setVisibility(View.VISIBLE);
                 save_Btn.setVisibility(View.VISIBLE);
                 contextEditText.setVisibility(View.VISIBLE);
@@ -61,6 +63,7 @@ public class CalendarFragment extends Fragment {
                 checkDay(year, month, dayOfMonth);
             }
         });
+
         save_Btn.setOnClickListener(new View.OnClickListener()
         {
             @Override
