@@ -11,6 +11,7 @@ import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -37,9 +38,12 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -103,8 +107,7 @@ public class RunActivity extends AppCompatActivity implements OnMapReadyCallback
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
 
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map_fragment);
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map_fragment);
         mapFragment.getMapAsync(this);
     }
 
@@ -181,7 +184,9 @@ public class RunActivity extends AppCompatActivity implements OnMapReadyCallback
             }
         });
     }
-
+    private LatLng startLatLng = new LatLng(0, 0);
+    private LatLng endLatLng = new LatLng(0, 0);
+    List<Polyline>polylines =new ArrayList<>();
     LocationCallback locationCallback = new LocationCallback() {
         @Override
         public void onLocationResult(LocationResult locationResult) {
@@ -192,9 +197,11 @@ public class RunActivity extends AppCompatActivity implements OnMapReadyCallback
             if (locationList.size() > 0) {
                 location = locationList.get(locationList.size() - 1);
                 //location = locationList.get(0);
-
+                double latitude =location.getLatitude();
+                double longtitude=location.getLongitude();
                 currentPosition
                         = new LatLng(location.getLatitude(), location.getLongitude());
+
 
 
                 String markerTitle = getCurrentAddress(currentPosition);
@@ -208,6 +215,9 @@ public class RunActivity extends AppCompatActivity implements OnMapReadyCallback
                 setCurrentLocation(location, markerTitle, markerSnippet);
 
                 mCurrentLocatiion = location;
+                endLatLng = new LatLng(latitude, longtitude);
+                drawPath();
+                startLatLng = new LatLng(latitude, longtitude);
             }
 
 
@@ -215,7 +225,11 @@ public class RunActivity extends AppCompatActivity implements OnMapReadyCallback
 
     };
 
-
+    private void drawPath(){        //polyline을 그려주는 메소드
+        PolylineOptions options = new PolylineOptions().add(startLatLng).add(endLatLng).width(15).color(Color.BLACK).geodesic(true);
+        polylines.add(mMap.addPolyline(options));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(startLatLng, 18));
+    }
 
     private void startLocationUpdates() {
 
