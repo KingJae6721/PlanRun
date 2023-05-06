@@ -27,6 +27,17 @@ public class MainFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+        Button viewAll = (Button) view.findViewById(R.id.viewAll);
+        viewAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), ChallengeActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
         return view;
     }
 }
