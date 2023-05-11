@@ -119,21 +119,22 @@
         </LinearLayout>
 
     </LinearLayout>
+
     <Button
-        android:layout_gravity="end"
-        android:layout_marginTop="150dp"
-        android:layout_marginRight="40dp"
-        android:minWidth="0dp"
-        android:minHeight="0dp"
         android:id="@+id/btn_logout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:letterSpacing="0"
+        android:layout_gravity="end"
+        android:layout_marginTop="40dp"
+        android:layout_marginRight="40dp"
         android:background="@android:color/transparent"
-        android:textStyle="bold"
+        android:letterSpacing="0"
+        android:minWidth="0dp"
+        android:minHeight="0dp"
+        android:text="로그아웃"
         android:textAllCaps="false"
         android:textColor="#D6D6D8"
         android:textSize="20dp"
-        android:text="로그아웃" />
+        android:textStyle="bold" />
 
 </LinearLayout>

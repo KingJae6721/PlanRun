@@ -37,14 +37,14 @@ android {
 
 dependencies {
     implementation 'com.prolificinteractive:material-calendarview:1.4.3'
-    implementation 'com.google.android.material:material:1.4.0'
+    implementation 'com.google.android.material:material:1.8.0'
     implementation 'de.hdodenhof:circleimageview:3.1.0' //Circle ImageView
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.8.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'com.android.volley:volley-cronet:1.2.1'
-    implementation 'com.google.firebase:firebase-auth-ktx:21.2.0'
-    implementation 'com.google.firebase:firebase-database-ktx:20.1.0'
+    implementation 'com.google.firebase:firebase-auth-ktx:22.0.0'
+    implementation 'com.google.firebase:firebase-database-ktx:20.2.1'
     implementation 'com.google.android.gms:play-services-maps:18.1.0'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
@@ -66,10 +66,11 @@ dependencies {
 
     //구글맵 인터페이스 추가
 
-    implementation 'com.google.android.gms:play-services-base:17.1.0'
-    implementation 'com.google.android.gms:play-services-maps:16.0.0'
+    implementation 'com.google.android.gms:play-services-base:18.2.0'
+    implementation 'com.google.android.gms:play-services-maps:18.1.0'
+    //noinspection GradleDynamicVersion
     implementation 'com.google.maps.android:android-maps-utils:0.5+'
-    implementation 'com.google.android.gms:play-services-location:17.0.0'
+    implementation 'com.google.android.gms:play-services-location:21.0.1'
     implementation 'com.github.niqo01.rxplayservices:rx-play-services-location:0.4.0'
 
 
