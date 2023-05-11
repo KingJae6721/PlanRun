@@ -66,7 +66,7 @@ public class AppSettingActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         send();
-                        Toast.makeText(getApplicationContext(), "이메일 전송", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "이메일", Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
                     }
                 });
