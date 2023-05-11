@@ -44,6 +44,10 @@
             android:src="@mipmap/ic_launcher_round" />
 
         <TextView
+<<<<<<< HEAD
+=======
+            android:id="@+id/nickname"
+>>>>>>> 3a06389873d176859dd219b081baf6d698cd4b48
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/profile_picture"
