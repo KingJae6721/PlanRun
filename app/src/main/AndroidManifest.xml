@@ -19,9 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PlanRun"
         tools:targetApi="31">
-        <uses-library
-            android:name="org.apache.http.legacy"
-            android:required="false"/>
+
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 
@@ -35,7 +33,7 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyB1Pv42Hvjy69MP8juF3X_iQN9wLZ1T-Kc" />
+            android:value="AIzaSyCVTt8IiCRC7NTASgHqhjavsEd-1sgGerU" />
 
         <activity
             android:name=".RunActivity"
@@ -61,8 +59,6 @@
         <activity android:name=".LoginActivity" />
         <activity android:name=".CalenderActivity" />
         <activity android:name=".RegisterActivity" />
-        <activity android:name=".AppSettingActivity" />
-
     </application>
 
 </manifest>

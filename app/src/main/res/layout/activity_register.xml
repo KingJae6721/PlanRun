@@ -14,7 +14,7 @@
         android:textSize="40dp"
         android:textColor="#C4FFFFFF"
         android:textStyle="bold"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="100dp"
         android:layout_marginBottom="50dp"
         android:layout_marginLeft="40dp"
         android:textAllCaps="false"
@@ -22,12 +22,29 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <EditText
+        android:id="@+id/et_nickname"
+        android:layout_width="332dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#ebebeb"
+        android:layout_marginLeft="40dp"
+        android:hint="  Nickname"
+        android:textColor="@color/white"
+        android:textColorHint="#CFC0C0C0"
+        android:textStyle="bold"
+        android:inputType="textEmailAddress" />
+    <TextView
+        android:id="@+id/nickname_condition"
+        android:layout_width="332dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:layout_marginLeft="40dp"/>
+
+    <EditText
         android:id="@+id/et_email"
         android:layout_width="332dp"
         android:layout_height="wrap_content"
         android:backgroundTint="#ebebeb"
         android:layout_marginLeft="40dp"
-
         android:hint="  Email"
         android:textColor="@color/white"
         android:textColorHint="#CFC0C0C0"
@@ -37,7 +54,7 @@
         android:id="@+id/email_condition"
         android:layout_width="332dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="30dp"
         android:layout_marginLeft="40dp"/>
 
     <EditText
@@ -56,8 +73,20 @@
         android:id="@+id/pwd_condition"
         android:layout_width="332dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
         android:layout_marginLeft="40dp"/>
 
+    <EditText
+        android:id="@+id/et_pwd_check"
+        android:layout_width="332dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#ebebeb"
+        android:layout_marginLeft="40dp"
+        android:hint="  pwd_check"
+        android:textColor="@color/white"
+        android:textColorHint="#CFC0C0C0"
+        android:textStyle="bold"
+        android:inputType="textPassword"/>
 
 
 
