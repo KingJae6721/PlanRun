@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    tools:context=".AppSettingActivity"
     android:background="@drawable/background" >
     <LinearLayout
         android:orientation="horizontal"
@@ -20,6 +21,7 @@
             android:textStyle="bold"
             android:text="앱 설정"/>
         <Button
+            android:id="@+id/btn_back"
             android:layout_marginTop="35dp"
             android:layout_marginLeft="195dp"
             android:layout_width="wrap_content"
@@ -47,6 +49,7 @@
         android:textStyle="bold"
         android:text="계정"/>
     <Button
+        android:id="@+id/btn_changePwd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingBottom="0dp"

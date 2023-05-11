@@ -28,6 +28,16 @@ public class MypageFragment extends Fragment {
         mFirebaseAuth = FirebaseAuth.getInstance();
 
         Button btn_logout = (Button) view.findViewById(R.id.btn_logout);
+        Button btn_setting = (Button) view.findViewById(R.id.btn_setting);
+
+        btn_setting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), AppSettingActivity.class);
+                startActivity(intent);
+            }
+        });
+
         btn_logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
