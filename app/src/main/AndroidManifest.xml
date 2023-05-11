@@ -59,6 +59,7 @@
         <activity android:name=".LoginActivity" />
         <activity android:name=".CalenderActivity" />
         <activity android:name=".RegisterActivity" />
+        <activity android:name=".ChallengeActivity" />
         <activity android:name=".AppSettingActivity" />
     </application>
 
