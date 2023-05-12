@@ -44,7 +44,7 @@
             android:src="@mipmap/ic_launcher_round" />
 
         <TextView
-            android:id="@+id/nickname"
+            android:id="@+id/nicknameTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/profile_picture"
@@ -52,7 +52,6 @@
             android:layout_marginLeft="18dp"
             android:layout_marginBottom="0dp"
             android:layout_toRightOf="@+id/profile_picture"
-            android:text="닉네임 님"
             android:textColor="@color/white"
             android:textSize="30dp" />
 
