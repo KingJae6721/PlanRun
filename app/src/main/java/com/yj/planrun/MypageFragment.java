@@ -126,3 +126,4 @@ public class MypageFragment extends Fragment {
         return view;
     }
 }
+
