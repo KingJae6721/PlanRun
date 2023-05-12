@@ -9,11 +9,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewManager;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.kakao.sdk.user.UserApiClient;
@@ -30,9 +32,47 @@ public class MypageFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_mypage, container, false);
         mFirebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = mFirebaseAuth.getCurrentUser();
+        DatabaseReference mDatabaseRef = FirebaseDatabase.getInstance().getReference("PlanRun");
 
         Button btn_logout = (Button) view.findViewById(R.id.btn_logout);
         Button btn_setting = (Button) view.findViewById(R.id.btn_setting);
+
+
+
+        TextView nicknameTextView = view.findViewById(R.id.nicknameTextView);
+        if (mFirebaseAuth != null) {
+            mDatabaseRef.child("UserAccount").child(mFirebaseAuth.getUid()).child("nickname").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (snapshot.exists()) {
+                        String nickname = snapshot.getValue(String.class);
+                        nicknameTextView.setText(nickname);
+                    }
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    Log.e("MainFragment", "데이터 로딩 실패: " + error.getMessage());
+                }
+            });
+        }
+        TextView emailTextView = view.findViewById(R.id.emailTextView);
+        if (mFirebaseAuth != null) {
+            mDatabaseRef.child("UserAccount").child(mFirebaseAuth.getUid()).child("emailId").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (snapshot.exists()) {
+                        String email = snapshot.getValue(String.class);
+                        emailTextView.setText(email);
+                    }
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    Log.e("MainFragment", "데이터 로딩 실패: " + error.getMessage());
+                }
+            });
+        }
+
 
         btn_setting.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,8 +103,8 @@ public class MypageFragment extends Fragment {
                 onDestroy();
             }
         });
-        //탈퇴처리
-        //mFirebaseAuth.getCurrentUser().delete();
+
+
         return view;
     }
 
