@@ -26,6 +26,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import com.yj.planrun.MainActivity;
+
 public class MainFragment extends Fragment {
 
     @Override
@@ -54,7 +56,7 @@ public class MainFragment extends Fragment {
 
 
         TextView nicknameTextView = view.findViewById(R.id.nicknameTextView);
-        FirebaseAuth auth  = FirebaseAuth.getInstance();
+        /*FirebaseAuth auth  = FirebaseAuth.getInstance();
         FirebaseUser mFirebaseAuth = auth.getCurrentUser();
         DatabaseReference mDatabaseRef = FirebaseDatabase.getInstance().getReference("PlanRun");
         if (mFirebaseAuth != null) {
@@ -63,7 +65,7 @@ public class MainFragment extends Fragment {
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if (snapshot.exists()) {
                         String nickname = snapshot.getValue(String.class);
-                        nicknameTextView.setText(nickname);
+
                     }
                 }
                 @Override
@@ -71,7 +73,9 @@ public class MainFragment extends Fragment {
                     Log.e("MainFragment", "데이터 로딩 실패: " + error.getMessage());
                 }
             });
-        }
+        }*/
+        nicknameTextView.setText(MainActivity.nickname);
+
         return view;
     }
 
