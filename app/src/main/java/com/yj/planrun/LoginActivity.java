@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -19,8 +20,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mFirebaseAuth;         //파이어베이스 인증
@@ -30,6 +34,7 @@ public class LoginActivity extends AppCompatActivity {
     private CheckBox auto_login;
     private String loginId, loginPwd;
     private boolean autoLogin;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +72,7 @@ public class LoginActivity extends AppCompatActivity {
                                 autoLoginEdit.putString("passwordNo", strPwd);
                                 autoLoginEdit.putBoolean("checkbox_state", auto_login.isChecked());
                                 autoLoginEdit.apply();
+
                             }
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             intent.putExtra("checkbox_state", auto_login.isChecked());

@@ -22,6 +22,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -30,6 +31,7 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
+import com.google.android.gms.location.Priority;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -44,6 +46,9 @@ import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.maps.model.RoundCap;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.maps.android.SphericalUtil;
+
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -59,8 +64,8 @@ public class RunActivity extends AppCompatActivity implements OnMapReadyCallback
 
     private static final String TAG = "googlemap_example";
     private static final int GPS_ENABLE_REQUEST_CODE = 2001;
-    private static final int UPDATE_INTERVAL_MS = 1000;  // 1초
-    private static final int FASTEST_UPDATE_INTERVAL_MS = 500; // 0.5초
+    private static final int UPDATE_INTERVAL_MS = 2000;  // 2초
+    private static final int FASTEST_UPDATE_INTERVAL_MS = 1000; // 0.5초
     private boolean run_state = false;
 
     // onRequestPermissionsResult에서 수신된 결과에서 ActivityCompat.requestPermissions를 사용한 퍼미션 요청을 구별하기 위해 사용됩니다.
@@ -81,6 +86,8 @@ public class RunActivity extends AppCompatActivity implements OnMapReadyCallback
     private LocationRequest locationRequest;
     private Location location;
     private Button btn_record ;
+    private TextView tv_distance;
+    private double distance=0;
 
 
     private View mLayout;  // Snackbar 사용하기 위해서는 View가 필요합니다.
@@ -97,6 +104,7 @@ public class RunActivity extends AppCompatActivity implements OnMapReadyCallback
 
         mLayout = findViewById(R.id.layout_run);
         btn_record = findViewById(R.id.btn_record);
+        tv_distance =findViewById(R.id.tv_distance);
         btn_record.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -111,7 +119,7 @@ public class RunActivity extends AppCompatActivity implements OnMapReadyCallback
             }
         });
         locationRequest = new LocationRequest()
-                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
+                .setPriority(Priority.PRIORITY_HIGH_ACCURACY)
                 .setInterval(UPDATE_INTERVAL_MS)
                 .setFastestInterval(FASTEST_UPDATE_INTERVAL_MS);
 
@@ -204,7 +212,9 @@ public class RunActivity extends AppCompatActivity implements OnMapReadyCallback
     }
     private LatLng startLatLng=new LatLng(0,0);
     private LatLng endLatLng=new LatLng(0,0);
+    double dis=0;
     List<Polyline>polylines =new ArrayList<>();
+
     LocationCallback locationCallback = new LocationCallback() {
         @Override
         public void onLocationResult(LocationResult locationResult) {
@@ -239,6 +249,13 @@ public class RunActivity extends AppCompatActivity implements OnMapReadyCallback
                 if(run_state==true){
                     endLatLng = new LatLng(latitude, longitude);
                     drawPath();
+                    dis=SphericalUtil.computeDistanceBetween(startLatLng, endLatLng);
+
+                    if(dis>1)
+                    distance+=dis;
+                    dis=0;
+                    distance=(int)(distance * 100) / 100.0;
+                    tv_distance.setText(distance +"m");
                     startLatLng = new LatLng(latitude, longitude);
                 }
             }
@@ -564,6 +581,40 @@ public class RunActivity extends AppCompatActivity implements OnMapReadyCallback
         }
     }
 
+    public double getDistance(LatLng LatLng1, LatLng LatLng2) {
+        double distance = 0;
+        Location locationA = new Location("A");
+        locationA.setLatitude(LatLng1.latitude);
+        locationA.setLongitude(LatLng1.longitude);
+        Location locationB = new Location("B");
+        locationB.setLatitude(LatLng2.latitude);
+        locationB.setLongitude(LatLng2.longitude);
 
 
+            double theta = LatLng1.longitude - LatLng2.longitude;
+            distance = Math.sin(deg2rad(LatLng1.latitude)) * Math.sin(deg2rad(LatLng2.latitude)) + Math.cos(deg2rad(LatLng1.latitude))
+                    * Math.cos(deg2rad(LatLng2.latitude)) * Math.cos(deg2rad(theta));
+            distance = Math.acos(distance);
+            distance = rad2deg(distance);
+            distance = distance * 60 * 1.1515;
+            distance = distance * 1.609344;    // 단위 mile 에서 km 변환.
+            distance = distance * 1000.0;      // 단위  km 에서 m 로 변환
+            return distance; // 단위 m
+
+
+    }
+    private double deg2rad(double deg){
+
+        return (double)(deg * Math.PI / (double)180d);
+
+    }
+
+
+    // 주어진 라디언(radian) 값을 도(degree) 값으로 변환
+
+    private double rad2deg(double rad){
+
+        return (double)(rad * (double)180d / Math.PI);
+
+    }
 }

@@ -25,6 +25,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+
+
 public class MypageFragment extends Fragment {
 
     private FirebaseAuth mFirebaseAuth;
@@ -34,7 +36,7 @@ public class MypageFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_mypage, container, false);
         mFirebaseAuth = FirebaseAuth.getInstance();
-        FirebaseUser user = mFirebaseAuth.getCurrentUser();
+
         DatabaseReference mDatabaseRef = FirebaseDatabase.getInstance().getReference("PlanRun");
 
         Button btn_logout = (Button) view.findViewById(R.id.btn_logout);
@@ -43,7 +45,10 @@ public class MypageFragment extends Fragment {
 
 
         TextView nicknameTextView = view.findViewById(R.id.nicknameTextView);
-        if (mFirebaseAuth != null) {
+
+
+
+        /*if (mFirebaseAuth != null) {
             mDatabaseRef.child("UserAccount").child(mFirebaseAuth.getUid()).child("nickname").addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -57,9 +62,11 @@ public class MypageFragment extends Fragment {
                     Log.e("MainFragment", "데이터 로딩 실패: " + error.getMessage());
                 }
             });
-        }
+        }*/
+        nicknameTextView.setText(MainActivity.nickname);
+
         TextView emailTextView = view.findViewById(R.id.emailTextView);
-        if (mFirebaseAuth != null) {
+       /* if (mFirebaseAuth != null) {
             mDatabaseRef.child("UserAccount").child(mFirebaseAuth.getUid()).child("emailId").addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -73,7 +80,8 @@ public class MypageFragment extends Fragment {
                     Log.e("MainFragment", "데이터 로딩 실패: " + error.getMessage());
                 }
             });
-        }
+        }*/
+        emailTextView.setText(MainActivity.email);
 
 
         btn_setting.setOnClickListener(new View.OnClickListener() {

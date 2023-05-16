@@ -12,6 +12,7 @@ import android.widget.Button;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class StartActivity extends AppCompatActivity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,8 +28,8 @@ public class StartActivity extends AppCompatActivity {
             finish(); // 현재 액티비티 파괴
         }
 
-        Button imageButton = (Button) findViewById(R.id.btn_login);
-        imageButton.setOnClickListener(new View.OnClickListener() {
+        Button btn_login = (Button) findViewById(R.id.btn_login);
+        btn_login.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
