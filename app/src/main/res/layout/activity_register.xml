@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".RegisterActivity"
-    android:background="@drawable/background"
+    android:background="#FFFFFF"
     android:orientation="vertical">
 
     <TextView
         android:textAlignment="center"
         android:text="Sign up"
         android:textSize="40dp"
-        android:textColor="#C4FFFFFF"
+        android:textColor="#F8DB82"
         android:textStyle="bold"
         android:layout_marginTop="100dp"
         android:layout_marginBottom="50dp"
@@ -82,7 +82,7 @@
         android:layout_height="wrap_content"
         android:backgroundTint="#ebebeb"
         android:layout_marginLeft="40dp"
-        android:hint="  pwd_check"
+        android:hint="  Password Check"
         android:textColor="@color/white"
         android:textColorHint="#CFC0C0C0"
         android:textStyle="bold"
