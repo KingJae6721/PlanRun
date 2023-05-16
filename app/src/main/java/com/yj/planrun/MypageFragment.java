@@ -30,6 +30,8 @@ import kotlin.jvm.functions.Function1;
 
 
 
+
+
 public class MypageFragment extends Fragment {
 
     private FirebaseAuth mFirebaseAuth;
