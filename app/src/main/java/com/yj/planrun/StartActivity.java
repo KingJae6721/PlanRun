@@ -28,6 +28,7 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function2;
 
 public class StartActivity extends AppCompatActivity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -17,6 +17,9 @@ import android.view.ViewManager;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.kakao.sdk.user.UserApiClient;
 
@@ -101,6 +104,11 @@ public class MypageFragment extends Fragment {
                 });
                 //로그아웃하기
                 mFirebaseAuth.signOut();
+
+                //구글 로그아웃
+                GoogleSignInClient googleSignInClient = GoogleSignIn.getClient(getActivity(), new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).build());
+                googleSignInClient.signOut();
+
                 Intent intent = new Intent(getActivity(), StartActivity.class);
                 startActivity(intent);
                 SharedPreferences sharedPreferences = getActivity().getSharedPreferences("sharedPreferences", Activity.MODE_PRIVATE);
@@ -115,6 +123,4 @@ public class MypageFragment extends Fragment {
 
         return view;
     }
-
 }
-
