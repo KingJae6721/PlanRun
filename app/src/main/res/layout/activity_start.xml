@@ -49,10 +49,11 @@
             android:scaleType="fitCenter" />
 
         <ImageButton
+            android:id="@+id/btn_kakao"
             android:layout_width="150dp"
             android:layout_height="48dp"
             android:adjustViewBounds="true"
-            android:background="@drawable/kakaobutton"
+            android:background="@drawable/kakao_login"
             android:scaleType="fitCenter" />
     </LinearLayout>
 

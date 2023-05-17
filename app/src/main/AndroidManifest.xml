@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.yj.planrun">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <!-- Always include this permission -->
@@ -19,6 +20,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PlanRun"
         tools:targetApi="31">
+
+        <!-- 카카오 로그인 -->
+        <meta-data
+            android:name="com.kakao.sdk.AppKey"
+            android:value="6b36a2c4390081d31d976c7437e97ad6" />
 
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
