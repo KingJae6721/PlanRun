@@ -145,4 +145,6 @@ public class MainActivity<nickname> extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "한번더 누르시면 앱이 종료됩니다", Toast.LENGTH_SHORT).show();
         }
     }
+
+
 }

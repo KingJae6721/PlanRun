@@ -1,10 +1,19 @@
 package com.yj.planrun;
 
+import static android.app.Activity.RESULT_OK;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -25,11 +34,16 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class MypageFragment extends Fragment {
 
     private FirebaseAuth mFirebaseAuth;
+    private CircleImageView circle_iv;
+    private String profilePath;
+
+    private ActivityResultLauncher<Intent> imageCaptureLauncher;
 
     @Override
     @Nullable
@@ -42,7 +56,7 @@ public class MypageFragment extends Fragment {
         Button btn_logout = (Button) view.findViewById(R.id.btn_logout);
         Button btn_setting = (Button) view.findViewById(R.id.btn_setting);
 
-
+        circle_iv = view.findViewById(R.id.circle_iv);
 
         TextView nicknameTextView = view.findViewById(R.id.nicknameTextView);
 
@@ -107,9 +121,25 @@ public class MypageFragment extends Fragment {
             }
         });
 
+        imageCaptureLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+            if (result.getResultCode() == Activity.RESULT_OK) {
+                Intent data = result.getData();
+
+                profilePath = data.getStringExtra("profilePath");
+                Log.e("로그 : ", "profilePath" + profilePath);
+                Bitmap bmp = BitmapFactory.decodeFile(profilePath);
+                circle_iv.setImageBitmap(bmp);
+            }
+        });
+
+        circle_iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), CameraActivity.class);
+                imageCaptureLauncher.launch(intent);
+            }
+        });
 
         return view;
     }
-
 }
-
