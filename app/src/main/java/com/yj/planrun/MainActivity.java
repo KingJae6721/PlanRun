@@ -39,7 +39,7 @@ public class MainActivity<nickname> extends AppCompatActivity {
     CommunityFragment communityFragment;
     MypageFragment mypageFragment; // 여기까지
 
-    public MainActivity() {
+   /* public MainActivity() {
         mFirebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mFirebaseAuth.getCurrentUser();
         DatabaseReference mDatabaseRef = FirebaseDatabase.getInstance().getReference("PlanRun");
@@ -57,26 +57,7 @@ public class MainActivity<nickname> extends AppCompatActivity {
                     Log.e("MainFragment", "데이터 로딩 실패: " + error.getMessage());
                 }
             });
-        }
-
-        if (mFirebaseAuth != null) {
-            mDatabaseRef.child("UserAccount").child(mFirebaseAuth.getUid()).child("emailId").addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    if (snapshot.exists()) {
-                        email = snapshot.getValue(String.class);
-
-                    }
-                }
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                    Log.e("MainFragment", "데이터 로딩 실패: " + error.getMessage());
-
-                }
-            });
-        }
-        Log.d("MainFragment", nickname+email);
-    }
+        }*/
 
     @Override
     protected void onCreate( Bundle savedInstanceState) {

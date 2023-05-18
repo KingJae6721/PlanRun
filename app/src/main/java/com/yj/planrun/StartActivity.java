@@ -72,7 +72,31 @@ public class StartActivity extends AppCompatActivity {
             }
         });
 
-
+        Function2<OAuthToken, Throwable, Unit> callback = new Function2<OAuthToken, Throwable, Unit>() {
+            @Override
+            public Unit invoke(OAuthToken oAuthToken, Throwable throwable) {
+                if(oAuthToken != null) {
+                    Intent intent = new Intent(StartActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+                if(throwable != null) {
+                    Toast.makeText(getApplicationContext(), "로그인 실패", Toast.LENGTH_LONG).show();
+                }
+                return null;
+            }
+        };
+        btn_kakao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(UserApiClient.getInstance().isKakaoTalkLoginAvailable(StartActivity.this)) {
+                    UserApiClient.getInstance().loginWithKakaoTalk(StartActivity.this, callback);
+                }
+                else {
+                    UserApiClient.getInstance().loginWithKakaoAccount(StartActivity.this, callback);
+                }
+            }
+        });
 
         //여기서부터 구글로그인
         String id = sharedPreferences.getString("id", null);
@@ -149,31 +173,5 @@ public class StartActivity extends AppCompatActivity {
         editor.commit();
     }
 
-        Function2<OAuthToken, Throwable, Unit> callback = new Function2<OAuthToken, Throwable, Unit>() {
-            @Override
-            public Unit invoke(OAuthToken oAuthToken, Throwable throwable) {
-                if(oAuthToken != null) {
-                    Intent intent = new Intent(StartActivity.this, MainActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
-                if(throwable != null) {
-                    Toast.makeText(getApplicationContext(), "로그인 실패", Toast.LENGTH_LONG).show();
-                }
-                return null;
-            }
-        };
-        btn_kakao.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(UserApiClient.getInstance().isKakaoTalkLoginAvailable(StartActivity.this)) {
-                    UserApiClient.getInstance().loginWithKakaoTalk(StartActivity.this, callback);
-                }
-                else {
-                    UserApiClient.getInstance().loginWithKakaoAccount(StartActivity.this, callback);
-                }
-            }
-        });
-    }
-    //주석
 }
+    //주석

@@ -83,14 +83,6 @@ public class AppSettingActivity extends AppCompatActivity {
             }
         });
 
-
-
-
-
-
-
-
-
         btn_acntDel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
