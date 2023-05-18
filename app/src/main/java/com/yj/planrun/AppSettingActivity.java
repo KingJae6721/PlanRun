@@ -1,5 +1,4 @@
 package com.yj.planrun;
-
 import static android.content.ContentValues.TAG;
 
 import android.app.Activity;
@@ -29,8 +28,9 @@ public class AppSettingActivity extends AppCompatActivity {
     private FirebaseDatabase mDatabase;
     private FirebaseAuth mFirebaseAuth;         //파이어베이스 인증
     private DatabaseReference mDatabaseRef;     //실시간 데이터베이스
+    FirebaseAuth auth = FirebaseAuth.getInstance();
+    FirebaseUser user = auth.getCurrentUser();
 
-    private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +55,9 @@ public class AppSettingActivity extends AppCompatActivity {
             }
 
         });
+
+
+
         btn_changePwd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -66,7 +69,7 @@ public class AppSettingActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         send();
-                        Toast.makeText(getApplicationContext(), "이메일 전송 완료", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "이메일 전송", Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
                     }
                 });
@@ -79,14 +82,6 @@ public class AppSettingActivity extends AppCompatActivity {
                 ad.show();
             }
         });
-
-
-
-
-
-
-
-
 
         btn_acntDel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,40 +102,36 @@ public class AppSettingActivity extends AppCompatActivity {
                                 mDatabaseRef.child("UserAccount").child(userToken).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {
-                                        Toast.makeText(getApplicationContext(), "회원 탈퇴가 완료되었습니다.", Toast.LENGTH_LONG).show();
-
-                                        // Firebase Authentication에서 현재 로그인한 사용자 삭제
-                                        FirebaseAuth.getInstance().getCurrentUser().delete().addOnSuccessListener(new OnSuccessListener<Void>() {
-                                            @Override
-                                            public void onSuccess(Void aVoid) {
-                                                Intent intent = new Intent(AppSettingActivity.this, LoginActivity.class);
-                                                startActivity(intent);
-                                                finish();
-                                            }
-                                        }).addOnFailureListener(new OnFailureListener() {
-                                            @Override
-                                            public void onFailure(@NonNull Exception e) {
-                                                System.out.println("error: "+e.getMessage());
-                                                Toast.makeText(getApplicationContext(), "인증 정보 삭제 실패", Toast.LENGTH_LONG).show();
-                                            }
-                                        });
+                                        Toast.makeText(getApplicationContext(), "회원 탈퇴가 완료되었습니다.", Toast.LENGTH_SHORT).show();
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
                                     @Override
                                     public void onFailure(@NonNull Exception e) {
                                         System.out.println("error: "+e.getMessage());
-                                        Toast.makeText(getApplicationContext(), "회원 탈퇴에 실패하였습니다.", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(getApplicationContext(), "회원 탈퇴에 실패하였습니다.", Toast.LENGTH_SHORT).show();
                                     }
                                 });
+                                Intent intent = new Intent(AppSettingActivity.this, LoginActivity.class);
+                                startActivity(intent);
+                                finish();
                             }
-                        });
-                alertDialogBuilder.setNegativeButton("취소",
-                        new DialogInterface.OnClickListener() {
+                        }).addOnFailureListener(new OnFailureListener() {
                             @Override
-                            public void onClick(DialogInterface arg0, int arg1) {
-                                // do nothing.
+                            public void onFailure(@NonNull Exception e) {
+                                System.out.println("error: "+e.getMessage());
+                                Toast.makeText(getApplicationContext(), "인증 정보 삭제 실패", Toast.LENGTH_SHORT).show();
                             }
                         });
+
+
+                    }
+                });
+                alertDialogBuilder.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        // do nothing.
+                    }
+                });
                 AlertDialog alertDialog = alertDialogBuilder.create();
                 alertDialog.show();
             }
