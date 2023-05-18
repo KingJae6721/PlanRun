@@ -66,7 +66,7 @@ public class AppSettingActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         send();
-                        Toast.makeText(getApplicationContext(), "이메일", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "이메일 전송 완료", Toast.LENGTH_LONG).show();
                         dialog.dismiss();
                     }
                 });
@@ -95,7 +95,7 @@ public class AppSettingActivity extends AppCompatActivity {
                                 mDatabaseRef.child("UserAccount").child(userToken).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {
-                                        Toast.makeText(getApplicationContext(), "회원 탈퇴가 완료되었습니다.", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getApplicationContext(), "회원 탈퇴가 완료되었습니다.", Toast.LENGTH_LONG).show();
 
                                         // Firebase Authentication에서 현재 로그인한 사용자 삭제
                                         FirebaseAuth.getInstance().getCurrentUser().delete().addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -109,7 +109,7 @@ public class AppSettingActivity extends AppCompatActivity {
                                             @Override
                                             public void onFailure(@NonNull Exception e) {
                                                 System.out.println("error: "+e.getMessage());
-                                                Toast.makeText(getApplicationContext(), "인증 정보 삭제 실패", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(getApplicationContext(), "인증 정보 삭제 실패", Toast.LENGTH_LONG).show();
                                             }
                                         });
                                     }
@@ -117,7 +117,7 @@ public class AppSettingActivity extends AppCompatActivity {
                                     @Override
                                     public void onFailure(@NonNull Exception e) {
                                         System.out.println("error: "+e.getMessage());
-                                        Toast.makeText(getApplicationContext(), "회원 탈퇴에 실패하였습니다.", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getApplicationContext(), "회원 탈퇴에 실패하였습니다.", Toast.LENGTH_LONG).show();
                                     }
                                 });
                             }

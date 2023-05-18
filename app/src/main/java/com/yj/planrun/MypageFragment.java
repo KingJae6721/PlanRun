@@ -16,6 +16,10 @@ import android.view.ViewManager;
 import android.widget.Button;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.kakao.sdk.user.UserApiClient;
+
+import kotlin.Unit;
+import kotlin.jvm.functions.Function1;
 
 public class MypageFragment extends Fragment {
 
@@ -41,6 +45,12 @@ public class MypageFragment extends Fragment {
         btn_logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                UserApiClient.getInstance().logout(new Function1<Throwable, Unit>() {
+                    @Override
+                    public Unit invoke(Throwable throwable) {
+                        return null;
+                    }
+                });
                 //로그아웃하기
                 mFirebaseAuth.signOut();
                 Intent intent = new Intent(getActivity(), StartActivity.class);
@@ -49,6 +59,7 @@ public class MypageFragment extends Fragment {
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.clear();
                 editor.commit();
+
                 onDestroy();
             }
         });

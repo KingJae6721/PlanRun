@@ -15,10 +15,17 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.kakao.sdk.auth.model.OAuthToken;
+import com.kakao.sdk.user.UserApiClient;
 
 import java.security.MessageDigest;
+
+import kotlin.Unit;
+import kotlin.jvm.functions.Function2;
 
 public class StartActivity extends AppCompatActivity {
     @Override
@@ -37,7 +44,7 @@ public class StartActivity extends AppCompatActivity {
         }
 
         Button imageButton = (Button) findViewById(R.id.btn_login);
-        Button btn_kakao = (Button) findViewById(R.id.btn_kakao);
+        ImageButton btn_kakao = (ImageButton) findViewById(R.id.btn_kakao);
         imageButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -46,10 +53,29 @@ public class StartActivity extends AppCompatActivity {
                 startActivity(intent1);
             }
         });
-
+        Function2<OAuthToken, Throwable, Unit> callback = new Function2<OAuthToken, Throwable, Unit>() {
+            @Override
+            public Unit invoke(OAuthToken oAuthToken, Throwable throwable) {
+                if(oAuthToken != null) {
+                    Intent intent = new Intent(StartActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+                if(throwable != null) {
+                    Toast.makeText(getApplicationContext(), "로그인 실패", Toast.LENGTH_LONG).show();
+                }
+                return null;
+            }
+        };
         btn_kakao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(UserApiClient.getInstance().isKakaoTalkLoginAvailable(StartActivity.this)) {
+                    UserApiClient.getInstance().loginWithKakaoTalk(StartActivity.this, callback);
+                }
+                else {
+                    UserApiClient.getInstance().loginWithKakaoAccount(StartActivity.this, callback);
+                }
             }
         });
     }
