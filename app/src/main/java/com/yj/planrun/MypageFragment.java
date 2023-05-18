@@ -21,14 +21,12 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.kakao.sdk.user.UserApiClient;
-
-import kotlin.Unit;
-import kotlin.jvm.functions.Function1;
-
-
+import com.google.firebase.database.ValueEventListener;
 
 
 
@@ -100,12 +98,6 @@ public class MypageFragment extends Fragment {
         btn_logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                UserApiClient.getInstance().logout(new Function1<Throwable, Unit>() {
-                    @Override
-                    public Unit invoke(Throwable throwable) {
-                        return null;
-                    }
-                });
                 //로그아웃하기
                 mFirebaseAuth.signOut();
 
@@ -119,12 +111,11 @@ public class MypageFragment extends Fragment {
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.clear();
                 editor.commit();
-
                 onDestroy();
             }
         });
-
-
+        //탈퇴처리
+        //mFirebaseAuth.getCurrentUser().delete();
         return view;
     }
 

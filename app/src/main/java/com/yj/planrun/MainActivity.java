@@ -39,11 +39,26 @@ public class MainActivity<nickname> extends AppCompatActivity {
     CommunityFragment communityFragment;
     MypageFragment mypageFragment; // 여기까지
 
-/*
     public MainActivity() {
         mFirebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mFirebaseAuth.getCurrentUser();
         DatabaseReference mDatabaseRef = FirebaseDatabase.getInstance().getReference("PlanRun");
+          if (mFirebaseAuth != null) {
+            mDatabaseRef.child("UserAccount").child(mFirebaseAuth.getUid()).child("nickname").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (snapshot.exists()) {
+                        nickname = snapshot.getValue(String.class);
+
+                    }
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    Log.e("MainFragment", "데이터 로딩 실패: " + error.getMessage());
+                }
+            });
+        }
+
         if (mFirebaseAuth != null) {
             mDatabaseRef.child("UserAccount").child(mFirebaseAuth.getUid()).child("emailId").addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
@@ -62,14 +77,11 @@ public class MainActivity<nickname> extends AppCompatActivity {
         }
         Log.d("MainFragment", nickname+email);
     }
-*/
 
     @Override
     protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
 
 
         //네비게이션 바(하단바) start
@@ -82,15 +94,9 @@ public class MainActivity<nickname> extends AppCompatActivity {
         //프래그먼트를 올리거나 교체하는 작업을 Transaction이라고 합니다.
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         //프래그먼트를 FrameLayout의 자식으로 등록해줍니다.
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         fragmentTransaction.add(R.id.containers, mainFragment);
         //commit을 하면 자식으로 등록된 프래그먼트가 화면에 보여집니다.
         fragmentTransaction.commit();
-
         NavigationBarView navigationBarView = findViewById(R.id.bottom_navigationview);
         navigationBarView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -112,8 +118,6 @@ public class MainActivity<nickname> extends AppCompatActivity {
                 return false;
             }
         }); //네비게이션 바(하단바) end
-
-
 
     }
     @Override
