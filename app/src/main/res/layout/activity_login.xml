@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".LoginActivity"
-    android:background="@drawable/background"
+    android:background="#ffffff"
     android:orientation="vertical"
     android:gravity="center_horizontal"
     >
@@ -14,7 +14,7 @@
         android:textAlignment="center"
         android:text="Login"
         android:textSize="50dp"
-        android:textColor="@color/white"
+        android:textColor="#F8DB82"
         android:textStyle="bold"
         android:layout_marginTop="125dp"
         android:layout_marginBottom="50dp"
@@ -27,7 +27,7 @@
         android:id="@+id/et_email"
         android:layout_width="332dp"
         android:layout_height="wrap_content"
-        android:backgroundTint="#ebebeb"
+        android:backgroundTint="#D3D3D3"
         android:layout_marginBottom="40dp"
         android:hint="  Email"
         android:textColor="@color/white"
@@ -40,7 +40,7 @@
         android:layout_width="332dp"
         android:layout_height="wrap_content"
         android:hint="  Password"
-        android:backgroundTint="#ebebeb"
+        android:backgroundTint="#D3D3D3"
         android:textStyle="bold"
         android:textColor="@color/white"
         android:textColorHint="#CEC0C0C0"
@@ -48,7 +48,6 @@
     <CheckBox
         android:id="@+id/auto_login"
         android:text="자동 로그인"
-        android:textColor="@color/white"
         android:layout_marginBottom="28dp"
         android:layout_width="332dp"
         android:layout_height="wrap_content" />

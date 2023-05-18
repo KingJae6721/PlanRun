@@ -1,14 +1,23 @@
 package com.yj.planrun;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.os.Bundle;
+import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -21,8 +30,18 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.kakao.sdk.auth.model.OAuthToken;
+import com.kakao.sdk.user.UserApiClient;
+
+import java.security.MessageDigest;
+
+import kotlin.Unit;
+import kotlin.jvm.functions.Function2;
+
+
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+
 
 public class StartActivity extends AppCompatActivity {
     private FirebaseAuth auth;
@@ -46,6 +65,7 @@ public class StartActivity extends AppCompatActivity {
         }
 
         Button btn_login = (Button) findViewById(R.id.btn_login);
+        ImageButton btn_kakao = (ImageButton) findViewById(R.id.btn_kakao);
         btn_login.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -115,6 +135,32 @@ public class StartActivity extends AppCompatActivity {
                     }
                 });
     }
+    //카카오 로그인 코드
+    Function2<OAuthToken, Throwable, Unit> callback = new Function2<OAuthToken, Throwable, Unit>() {
+        @Override
+        public Unit invoke(OAuthToken oAuthToken, Throwable throwable) {
+            if(oAuthToken != null) {
+                Intent intent = new Intent(StartActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+            if(throwable != null) {
+                Toast.makeText(getApplicationContext(), "로그인 실패", Toast.LENGTH_LONG).show();
+            }
+            return null;
+        }
+    };
+        btn_kakao.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            if(UserApiClient.getInstance().isKakaoTalkLoginAvailable(StartActivity.this)) {
+                UserApiClient.getInstance().loginWithKakaoTalk(StartActivity.this, callback);
+            }
+            else {
+                UserApiClient.getInstance().loginWithKakaoAccount(StartActivity.this, callback);
+            }
+        }
+    });
 
     private void moveMainPage(FirebaseUser user) {
         if (user != null) {
