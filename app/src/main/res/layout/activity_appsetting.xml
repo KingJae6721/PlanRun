@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".AppSettingActivity"
-    android:background="@drawable/background" >
+    android:background="#ffffff" >
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -16,7 +16,7 @@
             android:layout_marginLeft="33dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="23dp"
             android:textStyle="bold"
             android:text="앱 설정"/>
@@ -31,6 +31,7 @@
             android:minHeight="0dp"
             android:textStyle="bold"
             android:text="〈 Back"
+            android:textColor="@color/black"
             android:textAllCaps="false"
             android:textSize="15dp" />
     </LinearLayout>
@@ -44,7 +45,7 @@
         android:layout_marginBottom="8dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="23dp"
         android:textStyle="bold"
         android:text="계정"/>
@@ -58,6 +59,7 @@
         android:minWidth="0dp"
         android:minHeight="0dp"
         android:text="비밀번호 변경"
+        android:textColor="@color/black"
         android:textAllCaps="false"
         android:textSize="17dp" />
     <Button
@@ -70,6 +72,7 @@
         android:minWidth="0dp"
         android:minHeight="0dp"
         android:text="계정 탈퇴"
+        android:textColor="@color/black"
         android:textAllCaps="false"
         android:textSize="17dp" />
     <View
@@ -82,7 +85,7 @@
         android:layout_marginBottom="15dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="23dp"
         android:textStyle="bold"
         android:text="알림 설정"/>
@@ -96,7 +99,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="20dp"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:minWidth="0dp"
             android:minHeight="0dp"
             android:text="커뮤니티 푸쉬 알림"
@@ -117,7 +120,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="20dp"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:minWidth="0dp"
             android:minHeight="0dp"
             android:text="공지 알림"
@@ -138,7 +141,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="20dp"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:minWidth="0dp"
             android:minHeight="0dp"
             android:text="이벤트 알림"
@@ -158,7 +161,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="20dp"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:minWidth="0dp"
             android:minHeight="0dp"
             android:text="마케팅 알림"

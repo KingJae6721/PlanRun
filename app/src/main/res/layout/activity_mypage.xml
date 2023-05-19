@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/b"
-    android:background="@drawable/background"
+    android:background="#ffffff"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -19,6 +19,7 @@
         android:minHeight="0dp"
         android:textStyle="bold"
         android:text="〈 Back"
+        android:textColor="@color/black"
         android:textAllCaps="false"
         android:textSize="15dp" />
     <de.hdodenhof.circleimageview.CircleImageView
@@ -35,17 +36,23 @@
     <TextView
         android:text="user"
         android:textSize="20dp"
-        android:textColor="#EADCDC"
+        android:textColor="@color/black"
         android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <TextView
         android:text="email@seoil.ac.kr"
         android:textSize="15dp"
-        android:textColor="#EADCDC"
+        android:textColor="@color/black"
         android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+    <View
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"
+        android:layout_width="350dp"
+        android:layout_height="2dp"
+        android:background="#8C8A8A" />
     <LinearLayout
         android:layout_marginTop="40dp"
         android:layout_marginLeft="50dp"
@@ -62,7 +69,7 @@
                 android:layout_height="37dp"
                 android:src="@drawable/setting1"/>
             <Button
-                android:textColor="#E3E4EA"
+                android:textColor="@color/black"
                 android:textStyle="bold"
                 android:layout_gravity="center_vertical"
                 android:background="@android:color/transparent"
@@ -84,7 +91,7 @@
                 android:layout_height="43dp"
                 android:src="@drawable/notice"/>
             <Button
-                android:textColor="#E3E4EA"
+                android:textColor="@color/black"
                 android:textStyle="bold"
                 android:layout_gravity="center_vertical"
                 android:background="@android:color/transparent"
@@ -105,7 +112,7 @@
                 android:layout_height="39dp"
                 android:src="@drawable/event1"/>
             <Button
-                android:textColor="#E3E4EA"
+                android:textColor="@color/black"
                 android:textStyle="bold"
                 android:layout_gravity="center_vertical"
                 android:background="@android:color/transparent"
@@ -133,7 +140,7 @@
         android:minHeight="0dp"
         android:text="로그아웃"
         android:textAllCaps="false"
-        android:textColor="#D6D6D8"
+        android:textColor="@color/black"
         android:textSize="20dp"
         android:textStyle="bold" />
 

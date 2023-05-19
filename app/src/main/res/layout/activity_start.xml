@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".StartActivity"
-    android:background="#FFFFFF"
+    android:background="@drawable/background_whitelogo"
     android:orientation="vertical"
     android:gravity="center" >
 
@@ -13,7 +13,7 @@
         android:layout_width="300dp"
         android:layout_height="600dp"
         android:layout_weight="10"
-        android:src="@drawable/logoname3"
+        android:src="@drawable/logoname4"
         android:visibility="visible" />
 
     <Button
@@ -46,7 +46,7 @@
             android:layout_height="51dp"
             android:layout_marginRight="10dp"
             android:adjustViewBounds="true"
-            android:background="@drawable/naverbtn"
+            android:background="@drawable/btn_google_signin"
             android:scaleType="fitCenter" />
 
         <ImageButton
