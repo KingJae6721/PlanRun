@@ -28,7 +28,7 @@
         android:backgroundTint="#ebebeb"
         android:layout_marginLeft="40dp"
         android:hint="  Nickname"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textColorHint="#CFC0C0C0"
         android:textStyle="bold"
         android:inputType="textEmailAddress" />
@@ -46,7 +46,7 @@
         android:backgroundTint="#ebebeb"
         android:layout_marginLeft="40dp"
         android:hint="  Email"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textColorHint="#CFC0C0C0"
         android:textStyle="bold"
         android:inputType="textEmailAddress" />
@@ -63,7 +63,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="40dp"
         android:hint="  Password"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:backgroundTint="#ebebeb"
         android:textStyle="bold"
         android:textColorHint="#CEC0C0C0"
@@ -83,7 +83,7 @@
         android:backgroundTint="#ebebeb"
         android:layout_marginLeft="40dp"
         android:hint="  Password Check"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textColorHint="#CFC0C0C0"
         android:textStyle="bold"
         android:inputType="textPassword"/>
