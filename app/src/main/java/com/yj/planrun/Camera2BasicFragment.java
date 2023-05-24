@@ -518,7 +518,7 @@ public class Camera2BasicFragment extends Fragment
      * @param height The height of available size for camera preview
      */
     @SuppressWarnings("SuspiciousNameCombination")
-    private void setUpCameraOutputs(int width, int height, int facingId) {
+    private void setUpCameraOutputs(int width, int height) {
         Activity activity = getActivity();
         CameraManager manager = (CameraManager) activity.getSystemService(Context.CAMERA_SERVICE);
         try {
@@ -643,7 +643,7 @@ public class Camera2BasicFragment extends Fragment
             requestCameraPermission();
             return;
         }
-        setUpCameraOutputs(width, height, facingId);
+        setUpCameraOutputs(width, height);
         configureTransform(width, height);
         Activity activity = getActivity();
         CameraManager manager = (CameraManager) activity.getSystemService(Context.CAMERA_SERVICE);
@@ -953,63 +953,6 @@ public class Camera2BasicFragment extends Fragment
         }
     }
 
-    /**
-     * Saves a JPEG {@link Image} into the specified {@link File}.
-     */
-    private static class ImageUploader implements Runnable {
-
-        /**
-         * The JPEG image
-         */
-        private final Image mImage;
-        /**
-         * The file we save the image into.
-         */
-
-        ImageUploader(Image image) {
-            mImage = image;
-        }
-
-        @Override
-        public void run() {
-            ByteBuffer buffer = mImage.getPlanes()[0].getBuffer();
-            byte[] bytes = new byte[buffer.remaining()];
-            buffer.get(bytes);
-
-            FirebaseStorage storage = FirebaseStorage.getInstance();
-            StorageReference storageRef = storage.getReference();
-
-            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-            final StorageReference mountainImagesRef = storageRef.child("users/" + user.getUid() + "/profileImage.jpg");
-
-            UploadTask uploadTask = mountainImagesRef.putBytes(bytes);
-
-            uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-                @Override
-                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                    if (!task.isSuccessful()) {
-                        Log.e("실패1", "실패");
-                        throw task.getException();
-                    }
-
-                    // Continue with the task to get the download URL
-                    return mountainImagesRef.getDownloadUrl();
-                }
-            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-                @Override
-                public void onComplete(@NonNull Task<Uri> task) {
-                    if (task.isSuccessful()) {
-                        Uri downloadUri = task.getResult();
-                        Log.e("성공", "성공 : " + downloadUri);
-                    } else {
-                        // Handle failures
-                        // ...
-                        Log.e("실패2", "실패");
-                    }
-                }
-            });
-        }
-    }
 
     /**
      * Saves a JPEG {@link Image} into the specified {@link File}.
