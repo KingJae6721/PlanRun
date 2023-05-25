@@ -45,5 +45,11 @@
         android:layout_height="wrap_content"
         android:text="km"
         android:textSize="30dp" />
+    <TextView
+        android:id="@+id/tv_kcal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="칼로리"
+        android:textSize="30dp" />
 
 </LinearLayout>

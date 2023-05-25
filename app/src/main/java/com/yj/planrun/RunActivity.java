@@ -89,7 +89,7 @@ public class RunActivity extends AppCompatActivity implements OnMapReadyCallback
     private LocationRequest locationRequest;
     private Location location;
     private Button btn_record ;
-    private TextView tv_distance,tv_speed;
+    private TextView tv_distance,tv_speed, tv_kcal;
     private Chronometer chronometer;
 
     private double distance=0;
@@ -112,6 +112,7 @@ public class RunActivity extends AppCompatActivity implements OnMapReadyCallback
         tv_distance =findViewById(R.id.tv_distance);
         chronometer=findViewById(R.id.chronometer);
         tv_speed=findViewById(R.id.tv_speed);
+        tv_kcal=findViewById(R.id.tv_kcal);
 
         btn_record.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -293,14 +294,14 @@ public class RunActivity extends AppCompatActivity implements OnMapReadyCallback
 
                         int sec = time % 60;
 
-                        speed= distance/sec;
-                        tv_speed.setText("평균 초속"+speed+"m");
+                        speed= (int)(distance/sec*360/1000*100)/100.0;
+                        tv_speed.setText("시속"+speed+"km");
                     }
 
 
                     distance=(int)(distance * 100) / 100.0;
                     tv_distance.setText(distance +"m");
-
+                    tv_kcal.setText("칼로리"+((int)(distance * 100*65/*체중*/) / 100.0)+"kcal 소비");
                 }
                 beforePosition = currentPosition;
             }
