@@ -3,37 +3,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.yj.planrun">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <!-- 커뮤니티랑 마이페이지 사진에 쓸 권한 -->
-    <uses-permission android:name="android.permission.CAMERA" />
-    <!-- 갤러리 파일을 읽을 권한 -->
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- 커뮤니티랑 마이페이지 사진에 쓸 권한 -->
+    <uses-permission android:name="android.permission.CAMERA" /> <!-- 갤러리 파일을 읽을 권한 -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-feature android:name="android.hardware.camera" />
-    <uses-feature android:name="android.hardware.camera.autofocus" />
-    <!-- Always include this permission -->
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
-    <!-- Include only if your app benefits from precise location access. -->
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" /> <!-- Always include this permission -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- Include only if your app benefits from precise location access. -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
+        android:name=".KakaoApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:name=".KakaoApplication"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PlanRun"
         tools:targetApi="31">
-
+        <activity
+            android:name=".AddPhotoActivity"
+            android:exported="false" />
         <!-- 카카오 로그인 -->
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="6b36a2c4390081d31d976c7437e97ad6" />
-
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 
@@ -48,12 +45,13 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCVTt8IiCRC7NTASgHqhjavsEd-1sgGerU" />
-        <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
 
         <activity
             android:name=".RunActivity"
-            android:exported="false"
-            />
+            android:exported="false" />
         <activity
             android:name=".MyPageActivity"
             android:exported="false" />
@@ -75,11 +73,13 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <!-- Redirect URI: "kakao${NATIVE_APP_KEY}://oauth" -->
-                <data android:host="oauth"
+                <data
+                    android:host="oauth"
                     android:scheme="kakao6b36a2c4390081d31d976c7437e97ad6" />
             </intent-filter>
         </activity>
@@ -90,7 +90,7 @@
         <activity android:name=".ChallengeActivity" />
         <activity android:name=".AppSettingActivity" />
         <activity android:name=".CameraActivity" />
-        <activity android:name=".ClubFragment"/>
+        <activity android:name=".ClubFragment" />
     </application>
 
 </manifest>
