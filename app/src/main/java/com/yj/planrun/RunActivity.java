@@ -18,10 +18,12 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Looper;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.Chronometer;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -71,6 +73,7 @@ public class RunActivity extends AppCompatActivity implements OnMapReadyCallback
     // onRequestPermissionsResult에서 수신된 결과에서 ActivityCompat.requestPermissions를 사용한 퍼미션 요청을 구별하기 위해 사용됩니다.
     private static final int PERMISSIONS_REQUEST_CODE = 100;
     boolean needRequest = false;
+    private double speed;
 
 
     // 앱을 실행하기 위해 필요한 퍼미션을 정의합니다.
@@ -86,9 +89,11 @@ public class RunActivity extends AppCompatActivity implements OnMapReadyCallback
     private LocationRequest locationRequest;
     private Location location;
     private Button btn_record ;
-    private TextView tv_distance;
-    private double distance=0;
+    private TextView tv_distance,tv_speed;
+    private Chronometer chronometer;
 
+    private double distance=0;
+    private long pauseOffSet;
 
     private View mLayout;  // Snackbar 사용하기 위해서는 View가 필요합니다.
     // (참고로 Toast에서는 Context가 필요했습니다.)
@@ -105,19 +110,34 @@ public class RunActivity extends AppCompatActivity implements OnMapReadyCallback
         mLayout = findViewById(R.id.layout_run);
         btn_record = findViewById(R.id.btn_record);
         tv_distance =findViewById(R.id.tv_distance);
+        chronometer=findViewById(R.id.chronometer);
+        tv_speed=findViewById(R.id.tv_speed);
+
         btn_record.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if(run_state==false){
                     btn_record.setText("일시정지");
                     run_state=true;
+                    chronometer.setBase(SystemClock.elapsedRealtime()-pauseOffSet);
+                    chronometer.start();
+
+
                 }
                 else{
                     btn_record.setText("측정시작");
+                    pauseOffSet=SystemClock.elapsedRealtime()-chronometer.getBase();
+
+                    chronometer.stop();
                     run_state=false;
                 }
             }
         });
+
+
+
+
         locationRequest = new LocationRequest()
                 .setPriority(Priority.PRIORITY_HIGH_ACCURACY)
                 .setInterval(UPDATE_INTERVAL_MS)
@@ -210,8 +230,8 @@ public class RunActivity extends AppCompatActivity implements OnMapReadyCallback
             }
         });
     }
-    private LatLng startLatLng=new LatLng(0,0);
-    private LatLng endLatLng=new LatLng(0,0);
+    private LatLng beforePosition=new LatLng(0,0);
+   
     double dis=0;
     List<Polyline>polylines =new ArrayList<>();
 
@@ -229,9 +249,9 @@ public class RunActivity extends AppCompatActivity implements OnMapReadyCallback
                 double longitude=location.getLongitude();
 
                 currentPosition = new LatLng(location.getLatitude(), location.getLongitude());
-                if(startLatLng.latitude==0&&startLatLng.longitude==0){
-                    startLatLng=new LatLng(latitude,longitude);
-                }
+                if (beforePosition.longitude==0&&beforePosition.latitude==0&&run_state==true)
+                    beforePosition=currentPosition;
+                
 
 
                 String markerTitle = getCurrentAddress(currentPosition);
@@ -245,28 +265,57 @@ public class RunActivity extends AppCompatActivity implements OnMapReadyCallback
                 setCurrentLocation(location, markerTitle, markerSnippet);
 
                 mCurrentLocatiion = location;
+//[김영재] [오후 12:30] 1.gps가 10미터 이상부터 폴리라인을 그린다.
+//[김영재] [오후 12:32] 폴리라인의 마지막 latlng 저장
+//[김영재] [오후 12:32] gps 위치를 받다가
+//[김영재] [오후 12:32] 마지막latlng과 10m 이상의 차이가 생기면
+//[김영재] [오후 12:33] gps값 받아와서 그리기
 
                 if(run_state==true){
-                    endLatLng = new LatLng(latitude, longitude);
-                    drawPath();
-                    dis=SphericalUtil.computeDistanceBetween(startLatLng, endLatLng);
 
-                    if(dis>1)
-                    distance+=dis;
-                    dis=0;
+
+
+                    dis+=SphericalUtil.computeDistanceBetween(beforePosition, currentPosition);
+                    drawPath();
+                    if(dis>10){
+
+                        distance+=dis;
+                        dis=0;
+
+                        //tv_speed.setText(getSpeed((long)distance,chronometer.getBase())+"km");
+                        long current = SystemClock.elapsedRealtime() - chronometer.getBase();
+                        int time = (int) (current / 1000);
+
+                        //시간 구하기
+                        long hour = time / (60 * 60);
+
+                        int min = time % (60 * 60) / 60;
+
+                        int sec = time % 60;
+
+                        speed= distance/sec;
+                        tv_speed.setText("평균 초속"+speed+"m");
+                    }
+
+
                     distance=(int)(distance * 100) / 100.0;
                     tv_distance.setText(distance +"m");
-                    startLatLng = new LatLng(latitude, longitude);
+
                 }
+                beforePosition = currentPosition;
             }
         }
 
     };
+    private long getSpeed(long dis,long time){
+        return dis/time;
+
+    }
 
     private void drawPath(){        //polyline을 그려주는 메소드
         if(run_state==true) {
             PolylineOptions options = new PolylineOptions()
-                    .add(startLatLng).add(endLatLng)
+                    .add(beforePosition).add(currentPosition)
                     .width(15).color(Color.BLACK).geodesic(true)
                     .startCap(new RoundCap())
                     .endCap(new RoundCap())

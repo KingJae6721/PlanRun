@@ -39,44 +39,7 @@ public class MainActivity<nickname> extends AppCompatActivity {
     CommunityFragment communityFragment;
     MypageFragment mypageFragment; // 여기까지
 
-    public MainActivity() {
-        mFirebaseAuth = FirebaseAuth.getInstance();
-        FirebaseUser user = mFirebaseAuth.getCurrentUser();
-        DatabaseReference mDatabaseRef = FirebaseDatabase.getInstance().getReference("PlanRun");
-          if (mFirebaseAuth != null) {
-            mDatabaseRef.child("UserAccount").child(mFirebaseAuth.getUid()).child("nickname").addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    if (snapshot.exists()) {
-                        nickname = snapshot.getValue(String.class);
-
-                    }
-                }
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                    Log.e("MainFragment", "데이터 로딩 실패: " + error.getMessage());
-                }
-            });
-        }
-
-        if (mFirebaseAuth != null) {
-            mDatabaseRef.child("UserAccount").child(mFirebaseAuth.getUid()).child("emailId").addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    if (snapshot.exists()) {
-                        email = snapshot.getValue(String.class);
-
-                    }
-                }
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                    Log.e("MainFragment", "데이터 로딩 실패: " + error.getMessage());
-
-                }
-            });
-        }
-        Log.d("MainFragment", nickname+email);
-    }
+    public MainActivity() {}
 
     @Override
     protected void onCreate( Bundle savedInstanceState) {

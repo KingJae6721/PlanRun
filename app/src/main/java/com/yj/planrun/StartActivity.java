@@ -20,6 +20,7 @@ import android.widget.Toast;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.identity.BeginSignInRequest;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -30,10 +31,16 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.kakao.sdk.auth.model.OAuthToken;
 import com.kakao.sdk.user.UserApiClient;
 
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import kotlin.Unit;
 import kotlin.jvm.functions.Function2;
@@ -47,10 +54,12 @@ public class StartActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private GoogleSignInClient googleSignInClient;
     private int GOOGLE_LOGIN_CODE = 9001;
+    ImageButton btn_kakao;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
+        getHashKey();
         auth = FirebaseAuth.getInstance();
 
 
@@ -65,7 +74,7 @@ public class StartActivity extends AppCompatActivity {
         }
 
         Button btn_login = (Button) findViewById(R.id.btn_login);
-        ImageButton btn_kakao = (ImageButton) findViewById(R.id.btn_kakao);
+         btn_kakao = (ImageButton) findViewById(R.id.btn_kakao);
         btn_login.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -75,6 +84,34 @@ public class StartActivity extends AppCompatActivity {
             }
         });
 
+    //카카오로그인
+        btn_kakao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Function2<OAuthToken, Throwable, Unit> callback = new Function2<OAuthToken, Throwable, Unit>() {
+                    @Override
+                    public Unit invoke(OAuthToken oAuthToken, Throwable throwable) {
+                        if(oAuthToken != null) {
+                            Intent intent = new Intent(StartActivity.this, MainActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }
+                        if(throwable != null) {
+                            Toast.makeText(getApplicationContext(), "카카오 로그인 실패", Toast.LENGTH_LONG).show();
+                        }
+                        return null;
+                    }
+                };
+
+                if(UserApiClient.getInstance().isKakaoTalkLoginAvailable(StartActivity.this)) {
+                    UserApiClient.getInstance().loginWithKakaoTalk(StartActivity.this, callback);
+                }
+                else {
+                    UserApiClient.getInstance().loginWithKakaoAccount(StartActivity.this, callback);
+                }
+            }
+        });
 
 
         //여기서부터 구글로그인
@@ -95,7 +132,9 @@ public class StartActivity extends AppCompatActivity {
                 .requestIdToken("628881370078-ojp7dn78h59jgpofas8alp39jki7q6na.apps.googleusercontent.com")
                 .requestEmail()
                 .build();
-        googleSignInClient = GoogleSignIn.getClient(this, gso);
+        googleSignInClient = GoogleSignIn.getClient(StartActivity.this, gso);
+
+
 
     }
 
@@ -110,7 +149,7 @@ public class StartActivity extends AppCompatActivity {
 
         if (requestCode == GOOGLE_LOGIN_CODE) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-
+            Log.e("뭐가 문제야 시!발:","그건저도 잘,...");
             try {
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 firebaseAuthWithGoogle(account);
@@ -120,47 +159,24 @@ public class StartActivity extends AppCompatActivity {
             return;
         }
     }
+
     private void firebaseAuthWithGoogle(GoogleSignInAccount account) {
         AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
 
         auth.signInWithCredential(credential)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
+
                         FirebaseUser user = auth.getCurrentUser();
                         // 로그인 정보를 저장
                         saveLoginInfo(account);
                         moveMainPage(user);
                     } else {
-                        Toast.makeText(StartActivity.this, "로그인 실패", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(StartActivity.this, "구글 로그인 실패", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
-    //카카오 로그인 코드
-    Function2<OAuthToken, Throwable, Unit> callback = new Function2<OAuthToken, Throwable, Unit>() {
-        @Override
-        public Unit invoke(OAuthToken oAuthToken, Throwable throwable) {
-            if(oAuthToken != null) {
-                Intent intent = new Intent(StartActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
-            }
-            if(throwable != null) {
-                Toast.makeText(getApplicationContext(), "로그인 실패", Toast.LENGTH_LONG).show();
-            }
-            return null;
-        }
-    };
-        btn_kakao.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            if(UserApiClient.getInstance().isKakaoTalkLoginAvailable(StartActivity.this)) {
-                UserApiClient.getInstance().loginWithKakaoTalk(StartActivity.this, callback);
-            }
-            else {
-                UserApiClient.getInstance().loginWithKakaoAccount(StartActivity.this, callback);
-            }
-        }
-    });
+
 
     private void moveMainPage(FirebaseUser user) {
         if (user != null) {
@@ -177,5 +193,27 @@ public class StartActivity extends AppCompatActivity {
         editor.putString("email", account.getEmail());
         editor.commit();
     }
+    private void getHashKey(){
+        PackageInfo packageInfo = null;
+        try {
+            packageInfo = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_SIGNATURES);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        if (packageInfo == null)
+            Log.e("KeyHash", "KeyHash:null");
+
+        for (Signature signature : packageInfo.signatures) {
+            try {
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                Log.d("KeyHash", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+            } catch (NoSuchAlgorithmException e) {
+                Log.e("KeyHash", "Unable to get MessageDigest. signature=" + signature, e);
+            }
+        }
+    }
+
 
 }
+

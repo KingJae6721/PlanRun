@@ -20,6 +20,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -77,6 +78,7 @@ public class LoginActivity extends AppCompatActivity {
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             intent.putExtra("checkbox_state", auto_login.isChecked());
                             startActivity(intent);
+                            setFirebaseNicknameEmail();
                             finish(); //현재 액티비티 파괴
                         } else {
                             Toast.makeText(LoginActivity.this, "로그인실패", Toast.LENGTH_SHORT).show();
@@ -99,4 +101,47 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void setFirebaseNicknameEmail(){
+        FirebaseAuth auth  = FirebaseAuth.getInstance();
+        FirebaseUser mFirebaseAuth = auth.getCurrentUser();
+
+
+        DatabaseReference mDatabaseRef = FirebaseDatabase.getInstance().getReference("PlanRun");
+        if (mFirebaseAuth != null) {
+            mDatabaseRef.child("UserAccount").child(mFirebaseAuth.getUid()).child("nickname").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (snapshot.exists()) {
+                        MainActivity.nickname = snapshot.getValue(String.class);
+
+                    }
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    Log.e("MainFragment", "데이터 로딩 실패: " + error.getMessage());
+                }
+            });
+        }
+
+        if (mFirebaseAuth != null) {
+            mDatabaseRef.child("UserAccount").child(mFirebaseAuth.getUid()).child("emailId").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (snapshot.exists()) {
+                        MainActivity.email = snapshot.getValue(String.class);
+
+                    }
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    Log.e("MainFragment", "데이터 로딩 실패: " + error.getMessage());
+
+                }
+            });
+        }
+
+
+    }
+
 }
