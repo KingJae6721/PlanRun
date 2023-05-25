@@ -59,7 +59,7 @@
 
     <!-- 달력 안의 요일들에 적용되는 스타일 -->
     <style name="CalenderViewWeekCustomText" parent="android:TextAppearance.DeviceDefault.Small">
-        <item name="android:textSize">15sp</item>
+        <item name="android:textSize">10sp</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:weekNumberColor">@android:color/holo_red_light</item>
     </style>

@@ -49,8 +49,6 @@ public class AppSettingActivity extends AppCompatActivity {
         btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Toast.makeText(getApplicationContext(), firebaseUser.getUid(), Toast.LENGTH_LONG).show();
                 finish();
             }
 
