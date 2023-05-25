@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="@drawable/background"
+    android:background="#ffffff"
     android:fitsSystemWindows="true"
     >
 
@@ -20,8 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_gravity="bottom"
-            android:background="#807a7a7a"
-
+            android:background="@drawable/menu_background_style"
             app:itemIconSize="@dimen/design_bottom_navigation_height"
             app:itemIconTint="@drawable/menu_selector_color"
             app:itemTextColor="@drawable/menu_selector_color"

@@ -36,6 +36,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
 import com.kakao.sdk.auth.model.OAuthToken;
 import com.kakao.sdk.user.UserApiClient;
 
@@ -59,7 +61,7 @@ public class StartActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
-        getHashKey();
+
         auth = FirebaseAuth.getInstance();
 
 
@@ -75,7 +77,7 @@ public class StartActivity extends AppCompatActivity {
 
         Button btn_login = (Button) findViewById(R.id.btn_login);
          btn_kakao = (ImageButton) findViewById(R.id.btn_kakao);
-        btn_login.setOnClickListener(new View.OnClickListener() {
+         btn_login.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
@@ -159,7 +161,6 @@ public class StartActivity extends AppCompatActivity {
             return;
         }
     }
-
     private void firebaseAuthWithGoogle(GoogleSignInAccount account) {
         AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
 
@@ -172,11 +173,10 @@ public class StartActivity extends AppCompatActivity {
                         saveLoginInfo(account);
                         moveMainPage(user);
                     } else {
-                        Toast.makeText(StartActivity.this, "구글 로그인 실패", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(StartActivity.this, "로그인 실패", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
-
 
     private void moveMainPage(FirebaseUser user) {
         if (user != null) {
@@ -216,4 +216,3 @@ public class StartActivity extends AppCompatActivity {
 
 
 }
-

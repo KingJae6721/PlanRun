@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/b"
-    android:background="@drawable/background"
+    android:background="#ffffff"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -19,6 +19,7 @@
         android:minHeight="0dp"
         android:textStyle="bold"
         android:text="〈 Back"
+        android:textColor="@color/black"
         android:textAllCaps="false"
         android:textSize="15dp" />
     <de.hdodenhof.circleimageview.CircleImageView
@@ -35,34 +36,41 @@
     <TextView
         android:text="user"
         android:textSize="20dp"
-        android:textColor="#EADCDC"
+        android:textColor="@color/black"
         android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <TextView
         android:text="email@seoil.ac.kr"
         android:textSize="15dp"
-        android:textColor="#EADCDC"
+        android:textColor="@color/black"
         android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+    <View
+        android:layout_marginTop="15dp"
+        android:layout_gravity="center"
+        android:layout_width="350dp"
+        android:layout_height="2dp"
+        android:background="#8C8A8A" />
     <LinearLayout
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="30dp"
         android:layout_marginLeft="50dp"
         android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" >
         <LinearLayout
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="15dp"
             android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="37dp"
-                android:layout_height="37dp"
-                android:src="@drawable/setting1"/>
+                android:layout_marginTop="7dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/setting2"/>
             <Button
-                android:textColor="#E3E4EA"
+                android:textColor="@color/black"
                 android:textStyle="bold"
                 android:layout_gravity="center_vertical"
                 android:background="@android:color/transparent"
@@ -75,22 +83,23 @@
                 android:layout_height="wrap_content" />
         </LinearLayout>
         <LinearLayout
-            android:layout_marginBottom="12dp"
+            android:layout_marginBottom="15dp"
             android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="43dp"
-                android:layout_height="43dp"
-                android:src="@drawable/notice"/>
+                android:layout_marginTop="7dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/megaphone"/>
             <Button
-                android:textColor="#E3E4EA"
+                android:textColor="@color/black"
                 android:textStyle="bold"
                 android:layout_gravity="center_vertical"
                 android:background="@android:color/transparent"
                 android:minWidth="0dp"
                 android:minHeight="0dp"
-                android:paddingStart="5dp"
+                android:paddingStart="10dp"
                 android:text="공지사항"
                 android:textSize="16dp"
                 android:layout_width="wrap_content"
@@ -101,11 +110,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="39dp"
-                android:layout_height="39dp"
-                android:src="@drawable/event1"/>
+                android:layout_marginTop="7dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/event"/>
             <Button
-                android:textColor="#E3E4EA"
+                android:textColor="@color/black"
                 android:textStyle="bold"
                 android:layout_gravity="center_vertical"
                 android:background="@android:color/transparent"
@@ -133,8 +143,8 @@
         android:minHeight="0dp"
         android:text="로그아웃"
         android:textAllCaps="false"
-        android:textColor="#D6D6D8"
-        android:textSize="20dp"
+        android:textColor="@color/black"
+        android:textSize="15dp"
         android:textStyle="bold" />
 
 </LinearLayout>

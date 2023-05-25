@@ -39,11 +39,11 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.kakao.sdk.user.UserApiClient;
 
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -53,6 +53,10 @@ import com.google.firebase.database.ValueEventListener;
 import de.hdodenhof.circleimageview.CircleImageView;
 import android.Manifest;
 
+import com.kakao.sdk.user.UserApiClient;
+
+import kotlin.Unit;
+import kotlin.jvm.functions.Function1;
 
 public class MypageFragment extends Fragment {
 
@@ -149,6 +153,7 @@ public class MypageFragment extends Fragment {
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.clear();
                 editor.commit();
+
                 onDestroy();
             }
         });
@@ -212,6 +217,4 @@ public class MypageFragment extends Fragment {
 
         return view;
     }
-
 }
-
