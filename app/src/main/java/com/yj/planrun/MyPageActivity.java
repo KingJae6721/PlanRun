@@ -5,11 +5,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 import com.google.firebase.auth.FirebaseAuth;
+
+import java.io.File;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MyPageActivity extends AppCompatActivity {
     private FirebaseAuth mFirebaseAuth;
@@ -36,7 +43,10 @@ public class MyPageActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+
         //탈퇴처리
         //mFirebaseAuth.getCurrentUser().delete();
     }
+
 }
