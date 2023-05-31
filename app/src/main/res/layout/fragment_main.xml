@@ -1,201 +1,238 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.sothree.slidinguppanel.SlidingUpPanelLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="5dp"
-    android:background="@color/white"
-
+    android:background="#00FFFFFF"
+    android:gravity="bottom"
+    app:umanoShadowHeight="0dp"
+    app:umanoPanelHeight="95dp"
+    app:umanoOverlay="true"
+    app:umanoDragView="@+id/slide_layout"
     tools:context=".MainFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <!-- 오늘 달린 거리 탭-->
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/rectangle_style"
+    <LinearLayout
+        android:gravity="center"
         android:orientation="vertical"
-        android:padding="20dp"
-        android:textSize="30sp">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <fragment
+                android:id="@+id/map_fragment"
+                android:name="com.google.android.gms.maps.SupportMapFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:layout="@layout/activity_run" />
+            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                android:layout_height="80dp"
+                android:layout_width="80dp"
+                android:layout_gravity="bottom|center"
+                android:layout_marginBottom="110dp"
+                app:backgroundTint="#FF0"
+                android:text=" 시작"
+                android:textSize="15dp"
+                android:textAlignment="center"/>
+        </FrameLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:background="@drawable/main_background"
+        android:id="@+id/slide_layout"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
 
-        <TextView
-            android:id="@+id/text1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:layout_marginLeft="10dp"
-            android:layout_marginBottom="5dp"
-            android:text="오늘의 러닝"
-            android:textColor="@color/black"
-            android:textSize="17dp"
-            android:textStyle="bold" />
-
-        <ImageView
-            android:id="@+id/profile_picture"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/text1"
-            android:layout_gravity="left"
-            android:layout_marginLeft="10dp"
-            android:src="@mipmap/ic_launcher_round" />
-
-        <TextView
-            android:id="@+id/nicknameTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/profile_picture"
-            android:layout_gravity="left|bottom"
-            android:layout_marginLeft="18dp"
-            android:layout_marginBottom="0dp"
-            android:layout_toRightOf="@+id/profile_picture"
-            android:textColor="@color/white"
-            android:textSize="30dp" />
-
-        <ImageView
+        <View
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center"
+            android:background="@drawable/slide_view_background"
             android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_alignParentEnd="true"
-            android:layout_gravity="right|top"
-            android:layout_marginEnd="4dp"
-            android:layout_marginBottom="32dp"
-            android:src="@mipmap/ic_launcher_round" />
-
-        <TextView
-            android:layout_width="wrap_content"
+            android:layout_height="3dp"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/profile_picture"
-            android:layout_marginLeft="10dp"
-            android:text="%s 킬로미터"
-            android:textSize="30dp" />
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/rectangle_style"
+            android:orientation="vertical"
+            android:padding="20dp"
+            android:textSize="30sp">
 
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/text1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="5dp"
+                android:text="오늘의 러닝"
+                android:textColor="@color/black"
+                android:textSize="17dp"
+                android:textStyle="bold" />
 
-    <RelativeLayout
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/rectangle_style"
-        android:orientation="vertical"
-        android:padding="15dp">
+            <ImageView
+                android:id="@+id/profile_picture"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/text1"
+                android:layout_gravity="left"
+                android:layout_marginLeft="10dp"
+                android:src="@mipmap/ic_launcher_round" />
 
+            <TextView
+                android:id="@+id/nicknameTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/profile_picture"
+                android:layout_gravity="left|bottom"
+                android:layout_marginLeft="18dp"
+                android:layout_marginBottom="0dp"
+                android:layout_toRightOf="@+id/profile_picture"
+                android:textColor="@color/white"
+                android:textSize="30dp" />
 
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentEnd="true"
+                android:layout_gravity="right|top"
+                android:layout_marginEnd="4dp"
+                android:layout_marginBottom="32dp"
+                android:src="@mipmap/ic_launcher_round" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/profile_picture"
+                android:layout_marginLeft="10dp"
+                android:text="%s 킬로미터"
+                android:textSize="30dp" />
 
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/rectangle_style"
+            android:orientation="vertical"
+            android:padding="15dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+                    <TextView
+                        android:id="@+id/txt_challenge_month"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="9dp"
+                        android:text="월간 챌린지"
+                        android:textColor="@color/black"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                    <Button
+                        android:id="@+id/viewAll"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="204dp"
+                        android:minHeight="0dp"
+                        android:minWidth="0dp"
+                        android:text="모두보기"
+                        android:background="@android:color/transparent"
+                        android:textColor="@color/black" />
+                </LinearLayout>
+                <ProgressBar
+                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                    android:max="100"
+                    android:progress="30"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/txt_challenge_week"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txt_challenge_month"
+                    android:text="주간 챌린지"
+                    android:textColor="@color/black" />
+
+                <ProgressBar
+                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                    android:max="100"
+                    android:progress="50"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txt_challenge_week"
+                    android:text="일일 챌린지"
+                    android:textColor="@color/black" />
+
+                <ProgressBar
+                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                    android:max="100"
+                    android:progress="90"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" >
-                <TextView
-                    android:id="@+id/txt_challenge_month"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="9dp"
-                    android:text="월간 챌린지"
-                    android:textColor="@color/black"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-                <Button
-                    android:id="@+id/viewAll"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="204dp"
-                    android:minHeight="0dp"
-                    android:minWidth="0dp"
-                    android:text="모두보기"
-                    android:background="@android:color/transparent"
-                    android:textColor="@color/black" />
-            </LinearLayout>
-            <ProgressBar
-                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-                android:max="100"
-                android:progress="30"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:id="@+id/txt_challenge_week"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/txt_challenge_month"
-                android:text="주간 챌린지"
-                android:textColor="@color/black" />
-
-            <ProgressBar
-                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-                android:max="100"
-                android:progress="50"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/rectangle_style"
+            android:orientation="vertical"
+            android:padding="15dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/txt_challenge_week"
-                android:text="일일 챌린지"
+
+                android:text="닉네임 님은"
                 android:textColor="@color/black" />
 
-            <ProgressBar
-                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-                android:max="100"
-                android:progress="90"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="이번 달에 11키로를 달렸습니다"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="지금까지는 총 --키로나 달리셨네요! 대단합니다!"
+                android:textColor="@color/black" />
         </LinearLayout>
-
-    </RelativeLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/rectangle_style"
-        android:orientation="vertical"
-        android:padding="15dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:text="닉네임 님은"
-            android:textColor="@color/black" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:text="이번 달에 11키로를 달렸습니다"
-            android:textColor="@color/black" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:text="지금까지는 총 --키로나 달리셨네요! 대단합니다!"
-            android:textColor="@color/black" />
+        <Button
+            android:id="@+id/btn_run"
+            android:text="Run"
+            android:textColor="#E23E3D3D"
+            android:backgroundTint="#F8DA40"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
     </LinearLayout>
-    <Button
-        android:id="@+id/btn_run"
-        android:text="Run"
-        android:textColor="#E23E3D3D"
-        android:backgroundTint="#F8DA40"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-</LinearLayout>
+</com.sothree.slidinguppanel.SlidingUpPanelLayout>

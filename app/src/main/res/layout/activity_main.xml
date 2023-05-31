@@ -10,10 +10,10 @@
     >
 
     <FrameLayout
+        android:id="@+id/containers"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:id="@+id/containers">
+        android:layout_weight="1">
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_navigationview"
