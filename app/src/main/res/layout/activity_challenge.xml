@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/background"
+    android:foregroundTint="@color/white"
+    android:background="#ffffff"
     tools:context=".ChallengeActivity">
 
     <LinearLayout
@@ -17,7 +18,7 @@
             android:layout_marginLeft="33dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="23dp"
             android:textStyle="bold"
             android:text="챌린지"/>
@@ -32,12 +33,16 @@
             android:textStyle="bold"
             android:text="〈 Back"
             android:textAllCaps="false"
+            android:textColor="@color/black"
             android:textSize="15dp" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal"
+        android:clipToPadding="false">
         <Button
             android:id="@+id/day"
             android:layout_weight="1"
@@ -50,7 +55,8 @@
             android:minHeight="0dp"
             android:text="일일"
             android:textAllCaps="false"
-            android:textSize="17dp" />
+            android:textSize="17dp"
+            android:textColor="@color/black" />
         <Button
             android:id="@+id/week"
             android:layout_weight="1"
@@ -63,20 +69,22 @@
             android:minHeight="0dp"
             android:text="주간"
             android:textAllCaps="false"
-            android:textSize="17dp" />
+            android:textSize="17dp"
+            android:textColor="@color/black" />
         <Button
             android:id="@+id/month"
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
+            android:paddingBottom="0dp"
             android:layout_marginLeft="2dp"
             android:background="@android:color/transparent"
             android:minWidth="0dp"
             android:minHeight="0dp"
             android:text="월간"
             android:textAllCaps="false"
-            android:textSize="17dp" />
+            android:textSize="17dp"
+            android:textColor="@color/black" />
     </LinearLayout>
 
     <LinearLayout
