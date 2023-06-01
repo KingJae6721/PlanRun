@@ -48,14 +48,20 @@ import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.maps.model.RoundCap;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.maps.android.SphericalUtil;
 
 import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 
 public class RunActivity extends AppCompatActivity implements OnMapReadyCallback, ActivityCompat.OnRequestPermissionsResultCallback{
@@ -74,7 +80,7 @@ public class RunActivity extends AppCompatActivity implements OnMapReadyCallback
     private static final int PERMISSIONS_REQUEST_CODE = 100;
     boolean needRequest = false;
     private double speed;
-
+    private FirebaseAuth mAuth;
 
     // 앱을 실행하기 위해 필요한 퍼미션을 정의합니다.
     String[] REQUIRED_PERMISSIONS  = {Manifest.permission.ACCESS_FINE_LOCATION,
@@ -88,7 +94,7 @@ public class RunActivity extends AppCompatActivity implements OnMapReadyCallback
     private FusedLocationProviderClient mFusedLocationClient;
     private LocationRequest locationRequest;
     private Location location;
-    private Button btn_record ;
+    private Button btn_record ,btn_runend;
     private TextView tv_distance,tv_speed, tv_kcal;
     private Chronometer chronometer;
 
@@ -113,6 +119,17 @@ public class RunActivity extends AppCompatActivity implements OnMapReadyCallback
         chronometer=findViewById(R.id.chronometer);
         tv_speed=findViewById(R.id.tv_speed);
         tv_kcal=findViewById(R.id.tv_kcal);
+        btn_runend = findViewById(R.id.btn_runend);
+
+        btn_runend.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                // 길게 누르면 데이터베이스에 값을 저장하고 액티비티 종료
+                saveDataToFirebase();
+                finish();
+                return true;
+            }
+        });
 
         btn_record.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -160,6 +177,33 @@ public class RunActivity extends AppCompatActivity implements OnMapReadyCallback
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map_fragment);
         mapFragment.getMapAsync(this);
+
+
+
+
+        mAuth = FirebaseAuth.getInstance();
+    }
+
+    private void saveDataToFirebase() {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("runningData");
+        // 현재 사용자 가져오기
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser != null) {
+            String userId = currentUser.getUid();
+
+            // 저장할 데이터 맵 만들기
+            Map<String, Object> dataMap = new HashMap<>();
+            dataMap.put("time", chronometer.getText().toString());
+            dataMap.put("distance", tv_distance.getText().toString());
+            dataMap.put("calories", tv_kcal.getText().toString());
+            dataMap.put("pace", tv_speed.getText().toString());
+
+            // Realtime Database에 데이터 추가
+            myRef.child(userId).push().setValue(dataMap);
+        }else {
+            Toast.makeText(RunActivity.this, "로그인 정보를 확인할 수 없습니다.", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
