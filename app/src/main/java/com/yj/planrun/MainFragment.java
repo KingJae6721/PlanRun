@@ -97,8 +97,31 @@ public class MainFragment extends Fragment implements OnMapReadyCallback, Activi
     @Override
     @Nullable
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
-    {   mLayout = inflater.inflate(R.layout.fragment_main, container, false);
+    {   mLayout = inflater.inflate(R.layout.fragment_main, null, false);
 
+        TextView nicknameTextView = mLayout.findViewById(R.id.nicknameTextView);
+
+        nicknameTextView.setText(MainActivity.nickname);
+
+
+
+        locationRequest = new LocationRequest()
+                .setPriority(Priority.PRIORITY_HIGH_ACCURACY)
+                .setInterval(UPDATE_INTERVAL_MS)
+                .setFastestInterval(FASTEST_UPDATE_INTERVAL_MS);
+
+        LocationSettingsRequest.Builder builder =
+                new LocationSettingsRequest.Builder();
+
+        builder.addLocationRequest(locationRequest);
+
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(getActivity());
+
+        SupportMapFragment mapFragment = (SupportMapFragment) this.getChildFragmentManager().findFragmentById(R.id.map_fragment);
+        mapFragment.getMapAsync(this);
+
+
+        //이벤트
         Button btn_run = (Button) mLayout.findViewById(R.id.btn_run);
         btn_run.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,43 +140,7 @@ public class MainFragment extends Fragment implements OnMapReadyCallback, Activi
             }
         });
 
-        TextView nicknameTextView = mLayout.findViewById(R.id.nicknameTextView);
-        /*FirebaseAuth auth  = FirebaseAuth.getInstance();
-        FirebaseUser mFirebaseAuth = auth.getCurrentUser();
-        DatabaseReference mDatabaseRef = FirebaseDatabase.getInstance().getReference("PlanRun");
-        if (mFirebaseAuth != null) {
-            mDatabaseRef.child("UserAccount").child(mFirebaseAuth.getUid()).child("nickname").addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    if (snapshot.exists()) {
-                        String nickname = snapshot.getValue(String.class);
 
-                    }
-                }
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                    Log.e("MainFragment", "데이터 로딩 실패: " + error.getMessage());
-                }
-            });
-        }*/
-        nicknameTextView.setText(MainActivity.nickname);
-
-
-
-        locationRequest = new LocationRequest()
-                .setPriority(Priority.PRIORITY_HIGH_ACCURACY)
-                .setInterval(UPDATE_INTERVAL_MS)
-                .setFastestInterval(FASTEST_UPDATE_INTERVAL_MS);
-
-        LocationSettingsRequest.Builder builder =
-                new LocationSettingsRequest.Builder();
-
-        builder.addLocationRequest(locationRequest);
-
-        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(getActivity());
-
-        SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map_fragment);
-        mapFragment.getMapAsync(this);
 
         return mLayout;
     }
