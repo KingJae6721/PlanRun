@@ -22,34 +22,112 @@
             tools:layout="@layout/activity_run"
             />
     </FrameLayout>
-    <Button
-        android:id="@+id/btn_record"
+    <LinearLayout
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="40dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="측정 시작"/>
-
-    <TextView
-        android:id="@+id/tv_distance"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_marginRight="20dp"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <Chronometer
+                android:id="@+id/chronometer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="25dp"
+                android:textAlignment="center"/>
+            <TextView
+                android:text="시간"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_marginRight="20dp"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tv_kcal"
+                android:text="000kcal"
+                android:textSize="25dp"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:text="칼로리"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tv_speed"
+                android:text="00km"
+                android:textSize="25dp"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:text="시속"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_gravity="center"
+        android:layout_margin="30dp"
+        android:orientation="vertical"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="km"
-        android:textSize="30dp" />
-    <Chronometer
-        android:id="@+id/chronometer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="30dp"/>
-    <TextView
-        android:id="@+id/tv_speed"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_distance"
+            android:text="00.00"
+            android:textSize="50dp"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:text="거리(km)"
+            android:gravity="center"
+            android:textSize="25dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_gravity="center"
+        android:orientation="horizontal"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="km"
-        android:textSize="30dp" />
-    <TextView
-        android:id="@+id/tv_kcal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="칼로리"
-        android:textSize="30dp" />
+        android:layout_height="wrap_content" >
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_runend"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/btn_runend_style"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:text="종료"
+            android:textColor="@color/white"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_record"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/btn_record_style"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:text="시 작"/>
+    </LinearLayout>
 
 </LinearLayout>

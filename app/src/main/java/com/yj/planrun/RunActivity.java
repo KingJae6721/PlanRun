@@ -119,7 +119,9 @@ public class RunActivity extends AppCompatActivity implements OnMapReadyCallback
             public void onClick(View v) {
 
                 if(run_state==false){
-                    btn_record.setText("일시정지");
+                    btn_record.setText("일시 정지");
+                    btn_record.setTextColor(Color.WHITE);
+                    btn_record.setBackgroundResource(R.drawable.btn_runstop_style);
                     run_state=true;
                     chronometer.setBase(SystemClock.elapsedRealtime()-pauseOffSet);
                     chronometer.start();
@@ -127,7 +129,9 @@ public class RunActivity extends AppCompatActivity implements OnMapReadyCallback
 
                 }
                 else{
-                    btn_record.setText("측정시작");
+                    btn_record.setText("시 작");
+                    btn_record.setTextColor(Color.BLACK);
+                    btn_record.setBackgroundResource(R.drawable.btn_record_style);
                     pauseOffSet=SystemClock.elapsedRealtime()-chronometer.getBase();
 
                     chronometer.stop();
