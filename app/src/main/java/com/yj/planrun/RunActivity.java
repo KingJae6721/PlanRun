@@ -280,7 +280,7 @@ public class RunActivity extends AppCompatActivity implements OnMapReadyCallback
         });
     }
     private LatLng beforePosition=new LatLng(0,0);
-   
+
     double dis=0;
     List<Polyline>polylines =new ArrayList<>();
 
@@ -300,7 +300,7 @@ public class RunActivity extends AppCompatActivity implements OnMapReadyCallback
                 currentPosition = new LatLng(location.getLatitude(), location.getLongitude());
                 if (beforePosition.longitude==0&&beforePosition.latitude==0&&run_state==true)
                     beforePosition=currentPosition;
-                
+
 
 
                 String markerTitle = getCurrentAddress(currentPosition);
@@ -689,15 +689,15 @@ public class RunActivity extends AppCompatActivity implements OnMapReadyCallback
         locationB.setLongitude(LatLng2.longitude);
 
 
-            double theta = LatLng1.longitude - LatLng2.longitude;
-            distance = Math.sin(deg2rad(LatLng1.latitude)) * Math.sin(deg2rad(LatLng2.latitude)) + Math.cos(deg2rad(LatLng1.latitude))
-                    * Math.cos(deg2rad(LatLng2.latitude)) * Math.cos(deg2rad(theta));
-            distance = Math.acos(distance);
-            distance = rad2deg(distance);
-            distance = distance * 60 * 1.1515;
-            distance = distance * 1.609344;    // 단위 mile 에서 km 변환.
-            distance = distance * 1000.0;      // 단위  km 에서 m 로 변환
-            return distance; // 단위 m
+        double theta = LatLng1.longitude - LatLng2.longitude;
+        distance = Math.sin(deg2rad(LatLng1.latitude)) * Math.sin(deg2rad(LatLng2.latitude)) + Math.cos(deg2rad(LatLng1.latitude))
+                * Math.cos(deg2rad(LatLng2.latitude)) * Math.cos(deg2rad(theta));
+        distance = Math.acos(distance);
+        distance = rad2deg(distance);
+        distance = distance * 60 * 1.1515;
+        distance = distance * 1.609344;    // 단위 mile 에서 km 변환.
+        distance = distance * 1000.0;      // 단위  km 에서 m 로 변환
+        return distance; // 단위 m
 
 
     }
