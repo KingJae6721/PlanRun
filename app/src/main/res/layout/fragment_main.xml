@@ -8,7 +8,7 @@
     android:background="#00FFFFFF"
     android:gravity="bottom"
     app:umanoShadowHeight="0dp"
-    app:umanoPanelHeight="85dp"
+    app:umanoPanelHeight="80dp"
     app:umanoOverlay="true"
     app:umanoDragView="@+id/slide_layout"
     tools:context=".MainFragment">
