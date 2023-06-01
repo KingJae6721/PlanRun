@@ -12,13 +12,13 @@
 
     <TextView
         android:textAlignment="center"
-        android:text="Login"
+        android:text="Log in"
         android:textSize="50dp"
         android:textColor="#F8DB82"
         android:textStyle="bold"
         android:layout_marginTop="125dp"
         android:layout_marginBottom="50dp"
-        android:textAllCaps="false"
+        android:textAllCaps="true"
         android:letterSpacing="0"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
@@ -57,7 +57,7 @@
         android:layout_height="58dp"
         android:layout_marginVertical="1dp"
         android:backgroundTint="#75a9f9"
-        android:text="Login"
+        android:text="Log In"
         android:letterSpacing="0"
         android:textStyle="bold"
         android:textAllCaps="false"
@@ -80,7 +80,7 @@
             android:textAllCaps="false"
             android:textColor="#989eb1"
             android:textSize="13dp"
-            android:text="Forgot Password?" />
+            android:text="Find PW" />
         <Button
             android:id="@+id/btn_register"
             android:layout_width="wrap_content"

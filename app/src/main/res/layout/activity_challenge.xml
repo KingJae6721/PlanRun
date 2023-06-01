@@ -1,116 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<TabHost xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="@drawable/background"
+    android:id="@android:id/tabhost"
     tools:context=".ChallengeActivity">
-
     <LinearLayout
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="match_parent">
         <TextView
-            android:layout_marginTop="35dp"
-            android:layout_marginLeft="33dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:textSize="23dp"
-            android:textStyle="bold"
-            android:text="챌린지"/>
-        <Button
-            android:layout_marginTop="35dp"
-            android:layout_marginLeft="195dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:minWidth="0dp"
-            android:minHeight="0dp"
-            android:textStyle="bold"
-            android:text="〈 Back"
-            android:textAllCaps="false"
-            android:textSize="15dp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <Button
-            android:id="@+id/day"
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingBottom="0dp"
-            android:layout_marginLeft="2dp"
-            android:background="@android:color/transparent"
-            android:minWidth="0dp"
-            android:minHeight="0dp"
-            android:text="일일"
-            android:textAllCaps="false"
-            android:textSize="17dp" />
-        <Button
-            android:id="@+id/week"
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingBottom="0dp"
-            android:layout_marginLeft="2dp"
-            android:background="@android:color/transparent"
-            android:minWidth="0dp"
-            android:minHeight="0dp"
-            android:text="주간"
-            android:textAllCaps="false"
-            android:textSize="17dp" />
-        <Button
-            android:id="@+id/month"
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="2dp"
-            android:background="@android:color/transparent"
-            android:minWidth="0dp"
-            android:minHeight="0dp"
-            android:text="월간"
-            android:textAllCaps="false"
-            android:textSize="17dp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <View
-            android:id="@+id/dayView"
-            android:layout_weight="1"
+            android:text="챌린지"
+            android:textSize="22dp"
+            android:textColor="@color/black"
+            android:textAlignment="center"
+            android:padding="8dp"
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="#8C8A8A" />
-
-        <View
-            android:id="@+id/weekView"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"/>
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="#8C8A8A" />
-        <View
-            android:id="@+id/monthView"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="#8C8A8A" />
+            android:layout_height="match_parent">
 
+            <TabWidget
+                android:id="@android:id/tabs"
+                android:background="@drawable/menu_background_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </TabWidget>
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@android:id/tabcontent">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tabDay"
+                    android:orientation="vertical" >
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:id="@+id/tabWeek">
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:id="@+id/tabMonth">
+                </LinearLayout>
+
+            </FrameLayout>
+        </LinearLayout>
     </LinearLayout>
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/fragmentFrame"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-
-</LinearLayout>
+</TabHost>

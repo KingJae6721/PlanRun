@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:backgroundTint="#ebebeb"
         android:layout_marginLeft="40dp"
-        android:hint="  Nickname"
+        android:hint="  Name"
         android:textColor="@color/black"
         android:textColorHint="#CFC0C0C0"
         android:textStyle="bold"
@@ -82,25 +82,40 @@
         android:layout_height="wrap_content"
         android:backgroundTint="#ebebeb"
         android:layout_marginLeft="40dp"
-        android:hint="  Password Check"
+        android:hint="  Confirm Password"
         android:textColor="@color/black"
         android:textColorHint="#CFC0C0C0"
         android:textStyle="bold"
         android:inputType="textPassword"/>
-
-
-
-    <Button
-        android:id="@+id/btn_register"
-        android:layout_gravity="center_horizontal"
-        android:layout_width="306dp"
-        android:layout_height="58dp"
-        android:layout_marginTop="60dp"
-        android:backgroundTint="#75a9f9"
-        android:textAllCaps="false"
-        android:textSize="18dp"
-        android:textStyle="bold"
-        android:letterSpacing="0"
-        android:text="Sign up"/>
+    <LinearLayout
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="130dp"
+            android:layout_height="58dp"
+            android:layout_marginRight="40dp"
+            android:backgroundTint="#373737"
+            android:textAllCaps="false"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:letterSpacing="0"
+            android:text="Cancel"/>
+        <Button
+            android:id="@+id/btn_register"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="130dp"
+            android:layout_height="58dp"
+            android:backgroundTint="#75a9f9"
+            android:textAllCaps="false"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:letterSpacing="0"
+            android:text="Register"/>
+    </LinearLayout>
 
 </LinearLayout>
