@@ -8,7 +8,7 @@
     android:background="#00FFFFFF"
     android:gravity="bottom"
     app:umanoShadowHeight="0dp"
-    app:umanoPanelHeight="95dp"
+    app:umanoPanelHeight="80dp"
     app:umanoOverlay="true"
     app:umanoDragView="@+id/slide_layout"
     tools:context=".MainFragment">
@@ -23,6 +23,7 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <fragment
                 android:id="@+id/map_fragment"
                 android:name="com.google.android.gms.maps.SupportMapFragment"
@@ -30,6 +31,7 @@
                 android:layout_height="match_parent"
                 tools:layout="@layout/activity_run" />
             <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                android:id="@+id/btn_run"
                 android:layout_height="80dp"
                 android:layout_width="80dp"
                 android:layout_gravity="bottom|center"
@@ -207,32 +209,21 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
                 android:text="닉네임 님은"
                 android:textColor="@color/black" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
                 android:text="이번 달에 11키로를 달렸습니다"
                 android:textColor="@color/black" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
                 android:text="지금까지는 총 --키로나 달리셨네요! 대단합니다!"
                 android:textColor="@color/black" />
         </LinearLayout>
-        <Button
-            android:id="@+id/btn_run"
-            android:text="Run"
-            android:textColor="#E23E3D3D"
-            android:backgroundTint="#F8DA40"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+
     </LinearLayout>
 </com.sothree.slidinguppanel.SlidingUpPanelLayout>

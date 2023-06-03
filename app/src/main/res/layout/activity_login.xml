@@ -12,13 +12,13 @@
 
     <TextView
         android:textAlignment="center"
-        android:text="Login"
+        android:text="Log in"
         android:textSize="50dp"
-        android:textColor="#F8DB82"
+        android:textColor="#7A7A7A"
         android:textStyle="bold"
         android:layout_marginTop="125dp"
         android:layout_marginBottom="50dp"
-        android:textAllCaps="false"
+        android:textAllCaps="true"
         android:letterSpacing="0"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:backgroundTint="#D3D3D3"
         android:layout_marginBottom="40dp"
-        android:hint="  Email"
+        android:hint="  이메일"
         android:textColor="@color/black"
         android:textColorHint="#CFC0C0C0"
         android:textStyle="bold"
@@ -39,7 +39,7 @@
         android:id="@+id/et_pwd"
         android:layout_width="332dp"
         android:layout_height="wrap_content"
-        android:hint="  Password"
+        android:hint="  비밀번호"
         android:backgroundTint="#D3D3D3"
         android:textStyle="bold"
         android:textColor="@color/black"
@@ -51,15 +51,16 @@
         android:layout_marginBottom="28dp"
         android:layout_width="332dp"
         android:layout_height="wrap_content" />
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_login"
         android:layout_width="305dp"
-        android:layout_height="58dp"
+        android:layout_height="45dp"
         android:layout_marginVertical="1dp"
-        android:backgroundTint="#75a9f9"
-        android:text="Login"
+        android:background="@drawable/btn_login_style"
+        android:text="Log In"
         android:letterSpacing="0"
         android:textStyle="bold"
+        android:textColor="@color/white"
         android:textAllCaps="false"
         android:textSize="18dp"/>
 
@@ -80,7 +81,7 @@
             android:textAllCaps="false"
             android:textColor="#989eb1"
             android:textSize="13dp"
-            android:text="Forgot Password?" />
+            android:text="비밀번호 찾기" />
         <Button
             android:id="@+id/btn_register"
             android:layout_width="wrap_content"
@@ -89,7 +90,7 @@
             android:textAllCaps="false"
             android:textColor="#989eb1"
             android:textSize="13dp"
-            android:text="Sign up" />
+            android:text="회원가입" />
     </LinearLayout>
 
 </LinearLayout>
