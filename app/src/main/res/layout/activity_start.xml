@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".StartActivity"
-    android:background="@color/white"
+    android:background="@drawable/start_background"
     android:orientation="vertical"
     android:gravity="center" >
 
@@ -14,8 +14,7 @@
         android:layout_height="800dp"
         android:layout_weight="10"
         android:layout_marginTop="140dp"
-        android:layout_marginRight="15dp"
-        android:src="@drawable/ic_logonmex4"
+        android:src="@drawable/ic_logonmex5"
         android:visibility="visible" />
 
     <androidx.appcompat.widget.AppCompatButton
@@ -25,7 +24,7 @@
         android:layout_marginTop="150dp"
         android:layout_marginBottom="5dp"
         android:background="@drawable/btn_login_style"
-        android:textColor="@color/white"
+        android:textColor="#3F7EF2"
         android:text="Log In"
         android:letterSpacing="0"
         android:textStyle="bold"
@@ -38,7 +37,7 @@
         android:text="or use one of your social profiles"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="13dp"
-        android:textColor="#989eb1"/>
+        android:textColor="#DDDDDF"/>
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="185dp"
