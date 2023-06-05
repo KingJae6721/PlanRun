@@ -6,7 +6,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:foregroundTint="@color/white"
+    android:background="#ffffff"
     tools:context=".CommunityFragment">
 
     <RelativeLayout
@@ -22,7 +23,7 @@
                 android:id="@+id/post"
                 android:text="게시물"
                 android:textSize="30dp"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:layout_margin="5dp"
                 android:layout_marginLeft="10dp"
                 android:layout_width="wrap_content"
@@ -45,7 +46,7 @@
                 android:id="@+id/club"
                 android:text="클럽"
                 android:textSize="30dp"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:layout_margin="5dp"
                 android:layout_marginLeft="10dp"
                 android:layout_width="wrap_content"
@@ -54,7 +55,7 @@
                 android:id="@+id/club_line"
                 android:layout_marginLeft="5dp"
                 android:layout_below="@+id/club"
-                android:background="@color/white"
+                android:background="#AFAFAF"
                 android:layout_width="55dp"
                 android:layout_height="3dp"/>
         </RelativeLayout>
@@ -85,23 +86,5 @@
         android:layout_width="wrap_content"
         android:layout_height="3dp"/>
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:id="@+id/containers">
-
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottom_navigationview"
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:layout_gravity="bottom"
-            android:background="#807a7a7a"
-            app:itemIconSize="@dimen/design_bottom_navigation_height"
-            app:itemIconTint="@drawable/menu_selector_color"
-            app:itemTextColor="@drawable/menu_selector_color"
-            app:labelVisibilityMode="labeled"
-            app:menu="@menu/bottom_menu" />
-    </FrameLayout>
 
 </RelativeLayout>
