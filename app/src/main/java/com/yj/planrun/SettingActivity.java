@@ -86,7 +86,7 @@ public class SettingActivity extends AppCompatActivity {
                 }
             });
         }*/
-        nicknameTextView.setText(MainActivity.nickname);
+        nicknameTextView.setText(DataLoadingActivity.nickname);
         TextView emailTextView = findViewById(R.id.emailTextView);
         /* if (mFirebaseAuth != null) {
             mDatabaseRef.child("UserAccount").child(mFirebaseAuth.getUid()).child("emailId").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -103,7 +103,7 @@ public class SettingActivity extends AppCompatActivity {
                 }
             });
         }*/
-        emailTextView.setText(MainActivity.email);
+        emailTextView.setText(DataLoadingActivity.email);
 
         btn_setting.setOnClickListener(new View.OnClickListener() {
             @Override
