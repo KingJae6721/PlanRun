@@ -16,13 +16,15 @@
     <!-- TODO: Update blank fragment layout -->
     <!-- 오늘 달린 거리 탭-->
     <LinearLayout
-        android:gravity="center"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
 
             <fragment
                 android:id="@+id/map_fragment"
@@ -30,6 +32,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 tools:layout="@layout/activity_run" />
+
             <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
                 android:id="@+id/btn_run"
                 android:layout_height="80dp"
@@ -39,7 +42,7 @@
                 app:backgroundTint="#FF0"
                 android:text=" 시작"
                 android:textSize="15dp"
-                android:textAlignment="center"/>
+                android:textAlignment="center" />
         </FrameLayout>
     </LinearLayout>
     <LinearLayout
