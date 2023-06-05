@@ -102,7 +102,7 @@ public class MypageFragment extends Fragment {
                 }
             });
         }*/
-        nicknameTextView.setText(MainActivity.nickname);
+        nicknameTextView.setText(DataLoadingActivity.nickname);
 
         TextView emailTextView = view.findViewById(R.id.emailTextView);
        /* if (mFirebaseAuth != null) {
@@ -120,7 +120,7 @@ public class MypageFragment extends Fragment {
                 }
             });
         }*/
-        emailTextView.setText(MainActivity.email);
+        emailTextView.setText(DataLoadingActivity.email);
 
 
         btn_setting.setOnClickListener(new View.OnClickListener() {

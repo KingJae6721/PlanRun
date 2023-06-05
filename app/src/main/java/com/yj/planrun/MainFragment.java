@@ -101,7 +101,7 @@ public class MainFragment extends Fragment implements OnMapReadyCallback, Activi
 
         TextView nicknameTextView = mLayout.findViewById(R.id.nicknameTextView);
 
-        nicknameTextView.setText(MainActivity.nickname);
+        nicknameTextView.setText(DataLoadingActivity.nickname);
 
 
 

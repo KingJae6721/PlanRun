@@ -30,7 +30,7 @@ public class MainActivity<nickname> extends AppCompatActivity {
     private Button mBtnCommunity;
     private final long finishtimeed = 1000;
     private long presstime = 0;
-    public static String email, nickname;
+
 
     private FirebaseAuth mFirebaseAuth;
 
