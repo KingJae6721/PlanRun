@@ -124,7 +124,7 @@
             android:paddingLeft="4dp"
             android:textStyle="bold"
             android:textAllCaps="false"
-            android:textColor="#EB3051F8"
+            android:textColor="#FF4990E8"
             android:textSize="13dp"
             android:text="로그인" />
     </LinearLayout>
