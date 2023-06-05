@@ -33,6 +33,47 @@
                 android:layout_height="match_parent"
                 tools:layout="@layout/activity_run" />
 
+            <HorizontalScrollView
+                android:layout_marginTop="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="150dp">
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_margin="20dp">
+
+                    <!-- 디자인 하는 과정에서만 버튼으로 넣어두겠음-->
+                    <Button
+                        android:text="1번코스"
+                        android:textAlignment="center"
+                        android:textSize="30dp"
+                        android:layout_margin="10dp"
+                        android:layout_width="200dp"
+                        android:layout_height="match_parent"/>
+                    <Button
+                        android:text="2번코스"
+                        android:textAlignment="center"
+                        android:textSize="30dp"
+                        android:layout_margin="10dp"
+                        android:layout_width="200dp"
+                        android:layout_height="match_parent"/>
+                    <Button
+                        android:text="3번코스"
+                        android:textAlignment="center"
+                        android:textSize="30dp"
+                        android:layout_margin="10dp"
+                        android:layout_width="200dp"
+                        android:layout_height="match_parent"/>
+
+
+                </LinearLayout>
+
+
+            </HorizontalScrollView>
+
             <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
                 android:id="@+id/btn_run"
                 android:layout_height="80dp"
