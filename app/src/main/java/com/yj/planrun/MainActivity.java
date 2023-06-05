@@ -94,6 +94,10 @@ public class MainActivity<nickname> extends AppCompatActivity {
                         getSupportFragmentManager().beginTransaction().replace(R.id.containers, communityFragment).commit();
                         return true;
                     case R.id.mypage:
+                        Bundle bundle = new Bundle();
+                        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                        bundle.putString("destinationUid", uid);
+                        mypageFragment.setArguments(bundle);
                         getSupportFragmentManager().beginTransaction().replace(R.id.containers, mypageFragment).commit();
                         return true;
                 }

@@ -13,6 +13,11 @@
         android:layout_width="300dp"
         android:layout_height="300dp"/>
 
+    <Button
+        android:id="@+id/addphoto_btn_add"
+        android:text="사진 선택"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
     <EditText
         android:id="@+id/addphoto_edit_explain"
         android:gravity="top"

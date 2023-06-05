@@ -19,9 +19,12 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.provider.MediaStore;
 import android.util.Log;
@@ -30,16 +33,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.kakao.sdk.user.UserApiClient;
 
 import kotlin.Unit;
@@ -55,166 +66,219 @@ import android.Manifest;
 
 import com.kakao.sdk.user.UserApiClient;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 
 public class MypageFragment extends Fragment {
 
-    private FirebaseAuth mFirebaseAuth;
-    private CircleImageView circle_iv;
-    private String profilePath;
-
-    private ActivityResultLauncher<Intent> imageCaptureLauncher;
-    private ActivityResultLauncher<Intent> galleryLauncher;
-    private View dl_camera_choice;
-    private Button btn_camera, btn_gallery;
+    private View fragmentView;
+    private FirebaseFirestore firestore;
+    private String uid;
+    private FirebaseAuth auth;
 
 
     @Override
     @Nullable
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_mypage, container, false);
-        mFirebaseAuth = FirebaseAuth.getInstance();
 
-        DatabaseReference mDatabaseRef = FirebaseDatabase.getInstance().getReference("PlanRun");
-
-        Button btn_logout = (Button) view.findViewById(R.id.btn_logout);
-        Button btn_setting = (Button) view.findViewById(R.id.btn_setting);
-
-        circle_iv = view.findViewById(R.id.circle_iv);
-
-        TextView nicknameTextView = view.findViewById(R.id.nicknameTextView);
-
-
-
-        /*if (mFirebaseAuth != null) {
-            mDatabaseRef.child("UserAccount").child(mFirebaseAuth.getUid()).child("nickname").addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    if (snapshot.exists()) {
-                        String nickname = snapshot.getValue(String.class);
-                        nicknameTextView.setText(nickname);
-                    }
-                }
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                    Log.e("MainFragment", "데이터 로딩 실패: " + error.getMessage());
-                }
-            });
-        }*/
-        nicknameTextView.setText(MainActivity.nickname);
-
-        TextView emailTextView = view.findViewById(R.id.emailTextView);
-       /* if (mFirebaseAuth != null) {
-            mDatabaseRef.child("UserAccount").child(mFirebaseAuth.getUid()).child("emailId").addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    if (snapshot.exists()) {
-                        String email = snapshot.getValue(String.class);
-                        emailTextView.setText(email);
-                    }
-                }
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                    Log.e("MainFragment", "데이터 로딩 실패: " + error.getMessage());
-                }
-            });
-        }*/
-        emailTextView.setText(MainActivity.email);
-
-
-        btn_setting.setOnClickListener(new View.OnClickListener() {
+        ImageView setting = view.findViewById(R.id.setting);
+        setting.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), AppSettingActivity.class);
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), SettingActivity.class);
                 startActivity(intent);
             }
         });
 
-        btn_logout.setOnClickListener(new View.OnClickListener() {
+        fragmentView = view;
+        uid = getArguments().getString("destinationUid");
+        firestore = FirebaseFirestore.getInstance();
+        auth = FirebaseAuth.getInstance();
+
+        RecyclerView recyclerView = fragmentView.findViewById(R.id.account_reyclerview);
+        recyclerView.setAdapter(new UserFragmentRecyclerViewAdapter());
+        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
+
+
+
+        Button add_post = view.findViewById(R.id.add_post);
+        add_post.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                UserApiClient.getInstance().logout(new Function1<Throwable, Unit>() {
-                    @Override
-                    public Unit invoke(Throwable throwable) {
-                        return null;
-                    }
-                });
-                //로그아웃하기
-                mFirebaseAuth.signOut();
-
-                //구글 로그아웃
-                GoogleSignInClient googleSignInClient = GoogleSignIn.getClient(getActivity(), new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).build());
-                googleSignInClient.signOut();
-
-                Intent intent = new Intent(getActivity(), StartActivity.class);
+                Intent intent = new Intent(getActivity(), AddPhotoActivity.class);
                 startActivity(intent);
-                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("sharedPreferences", Activity.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.clear();
-                editor.commit();
-
-                onDestroy();
             }
         });
-        //탈퇴처리
-        //mFirebaseAuth.getCurrentUser().delete();
-
-        imageCaptureLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
-            if (result.getResultCode() == Activity.RESULT_OK) {
-                Intent data = result.getData();
-
-                profilePath = data.getStringExtra("profilePath");
-                Log.e("로그 : ", "profilePath" + profilePath);
-                Bitmap bmp = BitmapFactory.decodeFile(profilePath);
-                circle_iv.setImageBitmap(bmp);
-            }
-        });
-
-        galleryLauncher = registerForActivityResult(
-                new ActivityResultContracts.StartActivityForResult(),
-                new ActivityResultCallback<ActivityResult>() {
-                    @Override
-                    public void onActivityResult(ActivityResult result) {
-                        if(result.getResultCode() == RESULT_OK) {
-                            Intent intent = result.getData();
-                            Uri uri = intent.getData();
-                            Glide.with(view.getContext()).load(intent).override(80, 80).into(circle_iv);
-                        }
-                    }
-                }
-        );
-
-        circle_iv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dl_camera_choice = View.inflate(view.getContext(), R.layout.activity_camera_choice, null);
-                AlertDialog.Builder dlg = new AlertDialog.Builder(view.getContext());
-                dlg.setView(dl_camera_choice);
-                btn_camera = dl_camera_choice.findViewById(R.id.btn_camera);
-                btn_camera.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent intent = new Intent(getActivity(), CameraActivity.class);
-                        imageCaptureLauncher.launch(intent);
-                    }
-                });
-
-                btn_gallery = dl_camera_choice.findViewById(R.id.btn_gallery);
-
-                btn_gallery.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent intent = new Intent(Intent.ACTION_PICK);
-                        intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
-                        intent.setAction(Intent.ACTION_PICK);
-                        galleryLauncher.launch(intent);
-                    }
-                });
-                dlg.show();
-            }
-        });
-
         return view;
     }
+
+    private class UserFragmentRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+        private ArrayList<ContentDTO> contentDTOs = new ArrayList<>();
+        UserFragmentRecyclerViewAdapter() {
+            firestore.collection("images").whereEqualTo("uid", uid).addSnapshotListener((querySnapshot, firebaseFirestoreException) -> {
+                if (querySnapshot == null) return;
+                contentDTOs.clear();
+                for (DocumentSnapshot snapshot : querySnapshot.getDocuments()) {
+                    ContentDTO contentDTO = snapshot.toObject(ContentDTO.class);
+                    contentDTO.setDocumentId(snapshot.getId()); // documentId 설정 추가
+                    contentDTOs.add(contentDTO);
+                }
+                // 올린 시간 순으로 정렬
+                Collections.sort(contentDTOs, new Comparator<ContentDTO>() {
+                    @Override
+                    public int compare(ContentDTO o1, ContentDTO o2) {
+                        return Long.compare(o2.getTimestamp(), o1.getTimestamp());
+                    }
+                });
+
+                TextView postCountTextView = fragmentView.findViewById(R.id.account_tv_post_count);
+                postCountTextView.setText(String.valueOf(contentDTOs.size()));
+                //fragmentView.findViewById(R.id.account_tv_post_count).setText(String.valueOf(contentDTOs.size()));
+                notifyDataSetChanged();
+            });
+        }
+
+        @Override
+        public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            int screenWidth = parent.getContext().getResources().getDisplayMetrics().widthPixels;
+            int itemWidth = screenWidth / 3;
+            View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_mypage, parent, false);
+            itemView.setLayoutParams(new RecyclerView.LayoutParams(itemWidth, itemWidth));
+            return new CustomViewHolder(itemView);
+        }
+
+        class CustomViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener,View.OnLongClickListener {
+            ImageView imageView;
+            TextView textView;
+
+            CustomViewHolder(View itemView) {
+                super(itemView);
+                imageView = itemView.findViewById(R.id.item_mypage_image);
+                textView = itemView.findViewById(R.id.item_mypage_text);
+                itemView.setOnClickListener(this);
+                itemView.setOnLongClickListener(this);
+            }
+
+            @Override
+            public void onClick(View v) {
+                int position = getAdapterPosition();
+                if (position != RecyclerView.NO_POSITION) {
+                    // 클릭된 아이템의 position을 얻어옵니다.
+                    ContentDTO contentDTO = contentDTOs.get(position);
+                    // 상세 페이지로 이동하는 동작 수행
+                    moveToDetailPage(contentDTO);
+                }
+            }
+            @Override
+            public boolean onLongClick(View v) {
+                int position = getAdapterPosition();
+                if (position != RecyclerView.NO_POSITION) {
+                    // 삭제할 아이템의 position을 얻어옴
+                    ContentDTO contentDTO = contentDTOs.get(position);
+                    // 삭제 동작 수행
+                    deleteItem(contentDTO);
+                }
+                return true;
+            }
+
+
+            private void moveToDetailPage(ContentDTO contentDTO) {
+                // 상세 페이지로 이동하는 인텐트를 생성합니다.
+                Intent intent = new Intent(getActivity(), DetailActivity.class);
+                // 필요한 데이터를 인텐트에 추가합니다. 예를 들어, contentDTO의 ID를 전달할 수 있습니다.
+                intent.putExtra("contentId", contentDTO.getDocumentId());
+                startActivity(intent);
+            }
+            private void deleteItem(ContentDTO contentDTO) {
+                // Firestore에서 해당 아이템을 삭제
+                String documentId = contentDTO.getDocumentId(); // Firestore 문서 ID를 얻어옴
+                firestore.collection("images").document(documentId)
+                        .delete()
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                // Firestore에서 삭제 성공
+                                Toast.makeText(getContext(), "아이템이 삭제되었습니다.", Toast.LENGTH_SHORT).show();
+                                // RecyclerView에서 아이템 제거
+                                int position = contentDTOs.indexOf(contentDTO);
+                                if (position != -1) {
+                                    contentDTOs.remove(position);
+                                    notifyItemRemoved(position);
+                                }
+                                // Storage에서 사진 파일 삭제
+                                String imageUrl = contentDTO.getImageUrl();
+                                if (imageUrl != null) {
+                                    StorageReference storageRef = FirebaseStorage.getInstance().getReferenceFromUrl(imageUrl);
+                                    storageRef.delete()
+                                            .addOnSuccessListener(aVoid1 -> {
+                                                // Storage에서 사진 파일 삭제 성공
+                                            })
+                                            .addOnFailureListener(e -> {
+                                                // Storage에서 사진 파일 삭제 실패
+                                            });
+                                }
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                // Firestore에서 삭제 실패
+                                Toast.makeText(getContext(), "아이템 삭제에 실패했습니다.", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+                // RecyclerView에서 아이템 제거
+                int position = contentDTOs.indexOf(contentDTO);
+                if (position != -1) {
+                    contentDTOs.remove(position);
+                    notifyItemRemoved(position);
+                }
+            }
+        }
+
+        @Override
+        public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+            CustomViewHolder viewHolder = (CustomViewHolder) holder;
+            ContentDTO contentDTO = contentDTOs.get(position);
+
+           if (contentDTO.getImageUrl() != null) {
+               viewHolder.imageView.setVisibility(View.VISIBLE);
+               viewHolder.textView.setVisibility(View.GONE);
+               Glide.with(holder.itemView.getContext())
+                       .load(contentDTO.getImageUrl())
+                       .apply(RequestOptions.centerCropTransform())
+                       .into(viewHolder.imageView);
+           } else {
+               viewHolder.imageView.setVisibility(View.GONE);
+               viewHolder.textView.setVisibility(View.VISIBLE);
+               viewHolder.textView.setText(contentDTO.getExplain());
+           }
+
+
+
+            /*
+            // 아이템을 클릭했을 때 디테일 페이지로 이동
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(view.getContext(), DetailActivity.class);
+                    intent.putExtra("contentId", contentDTO.getDocumentId());
+                    view.getContext().startActivity(intent);
+                }
+            });
+            */
+        }
+
+        @Override
+        public int getItemCount() {
+            return contentDTOs.size();
+        }
+    }
+
+
 }
