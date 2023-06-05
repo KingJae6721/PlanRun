@@ -57,7 +57,10 @@ import com.google.maps.android.SphericalUtil;
 import org.w3c.dom.Text;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -199,6 +202,11 @@ public class RunActivity extends AppCompatActivity implements OnMapReadyCallback
             dataMap.put("calories", tv_kcal.getText().toString());
             dataMap.put("pace", tv_speed.getText().toString());
 
+            long now = System.currentTimeMillis();
+            Date date = new Date(now);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-hh시-mm분");
+            String getTime = sdf.format(date);
+            dataMap.put("date", "2023-06-06");
             // Realtime Database에 데이터 추가
             myRef.child(userId).push().setValue(dataMap);
         }else {
@@ -348,8 +356,10 @@ public class RunActivity extends AppCompatActivity implements OnMapReadyCallback
 
 
                     distance=(int)(distance * 100) / 100.0;
-                    tv_distance.setText(distance +"m");
-                    tv_kcal.setText("칼로리"+((int)(distance * 100*65/*체중*/) / 100.0)+"kcal 소비");
+
+
+                    tv_distance.setText((int)(distance /10)/100.0 +"km");
+                    tv_kcal.setText("칼로리"+((int)(((int)(distance /10)/100.0) * 100*65/*체중*/) / 100.0));
                 }
                 beforePosition = currentPosition;
             }

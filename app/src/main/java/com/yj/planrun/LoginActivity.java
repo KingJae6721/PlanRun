@@ -60,33 +60,35 @@ public class LoginActivity extends AppCompatActivity {
                 //로그인 요청
                 String strEmail = mEtEmail.getText().toString();
                 String strPwd = mEtPwd.getText().toString();
+                if(!mEtEmail.getText().toString().equals("")&&!mEtPwd.getText().toString().equals("")) {//아무것도 입력안할 시 오류제어
+                    mFirebaseAuth.signInWithEmailAndPassword(strEmail, strPwd).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                if (auto_login.isChecked()) {
+                                    // 자동 로그인 데이터 저장
+                                    SharedPreferences sharedPreferences = getSharedPreferences("sharedPreferences", Activity.MODE_PRIVATE);
+                                    SharedPreferences.Editor autoLoginEdit = sharedPreferences.edit();
+                                    autoLoginEdit.putString("userId", strEmail);
+                                    autoLoginEdit.putString("passwordNo", strPwd);
+                                    autoLoginEdit.putBoolean("checkbox_state", auto_login.isChecked());
+                                    autoLoginEdit.apply();
 
-                mFirebaseAuth.signInWithEmailAndPassword(strEmail, strPwd).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            if (auto_login.isChecked()) {
-                                // 자동 로그인 데이터 저장
-                                SharedPreferences sharedPreferences = getSharedPreferences("sharedPreferences", Activity.MODE_PRIVATE);
-                                SharedPreferences.Editor autoLoginEdit = sharedPreferences.edit();
-                                autoLoginEdit.putString("userId", strEmail);
-                                autoLoginEdit.putString("passwordNo", strPwd);
-                                autoLoginEdit.putBoolean("checkbox_state", auto_login.isChecked());
-                                autoLoginEdit.apply();
-
+                                }
+                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                intent.putExtra("checkbox_state", auto_login.isChecked());
+                                startActivity(intent);
+                                setFirebaseNicknameEmail();
+                                finish(); //현재 액티비티 파괴
+                            } else {
+                                Toast.makeText(LoginActivity.this, "로그인실패", Toast.LENGTH_SHORT).show();
                             }
-                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                            intent.putExtra("checkbox_state", auto_login.isChecked());
-                            startActivity(intent);
-                            setFirebaseNicknameEmail();
-                            finish(); //현재 액티비티 파괴
-                        } else {
-                            Toast.makeText(LoginActivity.this, "로그인실패", Toast.LENGTH_SHORT).show();
                         }
-                    }
-                });
+                    });
+                }
             }
         });
+
 
 
 
