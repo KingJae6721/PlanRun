@@ -29,6 +29,7 @@ public class MyAdapter extends FragmentStateAdapter {
         return 2000;
     }
 
+
     public int getRealPosition(int position) { return position % mCount; }
 
 }

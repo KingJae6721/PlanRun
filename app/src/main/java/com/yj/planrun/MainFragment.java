@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -106,12 +107,11 @@ public class MainFragment extends Fragment implements OnMapReadyCallback, Activi
     @Override
     @Nullable
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
-    {   mLayout = inflater.inflate(R.layout.fragment_main, null, false);
+    {
+
+
+        mLayout = inflater.inflate(R.layout.fragment_main, null, false);
         run_record1 = inflater.inflate(R.layout.fragment_run_record1, null, false);
-
-
-
-
 
         locationRequest = new LocationRequest()
                 .setPriority(Priority.PRIORITY_HIGH_ACCURACY)
@@ -130,12 +130,15 @@ public class MainFragment extends Fragment implements OnMapReadyCallback, Activi
 
         //ViewPager2
         mPager = mLayout.findViewById(R.id.viewpager);
+        mPager.setSaveEnabled(false);
+        mPager.setBackgroundColor(Color.parseColor("#00000000"));
         //Adapter
         pagerAdapter = new MyAdapter(this, num_page);
         mPager.setAdapter(pagerAdapter);
         //Indicator
         mIndicator = mLayout.findViewById(R.id.indicator);
         mIndicator.setViewPager(mPager);
+
         mIndicator.createIndicators(num_page,0);
         //ViewPager Setting
         mPager.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);

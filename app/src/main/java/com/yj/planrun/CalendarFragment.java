@@ -80,13 +80,18 @@ public class CalendarFragment extends Fragment {
 
                 diaryTextView.setText(String.format("%d / %d / %d", date.getYear(), date.getMonth(), date.getDay()));
 
+                tv_date.setText("");
+                tv_distance.setText("기록이 없습니다");
 
+                tv_pace.setText("");
                 for(RunningData data1: DataLoadingActivity.run_data) {
+
                     if(data1.getDate().equals(date.getYear()+"-"+ date.getMonth()+"-"+date.getDay())){
                         tv_distance.setText(data1.getDistance());
                         tv_date.setText(data1.getDate());
                         tv_pace.setText(data1.getPace());
                     }
+
                 }
 
             }
