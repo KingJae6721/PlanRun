@@ -100,17 +100,16 @@ public class MainFragment extends Fragment implements OnMapReadyCallback, Activi
     private LocationRequest locationRequest;
     private Location location;
 
-    private View mLayout;  // Snackbar 사용하기 위해서는 View가 필요합니다.
+    private View mLayout, run_record1;  // Snackbar 사용하기 위해서는 View가 필요합니다.
     // (참고로 Toast에서는 Context가 필요했습니다.)
 
     @Override
     @Nullable
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {   mLayout = inflater.inflate(R.layout.fragment_main, null, false);
+        run_record1 = inflater.inflate(R.layout.fragment_run_record1, null, false);
 
-        TextView nicknameTextView = mLayout.findViewById(R.id.nicknameTextView);
 
-        nicknameTextView.setText(DataLoadingActivity.nickname);
 
 
 
@@ -166,6 +165,8 @@ public class MainFragment extends Fragment implements OnMapReadyCallback, Activi
             }
         });
 
+        TextView nicknameTextView = run_record1.findViewById(R.id.nicknameTextView);
+        nicknameTextView.setText(DataLoadingActivity.nickname);
         //이벤트
         Button btn_run = (Button) mLayout.findViewById(R.id.btn_run);
         btn_run.setOnClickListener(new View.OnClickListener() {
