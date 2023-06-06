@@ -43,9 +43,126 @@
                     android:id="@+id/tabDay"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/black"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center|top"
+                    tools:context=".DayFragment">
 
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="90dp"
+                        android:gravity="center|left">
+                        <LinearLayout
+                            android:layout_marginLeft="10dp"
+                            android:orientation="vertical"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:textSize="30dp"
+                                android:text="오늘의 챌린지"
+                                android:textStyle="bold"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+                            <TextView
+                                android:textSize="25dp"
+                                android:text="20분동안 달려보세요!"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+                        </LinearLayout>
+                        <ImageView
+                            android:src="@drawable/ic_calender_checked"
+                            android:layout_marginLeft="91dp"
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_marginTop="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="90dp"
+                        android:gravity="center|left">
+                        <LinearLayout
+                            android:layout_marginLeft="10dp"
+                            android:orientation="vertical"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:textSize="30dp"
+                                android:text="오늘의 챌린지"
+                                android:textStyle="bold"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+                            <TextView
+                                android:textSize="25dp"
+                                android:text="5km를 달려보세요!"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+                        </LinearLayout>
+                        <ImageView
+                            android:src="@drawable/ic_calender_checked"
+                            android:layout_marginLeft="117dp"
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_marginTop="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="90dp"
+                        android:gravity="center|left">
+                        <LinearLayout
+                            android:layout_marginLeft="10dp"
+                            android:orientation="vertical"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:textSize="30dp"
+                                android:text="오늘의 챌린지"
+                                android:textStyle="bold"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+                            <TextView
+                                android:textSize="25dp"
+                                android:text="5분내로 1km를 달려보세요!"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+                        </LinearLayout>
+                        <ImageView
+                            android:src="@drawable/ic_calender_checked"
+                            android:layout_marginLeft="27dp"
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_marginTop="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="90dp"
+                        android:gravity="center|left">
+                        <LinearLayout
+                            android:layout_marginLeft="10dp"
+                            android:orientation="vertical"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:textSize="30dp"
+                                android:text="오늘의 챌린지"
+                                android:textStyle="bold"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+                            <TextView
+                                android:textSize="25dp"
+                                android:text="100kcal를 소비해보세요!"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+                        </LinearLayout>
+                        <ImageView
+                            android:src="@drawable/ic_calender_checked"
+                            android:layout_marginLeft="54dp"
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"/>
+                    </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
