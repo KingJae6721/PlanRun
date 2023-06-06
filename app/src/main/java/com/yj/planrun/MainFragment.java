@@ -164,7 +164,7 @@ public class MainFragment extends Fragment implements OnMapReadyCallback, Activi
                 mIndicator.animatePageSelected(position%num_page);
             }
         });
-
+        mPager.setSaveEnabled(false);
         TextView nicknameTextView = run_record1.findViewById(R.id.nicknameTextView);
         nicknameTextView.setText(DataLoadingActivity.nickname);
         //이벤트

@@ -43,7 +43,7 @@
                     android:layout_marginBottom="5dp"
                     android:layout_gravity="bottom"/>
             </FrameLayout>
-            <FrameLayout
+            <RelativeLayout
                 android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -53,18 +53,23 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     tools:layout="@layout/activity_run" />
-
-                <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-                    android:id="@+id/btn_run"
-                    android:layout_height="80dp"
-                    android:layout_width="80dp"
-                    android:layout_gravity="bottom|center"
-                    android:layout_marginBottom="110dp"
-                    app:backgroundTint="#FF0"
-                    android:text=" 시작"
-                    android:textSize="15dp"
-                    android:textAlignment="center" />
-            </FrameLayout>
+                <LinearLayout
+                    android:background="@drawable/map_background"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" >
+                    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                        android:id="@+id/btn_run"
+                        android:layout_height="80dp"
+                        android:layout_width="80dp"
+                        android:layout_gravity="bottom|center"
+                        android:layout_marginLeft="165dp"
+                        android:layout_marginBottom="50dp"
+                        app:backgroundTint="#FF0"
+                        android:text=" 시작"
+                        android:textSize="15dp"
+                        android:textAlignment="center" />
+                </LinearLayout>
+            </RelativeLayout>
     </LinearLayout>
     <LinearLayout
         android:background="@drawable/main_background"
