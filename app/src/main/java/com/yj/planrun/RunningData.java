@@ -5,6 +5,7 @@ public class RunningData {
     private  String date;
     private  String distance;
     private  String calories;
+    private  String pace;
 
     public RunningData(){}
 
@@ -39,8 +40,5 @@ public class RunningData {
     public void setPace(String pace) {
         this.pace = pace;
     }
-
-    private  String pace;
-
 
 }
