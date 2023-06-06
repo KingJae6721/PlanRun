@@ -204,9 +204,12 @@ public class RunActivity extends AppCompatActivity implements OnMapReadyCallback
 
             long now = System.currentTimeMillis();
             Date date = new Date(now);
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-hh시-mm분");
-            String getTime = sdf.format(date);
-            dataMap.put("date", "2023-06-06");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-M-d");
+            SimpleDateFormat sdf_1 = new SimpleDateFormat("hh:mm");
+            String getDate = sdf.format(date);
+            String getTime = sdf_1.format(date);
+            dataMap.put("date", getDate);
+            dataMap.put("date_time", getTime);
             // Realtime Database에 데이터 추가
             myRef.child(userId).push().setValue(dataMap);
         }else {

@@ -70,7 +70,7 @@ public class StartActivity extends AppCompatActivity {
 
         // 자동 로그인 체크박스가 체크되어 있으면, LoginActivity 대신 MainActivity로 이동
         if (autoLogin) {
-            Intent intent = new Intent(StartActivity.this, MainActivity.class);
+            Intent intent = new Intent(StartActivity.this, DataLoadingActivity.class);
             startActivity(intent);
             finish(); // 현재 액티비티 파괴
         }
@@ -95,7 +95,7 @@ public class StartActivity extends AppCompatActivity {
                     @Override
                     public Unit invoke(OAuthToken oAuthToken, Throwable throwable) {
                         if(oAuthToken != null) {
-                            Intent intent = new Intent(StartActivity.this, MainActivity.class);
+                            Intent intent = new Intent(StartActivity.this, DataLoadingActivity.class);
                             startActivity(intent);
                             finish();
                         }
@@ -121,7 +121,7 @@ public class StartActivity extends AppCompatActivity {
 
         // 이미 로그인한 경우 메인 화면으로 이동 (자동로그인)
         if (id != null) {
-            Intent intent = new Intent(StartActivity.this, MainActivity.class);
+            Intent intent = new Intent(StartActivity.this, DataLoadingActivity.class);
             startActivity(intent);
             finish();
         }
@@ -180,7 +180,7 @@ public class StartActivity extends AppCompatActivity {
 
     private void moveMainPage(FirebaseUser user) {
         if (user != null) {
-            startActivity(new Intent(this, MainActivity.class));
+            startActivity(new Intent(this, DataLoadingActivity.class));
             finish();
         }
     }
