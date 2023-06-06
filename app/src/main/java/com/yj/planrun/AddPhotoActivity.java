@@ -4,14 +4,23 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -21,8 +30,10 @@ public class AddPhotoActivity extends AppCompatActivity {
     private FirebaseStorage storage;
     private Uri photoUri;
     private ImageView addphoto_image;
-    private Button addphoto_btn_upload;
-
+    private Button addphoto_btn_upload,addphoto_btn_add;
+    private FirebaseAuth auth;
+    private FirebaseFirestore firestore;
+    private EditText addphoto_edit_explain;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,17 +41,38 @@ public class AddPhotoActivity extends AppCompatActivity {
 
         addphoto_image = findViewById(R.id.addphoto_image);
         addphoto_btn_upload = findViewById(R.id.addphoto_btn_upload);
+        addphoto_edit_explain = findViewById(R.id.addphoto_edit_explain);
+        addphoto_btn_add = findViewById(R.id.addphoto_btn_add);
 
         // Initialize storage
         storage = FirebaseStorage.getInstance();
+        auth = FirebaseAuth.getInstance();
+        firestore = FirebaseFirestore.getInstance();
 
         // Open the album
-        Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
-        photoPickerIntent.setType("image/*");
-        startActivityForResult(photoPickerIntent, PICK_IMAGE_FROM_ALBUM);
+        addphoto_btn_add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Open the album
+                Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+                photoPickerIntent.setType("image/*");
+                startActivityForResult(photoPickerIntent, PICK_IMAGE_FROM_ALBUM);
+            }
+        });
+        //Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+        //photoPickerIntent.setType("image/*");
+        //startActivityForResult(photoPickerIntent, PICK_IMAGE_FROM_ALBUM);
 
         // Add image upload event
-        addphoto_btn_upload.setOnClickListener(v -> contentUpload());
+        addphoto_btn_upload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                contentUpload();
+            }
+        });
+
+
+
     }
 
     @Override
@@ -62,15 +94,59 @@ public class AddPhotoActivity extends AppCompatActivity {
         // Make filename
         String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "IMAGE_" + timestamp + "_.png";
-
         StorageReference storageRef = storage.getReference().child("images").child(imageFileName);
 
+        /*
         // File upload
         if (photoUri != null) {
             storageRef.putFile(photoUri).addOnSuccessListener(taskSnapshot -> {
                 Toast.makeText(AddPhotoActivity.this, "upload", Toast.LENGTH_LONG).show();
                 finish();
             });
+        }
+        */
+
+        // FileUpload
+        // Upload image if photoUri is not null
+        if (photoUri != null) {
+            storageRef.putFile(photoUri).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                @Override
+                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                    return storageRef.getDownloadUrl();
+                }
+            }).addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    ContentDTO contentDTO = new ContentDTO();
+                    // Insert downloadUrl of image
+                    contentDTO.setImageUrl(uri.toString());
+                    // Insert uid of user
+                    contentDTO.setUid(auth.getCurrentUser().getUid());
+                    // Insert userId
+                    contentDTO.setUserId(auth.getCurrentUser().getEmail());
+                    // Insert explain of content
+                    contentDTO.setExplain(addphoto_edit_explain.getText().toString());
+                    // Insert timestamp
+                    contentDTO.setTimestamp(System.currentTimeMillis());
+                    firestore.collection("images").document().set(contentDTO);
+                    setResult(Activity.RESULT_OK);
+                    finish();
+                }
+            });
+        } else {
+            // If photoUri is null, upload only text content or handle the case accordingly
+            ContentDTO contentDTO = new ContentDTO();
+            // Insert uid of user
+            contentDTO.setUid(auth.getCurrentUser().getUid());
+            // Insert userId
+            contentDTO.setUserId(auth.getCurrentUser().getEmail());
+            // Insert explain of content
+            contentDTO.setExplain(addphoto_edit_explain.getText().toString());
+            // Insert timestamp
+            contentDTO.setTimestamp(System.currentTimeMillis());
+            firestore.collection("images").document().set(contentDTO);
+            setResult(Activity.RESULT_OK);
+            finish();
         }
     }
 }
