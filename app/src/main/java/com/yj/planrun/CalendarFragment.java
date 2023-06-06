@@ -44,18 +44,16 @@ import java.util.HashSet;
 
 public class CalendarFragment extends Fragment {
 
-    public String readDay = null;
-    public String str = null;
+
     public MaterialCalendarView calendarView;
-    public Button cha_Btn, del_Btn, save_Btn;
-    public TextView diaryTextView, tv_runningData, textView3;
-    public EditText contextEditText;
+    public TextView diaryTextView, tv_pace,tv_distance,tv_date;
+
 
     private FirebaseDatabase mDatabase;
     private FirebaseAuth mFirebaseAuth;         //파이어베이스 인증
     private DatabaseReference mDatabaseRef;     //실시간 데이터베이스
     private  ArrayList<CalendarDay> calendarDayList;
-    private  ArrayList <RunningData> data;
+
 
 
     @Override
@@ -66,11 +64,9 @@ public class CalendarFragment extends Fragment {
 
         calendarView = view.findViewById(R.id.calendarView);
         diaryTextView = view.findViewById(R.id.diaryTextView);
-        save_Btn = view.findViewById(R.id.save_Btn);
-        del_Btn = view.findViewById(R.id.del_Btn);
-        cha_Btn = view.findViewById(R.id.cha_Btn);
-        tv_runningData = view.findViewById(R.id.tv_runningData);
-        contextEditText = view.findViewById(R.id.contextEditText);
+        tv_date=view.findViewById(R.id.tv_date);
+        tv_pace=view.findViewById(R.id.tv_pace);
+        tv_distance=view.findViewById(R.id.tv_distance);
 
         FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
 
@@ -80,202 +76,46 @@ public class CalendarFragment extends Fragment {
         calendarView.setOnDateChangedListener(new OnDateSelectedListener() {
             @Override
             public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
-
                 diaryTextView.setVisibility(View.VISIBLE);
-                save_Btn.setVisibility(View.VISIBLE);
-                contextEditText.setVisibility(View.INVISIBLE);
-                tv_runningData.setVisibility(View.VISIBLE);
-                cha_Btn.setVisibility(View.INVISIBLE);
-                del_Btn.setVisibility(View.INVISIBLE);
 
                 diaryTextView.setText(String.format("%d / %d / %d", date.getYear(), date.getMonth(), date.getDay()));
 
-                contextEditText.setText("");
+                tv_date.setText("");
+                tv_distance.setText("기록이 없습니다");
+
+                tv_pace.setText("");
+                for(RunningData data1: DataLoadingActivity.run_data) {
+
+                    if(data1.getDate().equals(date.getYear()+"-"+ date.getMonth()+"-"+date.getDay())){
+                        tv_distance.setText(data1.getDistance());
+                        tv_date.setText(data1.getDate());
+                        tv_pace.setText(data1.getPace());
+                    }
+
+                }
 
             }
         });
-/*
-        //////////////////필요없는 기능임...
-        save_Btn.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                saveDiary(readDay);
-                str = contextEditText.getText().toString();
-                textView2.setText(str);
-                save_Btn.setVisibility(View.INVISIBLE);
-                cha_Btn.setVisibility(View.VISIBLE);
-                del_Btn.setVisibility(View.VISIBLE);
-                contextEditText.setVisibility(View.INVISIBLE);
-                textView2.setVisibility(View.VISIBLE);
-
-            }
-        });
-*/
 
         //달력에 배경 그리기
 
         calendarDayList = new ArrayList<>();
-        getRecord();//calendarDayList에 날짜 담기
+        int year, month, day;
+        for(RunningData data1: DataLoadingActivity.run_data){
 
-        mDatabaseRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot runningData : snapshot.getChildren()){
-                    data= new ArrayList<RunningData>();
-                    data.add(runningData.getValue(RunningData.class));
+            String str =data1.getDate();
+            String []date=str.split("-");
+            year=Integer.parseInt(date[0]);
+            month=Integer.parseInt(date[1]);
+            day=Integer.parseInt(date[2]);
+            Log.d("로그",date[0]+date[1]+date[2]);
 
-                    for(RunningData data1: data){
-                        String str =data1.getDate();
-                        String []date=str.split("-");
-                        year=Integer.parseInt(date[0]);
-                        month=Integer.parseInt(date[1]);
-                        day=Integer.parseInt(date[2]);
-                        Log.d("로그",date[0]+date[1]+date[2]);
-
-                        calendarDayList.add(CalendarDay.from(year,month,day));
-                        calendarView.addDecorators(new EventDecorator(calendarDayList, getActivity(), tv_runningData));
-                    }
-                }
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-
-
-
-        
-        
+            calendarDayList.add(CalendarDay.from(year,month,day));
+            calendarView.addDecorators(new EventDecorator(calendarDayList, getActivity()));
+        }
         return view;
     }//onCreate
-
-/*
-
-
-    public void checkDay(int cYear, int cMonth, int cDay)//날짜선택함수
-    {
-        readDay = "" + cYear + "-" + (cMonth + 1) + "" + "-" + cDay + ".txt";
-        FileInputStream fis;
-
-        try
-        {
-            fis = getContext().openFileInput(readDay);
-
-            byte[] fileData = new byte[fis.available()];
-            fis.read(fileData);
-            fis.close();
-
-            str = new String(fileData);
-
-            contextEditText.setVisibility(View.INVISIBLE);
-            textView2.setVisibility(View.VISIBLE);
-            textView2.setText(str);
-
-            save_Btn.setVisibility(View.INVISIBLE);
-            cha_Btn.setVisibility(View.VISIBLE);
-            del_Btn.setVisibility(View.VISIBLE);
-
-            cha_Btn.setOnClickListener(new View.OnClickListener()
-            {
-                @Override
-                public void onClick(View view)
-                {
-                    contextEditText.setVisibility(View.VISIBLE);
-                    textView2.setVisibility(View.INVISIBLE);
-                    contextEditText.setText(str);
-
-                    save_Btn.setVisibility(View.VISIBLE);
-                    cha_Btn.setVisibility(View.INVISIBLE);
-                    del_Btn.setVisibility(View.INVISIBLE);
-                    textView2.setText(contextEditText.getText());
-                }
-
-            });
-            del_Btn.setOnClickListener(new View.OnClickListener()
-            {
-                @Override
-                public void onClick(View view)
-                {
-                    textView2.setVisibility(View.INVISIBLE);
-                    contextEditText.setText("");
-                    contextEditText.setVisibility(View.VISIBLE);
-                    save_Btn.setVisibility(View.VISIBLE);
-                    cha_Btn.setVisibility(View.INVISIBLE);
-                    del_Btn.setVisibility(View.INVISIBLE);
-                    removeDiary(readDay);
-                }
-            });
-            if (textView2.getText() == null)
-            {
-                textView2.setVisibility(View.INVISIBLE);
-                diaryTextView.setVisibility(View.VISIBLE);
-                save_Btn.setVisibility(View.VISIBLE);
-                cha_Btn.setVisibility(View.INVISIBLE);
-                del_Btn.setVisibility(View.INVISIBLE);
-                contextEditText.setVisibility(View.VISIBLE);
-            }
-
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-    }
-
-    public void removeDiary(String readDay)
-    {
-        FileOutputStream fos;
-        try
-        {
-            fos = getContext().openFileOutput(readDay, Context.MODE_PRIVATE);
-            String content = "";
-            fos.write((content).getBytes());
-            fos.close();
-
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-    }
-
-    @SuppressLint("WrongConstant")
-    public void saveDiary(String readDay)
-    {
-        FileOutputStream fos;
-        try
-        {
-            fos = getContext().openFileOutput(readDay, MODE_NO_LOCALIZED_COLLATORS);
-            String content = contextEditText.getText().toString();
-            fos.write((content).getBytes());
-            fos.close();
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-    }
-*/
-public interface Callback{
-    void success(String data);
-    void fail(String errorMessage);
-}
-    
-    //유저 기록 가져오기
-    int year, month, day;
-    public void getRecord(){
-
-    }
-
-
-
-}
+}//CalenderFragment 클래스
 
 
 
@@ -286,12 +126,12 @@ class EventDecorator implements DayViewDecorator {
     private final Drawable drawable;
     private int color;
     private HashSet<CalendarDay> dates;
-    private TextView textView;
-    public EventDecorator(Collection<CalendarDay> dates, Context context, TextView textView) {
+
+    public EventDecorator(Collection<CalendarDay> dates, Context context) {
         drawable =  ContextCompat.getDrawable(context,R.drawable.ic_calender_checked);
 
         this.dates = new HashSet<>(dates);
-        this.textView = textView;
+
     }
 
     @Override
@@ -305,8 +145,5 @@ class EventDecorator implements DayViewDecorator {
         view.setSelectionDrawable(drawable);
     }
 
-    public void setText(String text){
-        textView.setText(text);
-    }
 
 }

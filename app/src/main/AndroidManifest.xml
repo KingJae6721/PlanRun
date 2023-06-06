@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.yj.planrun">
+    package="com.yj.planrun" >
 
     <uses-permission android:name="android.permission.INTERNET" /> <!-- 커뮤니티랑 마이페이지 사진에 쓸 권한 -->
     <uses-permission android:name="android.permission.CAMERA" /> <!-- 갤러리 파일을 읽을 권한 -->
@@ -13,7 +13,6 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- Include only if your app benefits from precise location access. -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
-
     <application
         android:name=".KakaoApplication"
         android:allowBackup="true"
@@ -24,11 +23,30 @@
         android:roundIcon="@mipmap/ic_main_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PlanRun"
-        tools:targetApi="31">
+        tools:targetApi="31" >
+        <activity
+            android:name=".DetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SettingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DataLoadingActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".nick_change"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".AddPhotoActivity"
-            android:exported="false" />
-        <!-- 카카오 로그인 -->
+            android:exported="false" /> <!-- 카카오 로그인 -->
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="6b36a2c4390081d31d976c7437e97ad6" />
@@ -58,7 +76,7 @@
             android:exported="false" />
         <activity
             android:name=".StartActivity"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -71,7 +89,7 @@
         </activity>
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 

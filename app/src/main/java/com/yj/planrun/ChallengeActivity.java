@@ -1,8 +1,6 @@
 package com.yj.planrun;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -13,55 +11,28 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TabHost;
 
-import com.google.android.material.tabs.TabLayout;
-
-public class ChallengeActivity extends FragmentActivity {
-
-    TabLayout tabs;
-
-    DayFragment dayFragment;
-    WeekFragment weekFragment;
-    MonthFragment monthFragment;
+public class ChallengeActivity extends TabActivity {
 
     @Override
+    @SuppressWarnings("deprecation")
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_challenge);
 
-        dayFragment = new DayFragment();
-        weekFragment = new WeekFragment();
-        monthFragment = new MonthFragment();
+        TabHost tabHost = getTabHost();
 
-        getSupportFragmentManager().beginTransaction().add(R.id.container, dayFragment).commit();
+        TabHost.TabSpec tabSpecDay = tabHost.newTabSpec("DAY").setIndicator("일 일");
+        tabSpecDay.setContent(R.id.tabDay);
+        tabHost.addTab(tabSpecDay);
 
-        tabs = findViewById(R.id.tabs);
-        tabs.addTab(tabs.newTab().setText("일 일"));
-        tabs.addTab(tabs.newTab().setText("주 간"));
-        tabs.addTab(tabs.newTab().setText("월 간"));
+        TabHost.TabSpec tabSpecWeek = tabHost.newTabSpec("WEEK").setIndicator("주 간");
+        tabSpecWeek.setContent(R.id.tabWeek);
+        tabHost.addTab(tabSpecWeek);
 
-        tabs.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                int postion = tab.getPosition();
-                Fragment selected = null;
-                if(postion == 0)
-                    selected = dayFragment;
-                else if (postion == 1)
-                    selected = weekFragment;
-                else if (postion == 2)
-                    selected = monthFragment;
-                getSupportFragmentManager().beginTransaction().replace(R.id.container, selected).commit();
-            }
+        TabHost.TabSpec tabSpecMonth = tabHost.newTabSpec("MONTH").setIndicator("월 간");
+        tabSpecMonth.setContent(R.id.tabMonth);
+        tabHost.addTab(tabSpecMonth);
 
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
+        tabHost.setCurrentTab(0);
     }
 }

@@ -86,23 +86,5 @@
         android:layout_width="wrap_content"
         android:layout_height="3dp"/>
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:id="@+id/containers">
-
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottom_navigationview"
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:layout_gravity="bottom"
-            android:background="@drawable/menu_background_style"
-            app:itemIconSize="@dimen/design_bottom_navigation_height"
-            app:itemIconTint="@drawable/menu_selector_color"
-            app:itemTextColor="@drawable/menu_selector_color"
-            app:labelVisibilityMode="labeled"
-            app:menu="@menu/bottom_menu" />
-    </FrameLayout>
 
 </RelativeLayout>
