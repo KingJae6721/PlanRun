@@ -14,9 +14,11 @@ import android.widget.TabHost;
 public class ChallengeActivity extends TabActivity {
 
     @Override
+    @SuppressWarnings("deprecation")
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_challenge);
+
         TabHost tabHost = getTabHost();
 
         TabHost.TabSpec tabSpecDay = tabHost.newTabSpec("DAY").setIndicator("일 일");
