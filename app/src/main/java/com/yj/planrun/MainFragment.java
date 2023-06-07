@@ -107,11 +107,8 @@ public class MainFragment extends Fragment implements OnMapReadyCallback, Activi
     @Nullable
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {   mLayout = inflater.inflate(R.layout.fragment_main, null, false);
-        run_record1 = inflater.inflate(R.layout.fragment_run_record1, null, false);
-
-
-
-
+        TextView nicknameTextView = mLayout.findViewById(R.id.nicknameTextView);
+        nicknameTextView.setText(DataLoadingActivity.nickname);
 
         locationRequest = new LocationRequest()
                 .setPriority(Priority.PRIORITY_HIGH_ACCURACY)
@@ -128,45 +125,6 @@ public class MainFragment extends Fragment implements OnMapReadyCallback, Activi
         SupportMapFragment mapFragment = (SupportMapFragment) this.getChildFragmentManager().findFragmentById(R.id.map_fragment);
         mapFragment.getMapAsync(this);
 
-        //ViewPager2
-        mPager = mLayout.findViewById(R.id.viewpager);
-        //Adapter
-        pagerAdapter = new MyAdapter(this, num_page);
-        mPager.setAdapter(pagerAdapter);
-        //Indicator
-        mIndicator = mLayout.findViewById(R.id.indicator);
-        mIndicator.setViewPager(mPager);
-        mIndicator.createIndicators(num_page,0);
-        //ViewPager Setting
-        mPager.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
-
-        /**
-         * 이 부분 조정하여 처음 시작하는 이미지 설정.
-         * 2000장 생성하였으니 현재위치 1002로 설정하여
-         * 좌 우로 슬라이딩 할 수 있게 함. 거의 무한대로
-         */
-
-        mPager.setCurrentItem(1000); //시작 지점
-        mPager.setOffscreenPageLimit(4); //최대 이미지 수
-
-        mPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                super.onPageScrolled(position, positionOffset, positionOffsetPixels);
-                if (positionOffsetPixels == 0) {
-                    mPager.setCurrentItem(position);
-                }
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                super.onPageSelected(position);
-                mIndicator.animatePageSelected(position%num_page);
-            }
-        });
-        mPager.setSaveEnabled(false);
-        TextView nicknameTextView = run_record1.findViewById(R.id.nicknameTextView);
-        nicknameTextView.setText(DataLoadingActivity.nickname);
         //이벤트
         Button btn_run = (Button) mLayout.findViewById(R.id.btn_run);
         btn_run.setOnClickListener(new View.OnClickListener() {
