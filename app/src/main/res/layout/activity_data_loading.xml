@@ -5,13 +5,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <LinearLayout
         android:layout_centerInParent="true"
-        android:text="Loading"
-        android:textColor="#000"
-        android:textSize="46sp"
-        android:textStyle="bold" />
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+        <ImageView
+            android:id="@+id/loading_gif"
+            android:layout_width="100dp"
+            android:layout_height="70dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/loading_img" />
+        <TextView
+            android:layout_gravity="center"
+            android:text="Loading"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
 </RelativeLayout>
