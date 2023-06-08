@@ -30,7 +30,6 @@
                 android:id="@android:id/tabs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
                 android:background="@drawable/menu_background_style"></TabWidget>
 
             <FrameLayout
@@ -71,7 +70,8 @@
                                 android:layout_height="wrap_content"/>
                         </LinearLayout>
                         <ImageView
-                            android:src="@drawable/ic_calender_checked"
+                            android:id="@+id/day_time_check"
+                            android:src="@drawable/check_ic"
                             android:layout_marginLeft="91dp"
                             android:layout_width="70dp"
                             android:layout_height="70dp"/>
@@ -100,7 +100,8 @@
                                 android:layout_height="wrap_content"/>
                         </LinearLayout>
                         <ImageView
-                            android:src="@drawable/ic_calender_checked"
+                            android:id="@+id/day_distance_check"
+                            android:src="@drawable/check_ic"
                             android:layout_marginLeft="117dp"
                             android:layout_width="70dp"
                             android:layout_height="70dp"/>
@@ -129,7 +130,8 @@
                                 android:layout_height="wrap_content"/>
                         </LinearLayout>
                         <ImageView
-                            android:src="@drawable/ic_calender_checked"
+                            android:id="@+id/day_pace_check"
+                            android:src="@drawable/check_ic"
                             android:layout_marginLeft="27dp"
                             android:layout_width="70dp"
                             android:layout_height="70dp"/>
@@ -158,10 +160,22 @@
                                 android:layout_height="wrap_content"/>
                         </LinearLayout>
                         <ImageView
-                            android:src="@drawable/ic_calender_checked"
+                            android:id="@+id/day_kcal_check"
+                            android:src="@drawable/check_ic"
                             android:layout_marginLeft="54dp"
                             android:layout_width="70dp"
                             android:layout_height="70dp"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="90dp"
+                        android:gravity="center|left">
+                        <Button
+                            android:id="@+id/logtest"
+                            android:text="test"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
                     </LinearLayout>
                 </LinearLayout>
 
