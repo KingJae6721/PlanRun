@@ -3,10 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/run_record1"
     android:background="@drawable/rectangle_style"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    tools:context=".RunRecord1Fragment"
-    >
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RunRecord1Fragment">
 
         <TextView
             android:id="@+id/text1"
