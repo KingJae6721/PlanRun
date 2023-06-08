@@ -20,54 +20,54 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-            <FrameLayout
-                android:layout_weight="1"
+        <FrameLayout
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <fragment
+                android:id="@+id/map_fragment"
+                android:name="com.google.android.gms.maps.SupportMapFragment"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <fragment
-                    android:id="@+id/map_fragment"
-                    android:name="com.google.android.gms.maps.SupportMapFragment"
+                android:layout_height="match_parent"
+                tools:layout="@layout/activity_run" >
+                <FrameLayout
+                    android:orientation="vertical"
+                    android:background="#00000000"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    tools:layout="@layout/activity_run" >
-                    <FrameLayout
-                        android:orientation="vertical"
-                        android:background="#00000000"
+                    android:layout_height="200dp" >
+                    <androidx.viewpager2.widget.ViewPager2
+                        android:id="@+id/viewpager"
+                        android:layout_gravity="center"
+                        android:clipToPadding="false"
+                        android:clipChildren="false"
                         android:layout_width="match_parent"
-                        android:layout_height="200dp" >
-                        <androidx.viewpager2.widget.ViewPager2
-                            android:id="@+id/viewpager"
-                            android:layout_gravity="center"
-                            android:clipToPadding="false"
-                            android:clipChildren="false"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="#00000000"
-                            android:scaleType="fitXY"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginBottom="10dp"/>
+                        android:layout_height="match_parent"
+                        android:background="#00000000"
+                        android:scaleType="fitXY"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"/>
 
-                        <me.relex.circleindicator.CircleIndicator3
-                            android:id="@+id/indicator"
-                            android:layout_width="match_parent"
-                            android:layout_height="48dp"
-                            android:layout_marginBottom="5dp"
-                            android:layout_gravity="bottom"/>
-                    </FrameLayout>
-                </fragment>
+                    <me.relex.circleindicator.CircleIndicator3
+                        android:id="@+id/indicator"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_gravity="bottom"/>
+                </FrameLayout>
+            </fragment>
 
-                <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-                    android:id="@+id/btn_run"
-                    android:layout_height="80dp"
-                    android:layout_width="80dp"
-                    android:layout_gravity="bottom|center"
-                    android:layout_marginBottom="110dp"
-                    app:backgroundTint="#FF0"
-                    android:text=" 시작"
-                    android:textSize="15dp"
-                    android:textAlignment="center" />
-            </FrameLayout>
+            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                android:id="@+id/btn_run"
+                android:layout_height="80dp"
+                android:layout_width="80dp"
+                android:layout_gravity="bottom|center"
+                android:layout_marginBottom="110dp"
+                app:backgroundTint="#FF0"
+                android:text=" 시작"
+                android:textSize="15dp"
+                android:textAlignment="center" />
+        </FrameLayout>
     </LinearLayout>
     <LinearLayout
         android:background="@drawable/main_background"
