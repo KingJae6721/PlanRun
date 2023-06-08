@@ -73,16 +73,32 @@ public class ChallengeActivity extends TabActivity {
                         HashMap<String, Object> runningDataSnapshot = (HashMap<String, Object>) dataSnapshot.getValue();
                         if (runningDataSnapshot != null) {
                             String calories = runningDataSnapshot.get("calories").toString();
-                            calories = calories.substring(0,3);
-                            tempSumCalories += Integer.parseInt(calories);
+                            try {
+                                calories = calories.substring(0, 3);
+                                tempSumCalories += Integer.parseInt(calories);
+                            } catch (NumberFormatException e) {
+                                // 정수로 변환할 수 없는 경우 처리할 내용
+                                Log.e("Firebase", "Failed to parse calories: " + calories, e);
+                            }
 
-                            String date = runningDataSnapshot.get("date").toString();
+                            String date = "";
+                            Object dateObj = runningDataSnapshot.get("date");
+                            if (dateObj != null) {
+                                date = dateObj.toString();
+                            }
 
-                            String date_time = runningDataSnapshot.get("date_time").toString();
+                            String date_time = "";
+                            Object date_timeObj = runningDataSnapshot.get("date_time");
+                            if (date_timeObj != null) {
+                                date_time = date_timeObj.toString();
+                            }
 
                             String distance = runningDataSnapshot.get("distance").toString();
-                            distance = distance.substring(0,2) + distance.substring(3);
-                            tempSumDistance += Integer.parseInt(distance);
+                           // distance = distance.substring(0,2) + distance.substring(3);
+                            distance = distance.replaceAll("[^0-9.]", ""); // 숫자와 소수점만 남기고 제거
+                            double distanceValue = Double.parseDouble(distance);
+                            int intValue = (int) distanceValue;
+                            tempSumDistance += intValue;
 
                             String pace = runningDataSnapshot.get("pace").toString();
                             pace = pace.substring(0,2);
