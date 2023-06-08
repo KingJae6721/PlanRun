@@ -1,5 +1,8 @@
 package com.yj.planrun;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class RunningData {
 
     private  String date;
@@ -57,6 +60,17 @@ public class RunningData {
 
     public void setPace(String pace) {
         this.pace = pace;
+    }
+
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("date", date);
+        result.put("date_time", date_time);
+        result.put("time", time);
+        result.put("distance", distance);
+        result.put("calories", calories);
+        result.put("pace", pace);
+        return result;
     }
 
 }
