@@ -101,7 +101,7 @@ public class CommunityFragment extends Fragment {
 
         private class CustomViewHolder extends RecyclerView.ViewHolder {
             TextView profileTextView;
-            ImageView imageViewContent;
+            ImageView imageViewContent,imageViewProfile;
             TextView explainTextView;
             TextView favoriteCounterTextView;
 
@@ -111,6 +111,7 @@ public class CommunityFragment extends Fragment {
                 imageViewContent = itemView.findViewById(R.id.detailviewitem_imageview_content);
                 explainTextView = itemView.findViewById(R.id.detailviewitem_explain_textview);
                 favoriteCounterTextView = itemView.findViewById(R.id.detailviewitem_favoritecounter_textview);
+                imageViewProfile = itemView.findViewById(R.id.detailviewitem_profile_image);
             }
         }
 
@@ -151,6 +152,16 @@ public class CommunityFragment extends Fragment {
 
             // This code is when the button is clicked
             view.findViewById(R.id.detailviewitem_favorite_imageview).setOnClickListener(v -> favoriteEvent(position));
+
+            // This code is when the profile image is clicked
+            viewHolder.imageViewProfile.setOnClickListener(v -> {
+                MypageFragment mypageFragment = new MypageFragment();
+                Bundle bundle = new Bundle();
+                bundle.putString("destinationUid", contentDTO.getUid());
+                bundle.putString("userId", contentDTO.getUserId());
+                mypageFragment.setArguments(bundle);
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.containers, mypageFragment).commit();
+            });
 
             // This code is when the page is loaded
             ImageView favoriteImageView = view.findViewById(R.id.detailviewitem_favorite_imageview);

@@ -79,16 +79,18 @@ public class MypageFragment extends Fragment {
     private FirebaseFirestore firestore;
     private String uid;
     private FirebaseAuth auth;
+    private String currentUserUid;
 
 
     @Override
     @Nullable
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_mypage, container, false);
-        TextView mypage_nickname = view.findViewById(R.id.mypage_nickname);
+        fragmentView = inflater.inflate(R.layout.fragment_mypage, container, false);
+        TextView mypage_nickname = fragmentView.findViewById(R.id.mypage_nickname);
         mypage_nickname.setText(DataLoadingActivity.nickname);
 
-        ImageView setting = view.findViewById(R.id.setting);
+        Button edit_profile = (Button) fragmentView.findViewById(R.id.edit_profile);
+        ImageView setting = fragmentView.findViewById(R.id.setting);
         setting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,30 +99,41 @@ public class MypageFragment extends Fragment {
             }
         });
 
-        fragmentView = view;
+        //fragmentView = view;
         uid = getArguments().getString("destinationUid");
         firestore = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
+        currentUserUid = auth.getCurrentUser().getUid();
+
+        if (uid.equals(currentUserUid)) {
+            // MyPage
+            Button add_post = fragmentView.findViewById(R.id.add_post);
+            add_post.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(getActivity(), AddPhotoActivity.class);
+                    startActivity(intent);
+                }
+            });
+        } else {
+            // OtherUserPage
+            Button follow = (Button) fragmentView.findViewById(R.id.add_post);
+            follow.setText(getString(R.string.follow));
+            setting.setVisibility(View.GONE);
+            edit_profile.setVisibility(View.GONE);
+        }
 
         RecyclerView recyclerView = fragmentView.findViewById(R.id.account_reyclerview);
         recyclerView.setAdapter(new UserFragmentRecyclerViewAdapter());
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
 
-
-
-        Button add_post = view.findViewById(R.id.add_post);
-        add_post.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), AddPhotoActivity.class);
-                startActivity(intent);
-            }
-        });
-        return view;
+        return fragmentView;
     }
 
     private class UserFragmentRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         private ArrayList<ContentDTO> contentDTOs = new ArrayList<>();
+        private boolean isMyPage; // 사용자 페이지 여부를 판단하는 플래그
+
         UserFragmentRecyclerViewAdapter() {
             firestore.collection("images").whereEqualTo("uid", uid).addSnapshotListener((querySnapshot, firebaseFirestoreException) -> {
                 if (querySnapshot == null) return;
@@ -183,7 +196,10 @@ public class MypageFragment extends Fragment {
                     // 삭제할 아이템의 position을 얻어옴
                     ContentDTO contentDTO = contentDTOs.get(position);
                     // 삭제 동작 수행
-                    deleteItem(contentDTO);
+                    if (uid.equals(currentUserUid)) {
+                        // Mypage의 경우 게시물 삭제 가능
+                        deleteItem(contentDTO);
+                    }
                 }
                 return true;
             }
