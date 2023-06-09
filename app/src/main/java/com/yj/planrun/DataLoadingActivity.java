@@ -6,10 +6,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.gif.GifDrawableResource;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -33,7 +37,8 @@ public class DataLoadingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(activity_data_loading);
-
+        ImageView loading_img = (ImageView) findViewById(R.id.loading_gif);
+        Glide.with(this).asGif().load(R.drawable.loading_img).into(loading_img);
         //로딩화면 시작.
         Loadingstart();
         setFirebaseNicknameEmail();

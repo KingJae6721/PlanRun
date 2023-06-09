@@ -12,71 +12,79 @@
 
     <RelativeLayout
         android:id="@+id/top_bar"
-        android:layout_margin="10dp"
         android:layout_width="match_parent"
-        android:layout_height="53dp">
+        android:layout_height="53dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp">
+
         <RelativeLayout
             android:id="@+id/post_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
+
             <TextView
                 android:id="@+id/post"
-                android:text="게시물"
-                android:textSize="30dp"
-                android:textColor="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="38dp"
                 android:layout_margin="5dp"
                 android:layout_marginLeft="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="38dp"/>
+                android:text="게시물"
+                android:textColor="@color/black"
+                android:textSize="30dp" />
+
             <View
                 android:id="@+id/post_line"
-                android:layout_marginLeft="5dp"
-                android:layout_below="@+id/post"
-                android:background="#FFEB3B"
                 android:layout_width="82dp"
-                android:layout_height="3dp"/>
+                android:layout_height="3dp"
+                android:layout_below="@+id/post"
+                android:layout_marginLeft="5dp"
+                android:background="#FFEB3B" />
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_marginLeft="100dp"
             android:id="@+id/club_btn"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="100dp">
+
             <TextView
                 android:id="@+id/club"
-                android:text="클럽"
-                android:textSize="30dp"
-                android:textColor="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="38dp"
                 android:layout_margin="5dp"
                 android:layout_marginLeft="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="38dp"/>
+                android:text="클럽"
+                android:textColor="@color/black"
+                android:textSize="30dp" />
+
             <View
                 android:id="@+id/club_line"
-                android:layout_marginLeft="5dp"
-                android:layout_below="@+id/club"
-                android:background="#AFAFAF"
                 android:layout_width="55dp"
-                android:layout_height="3dp"/>
+                android:layout_height="3dp"
+                android:layout_below="@+id/club"
+                android:layout_marginLeft="5dp"
+                android:background="#AFAFAF" />
         </RelativeLayout>
 
 
         <ImageView
             android:id="@+id/add_post"
-            android:src="@drawable/ic_plus"
-            android:layout_marginRight="15dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginTop="15dp"
+            android:layout_marginRight="15dp"
             android:layout_toLeftOf="@+id/search"
-            android:layout_width="35dp"
-            android:layout_height="35dp"/>
+            android:src="@drawable/ic_add_post" />
 
         <ImageView
             android:id="@+id/search"
-            android:src="@drawable/ic_search"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_alignParentRight="true"
             android:layout_marginTop="15dp"
-            android:layout_width="35dp"
-            android:layout_height="35dp"/>
+            android:src="@drawable/ic_search" />
 
     </RelativeLayout>
 
