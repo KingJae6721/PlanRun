@@ -23,6 +23,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -74,18 +75,20 @@ public class CommunityFragment extends Fragment {
 
         public DetailViewRecyclerViewAdapter() {
             firestore.collection("images")
-                    .orderBy("timestamp")
+                    .orderBy("timestamp", Query.Direction.DESCENDING)
                     .addSnapshotListener((querySnapshot, firebaseFirestoreException) -> {
-                        contentDTOs.clear();
-                        contentUidList.clear();
-                        for (DocumentSnapshot snapshot : querySnapshot.getDocuments()) {
-                            ContentDTO item = snapshot.toObject(ContentDTO.class);
-                            contentDTOs.add(item);
-                            contentUidList.add(snapshot.getId());
+                        if (querySnapshot != null) { // querySnapshot이 null인 경우 예외 처리
+                            contentDTOs.clear();
+                            contentUidList.clear();
+                            for (DocumentSnapshot snapshot : querySnapshot.getDocuments()) {
+                                ContentDTO item = snapshot.toObject(ContentDTO.class);
+                                contentDTOs.add(item);
+                                contentUidList.add(snapshot.getId());
+                            }
+                            // 업로드 시간 순으로 정렬
+                            //Collections.reverse(contentDTOs);
+                            notifyDataSetChanged();
                         }
-                        // 업로드 시간 순으로 정렬
-                        Collections.reverse(contentDTOs);
-                        notifyDataSetChanged();
                     });
         }
 
@@ -143,7 +146,7 @@ public class CommunityFragment extends Fragment {
             viewHolder.explainTextView.setText(contentDTO.getExplain());
 
             // Likes
-            //viewHolder.favoriteCounterTextView.setText("Likes " + contentDTO.getFavoriteCount());
+            viewHolder.favoriteCounterTextView.setText("Likes " + contentDTO.getFavoriteCount());
             viewHolder.explainTextView.setText(contentDTOs.get(position).getExplain());
 
             // This code is when the button is clicked
