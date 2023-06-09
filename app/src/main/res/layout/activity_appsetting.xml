@@ -7,36 +7,34 @@
     android:orientation="vertical"
     tools:context=".AppSettingActivity"
     android:background="#ffffff" >
-    <LinearLayout
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal"
-        android:layout_marginBottom="10dp"
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/setting_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="55dp"
+        android:background="@color/white"
+        android:elevation="4dp" >
         <Button
             android:id="@+id/btn_back"
-            android:layout_width="wrap_content"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
-            android:minWidth="0dp"
-            android:minHeight="0dp"
             android:textStyle="bold"
+            android:paddingRight="10dp"
+            android:minWidth="0dp"
             android:text="〈"
             android:textColor="@color/black"
-            android:textAllCaps="false"
             android:textSize="20dp" />
         <TextView
+            android:layout_gravity="center"
             android:layout_marginTop="1dp"
-            android:layout_marginLeft="125dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
-            android:textSize="23dp"
+            android:textSize="20dp"
             android:textStyle="bold"
             android:text="설 정"/>
-
-    </LinearLayout>
+    </androidx.appcompat.widget.Toolbar>
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_changeNickname"
         android:layout_width="match_parent"
@@ -70,7 +68,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
-        android:textSize="20dp"
+        android:textSize="18dp"
         android:textStyle="bold"
         android:text="알림 설정"/>
     <LinearLayout

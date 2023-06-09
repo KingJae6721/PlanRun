@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
     tools:context=".RegisterActivity"
     android:background="#FFFFFF"
     android:orientation="vertical">
@@ -16,7 +17,6 @@
         android:textStyle="bold"
         android:layout_marginTop="85dp"
         android:layout_marginBottom="50dp"
-        android:layout_marginLeft="40dp"
         android:textAllCaps="false"
         android:letterSpacing="0"
         android:layout_width="wrap_content"
@@ -24,10 +24,9 @@
     <EditText
         android:id="@+id/et_nickname"
         android:layout_width="332dp"
-        android:layout_height="45dp"
+        android:layout_height="40dp"
         android:background="@drawable/edit_style"
-        android:textSize="15dp"
-        android:layout_marginLeft="40dp"
+        android:textSize="13dp"
         android:hint="닉네임"
         android:paddingLeft="15dp"
         android:textColor="@color/black"
@@ -36,20 +35,18 @@
         android:inputType="textEmailAddress" />
     <TextView
         android:id="@+id/nickname_condition"
-        android:textSize="13dp"
+        android:textSize="11dp"
         android:layout_width="332dp"
         android:layout_height="wrap_content"
         android:paddingLeft="15dp"
-        android:layout_marginBottom="7dp"
-        android:layout_marginLeft="40dp"/>
+        android:layout_marginBottom="7dp"/>
 
     <EditText
         android:id="@+id/et_email"
         android:layout_width="332dp"
-        android:layout_height="45dp"
+        android:layout_height="40dp"
         android:background="@drawable/edit_style"
-        android:textSize="15dp"
-        android:layout_marginLeft="40dp"
+        android:textSize="13dp"
         android:hint="이메일"
         android:paddingLeft="15dp"
         android:textColor="@color/black"
@@ -58,20 +55,18 @@
         android:inputType="textEmailAddress" />
     <TextView
         android:id="@+id/email_condition"
-        android:textSize="13dp"
+        android:textSize="11dp"
         android:layout_width="332dp"
         android:layout_height="wrap_content"
         android:paddingLeft="15dp"
-        android:layout_marginBottom="7dp"
-        android:layout_marginLeft="40dp"/>
+        android:layout_marginBottom="7dp" />
 
     <EditText
         android:id="@+id/et_pwd"
         android:layout_width="332dp"
-        android:layout_height="45dp"
+        android:layout_height="40dp"
         android:background="@drawable/edit_style"
-        android:textSize="15dp"
-        android:layout_marginLeft="40dp"
+        android:textSize="13dp"
         android:hint="비밀번호"
         android:textColor="@color/black"
         android:paddingLeft="15dp"
@@ -81,35 +76,113 @@
 
     <TextView
         android:id="@+id/pwd_condition"
-        android:textSize="13dp"
+        android:textSize="11dp"
         android:layout_width="332dp"
         android:layout_height="wrap_content"
         android:paddingLeft="15dp"
-        android:layout_marginBottom="7dp"
-        android:layout_marginLeft="40dp"/>
+        android:layout_marginBottom="7dp" />
 
     <EditText
         android:id="@+id/et_pwd_check"
         android:layout_width="332dp"
-        android:layout_height="45dp"
+        android:layout_height="40dp"
         android:background="@drawable/edit_style"
-        android:textSize="15dp"
-        android:layout_marginLeft="40dp"
+        android:textSize="13dp"
         android:hint="비밀번호 재확인"
         android:paddingLeft="15dp"
         android:textColor="@color/black"
         android:textColorHint="#CFC0C0C0"
         android:textStyle="bold"
         android:inputType="textPassword"/>
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="332dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+        <LinearLayout
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+            <RadioButton
+                android:layout_weight="1"
+                android:id="@+id/radioButtonMale"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/CustomRadioButton"
+                android:textColor="#CF5E5E5E"
+                android:textSize="13dp"
+                android:text="남성" />
+            <RadioButton
+                android:layout_weight="1"
+                android:id="@+id/radioButtonFemale"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/CustomRadioButton"
+                android:textColor="#CF5E5E5E"
+                android:textSize="13dp"
+                android:text="여성" />
+        </LinearLayout>
+    </RadioGroup>
+    <LinearLayout
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_width="332dp"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/editTextHeight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="#9DD6FA"
+            android:hint="키"
+            android:textColor="@color/black"
+            android:textColorHint="#CFC0C0C0"
+            android:textAlignment="center"
+            android:textSize="13dp"
+            android:inputType="numberDecimal" />
+        <TextView
+            android:text="cm"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:textColor="#9E9A9A"
+            android:layout_marginRight="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/editTextWeight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="10dp"
+            android:hint="몸무게"
+            android:textColor="@color/black"
+            android:textColorHint="#CFC0C0C0"
+            android:backgroundTint="#9DD6FA"
+            android:textAlignment="center"
+            android:textSize="13dp"
+            android:inputType="numberDecimal" />
+        <TextView
+            android:text="kg"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:textColor="#9E9A9A"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_register"
         android:layout_gravity="center_horizontal"
         android:layout_width="250dp"
         android:layout_height="45dp"
-        android:layout_marginTop="105dp"
+        android:layout_marginTop="75dp"
         android:background="@drawable/btn_register_style"
         android:textAllCaps="false"
-        android:textSize="18dp"
+        android:textSize="15dp"
         android:textStyle="bold"
         android:textColor="#F4F2F2"
         android:letterSpacing="0"
