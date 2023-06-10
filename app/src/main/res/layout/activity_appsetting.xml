@@ -48,7 +48,7 @@
         android:textColor="@color/black"
         android:textAlignment="textStart"
         android:textAllCaps="false"
-        android:textSize="17dp" />
+        android:textSize="15dp" />
     <View
         android:background="#DCDBDB"
         android:layout_width="match_parent"
@@ -63,7 +63,7 @@
         android:textColor="@color/black"
         android:textAlignment="textStart"
         android:textAllCaps="false"
-        android:textSize="17dp" />
+        android:textSize="15dp" />
     <View
         android:layout_width="match_parent"
         android:layout_height="40dp"
@@ -75,7 +75,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
-        android:textSize="18dp"
+        android:textSize="17dp"
         android:textStyle="bold"
         android:text="알림 설정"/>
     <View
@@ -97,10 +97,10 @@
             android:minHeight="0dp"
             android:text="커뮤니티 푸쉬 알림"
             android:textAllCaps="false"
-            android:textSize="17dp" />
+            android:textSize="15dp" />
         <Switch
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="190dp"
+            android:layout_marginLeft="207dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -123,10 +123,10 @@
             android:minHeight="0dp"
             android:text="공지 알림"
             android:textAllCaps="false"
-            android:textSize="17dp" />
+            android:textSize="15dp" />
         <Switch
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="257dp"
+            android:layout_marginLeft="265dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -149,10 +149,10 @@
             android:minHeight="0dp"
             android:text="이벤트 알림"
             android:textAllCaps="false"
-            android:textSize="17dp" />
+            android:textSize="15dp" />
         <Switch
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="242dp"
+            android:layout_marginLeft="252dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -175,10 +175,10 @@
             android:minHeight="0dp"
             android:text="마케팅 알림"
             android:textAllCaps="false"
-            android:textSize="17dp" />
+            android:textSize="15dp" />
         <Switch
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="242dp"
+            android:layout_marginLeft="252dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -196,6 +196,6 @@
         android:textColor="#F84A4A"
         android:textAlignment="textStart"
         android:textAllCaps="false"
-        android:textSize="17dp" />
+        android:textSize="15dp" />
 
 </LinearLayout>

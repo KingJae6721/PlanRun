@@ -8,7 +8,7 @@
     android:background="#00FFFFFF"
     android:gravity="bottom"
     app:umanoShadowHeight="0dp"
-    app:umanoPanelHeight="100dp"
+    app:umanoPanelHeight="105dp"
     app:umanoOverlay="true"
     app:umanoDragView="@+id/slide_layout"
     tools:context=".MainFragment">
@@ -42,7 +42,8 @@
                         <ImageView
                             android:id="@+id/setting"
                             android:src="@mipmap/ic_main2"
-                            android:layout_marginRight="5dp"
+                            android:layout_gravity="right"
+                            android:layout_marginRight="20dp"
                             android:layout_width="30dp"
                             android:layout_height="30dp" />
                         <TextView
@@ -62,12 +63,12 @@
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
+                            android:layout_marginTop="8dp"
                             android:orientation="horizontal">
 
                             <RelativeLayout
                                 android:layout_width="300dp"
-                                android:layout_height="130dp"
+                                android:layout_height="120dp"
                                 android:layout_marginLeft="57dp"
                                 android:layout_marginRight="20dp"
                                 android:background="@drawable/shadow_style"
@@ -91,7 +92,7 @@
                                     android:layout_centerVertical="true"
                                     android:layout_marginLeft="20dp"
                                     android:textColor="#201F1F"
-                                    android:textSize="20dp" />
+                                    android:textSize="15dp" />
 
                                 <LinearLayout
                                     android:layout_width="wrap_content"
@@ -142,7 +143,7 @@
 
                             <RelativeLayout
                                 android:layout_width="300dp"
-                                android:layout_height="130dp"
+                                android:layout_height="120dp"
                                 android:layout_marginRight="20dp"
                                 android:background="@drawable/shadow_style"
                                 android:elevation="10dp">
@@ -165,7 +166,7 @@
                                     android:layout_centerVertical="true"
                                     android:layout_marginLeft="20dp"
                                     android:textColor="#201F1F"
-                                    android:textSize="20dp" />
+                                    android:textSize="15dp" />
 
                                 <LinearLayout
                                     android:layout_width="wrap_content"
@@ -215,7 +216,7 @@
 
                             <RelativeLayout
                                 android:layout_width="300dp"
-                                android:layout_height="130dp"
+                                android:layout_height="120dp"
                                 android:layout_marginRight="57dp"
                                 android:background="@drawable/shadow_style"
                                 android:elevation="10dp">
@@ -238,7 +239,7 @@
                                     android:layout_centerVertical="true"
                                     android:layout_marginLeft="20dp"
                                     android:textColor="#201F1F"
-                                    android:textSize="20dp" />
+                                    android:textSize="15dp" />
 
                                 <LinearLayout
                                     android:layout_width="wrap_content"
@@ -294,10 +295,11 @@
                         android:layout_width="80dp"
                         android:layout_gravity="bottom"
                         android:layout_marginLeft="165dp"
-                        android:layout_marginBottom="100dp"
+                        android:layout_marginBottom="110dp"
                         app:backgroundTint="#FF0"
                         android:text=" 시작"
                         android:textSize="15dp"
+                        android:textStyle="bold"
                         android:textAlignment="center" />
                 </FrameLayout>
             </RelativeLayout>
