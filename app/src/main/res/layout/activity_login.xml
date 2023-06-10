@@ -7,8 +7,7 @@
     tools:context=".LoginActivity"
     android:background="#ffffff"
     android:orientation="vertical"
-    android:gravity="center_horizontal"
-    >
+    android:gravity="center_horizontal" >
 
     <TextView
         android:textAlignment="center"
@@ -16,7 +15,7 @@
         android:textSize="50dp"
         android:textColor="#DAA8A8A8"
         android:textStyle="bold"
-        android:layout_marginTop="125dp"
+        android:layout_marginTop="185dp"
         android:layout_marginBottom="60dp"
         android:textAllCaps="true"
         android:letterSpacing="0"
@@ -26,12 +25,12 @@
     <EditText
         android:id="@+id/et_email"
         android:layout_width="332dp"
-        android:layout_height="50dp"
+        android:layout_height="45dp"
         android:background="@drawable/edit_style"
         android:layout_marginBottom="20dp"
         android:paddingLeft="15dp"
         android:hint="이메일"
-        android:textSize="15dp"
+        android:textSize="13dp"
         android:textColor="@color/black"
         android:textColorHint="#CFC0C0C0"
         android:textStyle="bold"
@@ -40,11 +39,11 @@
     <EditText
         android:id="@+id/et_pwd"
         android:layout_width="332dp"
-        android:layout_height="50dp"
+        android:layout_height="45dp"
         android:background="@drawable/edit_style"
         android:hint="비밀번호"
         android:paddingLeft="15dp"
-        android:textSize="15dp"
+        android:textSize="13dp"
         android:textStyle="bold"
         android:textColor="@color/black"
         android:textColorHint="#CEC0C0C0"

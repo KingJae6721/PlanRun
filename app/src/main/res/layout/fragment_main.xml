@@ -8,7 +8,7 @@
     android:background="#00FFFFFF"
     android:gravity="bottom"
     app:umanoShadowHeight="0dp"
-    app:umanoPanelHeight="80dp"
+    app:umanoPanelHeight="105dp"
     app:umanoOverlay="true"
     app:umanoDragView="@+id/slide_layout"
     tools:context=".MainFragment">
@@ -32,32 +32,43 @@
                     android:background="@drawable/map_background"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" >
-                    <TextView
-                        android:text="러 닝"
-                        android:textSize="25dp"
-                        android:textStyle="bold"
-                        android:textColor="@color/black"
-                        android:paddingTop="15dp"
-                        android:paddingBottom="7dp"
-                        android:paddingLeft="15dp"
-                        android:background="#FFFFFF"
+                    <androidx.appcompat.widget.Toolbar
+                        android:id="@+id/setting_toolbar"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
-
+                        android:layout_height="55dp"
+                        android:minWidth="0dp"
+                        android:background="@color/white"
+                        android:elevation="4dp" >
+                        <ImageView
+                            android:id="@+id/setting"
+                            android:src="@mipmap/ic_main2"
+                            android:layout_gravity="right"
+                            android:layout_marginRight="20dp"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp" />
+                        <TextView
+                            android:text="러 닝"
+                            android:textSize="20dp"
+                            android:textStyle="bold"
+                            android:textColor="@color/black"
+                            android:background="#FFFFFF"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                    </androidx.appcompat.widget.Toolbar>
                     <HorizontalScrollView
                         android:layout_width="wrap_content"
                         android:layout_height="150dp"
-                        android:layout_marginTop="60dp">
+                        android:layout_marginTop="80dp">
 
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
+                            android:layout_marginTop="8dp"
                             android:orientation="horizontal">
 
                             <RelativeLayout
                                 android:layout_width="300dp"
-                                android:layout_height="130dp"
+                                android:layout_height="120dp"
                                 android:layout_marginLeft="57dp"
                                 android:layout_marginRight="20dp"
                                 android:background="@drawable/shadow_style"
@@ -70,7 +81,7 @@
                                     android:layout_alignParentLeft="true"
                                     android:layout_marginLeft="20dp"
                                     android:layout_marginTop="20dp"
-                                    android:src="@mipmap/ic_main" />
+                                    android:src="@mipmap/ic_main2" />
 
                                 <TextView
                                     android:id="@+id/nicknameTextView"
@@ -81,7 +92,7 @@
                                     android:layout_centerVertical="true"
                                     android:layout_marginLeft="20dp"
                                     android:textColor="#201F1F"
-                                    android:textSize="20dp" />
+                                    android:textSize="15dp" />
 
                                 <LinearLayout
                                     android:layout_width="wrap_content"
@@ -115,7 +126,6 @@
                                     android:orientation="vertical">
 
                                     <TextView
-                                        android:id="@+id/tv_calories"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:gravity="center"
@@ -133,7 +143,7 @@
 
                             <RelativeLayout
                                 android:layout_width="300dp"
-                                android:layout_height="130dp"
+                                android:layout_height="120dp"
                                 android:layout_marginRight="20dp"
                                 android:background="@drawable/shadow_style"
                                 android:elevation="10dp">
@@ -145,7 +155,7 @@
                                     android:layout_alignParentLeft="true"
                                     android:layout_marginLeft="20dp"
                                     android:layout_marginTop="20dp"
-                                    android:src="@mipmap/ic_main" />
+                                    android:src="@mipmap/ic_main2" />
 
                                 <TextView
                                     android:id="@+id/nicknameTextView2"
@@ -156,7 +166,7 @@
                                     android:layout_centerVertical="true"
                                     android:layout_marginLeft="20dp"
                                     android:textColor="#201F1F"
-                                    android:textSize="20dp" />
+                                    android:textSize="15dp" />
 
                                 <LinearLayout
                                     android:layout_width="wrap_content"
@@ -206,7 +216,7 @@
 
                             <RelativeLayout
                                 android:layout_width="300dp"
-                                android:layout_height="130dp"
+                                android:layout_height="120dp"
                                 android:layout_marginRight="57dp"
                                 android:background="@drawable/shadow_style"
                                 android:elevation="10dp">
@@ -218,7 +228,7 @@
                                     android:layout_alignParentLeft="true"
                                     android:layout_marginLeft="20dp"
                                     android:layout_marginTop="20dp"
-                                    android:src="@mipmap/ic_main" />
+                                    android:src="@mipmap/ic_main2" />
 
                                 <TextView
                                     android:id="@+id/nicknameTextView3"
@@ -229,7 +239,7 @@
                                     android:layout_centerVertical="true"
                                     android:layout_marginLeft="20dp"
                                     android:textColor="#201F1F"
-                                    android:textSize="20dp" />
+                                    android:textSize="15dp" />
 
                                 <LinearLayout
                                     android:layout_width="wrap_content"
@@ -279,19 +289,18 @@
                         </LinearLayout>
 
                     </HorizontalScrollView>
-
                     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
                         android:id="@+id/btn_run"
                         android:layout_height="80dp"
                         android:layout_width="80dp"
                         android:layout_gravity="bottom"
                         android:layout_marginLeft="165dp"
-                        android:layout_marginBottom="100dp"
+                        android:layout_marginBottom="110dp"
                         app:backgroundTint="#FF0"
                         android:text=" 시작"
                         android:textSize="15dp"
-                        android:textAlignment="center"
-                        tools:ignore="RtlCompat" />
+                        android:textStyle="bold"
+                        android:textAlignment="center" />
                 </FrameLayout>
             </RelativeLayout>
     </LinearLayout>

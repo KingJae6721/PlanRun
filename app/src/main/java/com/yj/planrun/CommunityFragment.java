@@ -11,6 +11,7 @@ import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -25,6 +26,7 @@ public class CommunityFragment extends Fragment {
 
         RelativeLayout club_btn = view.findViewById(R.id.club_btn);
         ImageView add_post = view.findViewById(R.id.add_post);
+        Toolbar community_toolbar = view.findViewById(R.id.community_toolbar);
         ActivityCompat.requestPermissions(requireActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
         club_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -32,6 +34,7 @@ public class CommunityFragment extends Fragment {
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 ClubFragment clubFragment = new ClubFragment();
                 transaction.replace(R.id.community_layout, clubFragment);
+                community_toolbar.setVisibility(View.GONE);
                 transaction.commit();
             }
         });

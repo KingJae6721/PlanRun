@@ -85,6 +85,8 @@ public class MypageFragment extends Fragment {
     @Nullable
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_mypage, container, false);
+        TextView mypage_nickname = view.findViewById(R.id.mypage_nickname);
+        mypage_nickname.setText(DataLoadingActivity.nickname);
 
         ImageView setting = view.findViewById(R.id.setting);
         setting.setOnClickListener(new View.OnClickListener() {

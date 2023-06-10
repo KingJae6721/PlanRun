@@ -5,60 +5,65 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:minWidth="0dp"
     tools:context=".AppSettingActivity"
     android:background="#ffffff" >
-    <LinearLayout
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal"
-        android:layout_marginBottom="10dp"
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/setting_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="55dp"
+        android:background="@color/white"
+        android:elevation="4dp" >
+        <TextView
+            android:layout_gravity="center"
+            android:layout_marginTop="1dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:text="설 정"/>
         <Button
             android:id="@+id/btn_back"
+            android:layout_gravity="right"
+            android:layout_marginRight="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
             android:minWidth="0dp"
             android:minHeight="0dp"
-            android:textStyle="bold"
-            android:text="〈"
-            android:textColor="@color/black"
+            android:text="X"
+            android:textColor="#888787"
             android:textAllCaps="false"
             android:textSize="20dp" />
-        <TextView
-            android:layout_marginTop="1dp"
-            android:layout_marginLeft="125dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:textSize="23dp"
-            android:textStyle="bold"
-            android:text="설 정"/>
-
-    </LinearLayout>
+    </androidx.appcompat.widget.Toolbar>
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_changeNickname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingStart="15dp"
+        android:paddingStart="20dp"
         android:background="@drawable/appsetting_btn_background"
         android:text="닉네임 변경"
         android:textColor="@color/black"
         android:textAlignment="textStart"
         android:textAllCaps="false"
-        android:textSize="17dp" />
+        android:textSize="15dp" />
+    <View
+        android:background="#DCDBDB"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_changePwd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingStart="15dp"
+        android:paddingStart="20dp"
         android:background="@drawable/appsetting_btn_background"
         android:text="비밀번호 변경"
         android:textColor="@color/black"
         android:textAlignment="textStart"
         android:textAllCaps="false"
-        android:textSize="17dp" />
+        android:textSize="15dp" />
     <View
         android:layout_width="match_parent"
         android:layout_height="40dp"
@@ -70,9 +75,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
-        android:textSize="20dp"
+        android:textSize="17dp"
         android:textStyle="bold"
         android:text="알림 설정"/>
+    <View
+        android:background="#DCDBDB"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
     <LinearLayout
         android:background="@drawable/appsetting_btn_background"
         android:orientation="horizontal"
@@ -88,13 +97,17 @@
             android:minHeight="0dp"
             android:text="커뮤니티 푸쉬 알림"
             android:textAllCaps="false"
-            android:textSize="17dp" />
+            android:textSize="15dp" />
         <Switch
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="190dp"
+            android:layout_marginLeft="207dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
+    <View
+        android:background="#DCDBDB"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
     <LinearLayout
         android:background="@drawable/appsetting_btn_background"
         android:orientation="horizontal"
@@ -110,13 +123,17 @@
             android:minHeight="0dp"
             android:text="공지 알림"
             android:textAllCaps="false"
-            android:textSize="17dp" />
+            android:textSize="15dp" />
         <Switch
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="257dp"
+            android:layout_marginLeft="265dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
+    <View
+        android:background="#DCDBDB"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
     <LinearLayout
         android:background="@drawable/appsetting_btn_background"
         android:orientation="horizontal"
@@ -132,13 +149,17 @@
             android:minHeight="0dp"
             android:text="이벤트 알림"
             android:textAllCaps="false"
-            android:textSize="17dp" />
+            android:textSize="15dp" />
         <Switch
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="242dp"
+            android:layout_marginLeft="252dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
+    <View
+        android:background="#DCDBDB"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
     <LinearLayout
         android:background="@drawable/appsetting_btn_background"
         android:orientation="horizontal"
@@ -154,10 +175,10 @@
             android:minHeight="0dp"
             android:text="마케팅 알림"
             android:textAllCaps="false"
-            android:textSize="17dp" />
+            android:textSize="15dp" />
         <Switch
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="242dp"
+            android:layout_marginLeft="252dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -169,12 +190,12 @@
         android:id="@+id/btn_acntDel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingStart="15dp"
+        android:paddingStart="20dp"
         android:background="@color/white"
         android:text="계정 탈퇴"
         android:textColor="#F84A4A"
         android:textAlignment="textStart"
         android:textAllCaps="false"
-        android:textSize="17dp" />
+        android:textSize="15dp" />
 
 </LinearLayout>

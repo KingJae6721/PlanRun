@@ -362,7 +362,7 @@ public class RunActivity extends AppCompatActivity implements OnMapReadyCallback
 
 
                     tv_distance.setText((int)(distance /10)/100.0 +"km");
-                    tv_kcal.setText("칼로리"+((int)(((int)(distance /10)/100.0) * 100*65/*체중*/) / 100.0));
+                    tv_kcal.setText(""+((int)(((int)(distance /10)/100.0) * 100*65/*체중*/) / 100.0));
                 }
                 beforePosition = currentPosition;
             }
