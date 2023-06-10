@@ -57,6 +57,7 @@ public class DataLoadingActivity extends AppCompatActivity {
                         run_data = new ArrayList<RunningData>();
                         for(DataSnapshot runningData : snapshot.getChildren()){
                             run_data.add(runningData.getValue(RunningData.class));
+                            Log.d("로그","추가");
                         }
                     }
                     @Override

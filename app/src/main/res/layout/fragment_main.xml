@@ -115,6 +115,7 @@
                                     android:orientation="vertical">
 
                                     <TextView
+                                        android:id="@+id/tv_calories"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:gravity="center"
@@ -289,7 +290,8 @@
                         app:backgroundTint="#FF0"
                         android:text=" 시작"
                         android:textSize="15dp"
-                        android:textAlignment="center" />
+                        android:textAlignment="center"
+                        tools:ignore="RtlCompat" />
                 </FrameLayout>
             </RelativeLayout>
     </LinearLayout>
