@@ -8,7 +8,7 @@
     android:background="#00FFFFFF"
     android:gravity="bottom"
     app:umanoShadowHeight="0dp"
-    app:umanoPanelHeight="105dp"
+    app:umanoPanelHeight="100dp"
     app:umanoOverlay="true"
     app:umanoDragView="@+id/slide_layout"
     tools:context=".MainFragment">
@@ -19,6 +19,45 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <fragment
+                android:id="@+id/map_fragment"
+                android:name="com.google.android.gms.maps.SupportMapFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:layout="@layout/activity_run" />
+            <FrameLayout
+                android:background="@drawable/map_background"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/setting_toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:minWidth="0dp"
+                    android:background="@color/white"
+                    android:elevation="4dp" >
+                    <ImageView
+                        android:id="@+id/setting"
+                        android:src="@mipmap/ic_main2"
+                        android:layout_marginRight="5dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp" />
+                    <TextView
+                        android:text="러 닝"
+                        android:textSize="20dp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:background="#FFFFFF"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </androidx.appcompat.widget.Toolbar>
+                <HorizontalScrollView
+                    android:layout_width="wrap_content"
+                    android:layout_height="150dp"
+                    android:layout_marginTop="80dp">
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -143,7 +182,7 @@
 
                             <RelativeLayout
                                 android:layout_width="300dp"
-                                android:layout_height="120dp"
+                                android:layout_height="130dp"
                                 android:layout_marginRight="20dp"
                                 android:background="@drawable/shadow_style"
                                 android:elevation="10dp">
@@ -166,7 +205,7 @@
                                     android:layout_centerVertical="true"
                                     android:layout_marginLeft="20dp"
                                     android:textColor="#201F1F"
-                                    android:textSize="15dp" />
+                                    android:textSize="20dp" />
 
                                 <LinearLayout
                                     android:layout_width="wrap_content"
@@ -239,7 +278,7 @@
                                     android:layout_centerVertical="true"
                                     android:layout_marginLeft="20dp"
                                     android:textColor="#201F1F"
-                                    android:textSize="15dp" />
+                                    android:textSize="20dp" />
 
                                 <LinearLayout
                                     android:layout_width="wrap_content"
