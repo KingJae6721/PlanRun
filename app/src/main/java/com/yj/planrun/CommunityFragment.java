@@ -98,7 +98,7 @@ public class CommunityFragment extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         AlertDialog alertDialog = (AlertDialog) dialogInterface;
-                        EditText editTextNickname = alertDialog.findViewById(R.id.editTextUserId); // 수정 필요
+                        EditText editTextNickname = alertDialog.findViewById(R.id.editTextUserId);
                         String nickname = editTextNickname.getText().toString().trim();
                         showUserProfileByNickname(nickname);
                     }

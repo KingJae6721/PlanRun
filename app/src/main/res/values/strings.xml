@@ -8,6 +8,7 @@
     <string name="count_0">0</string>
     <string name="follower">팔로워</string>
     <string name="following">팔로잉</string>
+    <string name="follow_cancel">follow cancel</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
