@@ -25,12 +25,12 @@
 
         <ImageView
             android:id="@+id/setting"
-            android:src="@drawable/setting2"
+            android:src="@drawable/ic_list"
             android:layout_gravity="right"
             android:layout_marginTop="15dp"
-            android:layout_marginRight="15dp"
+            android:layout_marginRight="18dp"
             android:layout_width="25dp"
-            android:layout_height="25dp" />
+            android:layout_height="30dp" />
 
     </androidx.appcompat.widget.Toolbar>
 
@@ -64,6 +64,7 @@
             android:gravity="center"
             android:layout_below="@+id/introduce"
             android:layout_alignParentBottom="true"
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <Button
@@ -158,17 +159,19 @@
         </LinearLayout>
     </RelativeLayout>
     <View
+        android:layout_marginTop="18dp"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#DCDBDB" />
-        <TextView
-            android:layout_gravity="center"
-            android:text="내 게시물"
-            android:textSize="13dp"
-            android:textStyle="bold"
-            android:layout_margin="5dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+    <TextView
+        android:layout_gravity="center"
+        android:text="내 게시물"
+        android:textSize="13dp"
+        android:textStyle="bold"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
     <View
         android:layout_width="match_parent"
@@ -187,6 +190,5 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     </androidx.recyclerview.widget.RecyclerView>
-
 
 </LinearLayout>

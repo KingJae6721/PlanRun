@@ -14,6 +14,7 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -66,7 +67,7 @@ public class SettingActivity extends AppCompatActivity {
         DatabaseReference mDatabaseRef = FirebaseDatabase.getInstance().getReference("PlanRun");
 
         Button btn_logout = findViewById(R.id.btn_logout);
-        Button btn_setting = findViewById(R.id.btn_setting);
+        LinearLayout btn_setting = findViewById(R.id.btn_setting);
 
         circle_iv = findViewById(R.id.circle_iv);
 

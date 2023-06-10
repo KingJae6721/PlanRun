@@ -30,6 +30,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -61,6 +62,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 import com.yj.planrun.MainActivity;
 
 import java.io.IOException;
@@ -100,7 +102,7 @@ public class MainFragment extends Fragment implements OnMapReadyCallback, Activi
     private LocationRequest locationRequest;
     private Location location;
 
-    private View mLayout, run_record1;  // Snackbar 사용하기 위해서는 View가 필요합니다.
+    private View mLayout;  // Snackbar 사용하기 위해서는 View가 필요합니다.
     // (참고로 Toast에서는 Context가 필요했습니다.)
 
     @Override
