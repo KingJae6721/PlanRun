@@ -34,6 +34,7 @@ import android.view.ViewGroup;
 import android.view.ViewManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -81,6 +82,7 @@ public class MypageFragment extends Fragment {
     private FirebaseAuth auth;
     private String currentUserUid;
 
+    private DatabaseReference mDatabaseRef;
 
     @Override
     @Nullable
@@ -104,6 +106,7 @@ public class MypageFragment extends Fragment {
         firestore = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
         currentUserUid = auth.getCurrentUser().getUid();
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference("PlanRun");
 
         if (uid.equals(currentUserUid)) {
             // MyPage
@@ -118,9 +121,26 @@ public class MypageFragment extends Fragment {
         } else {
             // OtherUserPage
             Button follow = (Button) fragmentView.findViewById(R.id.add_post);
+            TextView list_of_posts = fragmentView.findViewById(R.id.list_of_posts);
             follow.setText(getString(R.string.follow));
             setting.setVisibility(View.GONE);
             edit_profile.setVisibility(View.GONE);
+            //버튼 크기 늘리기
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 2f);
+            params.setMargins(33, 0, 33, 0); // 양옆에 16dp의 마진 설정
+            follow.setLayoutParams(params);
+            mDatabaseRef.child("UserAccount").child(uid).child("nickname").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    String nickname = dataSnapshot.getValue(String.class);
+                    if (nickname != null) {
+                        mypage_nickname.setText(nickname);
+                        list_of_posts.setText(nickname + "게시물");
+                    }
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {}
+            });
         }
 
         RecyclerView recyclerView = fragmentView.findViewById(R.id.account_reyclerview);

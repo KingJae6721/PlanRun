@@ -1,14 +1,18 @@
 package com.yj.planrun;
 
 import android.Manifest;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,6 +24,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -31,6 +40,7 @@ import java.util.List;
 import java.util.Map;
 
 public class CommunityFragment extends Fragment {
+    private DatabaseReference mDatabaseRef;
     private FirebaseFirestore firestore;
     private String uid;
     @Override
@@ -44,9 +54,12 @@ public class CommunityFragment extends Fragment {
         RecyclerView recyclerView = view.findViewById(R.id.detailviewfragment_recyclerview);
         recyclerView.setAdapter(new DetailViewRecyclerViewAdapter());
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference("PlanRun");
 
         RelativeLayout club_btn = view.findViewById(R.id.club_btn);
         ImageView add_post = view.findViewById(R.id.add_post);
+        ImageView search = view.findViewById(R.id.search);
+
         ActivityCompat.requestPermissions(requireActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
         club_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,8 +79,107 @@ public class CommunityFragment extends Fragment {
             }
         });
 
+        //검색
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showSearchDialog();
+            }
+        });
+
         return view;
     }
+    private void showSearchDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("Search")
+                .setMessage("Enter nickname:")
+                .setView(R.layout.dialog_search)
+                .setPositiveButton("Search", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        AlertDialog alertDialog = (AlertDialog) dialogInterface;
+                        EditText editTextNickname = alertDialog.findViewById(R.id.editTextUserId); // 수정 필요
+                        String nickname = editTextNickname.getText().toString().trim();
+                        showUserProfileByNickname(nickname);
+                    }
+                })
+                .setNegativeButton("Cancel", null)
+                .show();
+    }
+
+
+    private void showUserProfileByNickname(String nickname) {
+        mDatabaseRef.child("UserAccount")
+                .orderByChild("nickname")
+                .equalTo(nickname)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()) {
+                            // 사용자를 찾았을 때의 처리
+                            for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                                String uid = userSnapshot.getKey();
+                                // 해당 사용자 정보를 사용하여 마이페이지로 이동
+                                showMypageFragment(uid, nickname);
+                            }
+                        } else {
+                            // 사용자를 찾지 못했을 때의 처리
+                            Toast.makeText(getActivity(), "User not found.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        // 에러 처리
+                        Toast.makeText(getActivity(), "Search failed. Please try again.", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+    private void showMypageFragment(String uid, String nickname) {
+        MypageFragment mypageFragment = new MypageFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("destinationUid", uid);
+        bundle.putString("userId", nickname);
+        mypageFragment.setArguments(bundle);
+        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.containers, mypageFragment).commit();
+    }
+
+
+    private void showUserProfile(String uid) {
+        // 사용자 프로필을 보여주는 코드 작성
+        // 예를 들어, 사용자의 프로필 이미지와 닉네임을 표시하는 등의 작업을 수행할 수 있습니다.
+        // 이 부분은 원하는 방식으로 UI를 구성하시면 됩니다.
+    }
+    /*
+    private void searchUser(String userId) {
+        firestore.collection("users")
+                .whereEqualTo("userId", userId)
+                .get()
+                .addOnSuccessListener(querySnapshot -> {
+                    if (!querySnapshot.isEmpty()) {
+                        DocumentSnapshot documentSnapshot = querySnapshot.getDocuments().get(0);
+                        String destinationUid = documentSnapshot.getId();
+
+                        MypageFragment mypageFragment = new MypageFragment();
+                        Bundle bundle = new Bundle();
+                        bundle.putString("destinationUid", destinationUid);
+                        bundle.putString("userId", userId);
+                        mypageFragment.setArguments(bundle);
+                        getActivity().getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.containers, mypageFragment)
+                                .commit();
+                    } else {
+                        // 유저를 찾지 못한 경우에 대한 처리
+                        Toast.makeText(getActivity(), "User not found.", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    // 검색 중 에러가 발생한 경우에 대한 처리
+                    Toast.makeText(getActivity(), "Search failed. Please try again.", Toast.LENGTH_SHORT).show();
+                });
+    }
+       */
+
 
     private class DetailViewRecyclerViewAdapter extends RecyclerView.Adapter<DetailViewRecyclerViewAdapter.CustomViewHolder> {
         private ArrayList<ContentDTO> contentDTOs = new ArrayList<>();
@@ -153,7 +265,7 @@ public class CommunityFragment extends Fragment {
             // This code is when the button is clicked
             view.findViewById(R.id.detailviewitem_favorite_imageview).setOnClickListener(v -> favoriteEvent(position));
 
-            // This code is when the profile image is clicked
+            // 프로필 이미지를 눌렀을 경우 이벤트처리
             viewHolder.imageViewProfile.setOnClickListener(v -> {
                 MypageFragment mypageFragment = new MypageFragment();
                 Bundle bundle = new Bundle();
@@ -200,5 +312,7 @@ public class CommunityFragment extends Fragment {
                 return null;
             });
         }
+
+
     }
 }
