@@ -178,7 +178,7 @@
         android:minHeight="0dp"
         android:text="로그아웃"
         android:textAllCaps="false"
-        android:textColor="#D50A0A"
+        android:textColor="#BFF62222"
         android:textSize="15dp"
         android:textStyle="bold" />
 </LinearLayout>
