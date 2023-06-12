@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -47,6 +48,7 @@ public class CommunityFragment extends Fragment {
     private LinearLayout slidingPanel, slidingBackground;
     private DatabaseReference mDatabaseRef;
     private FirebaseFirestore firestore;
+    private EditText editTextNickname;
     private String uid;
     @Override
     @Nullable
@@ -64,11 +66,11 @@ public class CommunityFragment extends Fragment {
         RelativeLayout club_btn = view.findViewById(R.id.club_btn);
         ImageView add_post = view.findViewById(R.id.add_post);
         ImageView search = view.findViewById(R.id.search);
-
+        Button btn_search = view.findViewById(R.id.btn_search);
+        editTextNickname = view.findViewById(R.id.editTextUserId);
         Toolbar community_toolbar = view.findViewById(R.id.community_toolbar);
 
         ActivityCompat.requestPermissions(requireActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
-        ImageView search = view.findViewById(R.id.search);
         slidingPanel = view.findViewById(R.id.slidingPanel);
         slidingBackground = view.findViewById(R.id.slidingBackground);
 
@@ -104,10 +106,11 @@ public class CommunityFragment extends Fragment {
         });
 
         //검색
-        search.setOnClickListener(new View.OnClickListener() {
+        btn_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showSearchDialog();
+                String nickname = editTextNickname.getText().toString().trim();
+                showUserProfileByNickname(nickname);
             }
         });
 
@@ -153,6 +156,7 @@ public class CommunityFragment extends Fragment {
 
         slidingPanel.startAnimation(slideDownAnimation);
     }
+/*
     private void showSearchDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Search")
@@ -170,6 +174,7 @@ public class CommunityFragment extends Fragment {
                 .setNegativeButton("Cancel", null)
                 .show();
     }
+*/
 
 
     private void showUserProfileByNickname(String nickname) {
