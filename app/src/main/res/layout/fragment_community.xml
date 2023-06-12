@@ -9,82 +9,87 @@
     android:foregroundTint="@color/white"
     android:background="#ffffff"
     tools:context=".CommunityFragment">
-
-    <RelativeLayout
-        android:id="@+id/top_bar"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/community_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="53dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp">
-
+        android:layout_height="55dp"
+        android:background="@color/white"
+        android:elevation="4dp" >
         <RelativeLayout
-            android:id="@+id/post_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:id="@+id/top_bar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
 
-            <TextView
-                android:id="@+id/post"
-                android:layout_width="wrap_content"
-                android:layout_height="38dp"
-                android:layout_margin="5dp"
+            <RelativeLayout
+                android:id="@+id/post_btn"
+                android:gravity="center"
+                android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"
-                android:text="게시물"
-                android:textColor="@color/black"
-                android:textSize="30dp" />
-
-            <View
-                android:id="@+id/post_line"
-                android:layout_width="82dp"
-                android:layout_height="3dp"
-                android:layout_below="@+id/post"
-                android:layout_marginLeft="5dp"
-                android:background="#FFEB3B" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/club_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="100dp">
-
-            <TextView
-                android:id="@+id/club"
                 android:layout_width="wrap_content"
-                android:layout_height="38dp"
-                android:layout_margin="5dp"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/post"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginBottom="3dp"
+                    android:text="게시물"
+                    android:textColor="@color/black"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <View
+                    android:id="@+id/post_line"
+                    android:layout_width="55dp"
+                    android:layout_height="3dp"
+                    android:layout_below="@+id/post"
+                    android:background="#9DD6FA" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/club_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/post_btn"
                 android:layout_marginLeft="10dp"
-                android:text="클럽"
-                android:textColor="@color/black"
-                android:textSize="30dp" />
+                android:layout_toRightOf="@id/post_btn"
+                android:gravity="center">
 
-            <View
-                android:id="@+id/club_line"
-                android:layout_width="55dp"
-                android:layout_height="3dp"
-                android:layout_below="@+id/club"
-                android:layout_marginLeft="5dp"
-                android:background="#AFAFAF" />
-        </RelativeLayout>
+                <TextView
+                    android:id="@+id/club"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginBottom="3dp"
+                    android:text="클럽"
+                    android:textColor="#595858"
+                    android:textSize="15dp" />
 
+                <View
+                    android:id="@+id/club_line"
+                    android:layout_width="30dp"
+                    android:layout_height="3dp"
+                    android:layout_below="@+id/club"
+                    android:background="#AFAFAF" />
+            </RelativeLayout>
+            <ImageView
+                android:id="@+id/add_post"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginRight="5dp"
+                android:layout_toLeftOf="@+id/search"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_add_post" />
 
-        <ImageView
-            android:id="@+id/add_post"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_toLeftOf="@+id/search"
-            android:src="@drawable/ic_add_post" />
-
-        <ImageView
-            android:id="@+id/search"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="15dp"
-            android:src="@drawable/ic_search" />
+            <ImageView
+                android:id="@+id/search"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/ic_search" />
 
     </RelativeLayout>
 
@@ -102,8 +107,39 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/detailviewfragment_recyclerview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"></androidx.recyclerview.widget.RecyclerView>
+            android:layout_height="match_parent">
+        </androidx.recyclerview.widget.RecyclerView>
     </LinearLayout>
+    </androidx.appcompat.widget.Toolbar>
+    <LinearLayout
+        android:id="@+id/slidingBackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        android:background="#B5A6A5A5"
+        android:orientation="vertical"
+        android:visibility="gone">
+        <LinearLayout
+            android:id="@+id/slidingPanel"
+            android:orientation="vertical"
+            android:background="@drawable/main_background"
+            android:layout_width="match_parent"
+            android:layout_height="450dp">
+            <EditText
+                android:id="@+id/editTextUserId"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:hint="검색"
+                android:layout_width="332dp"
+                android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/btn_search"
+                android:text="검색"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
 
+    </LinearLayout>
 
 </RelativeLayout>

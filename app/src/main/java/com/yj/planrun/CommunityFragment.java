@@ -8,14 +8,19 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -40,8 +45,10 @@ import java.util.List;
 import java.util.Map;
 
 public class CommunityFragment extends Fragment {
+    private LinearLayout slidingPanel, slidingBackground;
     private DatabaseReference mDatabaseRef;
     private FirebaseFirestore firestore;
+    private EditText editTextNickname;
     private String uid;
     @Override
     @Nullable
@@ -59,14 +66,40 @@ public class CommunityFragment extends Fragment {
         RelativeLayout club_btn = view.findViewById(R.id.club_btn);
         ImageView add_post = view.findViewById(R.id.add_post);
         ImageView search = view.findViewById(R.id.search);
+        Button btn_search = view.findViewById(R.id.btn_search);
+        editTextNickname = view.findViewById(R.id.editTextUserId);
+        Toolbar community_toolbar = view.findViewById(R.id.community_toolbar);
 
         ActivityCompat.requestPermissions(requireActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+        slidingPanel = view.findViewById(R.id.slidingPanel);
+        slidingBackground = view.findViewById(R.id.slidingBackground);
+
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (slidingBackground.getVisibility() == View.VISIBLE) {
+                    hideSlidingPanel();
+                } else {
+                    showSlidingPanel();
+                }
+
+            }
+        });
+
+        slidingBackground.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                hideSlidingPanel();
+            }
+        });
+
         club_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 ClubFragment clubFragment = new ClubFragment();
                 transaction.replace(R.id.community_layout, clubFragment);
+                community_toolbar.setVisibility(View.GONE);
                 transaction.commit();
             }
         });
@@ -80,15 +113,59 @@ public class CommunityFragment extends Fragment {
         });
 
         //검색
-        search.setOnClickListener(new View.OnClickListener() {
+        btn_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showSearchDialog();
+                String nickname = editTextNickname.getText().toString().trim();
+                showUserProfileByNickname(nickname);
             }
         });
 
         return view;
+
+
     }
+    private void showSlidingPanel() {
+        slidingBackground.setVisibility(View.VISIBLE);
+        slidingPanel.setVisibility(View.VISIBLE);
+
+        Animation slideUpAnimation = new TranslateAnimation(
+                Animation.RELATIVE_TO_SELF, 0f,
+                Animation.RELATIVE_TO_SELF, 0f,
+                Animation.RELATIVE_TO_SELF, 1f,
+                Animation.RELATIVE_TO_SELF, 0f
+        );
+        slideUpAnimation.setDuration(500);
+        slidingPanel.startAnimation(slideUpAnimation);
+    }
+
+    // 슬라이딩 패널을 숨기는 메소드
+    private void hideSlidingPanel() {
+
+        Animation slideDownAnimation = new TranslateAnimation(
+                Animation.RELATIVE_TO_SELF, 0f,
+                Animation.RELATIVE_TO_SELF, 0f,
+                Animation.RELATIVE_TO_SELF, 0f,
+                Animation.RELATIVE_TO_SELF, 1f
+        );
+        slideDownAnimation.setDuration(500);
+        slideDownAnimation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) { }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                slidingPanel.setVisibility(View.GONE);
+                slidingBackground.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) { }
+        });
+
+        slidingPanel.startAnimation(slideDownAnimation);
+    }
+/*
     private void showSearchDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Search")
@@ -106,6 +183,7 @@ public class CommunityFragment extends Fragment {
                 .setNegativeButton("Cancel", null)
                 .show();
     }
+*/
 
 
     private void showUserProfileByNickname(String nickname) {

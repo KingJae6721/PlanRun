@@ -30,6 +30,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -61,11 +62,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import com.sothree.slidinguppanel.SlidingUpPanelLayout;
+import com.tbuonomo.viewpagerdotsindicator.DotsIndicator;
 import com.yj.planrun.MainActivity;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -84,12 +85,14 @@ public class MainFragment extends Fragment implements OnMapReadyCallback, Activi
 
     private static final String TAG = "googlemap_example";
     private static final int GPS_ENABLE_REQUEST_CODE = 2001;
-    private static final int UPDATE_INTERVAL_MS = 2000;  // 2초
-    private static final int FASTEST_UPDATE_INTERVAL_MS = 1000; // 0.5초
+    private static final int UPDATE_INTERVAL_MS = 5000;  // 5초
+    private static final int FASTEST_UPDATE_INTERVAL_MS = 3000; // 3초
 
     // onRequestPermissionsResult에서 수신된 결과에서 ActivityCompat.requestPermissions를 사용한 퍼미션 요청을 구별하기 위해 사용됩니다.
     private static final int PERMISSIONS_REQUEST_CODE = 100;
     boolean needRequest = false;
+
+    private TextView tv_totalDistance;
 
     // 앱을 실행하기 위해 필요한 퍼미션을 정의합니다.
     String[] REQUIRED_PERMISSIONS  = {Manifest.permission.ACCESS_FINE_LOCATION,
@@ -101,8 +104,6 @@ public class MainFragment extends Fragment implements OnMapReadyCallback, Activi
     private FusedLocationProviderClient mFusedLocationClient;
     private LocationRequest locationRequest;
     private Location location;
-    private TextView nicknameTextView, tv_calories, tv_distance;
-
     private View mLayout, run_record1;  // Snackbar 사용하기 위해서는 View가 필요합니다.
     // (참고로 Toast에서는 Context가 필요했습니다.)
 
@@ -110,8 +111,7 @@ public class MainFragment extends Fragment implements OnMapReadyCallback, Activi
     @Nullable
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {   mLayout = inflater.inflate(R.layout.fragment_main, null, false);
-        nicknameTextView = mLayout.findViewById(R.id.nicknameTextView);
-        nicknameTextView.setText(DataLoadingActivity.nickname);
+        run_record1 = inflater.inflate(R.layout.fragment_run_record, null, false);
 
         locationRequest = new LocationRequest()
                 .setPriority(Priority.PRIORITY_HIGH_ACCURACY)
@@ -127,6 +127,32 @@ public class MainFragment extends Fragment implements OnMapReadyCallback, Activi
 
         SupportMapFragment mapFragment = (SupportMapFragment) this.getChildFragmentManager().findFragmentById(R.id.map_fragment);
         mapFragment.getMapAsync(this);
+
+        ViewPager2 viewPager = mLayout.findViewById(R.id.viewPager);
+        ViewPagerFragmentAdapter adapter = new ViewPagerFragmentAdapter(getActivity());
+// ViewPager2에 표시할 각각의 프래그먼트를 추가합니다.
+        adapter.addFragment(new RunRecordFragment());
+        adapter.addFragment(new RunRecord2Fragment());
+// 어댑터를 ViewPager2에 설정합니다.
+        viewPager.setAdapter(adapter);
+        DotsIndicator dotsIndicator = mLayout.findViewById(R.id.dotsIndicator);
+        dotsIndicator.setViewPager2(viewPager);
+        viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                super.onPageScrolled(position, positionOffset, positionOffsetPixels);
+            }
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+            }
+            @Override
+            public void onPageScrollStateChanged(int state) {
+                super.onPageScrollStateChanged(state);
+            }
+        });
+
+
 
         //이벤트
         Button btn_run = (Button) mLayout.findViewById(R.id.btn_run);
@@ -147,28 +173,10 @@ public class MainFragment extends Fragment implements OnMapReadyCallback, Activi
             }
         });
 
+        tv_totalDistance=mLayout.findViewById(R.id.tv_distance);
+        //tv_totalDistance.setText(String.format("지금까지는 총 %fKm나 달리셨네요! 대단합니다!",DataLoadingActivity.total_distance));
 
-        //
-        tv_calories=mLayout.findViewById(R.id.tv_calories);
-        tv_distance=mLayout.findViewById(R.id.tv_distance);
-        long now = System.currentTimeMillis();
-        Date date = new Date(now);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-M-d");
 
-        String getDate = sdf.format(date);
-        boolean toDay_runData_exist=false;
-       /* for(RunningData data1: DataLoadingActivity.run_data) {
-
-            if (data1.getDate().equals(getDate)) {
-                toDay_runData_exist=true;
-            }
-
-        }
-        if(toDay_runData_exist==false){
-            tv_distance.setText("기록이 없습니다");
-            tv_calories.setVisibility(View.INVISIBLE);
-        }
-*/
         return mLayout;
     }
 

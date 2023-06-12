@@ -30,6 +30,7 @@ public class DataLoadingActivity extends AppCompatActivity {
     private FirebaseDatabase mDatabase;
     public static  ArrayList <RunningData> run_data;
     public static String email, nickname;
+    public static double total_distance=0.0;
     //UserAccount정보, 러닝 데이터 받아오기
     FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
     FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();//파이어베이스 객체 가지고와서서
@@ -42,6 +43,7 @@ public class DataLoadingActivity extends AppCompatActivity {
         //로딩화면 시작.
         Loadingstart();
         setFirebaseNicknameEmail();
+
     }
     private void Loadingstart(){
         Handler handler=new Handler();
@@ -59,6 +61,7 @@ public class DataLoadingActivity extends AppCompatActivity {
                             run_data.add(runningData.getValue(RunningData.class));
                             Log.d("로그","추가");
                         }
+                        for(RunningData data1: DataLoadingActivity.run_data) total_distance+=Double.parseDouble(data1.getDistance());
                     }
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
@@ -67,7 +70,7 @@ public class DataLoadingActivity extends AppCompatActivity {
 
                 finish();
             }
-        },2000);
+        },3000);
     }
 
     public void setFirebaseNicknameEmail() {

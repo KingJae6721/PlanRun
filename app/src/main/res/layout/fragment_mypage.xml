@@ -25,12 +25,12 @@
 
         <ImageView
             android:id="@+id/setting"
-            android:src="@drawable/setting2"
+            android:src="@drawable/ic_list"
             android:layout_gravity="right"
             android:layout_marginTop="15dp"
-            android:layout_marginRight="15dp"
+            android:layout_marginRight="18dp"
             android:layout_width="25dp"
-            android:layout_height="25dp" />
+            android:layout_height="30dp" />
 
     </androidx.appcompat.widget.Toolbar>
 
@@ -64,6 +64,7 @@
             android:gravity="center"
             android:layout_below="@+id/introduce"
             android:layout_alignParentBottom="true"
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <Button
@@ -187,9 +188,11 @@
         android:visibility="gone" />
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/account_reyclerview"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     </androidx.recyclerview.widget.RecyclerView>
-
 
 </LinearLayout>

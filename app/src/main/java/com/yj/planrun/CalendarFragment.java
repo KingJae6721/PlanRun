@@ -20,6 +20,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -64,9 +66,12 @@ public class CalendarFragment extends Fragment {
 
         calendarView = view.findViewById(R.id.calendarView);
         diaryTextView = view.findViewById(R.id.diaryTextView);
-        tv_date=view.findViewById(R.id.tv_date);
-        tv_pace=view.findViewById(R.id.tv_pace);
-        tv_distance=view.findViewById(R.id.tv_distance);
+        ActiveRecord a = new ActiveRecord(view.getContext().getApplicationContext());
+        LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
+        View additionalView = layoutInflater.inflate(R.layout.record_active, null);
+        View additionalView1 = layoutInflater.inflate(R.layout.record_active, null);
+        LinearLayout layout_record= (LinearLayout)view.findViewById(R.id.layout_record);
+
 
         FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
 
@@ -76,24 +81,49 @@ public class CalendarFragment extends Fragment {
         calendarView.setOnDateChangedListener(new OnDateSelectedListener() {
             @Override
             public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
+                layout_record.removeAllViews();
                 diaryTextView.setVisibility(View.VISIBLE);
 
-                diaryTextView.setText(String.format("%d / %d / %d", date.getYear(), date.getMonth(), date.getDay()));
+                diaryTextView.setText(String.format("%d / %d / %d", date.getYear(), date.getMonth()+1, date.getDay()));
+                boolean exist_data=false;
+                ArrayList<RunningData> selected_date_data= new ArrayList<RunningData>();
 
-                tv_date.setText("");
-                tv_distance.setText("기록이 없습니다");
-
-                tv_pace.setText("");
                 for(RunningData data1: DataLoadingActivity.run_data) {
 
-                    if (data1.getDate() != null && data1.getDate().equals(date.getYear() + "-" + date.getMonth() + "-" + date.getDay())) {
-                        tv_distance.setText(data1.getDistance());
-                        tv_date.setText(data1.getDate());
-                        tv_pace.setText(data1.getPace());
+                    if (data1.getDate() != null && data1.getDate().equals(date.getYear() + "-" + (date.getMonth()+1)+ "-" + date.getDay())) {
+                        selected_date_data.add(data1);
+                        exist_data=true;
                     }
 
                 }
 
+                for(RunningData a1:selected_date_data){
+                    View additionalView = layoutInflater.inflate(R.layout.record_active, null);
+
+                    tv_date=(TextView) additionalView.findViewById(R.id.tv_date);
+                    tv_pace=(TextView)additionalView.findViewById(R.id.tv_pace);
+                    tv_distance=(TextView)additionalView.findViewById(R.id.tv_distance);
+
+                    tv_distance.setText(a1.getDistance());
+                    tv_date.setText(a1.getDate()+" "+a1.getDate_time());
+                    tv_pace.setText(a1.getPace());
+
+                    layout_record.addView(additionalView);
+                    TextView textView=new TextView(getActivity());
+                    textView.setText("");
+                    layout_record.addView(textView);
+                    RelativeLayout detail = additionalView.findViewById(R.id.layout_record);
+                    TextView no_data=layout_record.findViewById(R.id.no_data);
+
+                    if (exist_data==false){
+
+                        no_data.setVisibility(View.VISIBLE);
+                    }
+                    else{
+                        no_data.setVisibility(View.INVISIBLE);
+                        detail.setVisibility(View.VISIBLE);
+                    }
+                }
             }
         });
 
@@ -107,7 +137,7 @@ public class CalendarFragment extends Fragment {
             if (str != null) {
                 String[] date = str.split("-");
                 year=Integer.parseInt(date[0]);
-                month=Integer.parseInt(date[1]);
+                month=Integer.parseInt(date[1])-1;
                 day=Integer.parseInt(date[2]);
                 Log.d("로그",date[0]+date[1]+date[2]);
 
@@ -118,6 +148,11 @@ public class CalendarFragment extends Fragment {
         }
         return view;
     }//onCreate
+
+    public void setRecord(){
+
+    }
+
 }//CalenderFragment 클래스
 
 

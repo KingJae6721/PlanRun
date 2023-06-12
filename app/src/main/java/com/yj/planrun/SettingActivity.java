@@ -14,6 +14,7 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -54,7 +55,7 @@ public class SettingActivity extends AppCompatActivity {
     private ActivityResultLauncher<Intent> imageCaptureLauncher;
     private ActivityResultLauncher<Intent> galleryLauncher;
     private View dl_camera_choice;
-    private Button btn_camera, btn_gallery;
+    private Button btn_camera, btn_gallery, btn_back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,10 +67,10 @@ public class SettingActivity extends AppCompatActivity {
         DatabaseReference mDatabaseRef = FirebaseDatabase.getInstance().getReference("PlanRun");
 
         Button btn_logout = findViewById(R.id.btn_logout);
-        Button btn_setting = findViewById(R.id.btn_setting);
+        LinearLayout btn_setting = findViewById(R.id.btn_setting);
 
         circle_iv = findViewById(R.id.circle_iv);
-
+        btn_back=findViewById(R.id.btn_back);
         TextView nicknameTextView = findViewById(R.id.nicknameTextView);
         /*if (mFirebaseAuth != null) {
             mDatabaseRef.child("UserAccount").child(mFirebaseAuth.getUid()).child("nickname").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -207,7 +208,14 @@ public class SettingActivity extends AppCompatActivity {
             }
         });
         */
-    }
+        btn_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+
+        });
+    }//OnCreate
     /*
     private void showCameraChoiceDialog() {
         View dl_camera_choice = View.inflate(this, R.layout.activity_camera_choice, null);

@@ -8,7 +8,7 @@
     android:background="#00FFFFFF"
     android:gravity="bottom"
     app:umanoShadowHeight="0dp"
-    app:umanoPanelHeight="100dp"
+    app:umanoPanelHeight="105dp"
     app:umanoOverlay="true"
     app:umanoDragView="@+id/slide_layout"
     tools:context=".MainFragment">
@@ -42,7 +42,8 @@
                         <ImageView
                             android:id="@+id/setting"
                             android:src="@mipmap/ic_main2"
-                            android:layout_marginRight="5dp"
+                            android:layout_gravity="right"
+                            android:layout_marginRight="20dp"
                             android:layout_width="30dp"
                             android:layout_height="30dp" />
                         <TextView
@@ -54,254 +55,42 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
                     </androidx.appcompat.widget.Toolbar>
-                    <HorizontalScrollView
-                        android:layout_width="wrap_content"
-                        android:layout_height="150dp"
-                        android:layout_marginTop="80dp">
-
-                        <LinearLayout
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="370dp"
+                        android:layout_height="120dp"
+                        android:layout_marginTop="80dp"
+                        android:layout_gravity="center_horizontal"
+                        app:cardCornerRadius="20dp"
+                        app:cardElevation="20dp">
+                        <androidx.viewpager2.widget.ViewPager2
+                            android:id="@+id/viewPager"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+                        <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+                            android:id="@+id/dotsIndicator"
+                            android:layout_gravity="bottom|center"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:orientation="horizontal">
-
-                            <RelativeLayout
-                                android:layout_width="300dp"
-                                android:layout_height="130dp"
-                                android:layout_marginLeft="57dp"
-                                android:layout_marginRight="20dp"
-                                android:background="@drawable/shadow_style"
-                                android:elevation="10dp">
-
-                                <ImageView
-                                    android:id="@+id/profile_picture"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_alignParentLeft="true"
-                                    android:layout_marginLeft="20dp"
-                                    android:layout_marginTop="20dp"
-                                    android:src="@mipmap/ic_main2" />
-
-                                <TextView
-                                    android:id="@+id/nicknameTextView"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_below="@id/profile_picture"
-                                    android:layout_alignBaseline="@id/profile_picture"
-                                    android:layout_centerVertical="true"
-                                    android:layout_marginLeft="20dp"
-                                    android:textColor="#201F1F"
-                                    android:textSize="20dp" />
-
-                                <LinearLayout
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_centerInParent="true"
-                                    android:layout_margin="30dp"
-                                    android:orientation="vertical">
-
-                                    <TextView
-                                        android:id="@+id/tv_distance"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:gravity="center"
-                                        android:text="00.00"
-                                        android:textColor="@color/black"
-                                        android:textSize="25dp" />
-
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:gravity="center"
-                                        android:text="거리(km)" />
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_alignParentRight="true"
-                                    android:layout_centerVertical="true"
-                                    android:layout_marginRight="20dp"
-                                    android:orientation="vertical">
-
-                                    <TextView
-                                        android:id="@+id/tv_calories"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:gravity="center"
-                                        android:text="00kcal"
-                                        android:textColor="@color/black"
-                                        android:textSize="25dp" />
-
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:gravity="center"
-                                        android:text="칼로리" />
-                                </LinearLayout>
-                            </RelativeLayout>
-
-                            <RelativeLayout
-                                android:layout_width="300dp"
-                                android:layout_height="130dp"
-                                android:layout_marginRight="20dp"
-                                android:background="@drawable/shadow_style"
-                                android:elevation="10dp">
-
-                                <ImageView
-                                    android:id="@+id/profile_picture2"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_alignParentLeft="true"
-                                    android:layout_marginLeft="20dp"
-                                    android:layout_marginTop="20dp"
-                                    android:src="@mipmap/ic_main2" />
-
-                                <TextView
-                                    android:id="@+id/nicknameTextView2"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_below="@id/profile_picture2"
-                                    android:layout_alignBaseline="@id/profile_picture2"
-                                    android:layout_centerVertical="true"
-                                    android:layout_marginLeft="20dp"
-                                    android:textColor="#201F1F"
-                                    android:textSize="20dp" />
-
-                                <LinearLayout
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_centerInParent="true"
-                                    android:layout_margin="30dp"
-                                    android:orientation="vertical">
-
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:gravity="center"
-                                        android:text="00.00"
-                                        android:textColor="@color/black"
-                                        android:textSize="25dp" />
-
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:gravity="center"
-                                        android:text="거리(km)" />
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_alignParentRight="true"
-                                    android:layout_centerVertical="true"
-                                    android:layout_marginRight="20dp"
-                                    android:orientation="vertical">
-
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:gravity="center"
-                                        android:text="00kcal"
-                                        android:textColor="@color/black"
-                                        android:textSize="25dp" />
-
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:gravity="center"
-                                        android:text="칼로리" />
-                                </LinearLayout>
-                            </RelativeLayout>
-
-                            <RelativeLayout
-                                android:layout_width="300dp"
-                                android:layout_height="130dp"
-                                android:layout_marginRight="57dp"
-                                android:background="@drawable/shadow_style"
-                                android:elevation="10dp">
-
-                                <ImageView
-                                    android:id="@+id/profile_picture3"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_alignParentLeft="true"
-                                    android:layout_marginLeft="20dp"
-                                    android:layout_marginTop="20dp"
-                                    android:src="@mipmap/ic_main2" />
-
-                                <TextView
-                                    android:id="@+id/nicknameTextView3"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_below="@id/profile_picture3"
-                                    android:layout_alignBaseline="@id/profile_picture3"
-                                    android:layout_centerVertical="true"
-                                    android:layout_marginLeft="20dp"
-                                    android:textColor="#201F1F"
-                                    android:textSize="20dp" />
-
-                                <LinearLayout
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_centerInParent="true"
-                                    android:layout_margin="30dp"
-                                    android:orientation="vertical">
-
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:gravity="center"
-                                        android:text="00.00"
-                                        android:textColor="@color/black"
-                                        android:textSize="25dp" />
-
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:gravity="center"
-                                        android:text="거리(km)" />
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_alignParentRight="true"
-                                    android:layout_centerVertical="true"
-                                    android:layout_marginRight="20dp"
-                                    android:orientation="vertical">
-
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:gravity="center"
-                                        android:text="00kcal"
-                                        android:textColor="@color/black"
-                                        android:textSize="25dp" />
-
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:gravity="center"
-                                        android:text="칼로리" />
-                                </LinearLayout>
-                            </RelativeLayout>
-                        </LinearLayout>
-
-                    </HorizontalScrollView>
-
+                            android:layout_marginBottom="5dp"
+                            app:dotsColor="#457C7B7B"
+                            app:dotsCornerRadius="30dp"
+                            app:selectedDotColor="#B423A4FA"
+                            app:dotsSize="6dp"
+                            app:dotsSpacing="3dp"
+                            app:dotsWidthFactor="2.5" />
+                    </androidx.cardview.widget.CardView>
                     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
                         android:id="@+id/btn_run"
                         android:layout_height="80dp"
                         android:layout_width="80dp"
                         android:layout_gravity="bottom"
                         android:layout_marginLeft="165dp"
-                        android:layout_marginBottom="100dp"
+                        android:layout_marginBottom="110dp"
                         app:backgroundTint="#FF0"
                         android:text=" 시작"
                         android:textSize="15dp"
-                        android:textAlignment="center"
-                        tools:ignore="RtlCompat" />
+                        android:textStyle="bold"
+                        android:textAlignment="center" />
                 </FrameLayout>
             </RelativeLayout>
     </LinearLayout>
@@ -310,7 +99,7 @@
         android:id="@+id/slide_layout"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="500dp" >
 
         <TextView
             android:text="챌린지"
@@ -427,6 +216,7 @@
                     android:textColor="@color/black" />
 
                 <TextView
+                    android:id="@+id/tv_total_distance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="지금까지는 총 --키로나 달리셨네요! 대단합니다!"
