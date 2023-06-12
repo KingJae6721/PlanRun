@@ -41,7 +41,9 @@ public class ChallengeActivity extends TabActivity {
 
     ImageView day_time_check, day_distance_check, day_pace_check, day_kcal_check; //일일
     ImageView week_time_1h_check, week_time_2h_check, week_distance_10km_check, week_distance_15km_check,
-            week_pace_1_check, week_pace_2_check, week_kcal_500_check, week_kcal_700_check; //주간
+            week_pace_33_check, week_pace_30_check, week_kcal_500_check, week_kcal_700_check; //주간
+    ImageView month_time_6h_check, month_time_10h_check, month_distance_50km_check, month_distance_70km_check,
+            month_pace_37_check, month_pace_41_check, month_kcal_2400_check, month_kcal_3000_check; //월간
 
     @Override
     @SuppressWarnings("deprecation")
@@ -57,7 +59,6 @@ public class ChallengeActivity extends TabActivity {
         day_distance_check = findViewById(R.id.day_distance_check);
         day_pace_check = findViewById(R.id.day_pace_check);
         day_kcal_check = findViewById(R.id.day_kcal_check);
-
         //일일
 
         //주간
@@ -65,16 +66,27 @@ public class ChallengeActivity extends TabActivity {
         week_time_2h_check = findViewById(R.id.week_time_2h_check);
         week_distance_10km_check = findViewById(R.id.week_distance_10km_check);
         week_distance_15km_check = findViewById(R.id.week_distance_15km_check);
-        week_pace_1_check = findViewById(R.id.week_pace_1_check);
-        week_pace_2_check = findViewById(R.id.week_pace_2_check);
+        week_pace_33_check = findViewById(R.id.week_pace_33_check);
+        week_pace_30_check = findViewById(R.id.week_pace_30_check);
         week_kcal_500_check = findViewById(R.id.week_kcal_500_check);
         week_kcal_700_check = findViewById(R.id.week_kcal_700_check);
         //주간
 
+        //월간
+        month_time_6h_check = findViewById(R.id.month_time_6h_check);
+        month_time_10h_check = findViewById(R.id.month_time_10h_check);
+        month_distance_50km_check = findViewById(R.id.month_distance_50km_check);
+        month_distance_70km_check = findViewById(R.id.month_distance_70km_check);
+        month_pace_37_check = findViewById(R.id.month_pace_37_check);
+        month_pace_41_check = findViewById(R.id.month_pace_41_check);
+        month_kcal_2400_check = findViewById(R.id.month_kcal_2400_check);
+        month_kcal_3000_check = findViewById(R.id.month_kcal_3000_check);
+        //월간
+
         // 0 : 일일, 1 : 주간, 2 : 월간
         final int[] sum_calories = new int[3];
         final double[] sum_distance = new double[3];
-        final int[] sum_pace = new int[3];
+        final double[] sum_pace = new double[3];
         final int[] sum_time = new int[3];
         final String[] runningDate = new String[1];
 
@@ -90,6 +102,8 @@ public class ChallengeActivity extends TabActivity {
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-M-d");
                     String getNowDate = sdf.format(nowDate);
                     int intNowDate = Integer.parseInt(getNowDate.substring(getNowDate.lastIndexOf("-")+1)); //~일 구하기
+                    int intNowMonth = Integer.parseInt(getNowDate.substring(5, getNowDate.lastIndexOf("-"))); //~월 구하기
+                    //Log.d("data", "runningData - StrNowMonth: " + StrNowMonth);
 
                     //이번주 월요일, 일요일 구하기
                     Calendar mon_cal = Calendar.getInstance(Locale.KOREA);
@@ -104,15 +118,21 @@ public class ChallengeActivity extends TabActivity {
 //                    Log.d("data", "runningData - sun_date: " + getSunDate);
                     int intMonDate = Integer.parseInt(getMonDate.substring(getMonDate.lastIndexOf("-")+1));
                     int intSunDate = Integer.parseInt(getSunDate.substring(getSunDate.lastIndexOf("-")+1));
-                    Log.d("data", "runningData - mon_date: " + intMonDate);
-                    Log.d("data", "runningData - sun_date: " + intSunDate);
+                    //Log.d("data", "runningData - mon_date: " + intMonDate);
+                    //Log.d("data", "runningData - sun_date: " + intSunDate);
+
+                    Double temp_pace = 0.00;
 
                     for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                         HashMap<String, Object> runningDataSnapshot = (HashMap<String, Object>) dataSnapshot.getValue();
+
+                        String pace = runningDataSnapshot.get("pace").toString();
+
                         if (runningDataSnapshot != null) {
                             String date = runningDataSnapshot.get("date").toString();
                             runningDate[0] = date;
-
+                            int intDateDay = Integer.parseInt(date.substring(date.lastIndexOf("-")+1)); //~일 구하기
+                            int intDateMonth = Integer.parseInt(date.substring(5, date.lastIndexOf("-"))); //~월 구하기
                             String date_time = runningDataSnapshot.get("date_time").toString();
 
                             if (getNowDate.equals(runningDate[0])) { //일일
@@ -120,15 +140,14 @@ public class ChallengeActivity extends TabActivity {
                                 calories = calories.replaceAll("[^0-9]", ""); // 숫자와 소수점만 남기고 제거
                                 sum_calories[0] += Integer.parseInt(calories);
 
-
                                 String distance = runningDataSnapshot.get("distance").toString();
                                 distance = distance.replaceAll("[^0-9.]", ""); // 숫자와 소수점만 남기고 제거
                                 double double_distance = Double.parseDouble(distance);
                                 sum_distance[0] += double_distance;
 
-                                String pace = runningDataSnapshot.get("pace").toString();
                                 pace = pace.replaceAll("[^0-9.]", ""); // 숫자와 소수점만 남기고 제거
-                                sum_pace[0] += Integer.parseInt(pace);
+                                sum_pace[0] = Double.parseDouble(pace);
+
 
                                 String time = runningDataSnapshot.get("time").toString();
                                 String[] sp_time = time.split(":");
@@ -143,20 +162,23 @@ public class ChallengeActivity extends TabActivity {
                                 sum_time[0] += intSec;
                                 //Log.d("data", "runningData - sum_time[0]: " + sum_time[0]);
                             } //일일
-                            if (intNowDate >= intMonDate && intNowDate <= intSunDate) { //주간
+                            if (intDateDay >= intMonDate && intDateDay <= intSunDate) { //주간
                                 String calories = runningDataSnapshot.get("calories").toString();
                                 calories = calories.replaceAll("[^0-9]", ""); // 숫자와 소수점만 남기고 제거
                                 sum_calories[1] += Integer.parseInt(calories);
-
 
                                 String distance = runningDataSnapshot.get("distance").toString();
                                 distance = distance.replaceAll("[^0-9.]", ""); // 숫자와 소수점만 남기고 제거
                                 double double_distance = Double.parseDouble(distance);
                                 sum_distance[1] += double_distance;
 
-                                String pace = runningDataSnapshot.get("pace").toString();
-                                pace = pace.replaceAll("[^0-9.]", ""); // 숫자와 소수점만 남기고 제거
-                                sum_pace[1] += Integer.parseInt(pace);
+                                pace = pace.replaceAll("[^0-9.]", ""); // 숫자와 소수점만 남기고 제거 = Double.parseDouble(pace);
+                                if (Double.parseDouble(pace) >= temp_pace) {
+                                    sum_pace[1] = Double.parseDouble(pace);
+                                    temp_pace = Double.parseDouble(pace);
+                                } else {
+                                    sum_pace[1] = temp_pace;
+                                }
 
                                 String time = runningDataSnapshot.get("time").toString();
                                 String[] sp_time = time.split(":");
@@ -171,6 +193,37 @@ public class ChallengeActivity extends TabActivity {
                                 sum_time[1] += intSec;
                                 //Log.d("data", "runningData - sum_time[1]: " + sum_time[1]);
                             } //주간
+                            if (intNowMonth == intDateMonth) { //월간
+                                String calories = runningDataSnapshot.get("calories").toString();
+                                calories = calories.replaceAll("[^0-9]", ""); // 숫자와 소수점만 남기고 제거
+                                sum_calories[2] += Integer.parseInt(calories);
+
+                                String distance = runningDataSnapshot.get("distance").toString();
+                                distance = distance.replaceAll("[^0-9.]", ""); // 숫자와 소수점만 남기고 제거
+                                double double_distance = Double.parseDouble(distance);
+                                sum_distance[2] += double_distance;
+
+                                pace = pace.replaceAll("[^0-9.]", ""); // 숫자와 소수점만 남기고 제거 = Double.parseDouble(pace);
+                                if (Double.parseDouble(pace) >= temp_pace) {
+                                    sum_pace[2] = Double.parseDouble(pace);
+                                    temp_pace = Double.parseDouble(pace);
+                                } else {
+                                    sum_pace[2] = temp_pace;
+                                }
+
+                                String time = runningDataSnapshot.get("time").toString();
+                                String[] sp_time = time.split(":");
+                                String min = sp_time[0];
+                                String sec = sp_time[1];
+                                int intMin = Integer.parseInt(min);
+                                int intSec = Integer.parseInt(sec);
+                                //Log.d("data", "runningData - intMin: " + intMin);
+                                //Log.d("data", "runningData - intSec: " + intSec);
+                                intSec += (intMin * 60);
+                                //Log.d("data", "runningData - intSec: " + intSec);
+                                sum_time[2] += intSec;
+                                //Log.d("data", "runningData - sum_time[1]: " + sum_time[1]);
+                            } //월간
                         }
                     }
                     Log.d("data", "runningData - sum_calories[0]: " + sum_calories[0]);
@@ -188,7 +241,7 @@ public class ChallengeActivity extends TabActivity {
                     } else {
                         day_distance_check.setVisibility(View.INVISIBLE);
                     }
-                    if (sum_pace[0] >= 5){
+                    if (sum_pace[0] >= 2.7){
                         day_pace_check.setVisibility(View.VISIBLE);
                     } else {
                         day_pace_check.setVisibility(View.INVISIBLE);
@@ -216,19 +269,19 @@ public class ChallengeActivity extends TabActivity {
                         week_distance_10km_check.setVisibility(View.VISIBLE);
                     } else {
                         week_distance_10km_check.setVisibility(View.INVISIBLE);
-                    }if (sum_distance[1] >= 10){
+                    }if (sum_distance[1] >= 15){
                         week_distance_15km_check.setVisibility(View.VISIBLE);
                     } else {
                         week_distance_15km_check.setVisibility(View.INVISIBLE);
                     }
-                    if (sum_pace[1] >= 15){
-                        week_pace_1_check.setVisibility(View.VISIBLE);
+                    if (sum_pace[1] >= 3){
+                        week_pace_30_check.setVisibility(View.VISIBLE);
                     } else {
-                        week_pace_1_check.setVisibility(View.INVISIBLE);
-                    }if (sum_pace[1] >= 15){
-                        week_pace_2_check.setVisibility(View.VISIBLE);
+                        week_pace_30_check.setVisibility(View.INVISIBLE);
+                    }if (sum_pace[1] >= 3.3){
+                        week_pace_33_check.setVisibility(View.VISIBLE);
                     } else {
-                        week_pace_2_check.setVisibility(View.INVISIBLE);
+                        week_pace_33_check.setVisibility(View.INVISIBLE);
                     }
                     if (sum_calories[1] >= 500){
                         week_kcal_500_check.setVisibility(View.VISIBLE);
@@ -238,9 +291,50 @@ public class ChallengeActivity extends TabActivity {
                         week_kcal_700_check.setVisibility(View.VISIBLE);
                     } else {
                         week_kcal_700_check.setVisibility(View.INVISIBLE);
+                    }//주간
+                    //월간
+                    //month_time_6h_check, month_time_10h_check, month_distance_50km_check, month_distance_70km_check,
+                    //month_pace_37_check, month_pace_41_check, month_kcal_2400_check, month_kcal_3000_check;
+                    Log.d("data", "runningData - sum_calories[2]: " + sum_calories[2]);
+                    Log.d("data", "runningData - sum_distance[2]: " + sum_distance[2]);
+                    Log.d("data", "runningData - sum_pace[2]: " + sum_pace[2]);
+                    Log.d("data", "runningData - sum_time[2]: " + sum_time[2]);
+                    if (sum_time[2] >= 21600){
+                        month_time_6h_check.setVisibility(View.VISIBLE);
+                    } else {
+                        month_time_6h_check.setVisibility(View.INVISIBLE);
+                    }if (sum_time[2] >= 36000){
+                        month_time_10h_check.setVisibility(View.VISIBLE);
+                    } else {
+                        month_time_10h_check.setVisibility(View.INVISIBLE);
                     }
-                    //주간
-
+                    if (sum_distance[2] >= 50){
+                        month_distance_50km_check.setVisibility(View.VISIBLE);
+                    } else {
+                        month_distance_50km_check.setVisibility(View.INVISIBLE);
+                    }if (sum_distance[2] >= 70){
+                        month_distance_70km_check.setVisibility(View.VISIBLE);
+                    } else {
+                        month_distance_70km_check.setVisibility(View.INVISIBLE);
+                    }
+                    if (sum_pace[2] >= 3.7){
+                        month_pace_37_check.setVisibility(View.VISIBLE);
+                    } else {
+                        month_pace_37_check.setVisibility(View.INVISIBLE);
+                    }if (sum_pace[2] >= 4.1){
+                        month_pace_41_check.setVisibility(View.VISIBLE);
+                    } else {
+                        month_pace_41_check.setVisibility(View.INVISIBLE);
+                    }
+                    if (sum_calories[2] >= 2400){
+                        month_kcal_2400_check.setVisibility(View.VISIBLE);
+                    } else {
+                        month_kcal_2400_check.setVisibility(View.INVISIBLE);
+                    }if (sum_calories[2] >= 3000){
+                        month_kcal_3000_check.setVisibility(View.VISIBLE);
+                    } else {
+                        month_kcal_3000_check.setVisibility(View.INVISIBLE);
+                    }//월간
                 }
                 else {
                     Log.w("Database", "Snapshot is null or has no value.");

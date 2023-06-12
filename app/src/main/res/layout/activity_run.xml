@@ -10,13 +10,12 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="350dp">
-       <!-- <fragment
+       <fragment
             android:id="@+id/map_fragment"
             android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:layout="@layout/activity_run"
-            />-->
+            tools:layout="@layout/activity_run" />
     </FrameLayout>
     <LinearLayout
         android:layout_marginLeft="10dp"
