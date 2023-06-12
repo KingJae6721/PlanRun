@@ -86,7 +86,7 @@ public class CalendarFragment extends Fragment {
                 tv_pace.setText("");
                 for(RunningData data1: DataLoadingActivity.run_data) {
 
-                    if(data1.getDate().equals(date.getYear()+"-"+ date.getMonth()+"-"+date.getDay())){
+                    if (data1.getDate() != null && data1.getDate().equals(date.getYear() + "-" + date.getMonth() + "-" + date.getDay())) {
                         tv_distance.setText(data1.getDistance());
                         tv_date.setText(data1.getDate());
                         tv_pace.setText(data1.getPace());
@@ -104,14 +104,17 @@ public class CalendarFragment extends Fragment {
         for(RunningData data1: DataLoadingActivity.run_data){
 
             String str =data1.getDate();
-            String []date=str.split("-");
-            year=Integer.parseInt(date[0]);
-            month=Integer.parseInt(date[1]);
-            day=Integer.parseInt(date[2]);
-            Log.d("로그",date[0]+date[1]+date[2]);
+            if (str != null) {
+                String[] date = str.split("-");
+                year=Integer.parseInt(date[0]);
+                month=Integer.parseInt(date[1]);
+                day=Integer.parseInt(date[2]);
+                Log.d("로그",date[0]+date[1]+date[2]);
 
-            calendarDayList.add(CalendarDay.from(year,month,day));
-            calendarView.addDecorators(new EventDecorator(calendarDayList, getActivity()));
+                calendarDayList.add(CalendarDay.from(year,month,day));
+                calendarView.addDecorators(new EventDecorator(calendarDayList, getActivity()));
+            }
+            ///String []date=str.split("-");
         }
         return view;
     }//onCreate

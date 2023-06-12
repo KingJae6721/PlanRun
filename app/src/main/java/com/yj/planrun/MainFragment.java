@@ -64,6 +64,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.yj.planrun.MainActivity;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -99,6 +101,7 @@ public class MainFragment extends Fragment implements OnMapReadyCallback, Activi
     private FusedLocationProviderClient mFusedLocationClient;
     private LocationRequest locationRequest;
     private Location location;
+    private TextView nicknameTextView, tv_calories, tv_distance;
 
     private View mLayout, run_record1;  // Snackbar 사용하기 위해서는 View가 필요합니다.
     // (참고로 Toast에서는 Context가 필요했습니다.)
@@ -107,7 +110,7 @@ public class MainFragment extends Fragment implements OnMapReadyCallback, Activi
     @Nullable
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {   mLayout = inflater.inflate(R.layout.fragment_main, null, false);
-        TextView nicknameTextView = mLayout.findViewById(R.id.nicknameTextView);
+        nicknameTextView = mLayout.findViewById(R.id.nicknameTextView);
         nicknameTextView.setText(DataLoadingActivity.nickname);
 
         locationRequest = new LocationRequest()
@@ -145,7 +148,27 @@ public class MainFragment extends Fragment implements OnMapReadyCallback, Activi
         });
 
 
+        //
+        tv_calories=mLayout.findViewById(R.id.tv_calories);
+        tv_distance=mLayout.findViewById(R.id.tv_distance);
+        long now = System.currentTimeMillis();
+        Date date = new Date(now);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-M-d");
 
+        String getDate = sdf.format(date);
+        boolean toDay_runData_exist=false;
+       /* for(RunningData data1: DataLoadingActivity.run_data) {
+
+            if (data1.getDate().equals(getDate)) {
+                toDay_runData_exist=true;
+            }
+
+        }
+        if(toDay_runData_exist==false){
+            tv_distance.setText("기록이 없습니다");
+            tv_calories.setVisibility(View.INVISIBLE);
+        }
+*/
         return mLayout;
     }
 
