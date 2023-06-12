@@ -151,7 +151,7 @@ public class MainFragment extends Fragment implements OnMapReadyCallback, Activi
 
 
         //
-        tv_calories=mLayout.findViewById(R.id.tv_calories);
+        tv_calories=mLayout.findViewById(R.id.tv_kcal);
         tv_distance=mLayout.findViewById(R.id.tv_distance);
         long now = System.currentTimeMillis();
         Date date = new Date(now);
