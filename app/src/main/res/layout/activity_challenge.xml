@@ -42,128 +42,162 @@
                     android:id="@+id/tabDay"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
                     android:layout_marginTop="10dp"
-                    android:gravity="center|top">
+                    android:gravity="center|top"
+                    android:orientation="vertical">
 
                     <LinearLayout
-                        android:orientation="horizontal"
                         android:layout_width="wrap_content"
                         android:layout_height="90dp"
-                        android:gravity="center|left">
+                        android:gravity="center|left"
+                        android:orientation="horizontal">
+
                         <LinearLayout
-                            android:layout_marginLeft="10dp"
-                            android:orientation="vertical"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:orientation="vertical">
+
                             <TextView
-                                android:textSize="30dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
                                 android:text="오늘의 챌린지"
-                                android:textStyle="bold"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"/>
+                                android:textSize="30dp"
+                                android:textStyle="bold" />
+
                             <TextView
-                                android:textSize="25dp"
-                                android:text="20분동안 달려보세요!"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"/>
+                                android:layout_height="wrap_content"
+                                android:text="20분동안 달려보세요!"
+                                android:textSize="25dp" />
                         </LinearLayout>
+
                         <ImageView
                             android:id="@+id/day_time_check"
-                            android:src="@drawable/check_ic"
-                            android:layout_marginLeft="91dp"
                             android:layout_width="70dp"
-                            android:layout_height="70dp"/>
+                            android:layout_height="70dp"
+                            android:layout_marginLeft="91dp"
+                            android:src="@drawable/check_ic" />
                     </LinearLayout>
+
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="1dp"
+                        android:layout_marginHorizontal="10dp"
+                        android:background="#807AB0DD" />
                     <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_marginTop="5dp"
                         android:layout_width="wrap_content"
                         android:layout_height="90dp"
-                        android:gravity="center|left">
+                        android:layout_marginTop="5dp"
+                        android:gravity="center|left"
+                        android:orientation="horizontal">
+
                         <LinearLayout
-                            android:layout_marginLeft="10dp"
-                            android:orientation="vertical"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:orientation="vertical">
+
                             <TextView
-                                android:textSize="30dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
                                 android:text="오늘의 챌린지"
-                                android:textStyle="bold"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"/>
+                                android:textSize="30dp"
+                                android:textStyle="bold" />
+
                             <TextView
-                                android:textSize="25dp"
-                                android:text="3km를 달려보세요!"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"/>
+                                android:layout_height="wrap_content"
+                                android:text="3km를 달려보세요!"
+                                android:textSize="25dp" />
                         </LinearLayout>
+
                         <ImageView
                             android:id="@+id/day_distance_check"
-                            android:src="@drawable/check_ic"
-                            android:layout_marginLeft="117dp"
                             android:layout_width="70dp"
-                            android:layout_height="70dp"/>
+                            android:layout_height="70dp"
+                            android:layout_marginLeft="117dp"
+                            android:src="@drawable/check_ic" />
                     </LinearLayout>
+
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="1dp"
+                        android:layout_marginHorizontal="10dp"
+                        android:background="#807AB0DD" />
                     <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_marginTop="5dp"
                         android:layout_width="wrap_content"
                         android:layout_height="90dp"
-                        android:gravity="center|left">
+                        android:layout_marginTop="5dp"
+                        android:gravity="center|left"
+                        android:orientation="horizontal">
+
                         <LinearLayout
-                            android:layout_marginLeft="10dp"
-                            android:orientation="vertical"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:orientation="vertical">
+
                             <TextView
-                                android:textSize="30dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
                                 android:text="오늘의 챌린지"
-                                android:textStyle="bold"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"/>
+                                android:textSize="30dp"
+                                android:textStyle="bold" />
+
                             <TextView
-                                android:textSize="25dp"
-                                android:text="5분내로 1km를 달려보세요!"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"/>
+                                android:layout_height="wrap_content"
+                                android:text="5분내로 1km를 달려보세요!"
+                                android:textSize="25dp" />
                         </LinearLayout>
+
                         <ImageView
                             android:id="@+id/day_pace_check"
-                            android:src="@drawable/check_ic"
-                            android:layout_marginLeft="27dp"
                             android:layout_width="70dp"
-                            android:layout_height="70dp"/>
+                            android:layout_height="70dp"
+                            android:layout_marginLeft="27dp"
+                            android:src="@drawable/check_ic" />
                     </LinearLayout>
+
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="1dp"
+                        android:layout_marginHorizontal="10dp"
+                        android:background="#807AB0DD" />
                     <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_marginTop="5dp"
                         android:layout_width="wrap_content"
                         android:layout_height="90dp"
-                        android:gravity="center|left">
+                        android:layout_marginTop="5dp"
+                        android:gravity="center|left"
+                        android:orientation="horizontal">
+
                         <LinearLayout
-                            android:layout_marginLeft="10dp"
-                            android:orientation="vertical"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:orientation="vertical">
+
                             <TextView
-                                android:textSize="30dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
                                 android:text="오늘의 챌린지"
-                                android:textStyle="bold"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"/>
+                                android:textSize="30dp"
+                                android:textStyle="bold" />
+
                             <TextView
-                                android:textSize="25dp"
-                                android:text="100kcal를 소비해보세요!"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"/>
+                                android:layout_height="wrap_content"
+                                android:text="100kcal를 소비해보세요!"
+                                android:textSize="25dp" />
                         </LinearLayout>
+
                         <ImageView
                             android:id="@+id/day_kcal_check"
-                            android:src="@drawable/check_ic"
-                            android:layout_marginLeft="54dp"
                             android:layout_width="70dp"
-                            android:layout_height="70dp"/>
+                            android:layout_height="70dp"
+                            android:layout_marginLeft="54dp"
+                            android:src="@drawable/check_ic" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -206,6 +240,11 @@
                                 android:layout_width="70dp"
                                 android:layout_height="70dp"/>
                         </LinearLayout>
+                        <View
+                            android:layout_width="wrap_content"
+                            android:layout_height="1dp"
+                            android:layout_marginHorizontal="10dp"
+                            android:background="#807AB0DD" />
                         <LinearLayout
                             android:orientation="horizontal"
                             android:layout_marginTop="5dp"
@@ -236,6 +275,11 @@
                                 android:layout_width="70dp"
                                 android:layout_height="70dp"/>
                         </LinearLayout>
+                        <View
+                            android:layout_width="wrap_content"
+                            android:layout_height="1dp"
+                            android:layout_marginHorizontal="10dp"
+                            android:background="#807AB0DD" />
                         <LinearLayout
                             android:orientation="horizontal"
                             android:layout_marginTop="5dp"
@@ -266,6 +310,11 @@
                                 android:layout_width="70dp"
                                 android:layout_height="70dp"/>
                         </LinearLayout>
+                        <View
+                            android:layout_width="wrap_content"
+                            android:layout_height="1dp"
+                            android:layout_marginHorizontal="10dp"
+                            android:background="#807AB0DD" />
                         <LinearLayout
                             android:orientation="horizontal"
                             android:layout_marginTop="5dp"
@@ -296,6 +345,11 @@
                                 android:layout_width="70dp"
                                 android:layout_height="70dp"/>
                         </LinearLayout>
+                        <View
+                            android:layout_width="wrap_content"
+                            android:layout_height="1dp"
+                            android:layout_marginHorizontal="10dp"
+                            android:background="#807AB0DD" />
                         <LinearLayout
                             android:orientation="horizontal"
                             android:layout_marginTop="5dp"
@@ -326,6 +380,11 @@
                                 android:layout_width="70dp"
                                 android:layout_height="70dp"/>
                         </LinearLayout>
+                        <View
+                            android:layout_width="wrap_content"
+                            android:layout_height="1dp"
+                            android:layout_marginHorizontal="10dp"
+                            android:background="#807AB0DD" />
                         <LinearLayout
                             android:orientation="horizontal"
                             android:layout_marginTop="5dp"
@@ -356,6 +415,13 @@
                                 android:layout_width="70dp"
                                 android:layout_height="70dp"/>
                         </LinearLayout>
+
+                        <View
+                            android:layout_width="wrap_content"
+                            android:layout_height="1dp"
+                            android:layout_marginHorizontal="10dp"
+                            android:background="#807AB0DD" />
+
                         <LinearLayout
                             android:orientation="horizontal"
                             android:layout_marginTop="5dp"
@@ -386,6 +452,13 @@
                                 android:layout_width="70dp"
                                 android:layout_height="70dp"/>
                         </LinearLayout>
+
+                        <View
+                            android:layout_width="wrap_content"
+                            android:layout_height="1dp"
+                            android:layout_marginHorizontal="10dp"
+                            android:background="#807AB0DD" />
+
                         <LinearLayout
                             android:orientation="horizontal"
                             android:layout_marginTop="5dp"
