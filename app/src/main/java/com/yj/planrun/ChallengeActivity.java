@@ -156,7 +156,7 @@ public class ChallengeActivity extends TabActivity {
 
                                 String pace = runningDataSnapshot.get("pace").toString();
                                 pace = pace.replaceAll("[^0-9.]", ""); // 숫자와 소수점만 남기고 제거
-                                sum_pace[1] += Integer.parseInt(pace);
+                                sum_pace[1] += Double.parseDouble(pace);
 
                                 String time = runningDataSnapshot.get("time").toString();
                                 String[] sp_time = time.split(":");

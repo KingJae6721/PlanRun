@@ -85,12 +85,14 @@ public class MainFragment extends Fragment implements OnMapReadyCallback, Activi
 
     private static final String TAG = "googlemap_example";
     private static final int GPS_ENABLE_REQUEST_CODE = 2001;
-    private static final int UPDATE_INTERVAL_MS = 2000;  // 2초
-    private static final int FASTEST_UPDATE_INTERVAL_MS = 1000; // 0.5초
+    private static final int UPDATE_INTERVAL_MS = 5000;  // 5초
+    private static final int FASTEST_UPDATE_INTERVAL_MS = 3000; // 3초
 
     // onRequestPermissionsResult에서 수신된 결과에서 ActivityCompat.requestPermissions를 사용한 퍼미션 요청을 구별하기 위해 사용됩니다.
     private static final int PERMISSIONS_REQUEST_CODE = 100;
     boolean needRequest = false;
+
+    private TextView tv_totalDistance;
 
     // 앱을 실행하기 위해 필요한 퍼미션을 정의합니다.
     String[] REQUIRED_PERMISSIONS  = {Manifest.permission.ACCESS_FINE_LOCATION,
@@ -171,6 +173,8 @@ public class MainFragment extends Fragment implements OnMapReadyCallback, Activi
             }
         });
 
+        tv_totalDistance=mLayout.findViewById(R.id.tv_distance);
+        //tv_totalDistance.setText(String.format("지금까지는 총 %fKm나 달리셨네요! 대단합니다!",DataLoadingActivity.total_distance));
 
 
         return mLayout;

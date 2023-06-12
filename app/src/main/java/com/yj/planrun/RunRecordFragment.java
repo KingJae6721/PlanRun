@@ -4,10 +4,15 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -59,10 +64,45 @@ public class RunRecordFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        Boolean data_exist=false;
         // Inflate the layout for this fragment
-        View view =inflater.inflate(R.layout.fragment_run_record2, container, false);
+        View view =inflater.inflate(R.layout.fragment_run_record, container, false);
         TextView tv_nickTextView=view.findViewById(R.id.nicknameTextView);
-        tv_nickTextView.setText(DataLoadingActivity.nickname);
+        TextView tv_distance=view.findViewById(R.id.tv_distance);
+        TextView tv_kcal= view.findViewById(R.id.tv_kcal);
+
+        long now = System.currentTimeMillis();
+        Date date = new Date(now);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-M-d");
+        String getDate = sdf.format(date);
+        double total_distance=0, total_calories=0;
+        for(RunningData data1: DataLoadingActivity.run_data) {
+
+            if (data1.getDate() != null && data1.getDate().equals(getDate)) {
+                Log.d("로그",Double.toString(total_distance));
+              total_distance+=Double.parseDouble(data1.getDistance());
+              total_calories+=Double.parseDouble(data1.getCalories());
+              data_exist=true;
+            }
+
+        }
+
+        if (data_exist==false){
+            LinearLayout km = view.findViewById(R.id.layout_km);
+            LinearLayout kcal = view.findViewById(R.id.layout_kcal);
+            km.setVisibility(View.INVISIBLE);
+            kcal.setVisibility(View.INVISIBLE);
+            TextView no_data=view.findViewById(R.id.no_data);
+            no_data.setVisibility(View.VISIBLE);
+        }else{
+            tv_distance.setText(Double.toString(total_distance));
+            tv_kcal.setText(Double.toString(total_calories));
+        }
+
+
+
+
+        tv_nickTextView.setText(String.format("%s님",DataLoadingActivity.nickname));
         return view;
     }
 }

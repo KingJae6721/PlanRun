@@ -61,8 +61,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:text="클럽"
                     android:layout_marginBottom="3dp"
+                    android:text="클럽"
                     android:textColor="#595858"
                     android:textSize="15dp" />
 
