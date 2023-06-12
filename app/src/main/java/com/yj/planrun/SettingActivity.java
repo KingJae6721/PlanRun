@@ -67,6 +67,9 @@ public class SettingActivity extends AppCompatActivity {
 
         Button btn_logout = findViewById(R.id.btn_logout);
         Button btn_setting = findViewById(R.id.btn_setting);
+        Button setting_back = (Button)findViewById(R.id.setting_back);
+
+
 
         circle_iv = findViewById(R.id.circle_iv);
 
@@ -104,6 +107,13 @@ public class SettingActivity extends AppCompatActivity {
             });
         }*/
         emailTextView.setText(DataLoadingActivity.email);
+
+        setting_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         btn_setting.setOnClickListener(new View.OnClickListener() {
             @Override

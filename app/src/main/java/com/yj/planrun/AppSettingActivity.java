@@ -45,6 +45,16 @@ public class AppSettingActivity extends AppCompatActivity {
         Button btn_acntDel = findViewById(R.id.btn_acntDel);
         Button btn_back = (Button) findViewById(R.id.btn_back);
         Button btn_changePwd = (Button) findViewById(R.id.btn_changePwd);
+        Button btn_changeNickname = (Button)findViewById(R.id.btn_changeNickname);
+
+        btn_changeNickname.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AppSettingActivity.this, nick_change.class);
+                startActivity(intent);
+            }
+        });
+
 
         btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
