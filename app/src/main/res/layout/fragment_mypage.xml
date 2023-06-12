@@ -70,7 +70,7 @@
             <Button
 
                 android:layout_marginRight="5dp"
-                android:id="@+id/account_btn_follow"
+                android:id="@+id/edit_profile"
                 android:text="프로필 수정"
                 android:textSize="13dp"
                 android:textStyle="bold"
@@ -143,12 +143,14 @@
                 android:layout_marginLeft="15dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
+
                 <TextView
                     android:id="@+id/account_tv_following_count"
-                    android:text="@string/count_0"
-                    android:textSize="20dp"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:text="@string/count_0"
+                    android:textSize="20dp" />
+
                 <TextView
                     android:text="@string/following"
                     android:textStyle="bold"
@@ -159,19 +161,18 @@
         </LinearLayout>
     </RelativeLayout>
     <View
-        android:layout_marginTop="18dp"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#DCDBDB" />
-    <TextView
-        android:layout_gravity="center"
-        android:text="내 게시물"
-        android:textSize="13dp"
-        android:textStyle="bold"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/list_of_posts"
+            android:layout_gravity="center"
+            android:text="내 게시물"
+            android:textSize="13dp"
+            android:textStyle="bold"
+            android:layout_margin="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
     <View
         android:layout_width="match_parent"
