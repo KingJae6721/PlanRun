@@ -78,7 +78,7 @@ public class CalendarFragment extends Fragment {
             public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
                 diaryTextView.setVisibility(View.VISIBLE);
 
-                diaryTextView.setText(String.format("%d / %d / %d", date.getYear(), date.getMonth(), date.getDay()));
+                diaryTextView.setText(String.format("%d / %d / %d", date.getYear(), date.getMonth()+1, date.getDay()));
 
                 tv_date.setText("");
                 tv_distance.setText("기록이 없습니다");
@@ -86,7 +86,7 @@ public class CalendarFragment extends Fragment {
                 tv_pace.setText("");
                 for(RunningData data1: DataLoadingActivity.run_data) {
 
-                    if (data1.getDate() != null && data1.getDate().equals(date.getYear() + "-" + date.getMonth() + "-" + date.getDay())) {
+                    if (data1.getDate() != null && data1.getDate().equals(date.getYear() + "-" + date.getMonth()+1+ "-" + date.getDay())) {
                         tv_distance.setText(data1.getDistance());
                         tv_date.setText(data1.getDate());
                         tv_pace.setText(data1.getPace());
