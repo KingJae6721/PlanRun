@@ -149,8 +149,8 @@ public class MainFragment extends Fragment implements OnMapReadyCallback, Activi
                 super.onPageScrollStateChanged(state);
             }
         });
-        TextView nicknameTextView = run_record1.findViewById(R.id.nicknameTextView);
-        nicknameTextView.setText(DataLoadingActivity.nickname);
+
+
 
         //이벤트
         Button btn_run = (Button) mLayout.findViewById(R.id.btn_run);

@@ -10,6 +10,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -34,6 +35,7 @@ import android.view.ViewGroup;
 import android.view.ViewManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,6 +49,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
@@ -79,16 +82,27 @@ public class MypageFragment extends Fragment {
     private FirebaseFirestore firestore;
     private String uid;
     private FirebaseAuth auth;
-
-
+    private String currentUserUid;
+    private DatabaseReference mDatabaseRef;
+    public static final int PICK_PROFILE_FROM_ALBUM = 10;
     @Override
     @Nullable
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_mypage, container, false);
-        TextView mypage_nickname = view.findViewById(R.id.mypage_nickname);
+        fragmentView = inflater.inflate(R.layout.fragment_mypage, container, false);
+        TextView mypage_nickname = fragmentView.findViewById(R.id.mypage_nickname);
         mypage_nickname.setText(DataLoadingActivity.nickname);
 
-        ImageView setting = view.findViewById(R.id.setting);
+        Button edit_profile = (Button) fragmentView.findViewById(R.id.edit_profile);
+        ImageView setting = fragmentView.findViewById(R.id.setting);
+        TextView followingCountTextView = fragmentView.findViewById(R.id.account_tv_following_count);
+        followingCountTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), FollowlistActivity.class);
+                intent.putExtra("userUid", uid);
+                startActivity(intent);
+            }
+        });
         setting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,30 +111,69 @@ public class MypageFragment extends Fragment {
             }
         });
 
-        fragmentView = view;
+
+        //fragmentView = view;
         uid = getArguments().getString("destinationUid");
         firestore = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
+        currentUserUid = auth.getCurrentUser().getUid();
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference("PlanRun");
+
+        if (uid.equals(currentUserUid)) {
+            // MyPage
+            Button add_post = fragmentView.findViewById(R.id.add_post);
+            add_post.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(getActivity(), AddPhotoActivity.class);
+                    startActivity(intent);
+                }
+            });
+        } else {
+            // OtherUserPage
+            Button follow = (Button) fragmentView.findViewById(R.id.add_post);
+            TextView list_of_posts = fragmentView.findViewById(R.id.list_of_posts);
+            follow.setText(getString(R.string.follow));
+            setting.setVisibility(View.GONE);
+            edit_profile.setVisibility(View.GONE);
+            //버튼 크기 늘리기
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 2f);
+            params.setMargins(33, 0, 33, 0); // 양옆에 16dp의 마진 설정
+            follow.setLayoutParams(params);
+            mDatabaseRef.child("UserAccount").child(uid).child("nickname").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    String nickname = dataSnapshot.getValue(String.class);
+                    if (nickname != null) {
+                        mypage_nickname.setText(nickname);
+                        list_of_posts.setText(nickname + "게시물");
+                    }
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {}
+            });
+
+            //팔로우
+            fragmentView.findViewById(R.id.add_post).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    requestFollow();
+                }
+            });
+        }
 
         RecyclerView recyclerView = fragmentView.findViewById(R.id.account_reyclerview);
         recyclerView.setAdapter(new UserFragmentRecyclerViewAdapter());
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
 
-
-
-        Button add_post = view.findViewById(R.id.add_post);
-        add_post.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), AddPhotoActivity.class);
-                startActivity(intent);
-            }
-        });
-        return view;
+        getFollowerAndFollowing();
+        return fragmentView;
     }
 
     private class UserFragmentRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         private ArrayList<ContentDTO> contentDTOs = new ArrayList<>();
+
+
         UserFragmentRecyclerViewAdapter() {
             firestore.collection("images").whereEqualTo("uid", uid).addSnapshotListener((querySnapshot, firebaseFirestoreException) -> {
                 if (querySnapshot == null) return;
@@ -183,7 +236,10 @@ public class MypageFragment extends Fragment {
                     // 삭제할 아이템의 position을 얻어옴
                     ContentDTO contentDTO = contentDTOs.get(position);
                     // 삭제 동작 수행
-                    deleteItem(contentDTO);
+                    if (uid.equals(currentUserUid)) {
+                        // Mypage의 경우 게시물 삭제 가능
+                        deleteItem(contentDTO);
+                    }
                 }
                 return true;
             }
@@ -282,5 +338,112 @@ public class MypageFragment extends Fragment {
         }
     }
 
+    private void getFollowerAndFollowing() {
+        firestore.collection("users").document(uid).addSnapshotListener((documentSnapshot, firebaseFirestoreException) -> {
+            if (documentSnapshot == null) return;
+            FollowDTO followDTO = documentSnapshot.toObject(FollowDTO.class);
+            if (followDTO != null) {
+                Integer followingCount = followDTO.getFollowingCount();
+                if (followingCount != null && followingCount != 0) {
+                    TextView followingCountTextView = (TextView) fragmentView.findViewById(R.id.account_tv_following_count);
+                    followingCountTextView.setText(String.valueOf(followingCount));
+                }
+                Integer followerCount = followDTO.getFollowerCount();
+                if (followerCount != null) {
+                    TextView followerCountTextView = (TextView) fragmentView.findViewById(R.id.account_tv_follower_count);
+                    followerCountTextView.setText(String.valueOf(followerCount));
+                    if (followDTO.getFollowers().containsKey(currentUserUid)) {
+                        Button addPostButton = (Button) fragmentView.findViewById(R.id.add_post);
+                        if (getActivity() != null) {
+                            addPostButton.setText(getActivity().getString(R.string.follow_cancel));
+                            addPostButton.getBackground().setColorFilter(ContextCompat.getColor(getActivity(), R.color.green), PorterDuff.Mode.MULTIPLY);
+                        }
+                    } else {
+                        if (!uid.equals(currentUserUid)) {
+                            Button addPostButton = (Button) fragmentView.findViewById(R.id.add_post);
+                            if (getActivity() != null) {
+                                addPostButton.setText(getActivity().getString(R.string.follow));
+                                addPostButton.getBackground().setColorFilter(null);
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    private void requestFollow() {
+        // My nickname
+        String myNickname = DataLoadingActivity.nickname;
+
+        // Get the nickname of the user I want to follow
+        mDatabaseRef.child("UserAccount").child(uid).child("nickname").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String userNickname = dataSnapshot.getValue(String.class);
+
+                // Save data to my account
+                DocumentReference tsDocFollowing = firestore.collection("users").document(currentUserUid);
+                firestore.runTransaction(transaction -> {
+                    FollowDTO followDTO = transaction.get(tsDocFollowing).toObject(FollowDTO.class);
+                    if (followDTO == null) {
+                        followDTO = new FollowDTO();
+                        followDTO.setFollowingCount(1);
+                        followDTO.getFollowings().put(uid, true);
+                        followDTO.getFollowingNicknames().put(uid, userNickname);  // Save the nickname
+
+                        transaction.set(tsDocFollowing, followDTO);
+                        return null;
+                    }
+
+                    if (followDTO.getFollowings().containsKey(uid)) {
+                        // It removes following third person when a third person follows me
+                        followDTO.setFollowingCount(followDTO.getFollowingCount() - 1);
+                        followDTO.getFollowings().remove(uid);
+                        followDTO.getFollowingNicknames().remove(uid);  // Remove the nickname
+                    } else {
+                        // It adds following third person when a third person does not follow me
+                        followDTO.setFollowingCount(followDTO.getFollowingCount() + 1);
+                        followDTO.getFollowings().put(uid, true);
+                        followDTO.getFollowingNicknames().put(uid, userNickname);  // Save the nickname
+                    }
+                    transaction.set(tsDocFollowing, followDTO);
+                    return null;
+                });
+
+                // Save data to third account
+                DocumentReference tsDocFollower = firestore.collection("users").document(uid);
+                firestore.runTransaction(transaction -> {
+                    FollowDTO followDTO = transaction.get(tsDocFollower).toObject(FollowDTO.class);
+                    if (followDTO == null) {
+                        followDTO = new FollowDTO();
+                        followDTO.setFollowerCount(1);
+                        followDTO.getFollowers().put(currentUserUid, true);
+                        followDTO.getFollowerNicknames().put(currentUserUid, myNickname);  // Save my nickname
+
+                        transaction.set(tsDocFollower, followDTO);
+                        return null;
+                    }
+
+                    if (followDTO.getFollowers().containsKey(currentUserUid)) {
+                        // It cancels my follower when I follow a third person
+                        followDTO.setFollowerCount(followDTO.getFollowerCount() - 1);
+                        followDTO.getFollowers().remove(currentUserUid);
+                        followDTO.getFollowerNicknames().remove(currentUserUid);  // Remove my nickname
+                    } else {
+                        // It adds my follower when I don't follow a third person
+                        followDTO.setFollowerCount(followDTO.getFollowerCount() + 1);
+                        followDTO.getFollowers().put(currentUserUid, true);
+                        followDTO.getFollowerNicknames().put(currentUserUid, myNickname);  // Save my nickname
+                    }
+                    transaction.set(tsDocFollower, followDTO);
+                    return null;
+                });
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {}
+        });
+    }
 
 }

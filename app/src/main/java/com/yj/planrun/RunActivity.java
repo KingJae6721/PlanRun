@@ -354,14 +354,14 @@ public class RunActivity extends AppCompatActivity implements OnMapReadyCallback
                         int sec = time % 60;
 
                         speed= (int)(distance/sec*360/1000*100)/100.0;
-                        tv_speed.setText("시속"+speed+"km");
+                        tv_speed.setText(speed+"");
                     }
 
 
                     distance=(int)(distance * 100) / 100.0;
 
 
-                    tv_distance.setText((int)(distance /10)/100.0 +"km");
+                    tv_distance.setText((int)(distance /10)/100.0 +"");
                     tv_kcal.setText(""+((int)(((int)(distance /10)/100.0) * 100*65/*체중*/) / 100.0));
                 }
                 beforePosition = currentPosition;
