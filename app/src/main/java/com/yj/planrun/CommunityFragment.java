@@ -79,13 +79,20 @@ public class CommunityFragment extends Fragment {
             public void onClick(View view) {
                 if (slidingBackground.getVisibility() == View.VISIBLE) {
                     hideSlidingPanel();
-                    slidingBackground.setVisibility(View.GONE);
                 } else {
                     showSlidingPanel();
-                    slidingBackground.setVisibility(View.VISIBLE);
                 }
+
             }
         });
+
+        slidingBackground.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                hideSlidingPanel();
+            }
+        });
+
         club_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -119,6 +126,7 @@ public class CommunityFragment extends Fragment {
 
     }
     private void showSlidingPanel() {
+        slidingBackground.setVisibility(View.VISIBLE);
         slidingPanel.setVisibility(View.VISIBLE);
 
         Animation slideUpAnimation = new TranslateAnimation(
@@ -148,6 +156,7 @@ public class CommunityFragment extends Fragment {
             @Override
             public void onAnimationEnd(Animation animation) {
                 slidingPanel.setVisibility(View.GONE);
+                slidingBackground.setVisibility(View.GONE);
             }
 
             @Override

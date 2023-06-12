@@ -116,7 +116,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="bottom"
-        android:background="#CD787878"
+        android:background="#B5A6A5A5"
         android:orientation="vertical"
         android:visibility="gone">
         <LinearLayout
