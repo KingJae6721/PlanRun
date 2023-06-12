@@ -63,11 +63,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
+import com.tbuonomo.viewpagerdotsindicator.DotsIndicator;
 import com.yj.planrun.MainActivity;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -103,17 +102,14 @@ public class MainFragment extends Fragment implements OnMapReadyCallback, Activi
     private FusedLocationProviderClient mFusedLocationClient;
     private LocationRequest locationRequest;
     private Location location;
-    private TextView nicknameTextView, tv_calories, tv_distance;
-
-    private View mLayout;  // Snackbar 사용하기 위해서는 View가 필요합니다.
+    private View mLayout, run_record1;  // Snackbar 사용하기 위해서는 View가 필요합니다.
     // (참고로 Toast에서는 Context가 필요했습니다.)
 
     @Override
     @Nullable
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {   mLayout = inflater.inflate(R.layout.fragment_main, null, false);
-        nicknameTextView = mLayout.findViewById(R.id.nicknameTextView);
-        nicknameTextView.setText(DataLoadingActivity.nickname);
+        run_record1 = inflater.inflate(R.layout.fragment_run_record, null, false);
 
         locationRequest = new LocationRequest()
                 .setPriority(Priority.PRIORITY_HIGH_ACCURACY)
@@ -129,6 +125,33 @@ public class MainFragment extends Fragment implements OnMapReadyCallback, Activi
 
         SupportMapFragment mapFragment = (SupportMapFragment) this.getChildFragmentManager().findFragmentById(R.id.map_fragment);
         mapFragment.getMapAsync(this);
+
+        ViewPager2 viewPager = mLayout.findViewById(R.id.viewPager);
+        ViewPagerFragmentAdapter adapter = new ViewPagerFragmentAdapter(getActivity());
+
+// ViewPager2에 표시할 각각의 프래그먼트를 추가합니다.
+        adapter.addFragment(new RunRecordFragment());
+        adapter.addFragment(new RunRecord2Fragment());
+// 어댑터를 ViewPager2에 설정합니다.
+        viewPager.setAdapter(adapter);
+        DotsIndicator dotsIndicator = mLayout.findViewById(R.id.dotsIndicator);
+        dotsIndicator.setViewPager2(viewPager);
+        viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                super.onPageScrolled(position, positionOffset, positionOffsetPixels);
+            }
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+            }
+            @Override
+            public void onPageScrollStateChanged(int state) {
+                super.onPageScrollStateChanged(state);
+            }
+        });
+        TextView nicknameTextView = run_record1.findViewById(R.id.nicknameTextView);
+        nicknameTextView.setText(DataLoadingActivity.nickname);
 
         //이벤트
         Button btn_run = (Button) mLayout.findViewById(R.id.btn_run);
@@ -150,27 +173,7 @@ public class MainFragment extends Fragment implements OnMapReadyCallback, Activi
         });
 
 
-        //
-        tv_calories=mLayout.findViewById(R.id.tv_kcal);
-        tv_distance=mLayout.findViewById(R.id.tv_distance);
-        long now = System.currentTimeMillis();
-        Date date = new Date(now);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-M-d");
 
-        String getDate = sdf.format(date);
-        boolean toDay_runData_exist=false;
-       /* for(RunningData data1: DataLoadingActivity.run_data) {
-
-            if (data1.getDate().equals(getDate)) {
-                toDay_runData_exist=true;
-            }
-
-        }
-        if(toDay_runData_exist==false){
-            tv_distance.setText("기록이 없습니다");
-            tv_calories.setVisibility(View.INVISIBLE);
-        }
-*/
         return mLayout;
     }
 
