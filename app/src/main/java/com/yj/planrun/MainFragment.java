@@ -128,7 +128,6 @@ public class MainFragment extends Fragment implements OnMapReadyCallback, Activi
 
         ViewPager2 viewPager = mLayout.findViewById(R.id.viewPager);
         ViewPagerFragmentAdapter adapter = new ViewPagerFragmentAdapter(getActivity());
-
 // ViewPager2에 표시할 각각의 프래그먼트를 추가합니다.
         adapter.addFragment(new RunRecordFragment());
         adapter.addFragment(new RunRecord2Fragment());

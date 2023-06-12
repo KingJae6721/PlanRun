@@ -93,5 +93,28 @@
 
         </RelativeLayout>
     </androidx.appcompat.widget.Toolbar>
+    <LinearLayout
+        android:id="@+id/slidingBackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        android:background="#CD787878"
+        android:orientation="vertical"
+        android:visibility="gone">
+        <LinearLayout
+            android:id="@+id/slidingPanel"
+            android:orientation="vertical"
+            android:background="@drawable/main_background"
+            android:layout_width="match_parent"
+            android:layout_height="450dp" >
+            <EditText
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:hint="검색"
+                android:layout_width="332dp"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+    </LinearLayout>
 
 </RelativeLayout>
