@@ -74,4 +74,9 @@
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/black</item>
     </style>
+
+    <!---->
+    <style name="IconStyle">
+        <item name="android:color">#B423A4FA</item>
+    </style>
 </resources>

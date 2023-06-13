@@ -68,16 +68,27 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:background="#DCDBDB" />
-    <TextView
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginBottom="15dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:textSize="17dp"
-        android:textStyle="bold"
-        android:text="알림 설정"/>
+    <LinearLayout
+        android:background="@drawable/appsetting_btn_background"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="54dp" >
+        <TextView
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="17dp"
+            android:textStyle="bold"
+            android:text="알림 설정"/>
+        <Switch
+            android:layout_marginTop="12dp"
+            android:layout_marginLeft="257.7dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
     <View
         android:background="#DCDBDB"
         android:layout_width="match_parent"
@@ -152,7 +163,7 @@
             android:textSize="15dp" />
         <Switch
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="252dp"
+            android:layout_marginLeft="251dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -178,7 +189,7 @@
             android:textSize="15dp" />
         <Switch
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="252dp"
+            android:layout_marginLeft="250.5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>

@@ -14,6 +14,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.gif.GifDrawableResource;
+import com.google.firebase.FirebaseError;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -42,35 +43,44 @@ public class DataLoadingActivity extends AppCompatActivity {
         Glide.with(this).asGif().load(R.drawable.loading_img).into(loading_img);
         //로딩화면 시작.
         Loadingstart();
+
+
+
+
+
         setFirebaseNicknameEmail();
 
     }
     private void Loadingstart(){
-        Handler handler=new Handler();
-        handler.postDelayed(new Runnable(){
-            public void run(){
-                Intent intent=new Intent(getApplicationContext(),MainActivity.class);
-                startActivity(intent);
 
-                mDatabaseRef= FirebaseDatabase.getInstance().getReference("runningData").child(firebaseUser.getUid());//루트설정
-                mDatabaseRef.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        run_data = new ArrayList<RunningData>();
-                        for(DataSnapshot runningData : snapshot.getChildren()){
-                            run_data.add(runningData.getValue(RunningData.class));
-                            Log.d("로그","추가");
-                        }
-                        for(RunningData data1: DataLoadingActivity.run_data) total_distance+=Double.parseDouble(data1.getDistance());
-                    }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                    }
-                });
+        if (mFirebaseAuth != null) {
+            mDatabaseRef= FirebaseDatabase.getInstance().getReference("runningData").child(firebaseUser.getUid());//루트설정
+            readData(mDatabaseRef, new OnGetDataListener() {
+                @Override
+                public void onSuccess(DataSnapshot dataSnapshot) {
 
-                finish();
-            }
-        },3000);
+                    run_data = new ArrayList<RunningData>();
+                    for(DataSnapshot runningData : dataSnapshot.getChildren()){
+                        run_data.add(runningData.getValue(RunningData.class));
+                        Log.d("로그","추가");
+                    }
+                    for(RunningData data1: run_data) total_distance+=Double.parseDouble(data1.getDistance());
+                    Intent intent=new Intent(getApplicationContext(),MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+                @Override
+                public void onStart() {
+                    //when starting
+                    Log.d("ONSTART", "Started");
+                }
+
+                @Override
+                public void onFailure() {
+                    Log.d("onFailure", "Failed");
+                }
+            });
+        }
     }
 
     public void setFirebaseNicknameEmail() {
@@ -78,7 +88,7 @@ public class DataLoadingActivity extends AppCompatActivity {
 
             mDatabaseRef = FirebaseDatabase.getInstance().getReference("PlanRun");
         if (mFirebaseAuth != null) {
-            mDatabaseRef.child("UserAccount").child(mFirebaseAuth.getUid()).child("nickname").addListenerForSingleValueEvent(new ValueEventListener() {
+           /* mDatabaseRef.child("UserAccount").child(mFirebaseAuth.getUid()).child("nickname").addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if (snapshot.exists()) {
@@ -89,11 +99,31 @@ public class DataLoadingActivity extends AppCompatActivity {
                 public void onCancelled(@NonNull DatabaseError error) {
                     Log.e("MainFragment", "데이터 로딩 실패: " + error.getMessage());
                 }
+            });*/
+
+            readData(mDatabaseRef.child("UserAccount").child(mFirebaseAuth.getUid()).child("nickname"), new OnGetDataListener() {
+                @Override
+                public void onSuccess(DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        DataLoadingActivity.nickname = dataSnapshot.getValue(String.class);
+                    }
+                    Log.d("OnSUCCESS", "getEmail");
+                }
+
+                @Override
+                public void onStart() {
+                    Log.d("ONSTART", "getNickname");
+                }
+
+                @Override
+                public void onFailure() {
+
+                }
             });
         }
 
         if (mFirebaseAuth != null) {
-            mDatabaseRef.child("UserAccount").child(mFirebaseAuth.getUid()).child("emailId").addListenerForSingleValueEvent(new ValueEventListener() {
+            /*mDatabaseRef.child("UserAccount").child(mFirebaseAuth.getUid()).child("emailId").addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if (snapshot.exists()) {
@@ -104,7 +134,46 @@ public class DataLoadingActivity extends AppCompatActivity {
                 public void onCancelled(@NonNull DatabaseError error) {
                     Log.e("MainFragment", "데이터 로딩 실패: " + error.getMessage());
                 }
+            });*/
+
+
+            readData(mDatabaseRef.child("UserAccount").child(mFirebaseAuth.getUid()).child("emailId"), new OnGetDataListener() {//이메일 받아오기
+                @Override
+                public void onSuccess(DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        DataLoadingActivity.email = dataSnapshot.getValue(String.class);
+                    }
+                    Log.d("OnSUCCESS", "getEmail");
+                }
+
+                @Override
+                public void onStart() {
+                    Log.d("ONSTART", "getEmail");
+                }
+
+                @Override
+                public void onFailure() {
+
+                }
             });
         }
+    }
+
+    public void readData(DatabaseReference ref, final OnGetDataListener listener) {
+        listener.onStart();
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                listener.onSuccess(dataSnapshot);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                listener.onFailure();
+            }
+
+        });
+
     }
 }
