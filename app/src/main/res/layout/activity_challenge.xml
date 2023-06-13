@@ -75,7 +75,6 @@
                             android:layout_width="70dp"
                             android:layout_height="70dp"/>
                     </LinearLayout>
-
                     <View
                         android:layout_width="wrap_content"
                         android:layout_height="1dp"
@@ -117,11 +116,12 @@
                         android:layout_height="1dp"
                         android:layout_marginHorizontal="10dp"
                         android:background="#807AB0DD" />
+
                     <LinearLayout
                         android:orientation="horizontal"
                         android:layout_marginTop="5dp"
                         android:layout_width="wrap_content"
-                        android:layout_height="90dp"
+                        android:layout_height="120dp"
                         android:gravity="center|left">
                         <LinearLayout
                             android:layout_marginLeft="10dp"
@@ -153,6 +153,7 @@
                         android:layout_height="1dp"
                         android:layout_marginHorizontal="10dp"
                         android:background="#807AB0DD" />
+
                     <LinearLayout
                         android:orientation="horizontal"
                         android:layout_marginTop="5dp"
@@ -183,8 +184,18 @@
                             android:layout_width="70dp"
                             android:layout_height="70dp"/>
                     </LinearLayout>
+
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="1dp"
+                        android:layout_marginHorizontal="10dp"
+                        android:background="#807AB0DD" />
+
+                    <!--일일 챌린지 끝@@@@@@@@@@@@@@@@@@@@@@@-->
+
                 </LinearLayout>
 
+                <!--주간 챌린지 시작@@@@@@@@@@@@@@@@@@@@@@@-->
                 <ScrollView
                     android:id="@+id/tabWeek"
                     android:layout_width="wrap_content"
@@ -193,11 +204,12 @@
                     android:gravity="center|top">
                     <LinearLayout
                         android:orientation="vertical"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
                         <LinearLayout
                             android:orientation="horizontal"
-                            android:layout_width="match_parent"
+                            android:layout_marginTop="5dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="90dp"
                             android:gravity="center|left">
                             <LinearLayout
@@ -220,15 +232,18 @@
                             <ImageView
                                 android:id="@+id/week_time_1h_check"
                                 android:src="@drawable/check_ic"
-                                android:layout_marginLeft="82dp"
+                                android:layout_marginLeft="75.5dp"
                                 android:layout_width="70dp"
                                 android:layout_height="70dp"/>
                         </LinearLayout>
+
                         <View
                             android:layout_width="wrap_content"
                             android:layout_height="1dp"
                             android:layout_marginHorizontal="10dp"
                             android:background="#807AB0DD" />
+
+
                         <LinearLayout
                             android:orientation="horizontal"
                             android:layout_marginTop="5dp"
@@ -255,15 +270,18 @@
                             <ImageView
                                 android:id="@+id/week_time_2h_check"
                                 android:src="@drawable/check_ic"
-                                android:layout_marginLeft="82dp"
+                                android:layout_marginLeft="75.5dp"
                                 android:layout_width="70dp"
                                 android:layout_height="70dp"/>
                         </LinearLayout>
+
                         <View
                             android:layout_width="wrap_content"
                             android:layout_height="1dp"
                             android:layout_marginHorizontal="10dp"
                             android:background="#807AB0DD" />
+
+
                         <LinearLayout
                             android:orientation="horizontal"
                             android:layout_marginTop="5dp"
@@ -290,15 +308,17 @@
                             <ImageView
                                 android:id="@+id/week_distance_10km_check"
                                 android:src="@drawable/check_ic"
-                                android:layout_marginLeft="109dp"
+                                android:layout_marginLeft="102.5dp"
                                 android:layout_width="70dp"
                                 android:layout_height="70dp"/>
                         </LinearLayout>
+
                         <View
                             android:layout_width="wrap_content"
                             android:layout_height="1dp"
                             android:layout_marginHorizontal="10dp"
                             android:background="#807AB0DD" />
+
                         <LinearLayout
                             android:orientation="horizontal"
                             android:layout_marginTop="5dp"
@@ -325,20 +345,22 @@
                             <ImageView
                                 android:id="@+id/week_distance_15km_check"
                                 android:src="@drawable/check_ic"
-                                android:layout_marginLeft="109dp"
+                                android:layout_marginLeft="102.5dp"
                                 android:layout_width="70dp"
                                 android:layout_height="70dp"/>
                         </LinearLayout>
+
                         <View
                             android:layout_width="wrap_content"
                             android:layout_height="1dp"
                             android:layout_marginHorizontal="10dp"
                             android:background="#807AB0DD" />
+
                         <LinearLayout
                             android:orientation="horizontal"
                             android:layout_marginTop="5dp"
                             android:layout_width="match_parent"
-                            android:layout_height="90dp"
+                            android:layout_height="120dp"
                             android:gravity="center|left">
                             <LinearLayout
                                 android:layout_marginLeft="10dp"
@@ -358,22 +380,24 @@
                                     android:layout_height="wrap_content"/>
                             </LinearLayout>
                             <ImageView
-                                android:id="@+id/week_pace_1_check"
+                                android:id="@+id/week_pace_30_check"
                                 android:src="@drawable/check_ic"
-                                android:layout_marginLeft="61dp"
+                                android:layout_marginLeft="42dp"
                                 android:layout_width="70dp"
                                 android:layout_height="70dp"/>
                         </LinearLayout>
+
                         <View
                             android:layout_width="wrap_content"
                             android:layout_height="1dp"
                             android:layout_marginHorizontal="10dp"
                             android:background="#807AB0DD" />
+
                         <LinearLayout
                             android:orientation="horizontal"
                             android:layout_marginTop="5dp"
                             android:layout_width="match_parent"
-                            android:layout_height="90dp"
+                            android:layout_height="120dp"
                             android:gravity="center|left">
                             <LinearLayout
                                 android:layout_marginLeft="10dp"
@@ -387,15 +411,15 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"/>
                                 <TextView
-                                    android:textSize="25dp"
-                                    android:text="분내로 km를 달려보세요!"
+                                    android:textSize="23dp"
+                                    android:text="5분내로 1km를 달려보세요!\n(페이스 3.3)"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"/>
                             </LinearLayout>
                             <ImageView
-                                android:id="@+id/week_pace_2_check"
+                                android:id="@+id/week_pace_33_check"
                                 android:src="@drawable/check_ic"
-                                android:layout_marginLeft="61dp"
+                                android:layout_marginLeft="43.5dp"
                                 android:layout_width="70dp"
                                 android:layout_height="70dp"/>
                         </LinearLayout>
@@ -432,7 +456,7 @@
                             <ImageView
                                 android:id="@+id/week_kcal_500_check"
                                 android:src="@drawable/check_ic"
-                                android:layout_marginLeft="60dp"
+                                android:layout_marginLeft="54dp"
                                 android:layout_width="70dp"
                                 android:layout_height="70dp"/>
                         </LinearLayout>
@@ -469,18 +493,19 @@
                             <ImageView
                                 android:id="@+id/week_kcal_700_check"
                                 android:src="@drawable/check_ic"
-                                android:layout_marginLeft="60dp"
+                                android:layout_marginLeft="54dp"
                                 android:layout_width="70dp"
                                 android:layout_height="70dp"/>
                         </LinearLayout>
                     </LinearLayout>
-                </ScrollView>
+                </ScrollView><!--주간 챌린지 끝!@@@@@@@@@-->
 
                 <ScrollView
                     android:id="@+id/tabMonth"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
+                    <!--월간 챌린지 시작!@@@@@@@@@@@@-->
                     <LinearLayout
                         android:orientation="vertical"
                         android:layout_width="wrap_content"
@@ -515,6 +540,13 @@
                                 android:layout_width="70dp"
                                 android:layout_height="70dp"/>
                         </LinearLayout>
+
+                        <View
+                            android:layout_width="wrap_content"
+                            android:layout_height="1dp"
+                            android:layout_marginHorizontal="10dp"
+                            android:background="#807AB0DD" />
+
                         <LinearLayout
                             android:orientation="horizontal"
                             android:layout_marginTop="5dp"
@@ -545,6 +577,13 @@
                                 android:layout_width="70dp"
                                 android:layout_height="70dp"/>
                         </LinearLayout>
+
+                        <View
+                            android:layout_width="wrap_content"
+                            android:layout_height="1dp"
+                            android:layout_marginHorizontal="10dp"
+                            android:background="#807AB0DD" />
+
                         <LinearLayout
                             android:orientation="horizontal"
                             android:layout_marginTop="5dp"
@@ -575,6 +614,13 @@
                                 android:layout_width="70dp"
                                 android:layout_height="70dp"/>
                         </LinearLayout>
+
+                        <View
+                            android:layout_width="wrap_content"
+                            android:layout_height="1dp"
+                            android:layout_marginHorizontal="10dp"
+                            android:background="#807AB0DD" />
+
                         <LinearLayout
                             android:orientation="horizontal"
                             android:layout_marginTop="5dp"
@@ -605,6 +651,13 @@
                                 android:layout_width="70dp"
                                 android:layout_height="70dp"/>
                         </LinearLayout>
+
+                        <View
+                            android:layout_width="wrap_content"
+                            android:layout_height="1dp"
+                            android:layout_marginHorizontal="10dp"
+                            android:background="#807AB0DD" />
+
                         <LinearLayout
                             android:orientation="horizontal"
                             android:layout_marginTop="5dp"
@@ -635,6 +688,13 @@
                                 android:layout_width="70dp"
                                 android:layout_height="70dp"/>
                         </LinearLayout>
+
+                        <View
+                            android:layout_width="wrap_content"
+                            android:layout_height="1dp"
+                            android:layout_marginHorizontal="10dp"
+                            android:background="#807AB0DD" />
+
                         <LinearLayout
                             android:orientation="horizontal"
                             android:layout_marginTop="5dp"
@@ -665,6 +725,13 @@
                                 android:layout_width="70dp"
                                 android:layout_height="70dp"/>
                         </LinearLayout>
+
+                        <View
+                            android:layout_width="wrap_content"
+                            android:layout_height="1dp"
+                            android:layout_marginHorizontal="10dp"
+                            android:background="#807AB0DD" />
+
                         <LinearLayout
                             android:orientation="horizontal"
                             android:layout_marginTop="5dp"
@@ -695,6 +762,13 @@
                                 android:layout_width="70dp"
                                 android:layout_height="70dp"/>
                         </LinearLayout>
+
+                        <View
+                            android:layout_width="wrap_content"
+                            android:layout_height="1dp"
+                            android:layout_marginHorizontal="10dp"
+                            android:background="#807AB0DD" />
+
                         <LinearLayout
                             android:orientation="horizontal"
                             android:layout_marginTop="5dp"
@@ -725,6 +799,14 @@
                                 android:layout_width="70dp"
                                 android:layout_height="70dp"/>
                         </LinearLayout>
+
+                        <View
+                            android:layout_width="wrap_content"
+                            android:layout_height="1dp"
+                            android:layout_marginHorizontal="10dp"
+                            android:background="#807AB0DD" />
+
+
                     </LinearLayout>
                 </ScrollView>
             </FrameLayout>
