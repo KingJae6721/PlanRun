@@ -6,36 +6,38 @@
     android:layout_height="match_parent"
     android:foregroundTint="@color/white"
     android:orientation="vertical"
-    android:background="#ffffff">
+    android:background="#EFEFEF">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:elevation="20dp"
         android:orientation="vertical">
-
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardElevation="3dp">
         <com.prolificinteractive.materialcalendarview.MaterialCalendarView
             android:id="@+id/calendarView"
+            android:layout_marginTop="15dp"
             android:layout_width="match_parent"
             android:layout_height="400dp"
-            android:layout_marginBottom="30dp"
-            android:background="#8D5FB5EF"
-            android:elevation="40dp"
-            app:mcv_arrowColor="@color/black"
+            android:theme="@style/CalenderViewCustom"
+            app:mcv_arrowColor="#23A4FA"
             app:mcv_dateTextAppearance="@style/CalenderViewDateCustomText"
             app:mcv_headerTextAppearance="@style/CalendarWidgetHeader"
-            app:mcv_weekDayTextAppearance="@style/CalenderViewWeekCustomText">
-
-        </com.prolificinteractive.materialcalendarview.MaterialCalendarView>
+            app:mcv_weekDayTextAppearance="@style/CalenderViewWeekCustomText" />
+        </androidx.cardview.widget.CardView>
 
         <TextView
             android:id="@+id/diaryTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="4dp"
-            android:elevation="40dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+            android:textSize="17dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_gravity="left"
+            android:layout_marginTop="50dp"
+            android:layout_marginLeft="20dp" />
 
 
         <LinearLayout
