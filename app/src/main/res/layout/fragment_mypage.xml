@@ -60,34 +60,36 @@
             android:layout_marginLeft="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
+
         <LinearLayout
-            android:gravity="center"
-            android:layout_below="@+id/introduce"
-            android:layout_alignParentBottom="true"
-            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/introduce"
+            android:layout_marginTop="10dp"
+            android:gravity="center">
+
             <Button
 
-                android:layout_marginRight="5dp"
                 android:id="@+id/edit_profile"
+                android:layout_width="190dp"
+                android:layout_height="45dp"
+                android:layout_marginRight="5dp"
+                android:backgroundTint="#9DD6FA"
                 android:text="프로필 수정"
-                android:textSize="13dp"
-                android:textStyle="bold"
                 android:textColor="#777676"
-                android:backgroundTint="#9DD6FA"
-                android:layout_width="190dp"
-                android:layout_height="45dp"/>
+                android:textSize="13dp"
+                android:textStyle="bold" />
+
             <Button
-                android:layout_marginLeft="5dp"
                 android:id="@+id/add_post"
-                android:text="게시물 추가"
-                android:textSize="13dp"
-                android:textStyle="bold"
-                android:textColor="#777676"
-                android:backgroundTint="#9DD6FA"
                 android:layout_width="190dp"
-                android:layout_height="45dp"/>
+                android:layout_height="45dp"
+                android:layout_marginLeft="5dp"
+                android:backgroundTint="#9DD6FA"
+                android:text="게시물 추가"
+                android:textColor="#777676"
+                android:textSize="13dp"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
@@ -161,6 +163,7 @@
         </LinearLayout>
     </RelativeLayout>
     <View
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#DCDBDB" />
