@@ -2,6 +2,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
+    android:paddingBottom="10dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <LinearLayout
@@ -53,9 +54,12 @@
     <TextView
         android:id="@+id/detailviewitem_favoritecounter_textview"
         android:text="like 0"
-        android:paddingBottom="35dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#DCDBDB" />
 
 
 </LinearLayout>

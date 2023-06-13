@@ -92,10 +92,10 @@
                 android:src="@drawable/ic_search" />
 
     </RelativeLayout>
-
+    </androidx.appcompat.widget.Toolbar>
     <View
         android:id="@+id/view"
-        android:layout_below="@+id/top_bar"
+        android:layout_below="@+id/community_toolbar"
         android:background="#A8A8A8"
         android:layout_width="wrap_content"
         android:layout_height="3dp"/>
@@ -110,7 +110,6 @@
             android:layout_height="match_parent">
         </androidx.recyclerview.widget.RecyclerView>
     </LinearLayout>
-    </androidx.appcompat.widget.Toolbar>
     <LinearLayout
         android:id="@+id/slidingBackground"
         android:layout_width="match_parent"

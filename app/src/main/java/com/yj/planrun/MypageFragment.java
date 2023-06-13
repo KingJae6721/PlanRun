@@ -95,6 +95,21 @@ public class MypageFragment extends Fragment {
         Button edit_profile = (Button) fragmentView.findViewById(R.id.edit_profile);
         ImageView setting = fragmentView.findViewById(R.id.setting);
         TextView followingCountTextView = fragmentView.findViewById(R.id.account_tv_following_count);
+
+        //fragmentView = view;
+        uid = getArguments().getString("destinationUid");
+        firestore = FirebaseFirestore.getInstance();
+        auth = FirebaseAuth.getInstance();
+        currentUserUid = auth.getCurrentUser().getUid();
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference("PlanRun");
+
+        setting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), SettingActivity.class);
+                startActivity(intent);
+            }
+        });
         followingCountTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,21 +118,6 @@ public class MypageFragment extends Fragment {
                 startActivity(intent);
             }
         });
-        setting.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), SettingActivity.class);
-                startActivity(intent);
-            }
-        });
-
-
-        //fragmentView = view;
-        uid = getArguments().getString("destinationUid");
-        firestore = FirebaseFirestore.getInstance();
-        auth = FirebaseAuth.getInstance();
-        currentUserUid = auth.getCurrentUser().getUid();
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference("PlanRun");
 
         if (uid.equals(currentUserUid)) {
             // MyPage
