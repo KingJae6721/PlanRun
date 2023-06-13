@@ -84,7 +84,7 @@ public class CalendarFragment extends Fragment {
                 layout_record.removeAllViews();
                 diaryTextView.setVisibility(View.VISIBLE);
 
-                diaryTextView.setText(String.format("%d / %d / %d", date.getYear(), date.getMonth()+1, date.getDay()));
+                diaryTextView.setText(String.format("%d월 %d일", date.getMonth()+1, date.getDay()));
                 boolean exist_data=false;
                 ArrayList<RunningData> selected_date_data= new ArrayList<RunningData>();
 
@@ -166,8 +166,7 @@ class EventDecorator implements DayViewDecorator {
     private HashSet<CalendarDay> dates;
 
     public EventDecorator(Collection<CalendarDay> dates, Context context) {
-        drawable =  ContextCompat.getDrawable(context,R.drawable.ic_calender_checked);
-
+        drawable =  ContextCompat.getDrawable(context,R.drawable.ic_calender_checked_size);
         this.dates = new HashSet<>(dates);
 
     }
