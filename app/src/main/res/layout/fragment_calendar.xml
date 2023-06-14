@@ -37,20 +37,38 @@
             android:textColor="@color/black"
             android:layout_gravity="left"
             android:layout_marginTop="50dp"
-            android:layout_marginLeft="20dp" />
-
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="25dp" />
 
         <LinearLayout
-            android:id="@+id/layout_record"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:background="@drawable/calender_background_style"
             android:layout_marginBottom="100dp"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
+            android:layout_width="380dp"
+            android:layout_height="wrap_content" >
+            <TextView
+                android:text="러닝 기록"
+                android:textSize="13dp"
+                android:textColor="@color/black"
+                android:textAlignment="viewStart"
 
+                android:background="@drawable/calender_textview_background_style"
+                android:paddingTop="2dp"
+                android:paddingLeft="15dp"
+                android:layout_marginBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="23dp"/>
+            <LinearLayout
+                android:id="@+id/layout_record"
+                android:layout_gravity="center"
+                android:layout_width="330dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
 
+            </LinearLayout>
         </LinearLayout>
-
     </LinearLayout>
 
 </ScrollView>
