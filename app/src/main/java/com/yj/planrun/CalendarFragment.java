@@ -48,14 +48,14 @@ public class CalendarFragment extends Fragment {
 
 
     public MaterialCalendarView calendarView;
-    public TextView diaryTextView, tv_pace,tv_distance,tv_date;
+    public TextView diaryTextView, tv_pace,tv_distance,tv_date,no_data;;
 
 
     private FirebaseDatabase mDatabase;
     private FirebaseAuth mFirebaseAuth;         //파이어베이스 인증
     private DatabaseReference mDatabaseRef;     //실시간 데이터베이스
     private  ArrayList<CalendarDay> calendarDayList;
-
+    private LinearLayout layout_record_parent;
 
 
     @Override
@@ -70,8 +70,8 @@ public class CalendarFragment extends Fragment {
         LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
         View additionalView = layoutInflater.inflate(R.layout.record_active, null);
         View additionalView1 = layoutInflater.inflate(R.layout.record_active, null);
-        LinearLayout layout_record= (LinearLayout)view.findViewById(R.id.layout_record);
-
+        LinearLayout layout_record= (LinearLayout)view.findViewById(R.id.layout_record1);
+        layout_record_parent= view.findViewById(R.id.layout_record_parent);
 
         FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
 
@@ -96,34 +96,39 @@ public class CalendarFragment extends Fragment {
                     }
 
                 }
+                layout_record_parent.setVisibility(View.VISIBLE);
+                if (exist_data == false){
 
-                for(RunningData a1:selected_date_data){
                     View additionalView = layoutInflater.inflate(R.layout.record_active, null);
-
                     tv_date=(TextView) additionalView.findViewById(R.id.tv_date);
-                    tv_pace=(TextView)additionalView.findViewById(R.id.tv_pace);
-                    tv_distance=(TextView)additionalView.findViewById(R.id.tv_distance);
-
-                    tv_distance.setText(a1.getDistance());
-                    tv_date.setText(a1.getDate()+" "+a1.getDate_time());
-                    tv_pace.setText(a1.getPace());
-
                     layout_record.addView(additionalView);
-                    TextView textView=new TextView(getActivity());
-                    textView.setText("");
-                    layout_record.addView(textView);
                     RelativeLayout detail = additionalView.findViewById(R.id.layout_record);
-                    TextView no_data=layout_record.findViewById(R.id.no_data);
+                    no_data=layout_record.findViewById(R.id.no_data);
 
-                    if (exist_data==false){
+                    no_data.setVisibility(View.VISIBLE);
+                    detail.setVisibility(View.INVISIBLE);
 
-                        no_data.setVisibility(View.VISIBLE);
-                    }
-                    else{
-                        no_data.setVisibility(View.INVISIBLE);
-                        detail.setVisibility(View.VISIBLE);
+                }else{
+                    for(RunningData a1:selected_date_data){
+                        View additionalView = layoutInflater.inflate(R.layout.record_active, null);
+
+                        tv_date=(TextView) additionalView.findViewById(R.id.tv_date);
+                        tv_pace=(TextView)additionalView.findViewById(R.id.tv_pace);
+                        tv_distance=(TextView)additionalView.findViewById(R.id.tv_distance);
+
+                        tv_distance.setText(a1.getDistance());
+                        tv_date.setText(a1.getDate()+" "+a1.getDate_time());
+                        tv_pace.setText(a1.getPace());
+
+                        layout_record.addView(additionalView);
+
+
+                        RelativeLayout detail = additionalView.findViewById(R.id.layout_record);
+                            detail.setVisibility(View.VISIBLE);
+
                     }
                 }
+
             }
         });
 
