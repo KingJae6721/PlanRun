@@ -84,7 +84,7 @@ public class ChallengeActivity extends TabActivity {
         //월간
 
         // 0 : 일일, 1 : 주간, 2 : 월간
-        final int[] sum_calories = new int[3];
+        final double[] sum_calories = new double[3];
         final double[] sum_distance = new double[3];
         final double[] sum_pace = new double[3];
         final int[] sum_time = new int[3];
@@ -137,8 +137,8 @@ public class ChallengeActivity extends TabActivity {
 
                             if (getNowDate.equals(runningDate[0])) { //일일
                                 String calories = runningDataSnapshot.get("calories").toString();
-                                calories = calories.replaceAll("[^0-9]", ""); // 숫자와 소수점만 남기고 제거
-                                sum_calories[0] += Integer.parseInt(calories);
+                                calories = calories.replaceAll("[^0-9.]", ""); // 숫자와 소수점만 남기고 제거
+                                sum_calories[0] += Double.parseDouble(calories);
 
                                 String distance = runningDataSnapshot.get("distance").toString();
                                 distance = distance.replaceAll("[^0-9.]", ""); // 숫자와 소수점만 남기고 제거
@@ -164,8 +164,8 @@ public class ChallengeActivity extends TabActivity {
                             } //일일
                             if (intDateDay >= intMonDate && intDateDay <= intSunDate) { //주간
                                 String calories = runningDataSnapshot.get("calories").toString();
-                                calories = calories.replaceAll("[^0-9]", ""); // 숫자와 소수점만 남기고 제거
-                                sum_calories[1] += Integer.parseInt(calories);
+                                calories = calories.replaceAll("[^0-9.]", ""); // 숫자와 소수점만 남기고 제거
+                                sum_calories[1] += Double.parseDouble(calories);
 
                                 String distance = runningDataSnapshot.get("distance").toString();
                                 distance = distance.replaceAll("[^0-9.]", ""); // 숫자와 소수점만 남기고 제거
@@ -195,8 +195,8 @@ public class ChallengeActivity extends TabActivity {
                             } //주간
                             if (intNowMonth == intDateMonth) { //월간
                                 String calories = runningDataSnapshot.get("calories").toString();
-                                calories = calories.replaceAll("[^0-9]", ""); // 숫자와 소수점만 남기고 제거
-                                sum_calories[2] += Integer.parseInt(calories);
+                                calories = calories.replaceAll("[^0-9.]", ""); // 숫자와 소수점만 남기고 제거
+                                sum_calories[2] += Double.parseDouble(calories);
 
                                 String distance = runningDataSnapshot.get("distance").toString();
                                 distance = distance.replaceAll("[^0-9.]", ""); // 숫자와 소수점만 남기고 제거
