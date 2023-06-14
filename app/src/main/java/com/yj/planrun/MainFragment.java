@@ -70,6 +70,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import me.relex.circleindicator.CircleIndicator3;
 
 public class MainFragment extends Fragment implements OnMapReadyCallback, ActivityCompat.OnRequestPermissionsResultCallback{
@@ -85,12 +86,14 @@ public class MainFragment extends Fragment implements OnMapReadyCallback, Activi
 
     private static final String TAG = "googlemap_example";
     private static final int GPS_ENABLE_REQUEST_CODE = 2001;
-    private static final int UPDATE_INTERVAL_MS = 2000;  // 2초
-    private static final int FASTEST_UPDATE_INTERVAL_MS = 1000; // 0.5초
+    private static final int UPDATE_INTERVAL_MS = 5000;  // 5초
+    private static final int FASTEST_UPDATE_INTERVAL_MS = 3000; // 3초
 
     // onRequestPermissionsResult에서 수신된 결과에서 ActivityCompat.requestPermissions를 사용한 퍼미션 요청을 구별하기 위해 사용됩니다.
     private static final int PERMISSIONS_REQUEST_CODE = 100;
     boolean needRequest = false;
+
+    private TextView tv_totalDistance;
 
     // 앱을 실행하기 위해 필요한 퍼미션을 정의합니다.
     String[] REQUIRED_PERMISSIONS  = {Manifest.permission.ACCESS_FINE_LOCATION,
@@ -105,12 +108,14 @@ public class MainFragment extends Fragment implements OnMapReadyCallback, Activi
     private View mLayout, run_record1;  // Snackbar 사용하기 위해서는 View가 필요합니다.
     // (참고로 Toast에서는 Context가 필요했습니다.)
 
+    private CircleImageView btn_location;
+
     @Override
     @Nullable
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {   mLayout = inflater.inflate(R.layout.fragment_main, null, false);
         run_record1 = inflater.inflate(R.layout.fragment_run_record, null, false);
-
+        btn_location= mLayout.findViewById(R.id.btn_getLocation);
         locationRequest = new LocationRequest()
                 .setPriority(Priority.PRIORITY_HIGH_ACCURACY)
                 .setInterval(UPDATE_INTERVAL_MS)
@@ -128,7 +133,6 @@ public class MainFragment extends Fragment implements OnMapReadyCallback, Activi
 
         ViewPager2 viewPager = mLayout.findViewById(R.id.viewPager);
         ViewPagerFragmentAdapter adapter = new ViewPagerFragmentAdapter(getActivity());
-
 // ViewPager2에 표시할 각각의 프래그먼트를 추가합니다.
         adapter.addFragment(new RunRecordFragment());
         adapter.addFragment(new RunRecord2Fragment());
@@ -172,6 +176,8 @@ public class MainFragment extends Fragment implements OnMapReadyCallback, Activi
             }
         });
 
+        tv_totalDistance=mLayout.findViewById(R.id.tv_distance);
+        //tv_totalDistance.setText(String.format("지금까지는 총 %fKm나 달리셨네요! 대단합니다!",DataLoadingActivity.total_distance));
 
 
         return mLayout;
@@ -274,6 +280,7 @@ public class MainFragment extends Fragment implements OnMapReadyCallback, Activi
 
 
                 //현재 위치에 마커 생성하고 이동
+
                 setCurrentLocation(location, markerTitle, markerSnippet);
 
                 mCurrentLocatiion = location;
@@ -408,8 +415,14 @@ public class MainFragment extends Fragment implements OnMapReadyCallback, Activi
 
         currentMarker = mMap.addMarker(markerOptions);
 
-        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLng(currentLatLng);
-        mMap.moveCamera(cameraUpdate);
+        btn_location.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLng(currentLatLng);
+                mMap.moveCamera(cameraUpdate);
+
+            }
+        });
 
     }
 

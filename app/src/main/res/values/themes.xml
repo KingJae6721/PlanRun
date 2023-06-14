@@ -50,21 +50,21 @@
     </style>
     <!-- 여기서 요일, 달력 안 숫자들의 폰트 설정을 수행할 수 있다 -->
     <style name="CalenderViewCustom" parent="Theme.AppCompat">
-        <item name="colorAccent">@android:color/holo_red_light</item>
+        <item name="colorAccent">#9DD6FA</item>
         <item name="colorPrimary">@android:color/holo_blue_light</item>
         <item name="android:textStyle">bold</item>
     </style>
 
     <!-- 달력 안의 숫자들에 적용되는 스타일 -->
     <style name="CalenderViewDateCustomText" parent="android:TextAppearance.DeviceDefault.Small">
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">15sp</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:weekNumberColor">#CDDC39</item>
     </style>
 
     <!-- 달력 안의 요일들에 적용되는 스타일 -->
     <style name="CalenderViewWeekCustomText" parent="android:TextAppearance.DeviceDefault.Small">
-        <item name="android:textSize">10sp</item>
+        <item name="android:textSize">13sp</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:weekNumberColor">@android:color/holo_red_light</item>
     </style>
@@ -73,5 +73,10 @@
     <style name="CalendarWidgetHeader">
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/black</item>
+    </style>
+
+    <!---->
+    <style name="IconStyle">
+        <item name="android:color">#B423A4FA</item>
     </style>
 </resources>

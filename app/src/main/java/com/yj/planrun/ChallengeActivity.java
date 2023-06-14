@@ -59,6 +59,7 @@ public class ChallengeActivity extends TabActivity {
         day_distance_check = findViewById(R.id.day_distance_check);
         day_pace_check = findViewById(R.id.day_pace_check);
         day_kcal_check = findViewById(R.id.day_kcal_check);
+
         //일일
 
         //주간

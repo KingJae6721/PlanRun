@@ -20,6 +20,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -46,14 +48,14 @@ public class CalendarFragment extends Fragment {
 
 
     public MaterialCalendarView calendarView;
-    public TextView diaryTextView, tv_pace,tv_distance,tv_date;
+    public TextView diaryTextView, tv_pace,tv_distance,tv_date,no_data;;
 
 
     private FirebaseDatabase mDatabase;
     private FirebaseAuth mFirebaseAuth;         //파이어베이스 인증
     private DatabaseReference mDatabaseRef;     //실시간 데이터베이스
     private  ArrayList<CalendarDay> calendarDayList;
-
+    private LinearLayout layout_record_parent;
 
 
     @Override
@@ -64,9 +66,12 @@ public class CalendarFragment extends Fragment {
 
         calendarView = view.findViewById(R.id.calendarView);
         diaryTextView = view.findViewById(R.id.diaryTextView);
-        tv_date=view.findViewById(R.id.tv_date);
-        tv_pace=view.findViewById(R.id.tv_pace);
-        tv_distance=view.findViewById(R.id.tv_distance);
+        ActiveRecord a = new ActiveRecord(view.getContext().getApplicationContext());
+        LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
+        View additionalView = layoutInflater.inflate(R.layout.record_active, null);
+        View additionalView1 = layoutInflater.inflate(R.layout.record_active, null);
+        LinearLayout layout_record= (LinearLayout)view.findViewById(R.id.layout_record1);
+        layout_record_parent= view.findViewById(R.id.layout_record_parent);
 
         FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
 
@@ -76,22 +81,52 @@ public class CalendarFragment extends Fragment {
         calendarView.setOnDateChangedListener(new OnDateSelectedListener() {
             @Override
             public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
+                layout_record.removeAllViews();
                 diaryTextView.setVisibility(View.VISIBLE);
 
-                diaryTextView.setText(String.format("%d / %d / %d", date.getYear(), date.getMonth()+1, date.getDay()));
+                diaryTextView.setText(String.format("%d월 %d일", date.getMonth()+1, date.getDay()));
+                boolean exist_data=false;
+                ArrayList<RunningData> selected_date_data= new ArrayList<RunningData>();
 
-                tv_date.setText("");
-                tv_distance.setText("기록이 없습니다");
-
-                tv_pace.setText("");
                 for(RunningData data1: DataLoadingActivity.run_data) {
 
                     if (data1.getDate() != null && data1.getDate().equals(date.getYear() + "-" + (date.getMonth()+1)+ "-" + date.getDay())) {
-                        tv_distance.setText(data1.getDistance());
-                        tv_date.setText(data1.getDate());
-                        tv_pace.setText(data1.getPace());
+                        selected_date_data.add(data1);
+                        exist_data=true;
                     }
 
+                }
+                layout_record_parent.setVisibility(View.VISIBLE);
+                if (exist_data == false){
+
+                    View additionalView = layoutInflater.inflate(R.layout.record_active, null);
+                    tv_date=(TextView) additionalView.findViewById(R.id.tv_date);
+                    layout_record.addView(additionalView);
+                    RelativeLayout detail = additionalView.findViewById(R.id.layout_record);
+                    no_data=layout_record.findViewById(R.id.no_data);
+
+                    no_data.setVisibility(View.VISIBLE);
+                    detail.setVisibility(View.INVISIBLE);
+
+                }else{
+                    for(RunningData a1:selected_date_data){
+                        View additionalView = layoutInflater.inflate(R.layout.record_active, null);
+
+                        tv_date=(TextView) additionalView.findViewById(R.id.tv_date);
+                        tv_pace=(TextView)additionalView.findViewById(R.id.tv_pace);
+                        tv_distance=(TextView)additionalView.findViewById(R.id.tv_distance);
+
+                        tv_distance.setText(a1.getDistance());
+                        tv_date.setText(a1.getDate()+" "+a1.getDate_time());
+                        tv_pace.setText(a1.getPace());
+
+                        layout_record.addView(additionalView);
+
+
+                        RelativeLayout detail = additionalView.findViewById(R.id.layout_record);
+                            detail.setVisibility(View.VISIBLE);
+
+                    }
                 }
 
             }
@@ -118,6 +153,11 @@ public class CalendarFragment extends Fragment {
         }
         return view;
     }//onCreate
+
+    public void setRecord(){
+
+    }
+
 }//CalenderFragment 클래스
 
 
@@ -131,8 +171,7 @@ class EventDecorator implements DayViewDecorator {
     private HashSet<CalendarDay> dates;
 
     public EventDecorator(Collection<CalendarDay> dates, Context context) {
-        drawable =  ContextCompat.getDrawable(context,R.drawable.ic_calender_checked);
-
+        drawable =  ContextCompat.getDrawable(context,R.drawable.ic_calender_checked_size);
         this.dates = new HashSet<>(dates);
 
     }
