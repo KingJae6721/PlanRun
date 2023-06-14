@@ -14,9 +14,10 @@
         android:layout_height="match_parent">
         <TextView
             android:text="챌린지"
-            android:textSize="22dp"
+            android:textSize="25dp"
             android:textColor="@color/black"
             android:textAlignment="center"
+            android:textStyle="bold"
             android:padding="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
@@ -48,22 +49,25 @@
 
                     <LinearLayout
                         android:orientation="horizontal"
-                        android:layout_width="wrap_content"
-                        android:layout_height="90dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_width="390dp"
+                        android:layout_height="80dp"
                         android:gravity="center|left">
                         <LinearLayout
-                            android:layout_marginLeft="10dp"
+                            android:layout_marginLeft="15dp"
                             android:orientation="vertical"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content">
                             <TextView
-                                android:textSize="30dp"
+                                android:textSize="13dp"
                                 android:text="오늘의 챌린지"
                                 android:textStyle="bold"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"/>
                             <TextView
-                                android:textSize="25dp"
+                                android:textSize="18dp"
+                                android:textColor="@color/black"
+                                android:layout_marginTop="5dp"
                                 android:text="20분동안 달려보세요!"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"/>
@@ -71,34 +75,36 @@
                         <ImageView
                             android:id="@+id/day_time_check"
                             android:src="@drawable/check_ic"
-                            android:layout_marginLeft="91dp"
-                            android:layout_width="70dp"
-                            android:layout_height="70dp"/>
+                            android:layout_marginLeft="166dp"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"/>
                     </LinearLayout>
                     <View
-                        android:layout_width="wrap_content"
-                        android:layout_height="1dp"
-                        android:layout_marginHorizontal="10dp"
-                        android:background="#807AB0DD" />
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:background="#9DD8FF"
+                        android:layout_width="370dp"
+                        android:layout_height="4px"/>
                     <LinearLayout
                         android:orientation="horizontal"
-                        android:layout_marginTop="5dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="90dp"
+                        android:layout_width="390dp"
+                        android:layout_height="80dp"
                         android:gravity="center|left">
                         <LinearLayout
-                            android:layout_marginLeft="10dp"
+                            android:layout_marginLeft="15dp"
                             android:orientation="vertical"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content">
                             <TextView
-                                android:textSize="30dp"
+                                android:textSize="13dp"
                                 android:text="오늘의 챌린지"
                                 android:textStyle="bold"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"/>
                             <TextView
-                                android:textSize="25dp"
+                                android:textSize="18dp"
+                                android:textColor="@color/black"
+                                android:layout_marginTop="5dp"
                                 android:text="3km를 달려보세요!"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"/>
@@ -106,73 +112,80 @@
                         <ImageView
                             android:id="@+id/day_distance_check"
                             android:src="@drawable/check_ic"
-                            android:layout_marginLeft="117dp"
-                            android:layout_width="70dp"
-                            android:layout_height="70dp"/>
+                            android:layout_marginLeft="184dp"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"/>
                     </LinearLayout>
-
                     <View
-                        android:layout_width="wrap_content"
-                        android:layout_height="1dp"
-                        android:layout_marginHorizontal="10dp"
-                        android:background="#807AB0DD" />
-
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:background="#9DD8FF"
+                        android:layout_width="370dp"
+                        android:layout_height="4px"/>
                     <LinearLayout
                         android:orientation="horizontal"
-                        android:layout_marginTop="5dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="120dp"
+                        android:layout_width="390dp"
+                        android:layout_height="100dp"
                         android:gravity="center|left">
                         <LinearLayout
-                            android:layout_marginLeft="10dp"
+                            android:layout_marginLeft="15dp"
                             android:orientation="vertical"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content">
                             <TextView
-                                android:textSize="30dp"
+                                android:textSize="13dp"
                                 android:text="오늘의 챌린지"
                                 android:textStyle="bold"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"/>
                             <TextView
-                                android:textSize="25dp"
-                                android:text="6분내로 1km를 달려보세요!\n(페이스 2.7)"
+                                android:textSize="16dp"
+                                android:textColor="@color/black"
+                                android:layout_marginTop="5dp"
+                                android:text="6분내로 1km를 달려보세요!"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+                            <TextView
+                                android:textSize="11dp"
+                                android:textColor="#656565"
+                                android:layout_marginTop="5dp"
+                                android:text="달성 조건 : 페이스 2.7이상"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"/>
                         </LinearLayout>
                         <ImageView
                             android:id="@+id/day_pace_check"
                             android:src="@drawable/check_ic"
-                            android:layout_marginLeft="27dp"
-                            android:layout_width="70dp"
-                            android:layout_height="70dp"/>
+                            android:layout_marginLeft="140dp"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"/>
                     </LinearLayout>
-
                     <View
-                        android:layout_width="wrap_content"
-                        android:layout_height="1dp"
-                        android:layout_marginHorizontal="10dp"
-                        android:background="#807AB0DD" />
-
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:background="#9DD8FF"
+                        android:layout_width="370dp"
+                        android:layout_height="4px"/>
                     <LinearLayout
                         android:orientation="horizontal"
-                        android:layout_marginTop="5dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="90dp"
+                        android:layout_width="390dp"
+                        android:layout_height="80dp"
                         android:gravity="center|left">
                         <LinearLayout
-                            android:layout_marginLeft="10dp"
+                            android:layout_marginLeft="15dp"
                             android:orientation="vertical"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content">
                             <TextView
-                                android:textSize="30dp"
-                                android:text="오늘의 챌린지"
+                                android:textSize="13dp"
+                                android:text="주간 챌린지"
                                 android:textStyle="bold"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"/>
                             <TextView
-                                android:textSize="25dp"
+                                android:textSize="18dp"
+                                android:textColor="@color/black"
+                                android:layout_marginTop="5dp"
                                 android:text="100kcal를 소비해보세요!"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"/>
@@ -180,51 +193,44 @@
                         <ImageView
                             android:id="@+id/day_kcal_check"
                             android:src="@drawable/check_ic"
-                            android:layout_marginLeft="54dp"
-                            android:layout_width="70dp"
-                            android:layout_height="70dp"/>
+                            android:layout_marginLeft="140dp"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"/>
                     </LinearLayout>
-
-                    <View
-                        android:layout_width="wrap_content"
-                        android:layout_height="1dp"
-                        android:layout_marginHorizontal="10dp"
-                        android:background="#807AB0DD" />
-
-                    <!--일일 챌린지 끝@@@@@@@@@@@@@@@@@@@@@@@-->
-
                 </LinearLayout>
 
-                <!--주간 챌린지 시작@@@@@@@@@@@@@@@@@@@@@@@-->
                 <ScrollView
                     android:id="@+id/tabWeek"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_marginTop="10dp"
                     android:gravity="center|top">
                     <LinearLayout
+                        android:gravity="center|top"
                         android:orientation="vertical"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
                         <LinearLayout
                             android:orientation="horizontal"
-                            android:layout_marginTop="5dp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="90dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_width="390dp"
+                            android:layout_height="80dp"
                             android:gravity="center|left">
                             <LinearLayout
-                                android:layout_marginLeft="10dp"
+                                android:layout_marginLeft="15dp"
                                 android:orientation="vertical"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content">
                                 <TextView
-                                    android:textSize="30dp"
+                                    android:textSize="13dp"
                                     android:text="주간 챌린지"
                                     android:textStyle="bold"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"/>
                                 <TextView
-                                    android:textSize="25dp"
+                                    android:textSize="18dp"
+                                    android:textColor="@color/black"
+                                    android:layout_marginTop="5dp"
                                     android:text="1시간 동안 달려보세요!"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"/>
@@ -232,37 +238,36 @@
                             <ImageView
                                 android:id="@+id/week_time_1h_check"
                                 android:src="@drawable/check_ic"
-                                android:layout_marginLeft="75.5dp"
-                                android:layout_width="70dp"
-                                android:layout_height="70dp"/>
+                                android:layout_marginLeft="155dp"
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"/>
                         </LinearLayout>
-
                         <View
-                            android:layout_width="wrap_content"
-                            android:layout_height="1dp"
-                            android:layout_marginHorizontal="10dp"
-                            android:background="#807AB0DD" />
-
-
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:background="#9DD8FF"
+                            android:layout_width="370dp"
+                            android:layout_height="4px"/>
                         <LinearLayout
                             android:orientation="horizontal"
-                            android:layout_marginTop="5dp"
-                            android:layout_width="match_parent"
-                            android:layout_height="90dp"
+                            android:layout_width="390dp"
+                            android:layout_height="80dp"
                             android:gravity="center|left">
                             <LinearLayout
-                                android:layout_marginLeft="10dp"
+                                android:layout_marginLeft="15dp"
                                 android:orientation="vertical"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content">
                                 <TextView
-                                    android:textSize="30dp"
+                                    android:textSize="13dp"
                                     android:text="주간 챌린지"
                                     android:textStyle="bold"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"/>
                                 <TextView
-                                    android:textSize="25dp"
+                                    android:textSize="18dp"
+                                    android:textColor="@color/black"
+                                    android:layout_marginTop="5dp"
                                     android:text="2시간 동안 달려보세요!"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"/>
@@ -270,37 +275,37 @@
                             <ImageView
                                 android:id="@+id/week_time_2h_check"
                                 android:src="@drawable/check_ic"
-                                android:layout_marginLeft="75.5dp"
-                                android:layout_width="70dp"
-                                android:layout_height="70dp"/>
+                                android:layout_marginLeft="155dp"
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"/>
                         </LinearLayout>
-
                         <View
-                            android:layout_width="wrap_content"
-                            android:layout_height="1dp"
-                            android:layout_marginHorizontal="10dp"
-                            android:background="#807AB0DD" />
-
-
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:background="#9DD8FF"
+                            android:layout_width="370dp"
+                            android:layout_height="4px"/>
                         <LinearLayout
                             android:orientation="horizontal"
-                            android:layout_marginTop="5dp"
-                            android:layout_width="match_parent"
-                            android:layout_height="90dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_width="390dp"
+                            android:layout_height="80dp"
                             android:gravity="center|left">
                             <LinearLayout
-                                android:layout_marginLeft="10dp"
+                                android:layout_marginLeft="15dp"
                                 android:orientation="vertical"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content">
                                 <TextView
-                                    android:textSize="30dp"
+                                    android:textSize="13dp"
                                     android:text="주간 챌린지"
                                     android:textStyle="bold"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"/>
                                 <TextView
-                                    android:textSize="25dp"
+                                    android:textSize="18dp"
+                                    android:textColor="@color/black"
+                                    android:layout_marginTop="5dp"
                                     android:text="10km를 달려보세요!"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"/>
@@ -308,36 +313,36 @@
                             <ImageView
                                 android:id="@+id/week_distance_10km_check"
                                 android:src="@drawable/check_ic"
-                                android:layout_marginLeft="102.5dp"
-                                android:layout_width="70dp"
-                                android:layout_height="70dp"/>
+                                android:layout_marginLeft="174dp"
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"/>
                         </LinearLayout>
-
                         <View
-                            android:layout_width="wrap_content"
-                            android:layout_height="1dp"
-                            android:layout_marginHorizontal="10dp"
-                            android:background="#807AB0DD" />
-
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:background="#9DD8FF"
+                            android:layout_width="370dp"
+                            android:layout_height="4px"/>
                         <LinearLayout
                             android:orientation="horizontal"
-                            android:layout_marginTop="5dp"
-                            android:layout_width="match_parent"
-                            android:layout_height="90dp"
+                            android:layout_width="390dp"
+                            android:layout_height="80dp"
                             android:gravity="center|left">
                             <LinearLayout
-                                android:layout_marginLeft="10dp"
+                                android:layout_marginLeft="15dp"
                                 android:orientation="vertical"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content">
                                 <TextView
-                                    android:textSize="30dp"
+                                    android:textSize="13dp"
                                     android:text="주간 챌린지"
                                     android:textStyle="bold"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"/>
                                 <TextView
-                                    android:textSize="25dp"
+                                    android:textSize="18dp"
+                                    android:textColor="@color/black"
+                                    android:layout_marginTop="5dp"
                                     android:text="15km를 달려보세요!"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"/>
@@ -345,110 +350,124 @@
                             <ImageView
                                 android:id="@+id/week_distance_15km_check"
                                 android:src="@drawable/check_ic"
-                                android:layout_marginLeft="102.5dp"
-                                android:layout_width="70dp"
-                                android:layout_height="70dp"/>
+                                android:layout_marginLeft="174dp"
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"/>
                         </LinearLayout>
-
                         <View
-                            android:layout_width="wrap_content"
-                            android:layout_height="1dp"
-                            android:layout_marginHorizontal="10dp"
-                            android:background="#807AB0DD" />
-
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:background="#9DD8FF"
+                            android:layout_width="370dp"
+                            android:layout_height="4px"/>
                         <LinearLayout
                             android:orientation="horizontal"
-                            android:layout_marginTop="5dp"
-                            android:layout_width="match_parent"
-                            android:layout_height="120dp"
+                            android:layout_width="390dp"
+                            android:layout_height="100dp"
                             android:gravity="center|left">
                             <LinearLayout
-                                android:layout_marginLeft="10dp"
+                                android:layout_marginLeft="15dp"
                                 android:orientation="vertical"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content">
                                 <TextView
-                                    android:textSize="30dp"
+                                    android:textSize="13dp"
                                     android:text="주간 챌린지"
                                     android:textStyle="bold"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"/>
                                 <TextView
-                                    android:textSize="22dp"
-                                    android:text="5.5분내로 1km를 달려보세요!\n(페이스 3.0) "
+                                    android:textSize="16dp"
+                                    android:textColor="@color/black"
+                                    android:layout_marginTop="5dp"
+                                    android:text="5.5분내로 1km를 달려보세요!"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"/>
+                                <TextView
+                                    android:textSize="11dp"
+                                    android:textColor="#656565"
+                                    android:layout_marginTop="5dp"
+                                    android:text="달성 조건 : 페이스 3.0이상"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"/>
                             </LinearLayout>
                             <ImageView
                                 android:id="@+id/week_pace_30_check"
                                 android:src="@drawable/check_ic"
-                                android:layout_marginLeft="42dp"
-                                android:layout_width="70dp"
-                                android:layout_height="70dp"/>
+                                android:layout_marginLeft="127dp"
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"/>
                         </LinearLayout>
-
                         <View
-                            android:layout_width="wrap_content"
-                            android:layout_height="1dp"
-                            android:layout_marginHorizontal="10dp"
-                            android:background="#807AB0DD" />
-
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:background="#9DD8FF"
+                            android:layout_width="370dp"
+                            android:layout_height="4px"/>
                         <LinearLayout
                             android:orientation="horizontal"
-                            android:layout_marginTop="5dp"
-                            android:layout_width="match_parent"
-                            android:layout_height="120dp"
+                            android:layout_width="390dp"
+                            android:layout_height="100dp"
                             android:gravity="center|left">
                             <LinearLayout
-                                android:layout_marginLeft="10dp"
+                                android:layout_marginLeft="15dp"
                                 android:orientation="vertical"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content">
                                 <TextView
-                                    android:textSize="30dp"
+                                    android:textSize="13dp"
                                     android:text="주간 챌린지"
                                     android:textStyle="bold"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"/>
                                 <TextView
-                                    android:textSize="23dp"
-                                    android:text="5분내로 1km를 달려보세요!\n(페이스 3.3)"
+                                    android:textSize="16dp"
+                                    android:textColor="@color/black"
+                                    android:layout_marginTop="5dp"
+                                    android:text="5분내로 1km를 달려보세요!"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"/>
+                                <TextView
+                                    android:textSize="11dp"
+                                    android:textColor="#656565"
+                                    android:layout_marginTop="5dp"
+                                    android:text="달성 조건 : 페이스 3.3이상"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"/>
                             </LinearLayout>
                             <ImageView
                                 android:id="@+id/week_pace_33_check"
                                 android:src="@drawable/check_ic"
-                                android:layout_marginLeft="43.5dp"
-                                android:layout_width="70dp"
-                                android:layout_height="70dp"/>
+                                android:layout_marginLeft="140dp"
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"/>
                         </LinearLayout>
-
                         <View
-                            android:layout_width="wrap_content"
-                            android:layout_height="1dp"
-                            android:layout_marginHorizontal="10dp"
-                            android:background="#807AB0DD" />
-
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:background="#9DD8FF"
+                            android:layout_width="370dp"
+                            android:layout_height="4px"/>
                         <LinearLayout
                             android:orientation="horizontal"
-                            android:layout_marginTop="5dp"
-                            android:layout_width="match_parent"
-                            android:layout_height="90dp"
+                            android:layout_width="390dp"
+                            android:layout_height="80dp"
                             android:gravity="center|left">
                             <LinearLayout
-                                android:layout_marginLeft="10dp"
+                                android:layout_marginLeft="15dp"
                                 android:orientation="vertical"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content">
                                 <TextView
-                                    android:textSize="30dp"
+                                    android:textSize="13dp"
                                     android:text="주간 챌린지"
                                     android:textStyle="bold"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"/>
                                 <TextView
-                                    android:textSize="25dp"
+                                    android:textSize="18dp"
+                                    android:textColor="@color/black"
+                                    android:layout_marginTop="5dp"
                                     android:text="500kcal를 소비해보세요!"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"/>
@@ -456,36 +475,36 @@
                             <ImageView
                                 android:id="@+id/week_kcal_500_check"
                                 android:src="@drawable/check_ic"
-                                android:layout_marginLeft="54dp"
-                                android:layout_width="70dp"
-                                android:layout_height="70dp"/>
+                                android:layout_marginLeft="140dp"
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"/>
                         </LinearLayout>
-
                         <View
-                            android:layout_width="wrap_content"
-                            android:layout_height="1dp"
-                            android:layout_marginHorizontal="10dp"
-                            android:background="#807AB0DD" />
-
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:background="#9DD8FF"
+                            android:layout_width="370dp"
+                            android:layout_height="4px"/>
                         <LinearLayout
                             android:orientation="horizontal"
-                            android:layout_marginTop="5dp"
-                            android:layout_width="match_parent"
-                            android:layout_height="90dp"
+                            android:layout_width="390dp"
+                            android:layout_height="80dp"
                             android:gravity="center|left">
                             <LinearLayout
-                                android:layout_marginLeft="10dp"
+                                android:layout_marginLeft="15dp"
                                 android:orientation="vertical"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content">
                                 <TextView
-                                    android:textSize="30dp"
+                                    android:textSize="13dp"
                                     android:text="주간 챌린지"
                                     android:textStyle="bold"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"/>
                                 <TextView
-                                    android:textSize="25dp"
+                                    android:textSize="18dp"
+                                    android:textColor="@color/black"
+                                    android:layout_marginTop="5dp"
                                     android:text="700kcal를 소비해보세요!"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"/>
@@ -493,42 +512,46 @@
                             <ImageView
                                 android:id="@+id/week_kcal_700_check"
                                 android:src="@drawable/check_ic"
-                                android:layout_marginLeft="54dp"
-                                android:layout_width="70dp"
-                                android:layout_height="70dp"/>
+                                android:layout_marginLeft="140dp"
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"/>
                         </LinearLayout>
                     </LinearLayout>
-                </ScrollView><!--주간 챌린지 끝!@@@@@@@@@-->
+                </ScrollView>
 
                 <ScrollView
                     android:id="@+id/tabMonth"
+                    android:gravity="center|top"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
-                    <!--월간 챌린지 시작!@@@@@@@@@@@@-->
                     <LinearLayout
+                        android:gravity="center|top"
                         android:orientation="vertical"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_marginTop="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
                         <LinearLayout
                             android:orientation="horizontal"
-                            android:layout_marginTop="5dp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="90dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_width="390dp"
+                            android:layout_height="80dp"
                             android:gravity="center|left">
                             <LinearLayout
-                                android:layout_marginLeft="10dp"
+                                android:layout_marginLeft="15dp"
                                 android:orientation="vertical"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content">
                                 <TextView
-                                    android:textSize="30dp"
+                                    android:textSize="13dp"
                                     android:text="월간 챌린지"
                                     android:textStyle="bold"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"/>
                                 <TextView
-                                    android:textSize="25dp"
+                                    android:textSize="18dp"
+                                    android:textColor="@color/black"
+                                    android:layout_marginTop="5dp"
                                     android:text="6시간 동안 달려보세요!"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"/>
@@ -536,36 +559,36 @@
                             <ImageView
                                 android:id="@+id/month_time_6h_check"
                                 android:src="@drawable/check_ic"
-                                android:layout_marginLeft="75.5dp"
-                                android:layout_width="70dp"
-                                android:layout_height="70dp"/>
+                                android:layout_marginLeft="155dp"
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"/>
                         </LinearLayout>
-
                         <View
-                            android:layout_width="wrap_content"
-                            android:layout_height="1dp"
-                            android:layout_marginHorizontal="10dp"
-                            android:background="#807AB0DD" />
-
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:background="#9DD8FF"
+                            android:layout_width="370dp"
+                            android:layout_height="4px"/>
                         <LinearLayout
                             android:orientation="horizontal"
-                            android:layout_marginTop="5dp"
-                            android:layout_width="match_parent"
-                            android:layout_height="90dp"
+                            android:layout_width="390dp"
+                            android:layout_height="80dp"
                             android:gravity="center|left">
                             <LinearLayout
-                                android:layout_marginLeft="10dp"
+                                android:layout_marginLeft="15dp"
                                 android:orientation="vertical"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content">
                                 <TextView
-                                    android:textSize="30dp"
+                                    android:textSize="13dp"
                                     android:text="월간 챌린지"
                                     android:textStyle="bold"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"/>
                                 <TextView
-                                    android:textSize="25dp"
+                                    android:textSize="18dp"
+                                    android:textColor="@color/black"
+                                    android:layout_marginTop="5dp"
                                     android:text="10시간 동안 달려보세요!"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"/>
@@ -573,36 +596,36 @@
                             <ImageView
                                 android:id="@+id/month_time_10h_check"
                                 android:src="@drawable/check_ic"
-                                android:layout_marginLeft="61.5dp"
-                                android:layout_width="70dp"
-                                android:layout_height="70dp"/>
+                                android:layout_marginLeft="145dp"
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"/>
                         </LinearLayout>
-
                         <View
-                            android:layout_width="wrap_content"
-                            android:layout_height="1dp"
-                            android:layout_marginHorizontal="10dp"
-                            android:background="#807AB0DD" />
-
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:background="#9DD8FF"
+                            android:layout_width="370dp"
+                            android:layout_height="4px"/>
                         <LinearLayout
                             android:orientation="horizontal"
-                            android:layout_marginTop="5dp"
-                            android:layout_width="match_parent"
-                            android:layout_height="90dp"
+                            android:layout_width="390dp"
+                            android:layout_height="80dp"
                             android:gravity="center|left">
                             <LinearLayout
-                                android:layout_marginLeft="10dp"
+                                android:layout_marginLeft="15dp"
                                 android:orientation="vertical"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content">
                                 <TextView
-                                    android:textSize="30dp"
+                                    android:textSize="13dp"
                                     android:text="월간 챌린지"
                                     android:textStyle="bold"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"/>
                                 <TextView
-                                    android:textSize="25dp"
+                                    android:textSize="18dp"
+                                    android:textColor="@color/black"
+                                    android:layout_marginTop="5dp"
                                     android:text="50km를 달려보세요!"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"/>
@@ -610,36 +633,37 @@
                             <ImageView
                                 android:id="@+id/month_distance_50km_check"
                                 android:src="@drawable/check_ic"
-                                android:layout_marginLeft="102.5dp"
-                                android:layout_width="70dp"
-                                android:layout_height="70dp"/>
+                                android:layout_marginLeft="174dp"
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"/>
                         </LinearLayout>
-
                         <View
-                            android:layout_width="wrap_content"
-                            android:layout_height="1dp"
-                            android:layout_marginHorizontal="10dp"
-                            android:background="#807AB0DD" />
-
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:background="#9DD8FF"
+                            android:layout_width="370dp"
+                            android:layout_height="4px"/>
                         <LinearLayout
                             android:orientation="horizontal"
-                            android:layout_marginTop="5dp"
-                            android:layout_width="match_parent"
-                            android:layout_height="90dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_width="390dp"
+                            android:layout_height="80dp"
                             android:gravity="center|left">
                             <LinearLayout
-                                android:layout_marginLeft="10dp"
+                                android:layout_marginLeft="15dp"
                                 android:orientation="vertical"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content">
                                 <TextView
-                                    android:textSize="30dp"
+                                    android:textSize="13dp"
                                     android:text="월간 챌린지"
                                     android:textStyle="bold"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"/>
                                 <TextView
-                                    android:textSize="25dp"
+                                    android:textSize="18dp"
+                                    android:textColor="@color/black"
+                                    android:layout_marginTop="5dp"
                                     android:text="70km를 달려보세요!"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"/>
@@ -647,110 +671,124 @@
                             <ImageView
                                 android:id="@+id/month_distance_70km_check"
                                 android:src="@drawable/check_ic"
-                                android:layout_marginLeft="102.5dp"
-                                android:layout_width="70dp"
-                                android:layout_height="70dp"/>
+                                android:layout_marginLeft="174dp"
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"/>
                         </LinearLayout>
-
                         <View
-                            android:layout_width="wrap_content"
-                            android:layout_height="1dp"
-                            android:layout_marginHorizontal="10dp"
-                            android:background="#807AB0DD" />
-
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:background="#9DD8FF"
+                            android:layout_width="370dp"
+                            android:layout_height="4px"/>
                         <LinearLayout
                             android:orientation="horizontal"
-                            android:layout_marginTop="5dp"
-                            android:layout_width="match_parent"
-                            android:layout_height="120dp"
+                            android:layout_width="390dp"
+                            android:layout_height="100dp"
                             android:gravity="center|left">
                             <LinearLayout
-                                android:layout_marginLeft="10dp"
+                                android:layout_marginLeft="15dp"
                                 android:orientation="vertical"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content">
                                 <TextView
-                                    android:textSize="30dp"
+                                    android:textSize="13dp"
                                     android:text="월간 챌린지"
                                     android:textStyle="bold"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"/>
                                 <TextView
-                                    android:textSize="22dp"
-                                    android:text="4.5분내로 1km를 달려보세요!\n(페이스 3.7) "
+                                    android:textSize="16dp"
+                                    android:textColor="@color/black"
+                                    android:layout_marginTop="5dp"
+                                    android:text="4.5분내로 1km를 달려보세요!"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"/>
+                                <TextView
+                                    android:textSize="11dp"
+                                    android:textColor="#656565"
+                                    android:layout_marginTop="5dp"
+                                    android:text="달성 조건 : 페이스 3.7이상"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"/>
                             </LinearLayout>
                             <ImageView
                                 android:id="@+id/month_pace_37_check"
                                 android:src="@drawable/check_ic"
-                                android:layout_marginLeft="43dp"
-                                android:layout_width="70dp"
-                                android:layout_height="70dp"/>
+                                android:layout_marginLeft="127dp"
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"/>
                         </LinearLayout>
-
                         <View
-                            android:layout_width="wrap_content"
-                            android:layout_height="1dp"
-                            android:layout_marginHorizontal="10dp"
-                            android:background="#807AB0DD" />
-
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:background="#9DD8FF"
+                            android:layout_width="370dp"
+                            android:layout_height="4px"/>
                         <LinearLayout
                             android:orientation="horizontal"
-                            android:layout_marginTop="5dp"
-                            android:layout_width="match_parent"
-                            android:layout_height="120dp"
+                            android:layout_width="390dp"
+                            android:layout_height="100dp"
                             android:gravity="center|left">
                             <LinearLayout
-                                android:layout_marginLeft="10dp"
+                                android:layout_marginLeft="15dp"
                                 android:orientation="vertical"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content">
                                 <TextView
-                                    android:textSize="30dp"
+                                    android:textSize="13dp"
                                     android:text="월간 챌린지"
                                     android:textStyle="bold"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"/>
                                 <TextView
-                                    android:textSize="23dp"
-                                    android:text="4분내로 1km를 달려보세요!\n(페이스 4.1)"
+                                    android:textSize="16dp"
+                                    android:textColor="@color/black"
+                                    android:layout_marginTop="5dp"
+                                    android:text="4분내로 1km를 달려보세요!"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"/>
+                                <TextView
+                                    android:textSize="11dp"
+                                    android:textColor="#656565"
+                                    android:layout_marginTop="5dp"
+                                    android:text="달성 조건 : 페이스 4.1이상"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"/>
                             </LinearLayout>
                             <ImageView
                                 android:id="@+id/month_pace_41_check"
                                 android:src="@drawable/check_ic"
-                                android:layout_marginLeft="43.5dp"
-                                android:layout_width="70dp"
-                                android:layout_height="70dp"/>
+                                android:layout_marginLeft="140dp"
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"/>
                         </LinearLayout>
-
                         <View
-                            android:layout_width="wrap_content"
-                            android:layout_height="1dp"
-                            android:layout_marginHorizontal="10dp"
-                            android:background="#807AB0DD" />
-
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:background="#9DD8FF"
+                            android:layout_width="370dp"
+                            android:layout_height="4px"/>
                         <LinearLayout
                             android:orientation="horizontal"
-                            android:layout_marginTop="5dp"
-                            android:layout_width="match_parent"
-                            android:layout_height="90dp"
+                            android:layout_width="390dp"
+                            android:layout_height="80dp"
                             android:gravity="center|left">
                             <LinearLayout
-                                android:layout_marginLeft="10dp"
+                                android:layout_marginLeft="15dp"
                                 android:orientation="vertical"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content">
                                 <TextView
-                                    android:textSize="30dp"
+                                    android:textSize="13dp"
                                     android:text="월간 챌린지"
                                     android:textStyle="bold"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"/>
                                 <TextView
-                                    android:textSize="25dp"
+                                    android:textSize="18dp"
+                                    android:textColor="@color/black"
+                                    android:layout_marginTop="5dp"
                                     android:text="2400kcal를 소비해보세요!"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"/>
@@ -758,36 +796,36 @@
                             <ImageView
                                 android:id="@+id/month_kcal_2400_check"
                                 android:src="@drawable/check_ic"
-                                android:layout_marginLeft="40dp"
-                                android:layout_width="70dp"
-                                android:layout_height="70dp"/>
+                                android:layout_marginLeft="130dp"
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"/>
                         </LinearLayout>
-
                         <View
-                            android:layout_width="wrap_content"
-                            android:layout_height="1dp"
-                            android:layout_marginHorizontal="10dp"
-                            android:background="#807AB0DD" />
-
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:background="#9DD8FF"
+                            android:layout_width="370dp"
+                            android:layout_height="4px"/>
                         <LinearLayout
                             android:orientation="horizontal"
-                            android:layout_marginTop="5dp"
-                            android:layout_width="match_parent"
-                            android:layout_height="90dp"
+                            android:layout_width="390dp"
+                            android:layout_height="80dp"
                             android:gravity="center|left">
                             <LinearLayout
-                                android:layout_marginLeft="10dp"
+                                android:layout_marginLeft="15dp"
                                 android:orientation="vertical"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content">
                                 <TextView
-                                    android:textSize="30dp"
+                                    android:textSize="13dp"
                                     android:text="월간 챌린지"
                                     android:textStyle="bold"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"/>
                                 <TextView
-                                    android:textSize="25dp"
+                                    android:textSize="18dp"
+                                    android:textColor="@color/black"
+                                    android:layout_marginTop="5dp"
                                     android:text="3000kcal를 소비해보세요!"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"/>
@@ -795,18 +833,10 @@
                             <ImageView
                                 android:id="@+id/month_kcal_3000_check"
                                 android:src="@drawable/check_ic"
-                                android:layout_marginLeft="40dp"
-                                android:layout_width="70dp"
-                                android:layout_height="70dp"/>
+                                android:layout_marginLeft="130dp"
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"/>
                         </LinearLayout>
-
-                        <View
-                            android:layout_width="wrap_content"
-                            android:layout_height="1dp"
-                            android:layout_marginHorizontal="10dp"
-                            android:background="#807AB0DD" />
-
-
                     </LinearLayout>
                 </ScrollView>
             </FrameLayout>
