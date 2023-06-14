@@ -6,12 +6,16 @@
     app:cardBackgroundColor="#9DD6FA"
     android:layout_gravity="center"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    >
     <RelativeLayout
         android:layout_gravity="center_horizontal"
         android:id="@+id/run_record1"
         android:layout_width="370dp"
-        android:layout_height="140dp" >
+        android:layout_height="140dp"
+
+        >
         <TextView
             android:id="@+id/tv_date"
             android:layout_marginTop="3dp"
