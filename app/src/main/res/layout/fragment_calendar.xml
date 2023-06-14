@@ -47,6 +47,7 @@
             android:background="@drawable/calender_background_style"
             android:layout_marginBottom="100dp"
             android:layout_width="380dp"
+            android:visibility="invisible"
             android:layout_height="wrap_content" >
             <TextView
                 android:text="RUNNING"

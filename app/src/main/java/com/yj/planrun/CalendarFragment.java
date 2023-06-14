@@ -48,14 +48,14 @@ public class CalendarFragment extends Fragment {
 
 
     public MaterialCalendarView calendarView;
-    public TextView diaryTextView, tv_pace,tv_distance,tv_date;
+    public TextView diaryTextView, tv_pace,tv_distance,tv_date,no_data;;
 
 
     private FirebaseDatabase mDatabase;
     private FirebaseAuth mFirebaseAuth;         //파이어베이스 인증
     private DatabaseReference mDatabaseRef;     //실시간 데이터베이스
     private  ArrayList<CalendarDay> calendarDayList;
-
+    private LinearLayout layout_record_parent;
 
 
     @Override
@@ -71,7 +71,7 @@ public class CalendarFragment extends Fragment {
         View additionalView = layoutInflater.inflate(R.layout.record_active, null);
         View additionalView1 = layoutInflater.inflate(R.layout.record_active, null);
         LinearLayout layout_record= (LinearLayout)view.findViewById(R.id.layout_record1);
-
+        layout_record_parent= view.findViewById(R.id.layout_record_parent);
 
         FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
 
@@ -96,9 +96,9 @@ public class CalendarFragment extends Fragment {
                     }
 
                 }
-                TextView no_data;
+                layout_record_parent.setVisibility(View.VISIBLE);
                 if (exist_data == false){
-                    Log.d(" 로그","실행은됨ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ");
+
                     View additionalView = layoutInflater.inflate(R.layout.record_active, null);
                     tv_date=(TextView) additionalView.findViewById(R.id.tv_date);
                     layout_record.addView(additionalView);
