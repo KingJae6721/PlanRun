@@ -3,25 +3,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/run_record1"
     android:layout_width="370dp"
-    android:layout_height="120dp"
+    android:layout_height="125dp"
     tools:context=".RunRecordFragment">
     <TextView
         android:id="@+id/today"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-
+        android:layout_toRightOf="@id/profile_picture"
+        android:layout_above="@id/layout_km"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
         android:text="지금까지 달린 거리"
-        android:layout_marginLeft="20dp"
-        android:textSize="15dp" />
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:layout_marginLeft="100dp"
+        android:textSize="13dp" />
     <ImageView
         android:id="@+id/profile_picture"
         android:layout_width="60dp"
         android:layout_height="60dp"
+        android:layout_marginTop="20dp"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="30dp"
-        android:layout_below="@+id/today"
-
         android:src="@mipmap/ic_main2" />
 
     <TextView
@@ -34,7 +38,7 @@
         android:layout_centerHorizontal="true"
         android:visibility="invisible"
         android:text="아직 기록이없습니다..."
-        android:textSize="24dp" />
+        android:textSize="20dp" />
 
     <TextView
         android:id="@+id/nicknameTextView"

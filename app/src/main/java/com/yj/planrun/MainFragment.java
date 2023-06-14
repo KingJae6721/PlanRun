@@ -30,6 +30,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -108,7 +109,7 @@ public class MainFragment extends Fragment implements OnMapReadyCallback, Activi
     private View mLayout, run_record1;  // Snackbar 사용하기 위해서는 View가 필요합니다.
     // (참고로 Toast에서는 Context가 필요했습니다.)
 
-    private CircleImageView btn_location;
+    private ImageButton btn_location;
 
     @Override
     @Nullable
