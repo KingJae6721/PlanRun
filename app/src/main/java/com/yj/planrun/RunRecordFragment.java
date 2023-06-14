@@ -75,16 +75,14 @@ public class RunRecordFragment extends Fragment {
         Date date = new Date(now);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-M-d");
         String getDate = sdf.format(date);
-        double total_distance=0, total_calories=0;
+        double total_distance=0.00, total_calories=0.00;
         for(RunningData data1: DataLoadingActivity.run_data) {
-
             if (data1.getDate() != null && data1.getDate().equals(getDate)) {
                 Log.d("로그",Double.toString(total_distance));
-              total_distance+=Double.parseDouble(data1.getDistance());
-              total_calories+=Double.parseDouble(data1.getCalories());
-              data_exist=true;
+                total_distance += Double.parseDouble(data1.getDistance());
+                total_calories+=Double.parseDouble(data1.getCalories());
+                data_exist=true;
             }
-
         }
 
         if (data_exist==false){
