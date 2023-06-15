@@ -15,6 +15,7 @@
     app:umanoDragView="@id/slidingBackground"
     tools:context=".CommunityFragment">
     <RelativeLayout
+        android:id="@+id/change"
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
     <androidx.appcompat.widget.Toolbar
@@ -99,22 +100,22 @@
                 android:layout_marginRight="10dp"
                 android:src="@drawable/ic_search" />
 
-    </RelativeLayout>
+        </RelativeLayout>
     </androidx.appcompat.widget.Toolbar>
 
-    <LinearLayout
-        android:layout_below="@+id/community_toolbar"
-        android:background="#B7F3F3F3"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/detailviewfragment_recyclerview"
+        <LinearLayout
+            android:layout_below="@+id/community_toolbar"
+            android:background="#B7F3F3F3"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-        </androidx.recyclerview.widget.RecyclerView>
-    </LinearLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/detailviewfragment_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </androidx.recyclerview.widget.RecyclerView>
+        </LinearLayout>
     </RelativeLayout>
     <LinearLayout
         android:id="@+id/slidingBackground"
@@ -134,7 +135,7 @@
                 android:layout_height="35dp"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/edit_style"
-                android:hint="검색 내용"
+                android:hint="찾고 싶은 닉네임을 검색해주세요."
                 android:paddingLeft="10dp"
                 android:textSize="13dp" />
 

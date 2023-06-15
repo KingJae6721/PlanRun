@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -31,7 +33,7 @@ public class AppSettingActivity extends AppCompatActivity {
     private DatabaseReference mDatabaseRef;     //실시간 데이터베이스
 
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
+    private Switch notification_all, notification_commnication, notification_notice, notification_event, notification_marketing;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +42,36 @@ public class AppSettingActivity extends AppCompatActivity {
         mFirebaseAuth = FirebaseAuth.getInstance();
         mDatabaseRef= FirebaseDatabase.getInstance().getReference("PlanRun");//루트설정
         FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();//파이어베이스 객체 가지고와서서
+
+        notification_all=findViewById(R.id.notification_set_all);
+        notification_commnication=findViewById(R.id.notification_set_community);
+        notification_notice=findViewById(R.id.notification_set_notice);
+        notification_event=findViewById(R.id.notification_set_event);
+        notification_marketing=findViewById(R.id.notification_set_marketing);
+
+        notification_all.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(notification_all.isChecked()==false){
+                    notification_all.setChecked(false);
+                    notification_commnication.setChecked(false);
+                    notification_event.setChecked(false);
+                    notification_notice.setChecked(false);
+                    notification_marketing.setChecked(false);
+
+                }
+                else{
+                    if(notification_all.isChecked()==true){
+                        notification_all.setChecked(true);
+                        notification_commnication.setChecked(true);
+                        notification_event.setChecked(true);
+                        notification_notice.setChecked(true);
+                        notification_marketing.setChecked(true);
+
+                    }
+                }
+            }
+        });
 
 
         Button btn_acntDel = findViewById(R.id.btn_acntDel);

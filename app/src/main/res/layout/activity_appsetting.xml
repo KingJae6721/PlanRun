@@ -83,7 +83,9 @@
             android:textSize="17dp"
             android:textStyle="bold"
             android:text="알림 설정"/>
+
         <Switch
+            android:id="@+id/notification_set_all"
             android:layout_marginTop="12dp"
             android:layout_marginLeft="257.7dp"
             android:layout_width="wrap_content"
@@ -110,6 +112,7 @@
             android:textAllCaps="false"
             android:textSize="15dp" />
         <Switch
+            android:id="@+id/notification_set_community"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="207dp"
             android:layout_width="wrap_content"
@@ -136,6 +139,7 @@
             android:textAllCaps="false"
             android:textSize="15dp" />
         <Switch
+            android:id="@+id/notification_set_notice"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="265dp"
             android:layout_width="wrap_content"
@@ -162,6 +166,7 @@
             android:textAllCaps="false"
             android:textSize="15dp" />
         <Switch
+            android:id="@+id/notification_set_event"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="251dp"
             android:layout_width="wrap_content"
@@ -188,6 +193,7 @@
             android:textAllCaps="false"
             android:textSize="15dp" />
         <Switch
+            android:id="@+id/notification_set_marketing"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="250.5dp"
             android:layout_width="wrap_content"
