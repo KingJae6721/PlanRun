@@ -122,6 +122,22 @@ public class MypageFragment extends Fragment {
         currentUserUid = auth.getCurrentUser().getUid();
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("PlanRun");
 
+        setting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), SettingActivity.class);
+                startActivity(intent);
+            }
+        });
+        followingCountTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), FollowlistActivity.class);
+                intent.putExtra("userUid", uid);
+                startActivity(intent);
+            }
+        });
+
         if (uid.equals(currentUserUid)) {
             // MyPage
             Button add_post = fragmentView.findViewById(R.id.add_post);

@@ -240,7 +240,7 @@ public class CommunityFragment extends Fragment {
 
         private class CustomViewHolder extends RecyclerView.ViewHolder {
             TextView profileTextView;
-            ImageView imageViewContent,imageViewProfile;
+            ImageView imageViewContent,imageViewProfile,imageComment;
             TextView explainTextView;
             TextView favoriteCounterTextView;
 
@@ -251,6 +251,7 @@ public class CommunityFragment extends Fragment {
                 explainTextView = itemView.findViewById(R.id.detailviewitem_explain_textview);
                 favoriteCounterTextView = itemView.findViewById(R.id.detailviewitem_favoritecounter_textview);
                 imageViewProfile = itemView.findViewById(R.id.detailviewitem_profile_image);
+                imageComment =itemView.findViewById(R.id.detailviewitem_comment_imageview);
             }
         }
 
@@ -302,6 +303,15 @@ public class CommunityFragment extends Fragment {
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.containers, mypageFragment).commit();
             });
 
+            // Comment 버튼 클릭 이벤트
+            viewHolder.imageComment.setOnClickListener(v -> {
+                Intent intent = new Intent(
+                        getContext(), CommentActivity.class);
+                intent.putExtra("contentId", contentUidList.get(position));   //사진과 텍스트
+                intent.putExtra("contentUid", contentUidList.get(position));    //댓글
+                startActivity(intent);
+            });
+
             // This code is when the page is loaded
             ImageView favoriteImageView = view.findViewById(R.id.detailviewitem_favorite_imageview);
             Map<String, Boolean> favorites = contentDTO.getFavorites();
@@ -318,6 +328,8 @@ public class CommunityFragment extends Fragment {
         public int getItemCount() {
             return contentDTOs.size();
         }
+
+
 
 
         private void favoriteEvent(int position) {
