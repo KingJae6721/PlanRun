@@ -248,6 +248,7 @@ public class CommunityFragment extends Fragment {
                 super(itemView);
                 profileTextView = itemView.findViewById(R.id.detailviewitem_profile_textview);
                 imageViewContent = itemView.findViewById(R.id.detailviewitem_imageview_content);
+                imageViewContent.setScaleType(ImageView.ScaleType.FIT_CENTER);
                 explainTextView = itemView.findViewById(R.id.detailviewitem_explain_textview);
                 favoriteCounterTextView = itemView.findViewById(R.id.detailviewitem_favoritecounter_textview);
                 imageViewProfile = itemView.findViewById(R.id.detailviewitem_profile_image);

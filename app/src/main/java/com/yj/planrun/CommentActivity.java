@@ -5,29 +5,36 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class CommentActivity extends AppCompatActivity {
     private String contentUid, contentId;
     private EditText comment_edit_message;
-    private TextView textView;
+    private TextView explainTextView;
     private ImageView imageView;
     private FirebaseFirestore firestore;
     private CommentRecyclerviewAdapter adapter;
@@ -52,9 +59,27 @@ public class CommentActivity extends AppCompatActivity {
         commentRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         firestore = FirebaseFirestore.getInstance();
-        textView = findViewById(R.id.detail_text);
-        imageView = findViewById(R.id.detail_image);
 
+        //콘텐트형식 item_detail로 찍기
+        LayoutInflater layoutInflater=getLayoutInflater();
+        View additionalView = layoutInflater.inflate(R.layout.item_detail, null);
+        LinearLayout linearLayout =findViewById(R.id.detail_image);
+
+        imageView = additionalView.findViewById(R.id.detailviewitem_imageview_content);
+
+        TextView profileTextView;
+        ImageView imageViewContent,imageViewProfile,imageComment;
+        TextView explainTextView;
+        TextView favoriteCounterTextView;
+
+            profileTextView = additionalView.findViewById(R.id.detailviewitem_profile_textview);
+
+            explainTextView = additionalView.findViewById(R.id.detailviewitem_explain_textview);
+            favoriteCounterTextView = additionalView.findViewById(R.id.detailviewitem_favoritecounter_textview);
+            imageViewProfile = additionalView.findViewById(R.id.detailviewitem_profile_image);
+            imageComment = additionalView.findViewById(R.id.detailviewitem_comment_imageview);
+
+        linearLayout.addView(additionalView);
         // 이미지와 텍스트 표시
         if (contentId != null) {
             // Firestore에서 해당 문서를 가져오는 코드 추가
@@ -67,7 +92,7 @@ public class CommentActivity extends AppCompatActivity {
                                 if (contentDTO != null) {
                                     String imageUrl = contentDTO.getImageUrl();
                                     String text = contentDTO.getExplain();
-
+                                    profileTextView.setText(contentDTO.getUserId());
                                     // 이미지와 텍스트를 화면에 표시
                                     if (imageUrl != null && !imageUrl.isEmpty()) {
                                         Glide.with(CommentActivity.this)
@@ -80,10 +105,52 @@ public class CommentActivity extends AppCompatActivity {
                                     }
 
                                     if (text != null && !text.isEmpty()) {
-                                        textView.setText(text);
-                                        textView.setVisibility(View.VISIBLE);
+                                        explainTextView.setText(text);
+                                        explainTextView.setVisibility(View.VISIBLE);
                                     } else {
-                                        textView.setVisibility(View.GONE);
+                                        explainTextView.setVisibility(View.GONE);
+                                    }
+
+                                    // Explain of content
+                                    explainTextView.setText(contentDTO.getExplain());
+
+                                    // Likes
+                                    favoriteCounterTextView.setText("Likes " + contentDTO.getFavoriteCount());
+                                    explainTextView.setText(contentDTO.getExplain());
+
+                                    // This code is when the button is clicked
+                                    //좋아요버튼 막아놓음
+                                    //additionalView.findViewById(R.id.detailviewitem_favorite_imageview).setOnClickListener(v -> favoriteEvent(position));
+
+                                    // 프로필 이미지를 눌렀을 경우 이벤트처리
+                                    imageViewProfile.setOnClickListener(v -> {
+                                        MypageFragment mypageFragment = new MypageFragment();
+                                        Bundle bundle = new Bundle();
+                                        bundle.putString("destinationUid", contentDTO.getUid());
+                                        bundle.putString("userId", contentDTO.getUserId());
+                                        mypageFragment.setArguments(bundle);
+                                        getSupportFragmentManager().beginTransaction().replace(R.id.containers, mypageFragment).commit();
+                                    });
+
+                                    // Comment 버튼 클릭 이벤트
+                                    imageComment.setOnClickListener(v -> {
+
+                                        comment_edit_message.requestFocus();
+                                        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                                        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
+
+
+                                    });
+
+                                    // This code is when the page is loaded
+                                    ImageView favoriteImageView = additionalView.findViewById(R.id.detailviewitem_favorite_imageview);
+                                    Map<String, Boolean> favorites = contentDTO.getFavorites();
+                                    if (favorites != null && favorites.containsKey(contentUid)) {
+                                        // This is like status
+                                        favoriteImageView.setImageResource(R.drawable.ic_favorite);
+                                    } else {
+                                        // This is unlike status
+                                        favoriteImageView.setImageResource(R.drawable.ic_favorite_border);
                                     }
                                 }
                             }
@@ -125,6 +192,7 @@ public class CommentActivity extends AppCompatActivity {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
                                     // 댓글 추가 실패 처리
+
                                 }
                             });
                 }
@@ -159,6 +227,8 @@ public class CommentActivity extends AppCompatActivity {
 
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
+
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_comment, parent, false);
             return new CustomViewHolder(view);
         }
@@ -168,11 +238,20 @@ public class CommentActivity extends AppCompatActivity {
             TextView profileTextView;
             ImageView profileImageView;
 
+            ImageView imageViewContent,imageViewProfile,imageComment;
+            TextView explainTextView;
+            TextView favoriteCounterTextView;
+
             CustomViewHolder(View itemView) {
                 super(itemView);
                 commentTextView = itemView.findViewById(R.id.commentviewitem_textview_comment);
                 profileTextView = itemView.findViewById(R.id.commentviewitem_textview_profile);
                 profileImageView = itemView.findViewById(R.id.commentviewitem_imageview_profile);
+                explainTextView = itemView.findViewById(R.id.detailviewitem_explain_textview);
+                favoriteCounterTextView = itemView.findViewById(R.id.detailviewitem_favoritecounter_textview);
+                imageViewContent = itemView.findViewById(R.id.detailviewitem_imageview_content);
+                imageViewProfile = itemView.findViewById(R.id.detailviewitem_profile_image);
+                imageComment =itemView.findViewById(R.id.detailviewitem_comment_imageview);
 
                 // 댓글 롱 클릭 이벤트 처리(댓글 삭제)
                 itemView.setOnLongClickListener(new View.OnLongClickListener() {
@@ -241,5 +320,24 @@ public class CommentActivity extends AppCompatActivity {
                         }
                     });
         }
+    }
+    private void favoriteEvent(int position) {
+        DocumentReference tsDoc = firestore.collection("images").document(contentUid);
+        firestore.runTransaction(transaction -> {
+            ContentDTO contentDTO = transaction.get(tsDoc).toObject(ContentDTO.class);
+
+            if (contentDTO.getFavorites().containsKey(contentUid)) {
+                // When the button is clicked
+                contentDTO.setFavoriteCount(contentDTO.getFavoriteCount() - 1);
+                contentDTO.getFavorites().remove(contentUid);
+            } else {
+                // When the button is not clicked
+                contentDTO.setFavoriteCount(contentDTO.getFavoriteCount() + 1);
+                contentDTO.getFavorites().put(contentUid, true);
+            }
+
+            transaction.set(tsDoc, contentDTO);
+            return null;
+        });
     }
 }

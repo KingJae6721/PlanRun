@@ -40,6 +40,9 @@ public class DetailActivity extends AppCompatActivity {
                             if (documentSnapshot.exists()) {
                                 ContentDTO contentDTO = documentSnapshot.toObject(ContentDTO.class);
                                 if (contentDTO != null) {
+                                    View view = View.inflate(getApplicationContext(),R.layout.item_detail,null);
+
+
                                     String imageUrl = contentDTO.getImageUrl();
                                     String text = contentDTO.getExplain();
 
