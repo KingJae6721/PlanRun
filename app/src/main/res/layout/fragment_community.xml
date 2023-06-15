@@ -135,7 +135,7 @@
                 android:layout_height="35dp"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/edit_style"
-                android:hint="검색 내용"
+                android:hint="찾고 싶은 닉네임을 검색해주세요."
                 android:paddingLeft="10dp"
                 android:textSize="13dp" />
 
