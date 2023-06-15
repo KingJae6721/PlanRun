@@ -64,8 +64,11 @@ public class DataLoadingActivity extends AppCompatActivity {
                         run_data.add(runningData.getValue(RunningData.class));
                         Log.d("로그","추가");
                     }
-                    for(RunningData data1: run_data) total_distance+=Double.parseDouble(data1.getDistance());
+                    for(RunningData data1: run_data) {
+                        total_distance += Double.parseDouble(data1.getDistance());
+                    }
                     Intent intent=new Intent(getApplicationContext(),MainActivity.class);
+                    intent.putExtra("total_distance",total_distance);
                     startActivity(intent);
                     finish();
                 }

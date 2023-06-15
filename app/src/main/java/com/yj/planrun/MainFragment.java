@@ -188,7 +188,7 @@ public class MainFragment extends Fragment implements OnMapReadyCallback, Activi
         });
 
         tv_totalDistance=mLayout.findViewById(R.id.tv_distance);
-        //tv_totalDistance.setText(String.format("지금까지는 총 %fKm나 달리셨네요! 대단합니다!",DataLoadingActivity.total_distance));
+
 
 
         return mLayout;

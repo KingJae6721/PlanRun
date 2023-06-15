@@ -66,7 +66,7 @@ public class CommentActivity extends AppCompatActivity {
         LinearLayout linearLayout =findViewById(R.id.detail_image);
 
         imageView = additionalView.findViewById(R.id.detailviewitem_imageview_content);
-
+        imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
         TextView profileTextView;
         ImageView imageViewContent,imageViewProfile,imageComment;
         TextView explainTextView;
