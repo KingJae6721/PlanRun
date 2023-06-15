@@ -191,17 +191,21 @@ public class MypageFragment extends Fragment {
 
     private class UserFragmentRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         private ArrayList<ContentDTO> contentDTOs = new ArrayList<>();
+        private ArrayList<String> contentUidList = new ArrayList<>();
 
-
-        UserFragmentRecyclerViewAdapter() {
+        public UserFragmentRecyclerViewAdapter() {
             firestore.collection("images").whereEqualTo("uid", uid).addSnapshotListener((querySnapshot, firebaseFirestoreException) -> {
                 if (querySnapshot == null) return;
                 contentDTOs.clear();
+                contentUidList.clear(); // contentUidList 초기화
+
                 for (DocumentSnapshot snapshot : querySnapshot.getDocuments()) {
                     ContentDTO contentDTO = snapshot.toObject(ContentDTO.class);
                     contentDTO.setDocumentId(snapshot.getId()); // documentId 설정 추가
                     contentDTOs.add(contentDTO);
+                    contentUidList.add(snapshot.getId()); // contentUidList에 고유 식별자 추가
                 }
+
                 // 올린 시간 순으로 정렬
                 Collections.sort(contentDTOs, new Comparator<ContentDTO>() {
                     @Override
@@ -212,7 +216,12 @@ public class MypageFragment extends Fragment {
 
                 TextView postCountTextView = fragmentView.findViewById(R.id.account_tv_post_count);
                 postCountTextView.setText(String.valueOf(contentDTOs.size()));
-                //fragmentView.findViewById(R.id.account_tv_post_count).setText(String.valueOf(contentDTOs.size()));
+
+                // contentUidList 사용 예시
+                for (String uid : contentUidList) {
+                    // contentUidList에서 각 고유 식별자를 활용하는 작업 수행
+                }
+
                 notifyDataSetChanged();
             });
         }
@@ -226,7 +235,7 @@ public class MypageFragment extends Fragment {
             return new CustomViewHolder(itemView);
         }
 
-        class CustomViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener,View.OnLongClickListener {
+        class CustomViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener {
             ImageView imageView;
             TextView textView;
 
@@ -234,20 +243,9 @@ public class MypageFragment extends Fragment {
                 super(itemView);
                 imageView = itemView.findViewById(R.id.item_mypage_image);
                 textView = itemView.findViewById(R.id.item_mypage_text);
-                itemView.setOnClickListener(this);
                 itemView.setOnLongClickListener(this);
             }
 
-            @Override
-            public void onClick(View v) {
-                int position = getAdapterPosition();
-                if (position != RecyclerView.NO_POSITION) {
-                    // 클릭된 아이템의 position을 얻어옵니다.
-                    ContentDTO contentDTO = contentDTOs.get(position);
-                    // 상세 페이지로 이동하는 동작 수행
-                    moveToDetailPage(contentDTO);
-                }
-            }
             @Override
             public boolean onLongClick(View v) {
                 int position = getAdapterPosition();
@@ -263,14 +261,6 @@ public class MypageFragment extends Fragment {
                 return true;
             }
 
-
-            private void moveToDetailPage(ContentDTO contentDTO) {
-                // 상세 페이지로 이동하는 인텐트를 생성합니다.
-                Intent intent = new Intent(getActivity(), DetailActivity.class);
-                // 필요한 데이터를 인텐트에 추가합니다. 예를 들어, contentDTO의 ID를 전달할 수 있습니다.
-                intent.putExtra("contentId", contentDTO.getDocumentId());
-                startActivity(intent);
-            }
             private void deleteItem(ContentDTO contentDTO) {
                 // Firestore에서 해당 아이템을 삭제
                 String documentId = contentDTO.getDocumentId(); // Firestore 문서 ID를 얻어옴
@@ -337,7 +327,13 @@ public class MypageFragment extends Fragment {
            }
 
 
-
+            viewHolder.imageView.setOnClickListener(v -> {
+                Intent intent = new Intent(
+                        getContext(), CommentActivity.class);
+                intent.putExtra("contentId", contentUidList.get(position));   //사진과 텍스트
+                intent.putExtra("contentUid", contentUidList.get(position));    //댓글
+                startActivity(intent);
+            });
             /*
             // 아이템을 클릭했을 때 디테일 페이지로 이동
             holder.itemView.setOnClickListener(new View.OnClickListener() {

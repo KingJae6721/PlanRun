@@ -93,6 +93,7 @@ public class ContentDTO {
         private String userId;
         private String comment;
         private Long timestamp;
+        private String documentId; // 추가된 필드
 
         public Comment() {
             // 기본 생성자
@@ -135,6 +136,11 @@ public class ContentDTO {
 
         public void setTimestamp(Long timestamp) {
             this.timestamp = timestamp;
+        }
+
+        public String getDocumentId() {return documentId;}
+
+        public void setDocumentId(String documentId) {this.documentId = documentId;
         }
     }
 }
