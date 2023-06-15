@@ -156,7 +156,17 @@ public class MainFragment extends Fragment implements OnMapReadyCallback, Activi
             }
         });
 
+        SlidingUpPanelLayout slidingUpPanelLayout = mLayout.findViewById(R.id.main_layout);
+        Button btn_challenge = (Button) mLayout.findViewById(R.id.btn_challenge);
 
+        btn_challenge.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(slidingUpPanelLayout.getPanelState() == SlidingUpPanelLayout.PanelState.COLLAPSED){
+                    slidingUpPanelLayout.setPanelState(SlidingUpPanelLayout.PanelState.ANCHORED);
+                }
+            }
+        });
 
         //이벤트
         Button btn_run = (Button) mLayout.findViewById(R.id.btn_run);
