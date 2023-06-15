@@ -70,7 +70,7 @@ public class CommunityFragment extends Fragment {
         Button btn_search = view.findViewById(R.id.btn_search);
         editTextNickname = view.findViewById(R.id.editTextUserId);
         Toolbar community_toolbar = view.findViewById(R.id.community_toolbar);
-
+        RelativeLayout a= view.findViewById(R.id.change);
         ActivityCompat.requestPermissions(requireActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
         slidingPanel = view.findViewById(R.id.community_layout);
 
@@ -87,7 +87,7 @@ public class CommunityFragment extends Fragment {
             public void onClick(View view) {
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 ClubFragment clubFragment = new ClubFragment();
-                transaction.replace(R.id.community_layout, clubFragment);
+                transaction.replace(R.id.change, clubFragment);
                 community_toolbar.setVisibility(View.GONE);
                 transaction.commit();
             }

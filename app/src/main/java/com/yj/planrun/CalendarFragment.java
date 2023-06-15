@@ -123,6 +123,7 @@ public class CalendarFragment extends Fragment {
                         layout_record.addView(additionalView);
 
 
+
                         RelativeLayout detail = additionalView.findViewById(R.id.layout_record);
                             detail.setVisibility(View.VISIBLE);
 
