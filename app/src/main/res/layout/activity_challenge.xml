@@ -74,10 +74,10 @@
                         </LinearLayout>
                         <ImageView
                             android:id="@+id/day_time_check"
-                            android:src="@drawable/ic_calender_checked_size"
-                            android:layout_marginLeft="166dp"
-                            android:layout_width="35dp"
-                            android:layout_height="35dp"/>
+                            android:layout_marginLeft="155dp"
+                            android:src="@drawable/ic_challenge_clear"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"/>
                     </LinearLayout>
                     <View
                         android:layout_marginTop="5dp"
@@ -111,10 +111,10 @@
                         </LinearLayout>
                         <ImageView
                             android:id="@+id/day_distance_check"
-                            android:src="@drawable/ic_calender_checked_size"
-                            android:layout_marginLeft="184dp"
-                            android:layout_width="35dp"
-                            android:layout_height="35dp"/>
+                            android:src="@drawable/ic_challenge_clear"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginLeft="173dp" />
                     </LinearLayout>
                     <View
                         android:layout_marginTop="5dp"
@@ -155,10 +155,10 @@
                         </LinearLayout>
                         <ImageView
                             android:id="@+id/day_pace_check"
-                            android:src="@drawable/ic_calender_checked_size"
-                            android:layout_marginLeft="140dp"
-                            android:layout_width="35dp"
-                            android:layout_height="35dp"/>
+                            android:src="@drawable/ic_challenge_clear"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginLeft="129dp" />
                     </LinearLayout>
                     <View
                         android:layout_marginTop="5dp"
@@ -192,10 +192,10 @@
                         </LinearLayout>
                         <ImageView
                             android:id="@+id/day_kcal_check"
-                            android:src="@drawable/ic_calender_checked_size"
-                            android:layout_marginLeft="140dp"
-                            android:layout_width="35dp"
-                            android:layout_height="35dp"/>
+                            android:src="@drawable/ic_challenge_clear"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginLeft="129dp" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -238,10 +238,10 @@
                             </LinearLayout>
                             <ImageView
                                 android:id="@+id/week_time_1h_check"
-                                android:src="@drawable/ic_calender_checked_size"
-                                android:layout_marginLeft="155dp"
-                                android:layout_width="35dp"
-                                android:layout_height="35dp"/>
+                                android:src="@drawable/ic_challenge_clear"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_marginLeft="144dp" />
                         </LinearLayout>
                         <View
                             android:layout_marginTop="5dp"
