@@ -38,6 +38,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -45,7 +46,7 @@ import java.util.List;
 import java.util.Map;
 
 public class CommunityFragment extends Fragment {
-    private LinearLayout slidingPanel, slidingBackground;
+    private SlidingUpPanelLayout slidingPanel;
     private DatabaseReference mDatabaseRef;
     private FirebaseFirestore firestore;
     private EditText editTextNickname;
@@ -71,28 +72,16 @@ public class CommunityFragment extends Fragment {
         Toolbar community_toolbar = view.findViewById(R.id.community_toolbar);
 
         ActivityCompat.requestPermissions(requireActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
-        slidingPanel = view.findViewById(R.id.slidingPanel);
-        slidingBackground = view.findViewById(R.id.slidingBackground);
+        slidingPanel = view.findViewById(R.id.community_layout);
 
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (slidingBackground.getVisibility() == View.VISIBLE) {
-                    hideSlidingPanel();
-                } else {
-                    showSlidingPanel();
+                if(slidingPanel.getPanelState() == SlidingUpPanelLayout.PanelState.COLLAPSED){
+                    slidingPanel.setPanelState(SlidingUpPanelLayout.PanelState.ANCHORED);
                 }
-
             }
         });
-
-        slidingBackground.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                hideSlidingPanel();
-            }
-        });
-
         club_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -124,46 +113,6 @@ public class CommunityFragment extends Fragment {
         return view;
 
 
-    }
-    private void showSlidingPanel() {
-        slidingBackground.setVisibility(View.VISIBLE);
-        slidingPanel.setVisibility(View.VISIBLE);
-
-        Animation slideUpAnimation = new TranslateAnimation(
-                Animation.RELATIVE_TO_SELF, 0f,
-                Animation.RELATIVE_TO_SELF, 0f,
-                Animation.RELATIVE_TO_SELF, 1f,
-                Animation.RELATIVE_TO_SELF, 0f
-        );
-        slideUpAnimation.setDuration(500);
-        slidingPanel.startAnimation(slideUpAnimation);
-    }
-
-    // 슬라이딩 패널을 숨기는 메소드
-    private void hideSlidingPanel() {
-
-        Animation slideDownAnimation = new TranslateAnimation(
-                Animation.RELATIVE_TO_SELF, 0f,
-                Animation.RELATIVE_TO_SELF, 0f,
-                Animation.RELATIVE_TO_SELF, 0f,
-                Animation.RELATIVE_TO_SELF, 1f
-        );
-        slideDownAnimation.setDuration(500);
-        slideDownAnimation.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) { }
-
-            @Override
-            public void onAnimationEnd(Animation animation) {
-                slidingPanel.setVisibility(View.GONE);
-                slidingBackground.setVisibility(View.GONE);
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) { }
-        });
-
-        slidingPanel.startAnimation(slideDownAnimation);
     }
 /*
     private void showSearchDialog() {

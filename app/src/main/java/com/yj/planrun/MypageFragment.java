@@ -68,6 +68,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import android.Manifest;
 
 import com.kakao.sdk.user.UserApiClient;
+import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -95,6 +96,24 @@ public class MypageFragment extends Fragment {
         Button edit_profile = (Button) fragmentView.findViewById(R.id.edit_profile);
         ImageView setting = fragmentView.findViewById(R.id.setting);
         TextView followingCountTextView = fragmentView.findViewById(R.id.account_tv_following_count);
+
+
+        followingCountTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), FollowlistActivity.class);
+                intent.putExtra("userUid", uid);
+                startActivity(intent);
+            }
+        });
+        setting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), SettingActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
         //fragmentView = view;
         uid = getArguments().getString("destinationUid");

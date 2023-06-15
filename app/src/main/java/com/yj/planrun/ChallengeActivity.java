@@ -202,7 +202,7 @@ public class ChallengeActivity extends TabActivity {
                                 String distance = runningDataSnapshot.get("distance").toString();
                                 distance = distance.replaceAll("[^0-9.]", ""); // 숫자와 소수점만 남기고 제거
                                 double double_distance = Double.parseDouble(distance);
-                                sum_distance[2] += double_distance;
+                                sum_distance[2] = Math.round((double_distance + sum_distance[2])*100.00)/100.00; //소수점 계산 오류 해결
 
                                 pace = pace.replaceAll("[^0-9.]", ""); // 숫자와 소수점만 남기고 제거 = Double.parseDouble(pace);
                                 if (Double.parseDouble(pace) >= temp_pace) {
