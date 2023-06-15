@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<com.sothree.slidinguppanel.SlidingUpPanelLayout
     android:id="@+id/community_layout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,7 +8,15 @@
     android:layout_height="match_parent"
     android:foregroundTint="@color/white"
     android:background="#ffffff"
+    android:gravity="bottom"
+    app:umanoShadowHeight="0dp"
+    app:umanoPanelHeight="0dp"
+    app:umanoOverlay="true"
+    app:umanoDragView="@id/slidingBackground"
     tools:context=".CommunityFragment">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/community_toolbar"
         android:layout_width="match_parent"
@@ -93,12 +101,9 @@
 
     </RelativeLayout>
     </androidx.appcompat.widget.Toolbar>
-    <View
-    android:id="@+id/view"
-    android:layout_width="wrap_content"
-    android:layout_height="55dp"/>
+
     <LinearLayout
-        android:layout_below="@+id/view"
+        android:layout_below="@+id/community_toolbar"
         android:background="#B7F3F3F3"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -110,36 +115,38 @@
 
         </androidx.recyclerview.widget.RecyclerView>
     </LinearLayout>
-
+    </RelativeLayout>
     <LinearLayout
         android:id="@+id/slidingBackground"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="bottom"
-        android:background="#B5A6A5A5"
-        android:orientation="vertical"
-        android:visibility="gone">
+        android:layout_height="350dp"
+        android:background="@drawable/main_background"
+        android:orientation="vertical">
         <LinearLayout
             android:id="@+id/slidingPanel"
-            android:orientation="vertical"
-            android:background="@drawable/main_background"
+            android:gravity="center_horizontal"
             android:layout_width="match_parent"
-            android:layout_height="450dp">
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
             <EditText
                 android:id="@+id/editTextUserId"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                android:hint="검색"
-                android:layout_width="332dp"
-                android:layout_height="wrap_content" />
-            <Button
+                android:layout_width="300dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/edit_style"
+                android:hint="검색 내용"
+                android:paddingLeft="10dp"
+                android:textSize="13dp" />
+
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_search"
+                android:layout_width="50dp"
+                android:layout_height="35dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/btn_login_style"
                 android:text="검색"
-                android:layout_gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:textSize="13dp" />
         </LinearLayout>
-
     </LinearLayout>
-
-</RelativeLayout>
+</com.sothree.slidinguppanel.SlidingUpPanelLayout>
