@@ -24,7 +24,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.ArrayList;
 
 public class CommentActivity extends AppCompatActivity {
-    private String contentUid,contentId;
+    private String contentUid, contentId;
     private EditText comment_edit_message;
     private TextView textView;
     private ImageView imageView;
@@ -48,8 +48,7 @@ public class CommentActivity extends AppCompatActivity {
         textView = findViewById(R.id.detail_text);
         imageView = findViewById(R.id.detail_image);
 
-        //이미지랑 텍스트 띄우기
-
+        // 이미지와 텍스트 표시
         if (contentId != null) {
             // Firestore에서 해당 문서를 가져오는 코드 추가
             firestore.collection("images").document(contentId).get()
@@ -91,7 +90,7 @@ public class CommentActivity extends AppCompatActivity {
                     });
         }
 
-        //댓글
+        // 댓글 작성 버튼 클릭 이벤트 처리
         findViewById(R.id.comment_btn_send).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -142,7 +141,9 @@ public class CommentActivity extends AppCompatActivity {
                         if (querySnapshot == null) return;
 
                         for (DocumentSnapshot snapshot : querySnapshot.getDocuments()) {
-                            comments.add(snapshot.toObject(ContentDTO.Comment.class));
+                            ContentDTO.Comment comment = snapshot.toObject(ContentDTO.Comment.class);
+                            comment.setDocumentId(snapshot.getId());    //삭제를 위해
+                            comments.add(comment);
                         }
                         notifyDataSetChanged();
                     });
@@ -164,19 +165,33 @@ public class CommentActivity extends AppCompatActivity {
                 commentTextView = itemView.findViewById(R.id.commentviewitem_textview_comment);
                 profileTextView = itemView.findViewById(R.id.commentviewitem_textview_profile);
                 profileImageView = itemView.findViewById(R.id.commentviewitem_imageview_profile);
+
+                // 댓글 롱 클릭 이벤트 처리(댓글 삭제)
+                itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View v) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            deleteComment(position);
+                            return true;
+                        }
+                        return false;
+                    }
+                });
             }
         }
 
         @Override
         public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
             CustomViewHolder customViewHolder = (CustomViewHolder) holder;
-            customViewHolder.commentTextView.setText(comments.get(position).getComment());
-            customViewHolder.profileTextView.setText(comments.get(position).getUserId());
+            ContentDTO.Comment comment = comments.get(position);
 
+            customViewHolder.commentTextView.setText(comment.getComment());
+            customViewHolder.profileTextView.setText(comment.getUserId());
 
             FirebaseFirestore.getInstance()
                     .collection("profileImages")
-                    .document(comments.get(position).getUid())
+                    .document(comment.getUid())
                     .get()
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
@@ -187,11 +202,36 @@ public class CommentActivity extends AppCompatActivity {
                                     .into(customViewHolder.profileImageView);
                         }
                     });
+
+            customViewHolder.itemView.setTag(comment.getDocumentId());  //삭제를 위해
         }
 
         @Override
         public int getItemCount() {
             return comments.size();
+        }
+
+        private void deleteComment(int position) {
+            ContentDTO.Comment comment = comments.get(position);
+
+            FirebaseFirestore.getInstance()
+                    .collection("images")
+                    .document(contentUid)
+                    .collection("comments")
+                    .document(comment.getDocumentId())
+                    .delete()
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            // 댓글 삭제 성공 처리
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            // 댓글 삭제 실패 처리
+                        }
+                    });
         }
     }
 }
