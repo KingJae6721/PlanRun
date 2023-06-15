@@ -275,7 +275,7 @@
                             </LinearLayout>
                             <ImageView
                                 android:id="@+id/week_time_2h_check"
-                                android:src="@drawable/ic_calender_checked_size"
+                                android:src="@drawable/ic_challenge_clear"
                                 android:layout_marginLeft="155dp"
                                 android:layout_width="35dp"
                                 android:layout_height="35dp"/>
@@ -313,7 +313,7 @@
                             </LinearLayout>
                             <ImageView
                                 android:id="@+id/week_distance_10km_check"
-                                android:src="@drawable/ic_calender_checked_size"
+                                android:src="@drawable/ic_challenge_clear"
                                 android:layout_marginLeft="174dp"
                                 android:layout_width="35dp"
                                 android:layout_height="35dp"/>
@@ -350,7 +350,7 @@
                             </LinearLayout>
                             <ImageView
                                 android:id="@+id/week_distance_15km_check"
-                                android:src="@drawable/ic_calender_checked_size"
+                                android:src="@drawable/ic_challenge_clear"
                                 android:layout_marginLeft="174dp"
                                 android:layout_width="35dp"
                                 android:layout_height="35dp"/>
@@ -394,7 +394,7 @@
                             </LinearLayout>
                             <ImageView
                                 android:id="@+id/week_pace_30_check"
-                                android:src="@drawable/ic_calender_checked_size"
+                                android:src="@drawable/ic_challenge_clear"
                                 android:layout_marginLeft="127dp"
                                 android:layout_width="35dp"
                                 android:layout_height="35dp"/>
@@ -438,7 +438,7 @@
                             </LinearLayout>
                             <ImageView
                                 android:id="@+id/week_pace_33_check"
-                                android:src="@drawable/ic_calender_checked_size"
+                                android:src="@drawable/ic_challenge_clear"
                                 android:layout_marginLeft="140dp"
                                 android:layout_width="35dp"
                                 android:layout_height="35dp"/>
@@ -475,7 +475,7 @@
                             </LinearLayout>
                             <ImageView
                                 android:id="@+id/week_kcal_500_check"
-                                android:src="@drawable/ic_calender_checked_size"
+                                android:src="@drawable/ic_challenge_clear"
                                 android:layout_marginLeft="140dp"
                                 android:layout_width="35dp"
                                 android:layout_height="35dp"/>
@@ -512,7 +512,7 @@
                             </LinearLayout>
                             <ImageView
                                 android:id="@+id/week_kcal_700_check"
-                                android:src="@drawable/ic_calender_checked_size"
+                                android:src="@drawable/ic_challenge_clear"
                                 android:layout_marginLeft="140dp"
                                 android:layout_width="35dp"
                                 android:layout_height="35dp"/>
@@ -559,7 +559,7 @@
                             </LinearLayout>
                             <ImageView
                                 android:id="@+id/month_time_6h_check"
-                                android:src="@drawable/ic_calender_checked_size"
+                                android:src="@drawable/ic_challenge_clear"
                                 android:layout_marginLeft="155dp"
                                 android:layout_width="35dp"
                                 android:layout_height="35dp"/>
@@ -596,7 +596,7 @@
                             </LinearLayout>
                             <ImageView
                                 android:id="@+id/month_time_10h_check"
-                                android:src="@drawable/ic_calender_checked_size"
+                                android:src="@drawable/ic_challenge_clear"
                                 android:layout_marginLeft="145dp"
                                 android:layout_width="35dp"
                                 android:layout_height="35dp"/>
@@ -633,7 +633,7 @@
                             </LinearLayout>
                             <ImageView
                                 android:id="@+id/month_distance_50km_check"
-                                android:src="@drawable/ic_calender_checked_size"
+                                android:src="@drawable/ic_challenge_clear"
                                 android:layout_marginLeft="174dp"
                                 android:layout_width="35dp"
                                 android:layout_height="35dp"/>
@@ -671,7 +671,7 @@
                             </LinearLayout>
                             <ImageView
                                 android:id="@+id/month_distance_70km_check"
-                                android:src="@drawable/ic_calender_checked_size"
+                                android:src="@drawable/ic_challenge_clear"
                                 android:layout_marginLeft="174dp"
                                 android:layout_width="35dp"
                                 android:layout_height="35dp"/>
@@ -715,7 +715,7 @@
                             </LinearLayout>
                             <ImageView
                                 android:id="@+id/month_pace_37_check"
-                                android:src="@drawable/ic_calender_checked_size"
+                                android:src="@drawable/ic_challenge_clear"
                                 android:layout_marginLeft="127dp"
                                 android:layout_width="35dp"
                                 android:layout_height="35dp"/>
@@ -759,7 +759,7 @@
                             </LinearLayout>
                             <ImageView
                                 android:id="@+id/month_pace_41_check"
-                                android:src="@drawable/ic_calender_checked_size"
+                                android:src="@drawable/ic_challenge_clear"
                                 android:layout_marginLeft="140dp"
                                 android:layout_width="35dp"
                                 android:layout_height="35dp"/>
@@ -796,7 +796,7 @@
                             </LinearLayout>
                             <ImageView
                                 android:id="@+id/month_kcal_2400_check"
-                                android:src="@drawable/ic_calender_checked_size"
+                                android:src="@drawable/ic_challenge_clear"
                                 android:layout_marginLeft="130dp"
                                 android:layout_width="35dp"
                                 android:layout_height="35dp"/>
@@ -833,7 +833,7 @@
                             </LinearLayout>
                             <ImageView
                                 android:id="@+id/month_kcal_3000_check"
-                                android:src="@drawable/ic_calender_checked_size"
+                                android:src="@drawable/ic_challenge_clear"
                                 android:layout_marginLeft="130dp"
                                 android:layout_width="35dp"
                                 android:layout_height="35dp"/>
