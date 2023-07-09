@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center|top"
+    tools:context=".NickChangeActivity">
+
+    <TextView
+        android:textAlignment="center"
+        android:text="Change Nickname"
+        android:textSize="40dp"
+        android:textColor="#7A7A7A"
+        android:textStyle="bold"
+        android:layout_marginTop="85dp"
+        android:layout_marginBottom="50dp"
+        android:textAllCaps="false"
+        android:letterSpacing="0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/et_changeNick"
+        android:layout_width="332dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#3395DF"
+        android:hint="  변경할 닉네임"
+        android:textColor="@color/black"
+        android:textColorHint="#CFC0C0C0"
+        android:textStyle="bold"
+        android:inputType="textEmailAddress" />
+    <LinearLayout
+        android:layout_marginTop="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_nickChange"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="160dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/btn_login_style"
+            android:textAllCaps="false"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:letterSpacing="0"
+            android:text="변경"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_cancel"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="160dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/btn_login_style"
+            android:textAllCaps="false"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:letterSpacing="0"
+            android:text="취소"/>
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

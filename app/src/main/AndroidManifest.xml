@@ -50,7 +50,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".nick_change"
+            android:name=".NickChangeActivity"
             android:exported="false" >
             <meta-data
                 android:name="android.app.lib_name"
@@ -123,7 +123,6 @@
         <activity android:name=".ChallengeActivity" />
         <activity android:name=".AppSettingActivity" />
         <activity android:name=".CameraActivity" />
-        <activity android:name=".ClubFragment" />
     </application>
 
 </manifest>
