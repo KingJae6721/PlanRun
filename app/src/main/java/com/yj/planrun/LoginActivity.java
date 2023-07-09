@@ -89,10 +89,13 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-
-
-
-
+        mBtnFindpwd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, EmailsendActivity.class);
+                startActivity(intent);
+            }
+        });
 
         Button mBtnRegister = findViewById(R.id.btn_register);
         mBtnRegister.setOnClickListener(new View.OnClickListener() {

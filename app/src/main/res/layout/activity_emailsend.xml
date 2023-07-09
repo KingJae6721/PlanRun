@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="30dp"
+    tools:context=".EmailsendActivity">
+
+    <TextView
+        android:text="가입하신 이메일 주소로 비밀번호 재설정 \n메일을 보내드립니다."
+        android:textSize="15dp"
+        android:textColor="#DA686868"
+        android:textStyle="bold"
+        android:layout_marginBottom="15dp"
+        android:textAllCaps="true"
+        android:letterSpacing="0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/emailEditText"
+        android:layout_width="332dp"
+        android:layout_height="40dp"
+        android:background="@drawable/edit_style"
+        android:textSize="13dp"
+        android:hint="이메일 입력"
+        android:paddingLeft="15dp"
+        android:textColor="@color/black"
+        android:textColorHint="#CFC0C0C0"
+        android:textStyle="bold"
+        android:inputType="textEmailAddress" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/changePasswordButton"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="332dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="75dp"
+        android:background="@drawable/btn_register_style"
+        android:textAllCaps="false"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        android:textColor="#F4F2F2"
+        android:letterSpacing="0"
+        android:text="비밀번호 변경 요청"/>
+
+</LinearLayout>
