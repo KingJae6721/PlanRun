@@ -9,10 +9,12 @@
     tools:context=".EmailsendActivity">
 
     <TextView
-        android:text="가입하신 이메일 주소로 비밀번호 재설정 \n메일을 보내드립니다."
-        android:textSize="15dp"
+        android:text="가입하신 이메일 주소로 비밀번호 재설정 메일을 보내드립니다."
+        android:textSize="13dp"
         android:textColor="#DA686868"
         android:textStyle="bold"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
         android:layout_marginBottom="15dp"
         android:textAllCaps="true"
         android:letterSpacing="0"
@@ -22,8 +24,9 @@
     <EditText
         android:id="@+id/emailEditText"
         android:layout_width="332dp"
-        android:layout_height="40dp"
+        android:layout_height="35dp"
         android:background="@drawable/edit_style"
+        android:layout_gravity="center"
         android:textSize="13dp"
         android:hint="이메일 입력"
         android:paddingLeft="15dp"
@@ -35,15 +38,15 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/changePasswordButton"
         android:layout_gravity="center_horizontal"
-        android:layout_width="332dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="75dp"
+        android:layout_width="300dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="45dp"
         android:background="@drawable/btn_register_style"
         android:textAllCaps="false"
-        android:textSize="15dp"
+        android:textSize="13dp"
         android:textStyle="bold"
         android:textColor="#F4F2F2"
         android:letterSpacing="0"
-        android:text="비밀번호 변경 요청"/>
+        android:text="이메일 보내기"/>
 
 </LinearLayout>
