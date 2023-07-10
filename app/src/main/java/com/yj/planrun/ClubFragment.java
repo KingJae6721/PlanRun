@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import androidx.appcompat.widget.Toolbar;
 
@@ -23,6 +24,16 @@ public class ClubFragment extends Fragment {
         RelativeLayout post_btn = view.findViewById(R.id.post_btn);
         Toolbar club_toolbar = view.findViewById(R.id.club_toolbar);
         Toolbar community_toolbar = commuLayout.findViewById(R.id.community_toolbar);
+
+        ImageView addPost_btn = view.findViewById(R.id.add_post);
+        addPost_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),CreateClubActivity.class);
+                startActivity(intent);
+            }
+        });
+
         post_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

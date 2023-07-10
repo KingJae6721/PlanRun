@@ -110,7 +110,7 @@ public class DataLoadingActivity extends AppCompatActivity {
                     if (dataSnapshot.exists()) {
                         DataLoadingActivity.nickname = dataSnapshot.getValue(String.class);
                     }
-                    Log.d("OnSUCCESS", "getEmail");
+                    Log.d("닉넴 바꿈!", "닉바꿈");
                 }
 
                 @Override
@@ -146,7 +146,7 @@ public class DataLoadingActivity extends AppCompatActivity {
                     if (dataSnapshot.exists()) {
                         DataLoadingActivity.email = dataSnapshot.getValue(String.class);
                     }
-                    Log.d("OnSUCCESS", "getEmail");
+                    Log.d("이메일", "이메일받음");
                 }
 
                 @Override

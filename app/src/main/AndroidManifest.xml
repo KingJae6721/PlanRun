@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.yj.planrun" >
+    package="com.yj.planrun">
 
     <uses-permission android:name="android.permission.INTERNET" /> <!-- 커뮤니티랑 마이페이지 사진에 쓸 권한 -->
     <uses-permission android:name="android.permission.CAMERA" /> <!-- 갤러리 파일을 읽을 권한 -->
@@ -26,6 +26,13 @@
         android:windowSoftInputMode="adjustResize"
         tools:targetApi="31">
         <activity
+            android:name=".CreateClubActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".EmailsendActivity"
             android:exported="false" />
         <activity
@@ -34,7 +41,7 @@
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".FollowlistActivity"
-            android:label="@string/app_name"></activity>
+            android:label="@string/app_name" />
         <activity
             android:name=".DetailActivity"
             android:exported="false" />
@@ -49,7 +56,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".nick_change"
+            android:name=".NickChangeActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

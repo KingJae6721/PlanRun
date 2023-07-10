@@ -164,6 +164,7 @@ public class MypageFragment extends Fragment {
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     String nickname = dataSnapshot.getValue(String.class);
                     if (nickname != null) {
+                        DataLoadingActivity.nickname=nickname;
                         mypage_nickname.setText(nickname);
                         list_of_posts.setText(nickname + "게시물");
                     }

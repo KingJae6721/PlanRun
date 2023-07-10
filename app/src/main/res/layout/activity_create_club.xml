@@ -7,8 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:fitsSystemWindows="true"
-
-    tools:context=".AddPhotoActivity">
+    tools:context=".CreateClubActivity">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/create_club_toolbar"
         android:layout_width="match_parent"
