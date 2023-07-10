@@ -2,7 +2,6 @@ package com.yj.planrun;
 
 import static android.content.ContentValues.TAG;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -16,7 +15,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -182,6 +180,15 @@ public class AppSettingActivity extends AppCompatActivity {
             }
         });
 
+        Button btn_changeNickname = (Button) findViewById(R.id.btn_changeNickname);
+        btn_changeNickname.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick (View view){
+                Intent intent = new Intent(AppSettingActivity.this, NickChangeActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
     private void send() {
         mFirebaseAuth = FirebaseAuth.getInstance();
@@ -195,4 +202,6 @@ public class AppSettingActivity extends AppCompatActivity {
             }
         });
     }
+
+
 }
