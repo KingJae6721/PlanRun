@@ -11,6 +11,7 @@ public class FollowDTO {
     private HashMap<String, String> followingNicknames = new HashMap<>();
     private HashMap<String, String> followerNicknames = new HashMap<>();
 
+
     public FollowDTO() {
     }
 
