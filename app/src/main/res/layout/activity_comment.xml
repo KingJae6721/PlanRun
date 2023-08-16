@@ -41,21 +41,20 @@
 </ScrollView>
     <LinearLayout
         android:layout_alignParentBottom="true"
-        android:background="#E6E6E6"
+        android:background="#FBFBFB"
         android:layout_weight="1"
-
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="50dp" >
         <EditText
             android:id="@+id/comment_edit_message"
-            android:background="@drawable/edit_style"
+            android:background="@drawable/edit_comment_style"
             android:layout_gravity="center_vertical"
             android:layout_width="300dp"
             android:layout_height="35dp"
             android:paddingLeft="10dp"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="11dp"
             android:layout_marginEnd="5dp"
             android:layout_marginBottom="10dp"
             android:layout_toLeftOf="@+id/comment_btn_send" />
@@ -69,7 +68,7 @@
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/btn_login_style"
-            android:text="send" />
+            android:text="보내기" />
     </LinearLayout>
 
 
