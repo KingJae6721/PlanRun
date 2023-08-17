@@ -60,6 +60,7 @@
         android:layout_height="wrap_content">
 
         <EditText
+            android:id="@+id/createclub_edit_clubname"
             android:hint="클럽 이름"
             android:textSize="12dp"
             android:paddingLeft="7dp"
@@ -96,7 +97,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" >
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/addphoto_btn_upload"
+            android:id="@+id/create_club_btn_upload"
             android:text="생 성"
             android:textColor="@color/white"
             android:textStyle="bold"
@@ -105,7 +106,7 @@
             android:layout_width="150dp"
             android:layout_height="40dp"/>
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/addphoto_btn_cancel"
+            android:id="@+id/create_club_btn_cancel"
             android:text="취 소"
             android:textColor="@color/white"
             android:textStyle="bold"

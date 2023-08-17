@@ -20,14 +20,15 @@
                 android:layout_margin="7.5dp"
                 android:layout_width="35dp"
                 android:layout_height="35dp"/>
+
             <TextView
                 android:id="@+id/detailviewitem_profile_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
                 android:text="User name"
                 android:textColor="#494949"
-                android:textStyle="bold"
-                android:layout_marginLeft="3dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:textStyle="bold" />
         </LinearLayout>
         <ImageView
             android:id="@+id/detailviewitem_imageview_content"

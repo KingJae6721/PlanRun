@@ -18,7 +18,8 @@ public class ContentDTO {
     public ContentDTO(String explain, String imageUrl, String uid, String userId, Long timestamp, int favoriteCount, Map<String, Boolean> favorites) {
         this.explain = explain;
         this.imageUrl = imageUrl;
-        this.uid = uid;
+        this.uid =
+                uid;
         this.userId = userId;
         this.timestamp = timestamp;
         this.favoriteCount = favoriteCount;

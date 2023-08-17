@@ -75,7 +75,7 @@
                     android:background="#9DD6FA" />
             </RelativeLayout>
             <ImageView
-                android:id="@+id/add_post"
+                android:id="@+id/add_club"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_marginRight="5dp"
@@ -94,5 +94,17 @@
 
         </RelativeLayout>
     </androidx.appcompat.widget.Toolbar>
+    <LinearLayout
+        android:layout_below="@+id/club_toolbar"
+        android:background="#B7F3F3F3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/detailviewfragment_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </androidx.recyclerview.widget.RecyclerView>
+    </LinearLayout>
 </RelativeLayout>
