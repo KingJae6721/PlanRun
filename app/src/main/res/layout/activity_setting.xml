@@ -42,7 +42,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="100dp"
         android:background="@android:color/transparent"
-        android:src="@mipmap/ic_main2"
+        android:src="@mipmap/app_icon_ex7"
         app:civ_border_overlay="true"
         app:civ_border_width="1dp"
         app:civ_border_color="#F6F3F3" />
