@@ -130,7 +130,7 @@ public class CreateClubActivity extends AppCompatActivity {
                     // Insert uid of user
                     clubDTO.setUid(auth.getCurrentUser().getUid());
                     // Insert userId
-                    clubDTO.setClubName(auth.getCurrentUser().getEmail());
+                    clubDTO.setClubName(createclub_edit_clubname.getText().toString());
                     // Insert explain of content
                     clubDTO.setExplain(addphoto_edit_explain.getText().toString());
                     // Insert timestamp
