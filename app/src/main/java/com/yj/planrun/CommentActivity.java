@@ -238,7 +238,7 @@ public class CommentActivity extends AppCompatActivity {
             TextView profileTextView;
             ImageView profileImageView;
 
-            ImageView imageViewContent,imageViewProfile,imageComment;
+            ImageView imageViewContent,imageViewProfile,imageComment,deleteImageView;
             TextView explainTextView;
             TextView favoriteCounterTextView;
 
@@ -252,9 +252,10 @@ public class CommentActivity extends AppCompatActivity {
                 imageViewContent = itemView.findViewById(R.id.detailviewitem_imageview_content);
                 imageViewProfile = itemView.findViewById(R.id.detailviewitem_profile_image);
                 imageComment =itemView.findViewById(R.id.detailviewitem_comment_imageview);
+                deleteImageView = itemView.findViewById(R.id.commentviewitem_imageview_delete); // 추가
 
                 // 댓글 롱 클릭 이벤트 처리(댓글 삭제)
-                itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                deleteImageView.setOnLongClickListener(new View.OnLongClickListener() {
                     @Override
                     public boolean onLongClick(View v) {
                         int position = getAdapterPosition();
@@ -291,6 +292,17 @@ public class CommentActivity extends AppCompatActivity {
                     });
 
             customViewHolder.itemView.setTag(comment.getDocumentId());  //삭제를 위해
+
+            // 현재 로그인한 사용자의 UID 가져오기
+            String currentUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+            // 댓글 작성자의 UID와 현재 사용자의 UID 비교하여 아이콘 가시성 설정
+            if (comment.getUid().equals(currentUid)) {
+                // 자신의 댓글인 경우에는 쓰레기통 아이콘을 보이도록 설정
+                customViewHolder.deleteImageView.setVisibility(View.VISIBLE);
+            } else {
+                // 자신의 댓글이 아닌 경우에는 쓰레기통 아이콘을 숨기도록 설정
+                customViewHolder.deleteImageView.setVisibility(View.GONE);
+            }
         }
 
         @Override
@@ -301,24 +313,31 @@ public class CommentActivity extends AppCompatActivity {
         private void deleteComment(int position) {
             ContentDTO.Comment comment = comments.get(position);
 
-            FirebaseFirestore.getInstance()
-                    .collection("images")
-                    .document(contentUid)
-                    .collection("comments")
-                    .document(comment.getDocumentId())
-                    .delete()
-                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            // 댓글 삭제 성공 처리
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            // 댓글 삭제 실패 처리
-                        }
-                    });
+            // 현재 로그인한 사용자의 UID 가져오기
+            String currentUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+            // 댓글 작성자의 UID와 현재 사용자의 UID를 비교하여 자신의 댓글인지 확인
+            if (comment.getUid().equals(currentUid)) {
+                // 자신의 댓글인 경우에만 삭제 수행
+                FirebaseFirestore.getInstance()
+                        .collection("images")
+                        .document(contentUid)
+                        .collection("comments")
+                        .document(comment.getDocumentId())
+                        .delete()
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                // 댓글 삭제 성공 처리
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                // 댓글 삭제 실패 처리
+                            }
+                        });
+            }
         }
     }
     private void favoriteEvent(int position) {
