@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,7 +65,7 @@ public class CommunityFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("PlanRun");
 
-        RelativeLayout club_btn = view.findViewById(R.id.club_btn);
+
         ImageView add_post = view.findViewById(R.id.add_post);
         ImageView search = view.findViewById(R.id.search);
         Button btn_search = view.findViewById(R.id.btn_search);
@@ -80,16 +81,6 @@ public class CommunityFragment extends Fragment {
                 if(slidingPanel.getPanelState() == SlidingUpPanelLayout.PanelState.COLLAPSED){
                     slidingPanel.setPanelState(SlidingUpPanelLayout.PanelState.ANCHORED);
                 }
-            }
-        });
-        club_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                ClubFragment clubFragment = new ClubFragment();
-                transaction.replace(R.id.change, clubFragment);
-                community_toolbar.setVisibility(View.GONE);
-                transaction.commit();
             }
         });
 
@@ -222,7 +213,9 @@ public class CommunityFragment extends Fragment {
                             for (DocumentSnapshot snapshot : querySnapshot.getDocuments()) {
                                 ContentDTO item = snapshot.toObject(ContentDTO.class);
                                 contentDTOs.add(item);
-                                contentUidList.add(snapshot.getId());
+                                String a=snapshot.getId();
+                                contentUidList.add(a);
+                                Log.d("콘텐트아이디리스트",a);
                             }
                             // 업로드 시간 순으로 정렬
                             //Collections.reverse(contentDTOs);
@@ -290,9 +283,9 @@ public class CommunityFragment extends Fragment {
             // Likes
             viewHolder.favoriteCounterTextView.setText("Likes " + contentDTO.getFavoriteCount());
             viewHolder.explainTextView.setText(contentDTOs.get(position).getExplain());
-
+            Log.e("에러",Integer.toString(position));
             // This code is when the button is clicked
-            view.findViewById(R.id.detailviewitem_favorite_imageview).setOnClickListener(v -> favoriteEvent(position));
+            view.findViewById(R.id.detailviewitem_favorite_imageview).setOnClickListener(v-> favoriteEvent(position));
 
             // 프로필 이미지를 눌렀을 경우 이벤트처리
             viewHolder.imageViewProfile.setOnClickListener(v -> {
@@ -340,14 +333,14 @@ public class CommunityFragment extends Fragment {
 
                 if (contentDTO.getFavorites().containsKey(uid)) {
                     // When the button is clicked
+                    Log.e("에러",Integer.toString(position));
                     contentDTO.setFavoriteCount(contentDTO.getFavoriteCount() - 1);
                     contentDTO.getFavorites().remove(uid);
-                } else {
+                } else if (!contentDTO.getFavorites().containsKey(uid)){
                     // When the button is not clicked
                     contentDTO.setFavoriteCount(contentDTO.getFavoriteCount() + 1);
                     contentDTO.getFavorites().put(uid, true);
                 }
-
                 transaction.set(tsDoc, contentDTO);
                 return null;
             });

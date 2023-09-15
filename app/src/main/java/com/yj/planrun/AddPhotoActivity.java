@@ -24,6 +24,7 @@ import com.google.firebase.storage.UploadTask;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Map;
 
 public class AddPhotoActivity extends AppCompatActivity {
     private final int PICK_IMAGE_FROM_ALBUM = 0;
@@ -108,6 +109,7 @@ public class AddPhotoActivity extends AppCompatActivity {
 
         // FileUpload
         // Upload image if photoUri is not null
+
         if (photoUri != null) {
             storageRef.putFile(photoUri).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                 @Override
@@ -128,6 +130,8 @@ public class AddPhotoActivity extends AppCompatActivity {
                     contentDTO.setExplain(addphoto_edit_explain.getText().toString());
                     // Insert timestamp
                     contentDTO.setTimestamp(System.currentTimeMillis());
+                    //좋아요 초기값
+                    contentDTO.getFavorites().put("0",true);
                     firestore.collection("images").document().set(contentDTO);
                     setResult(Activity.RESULT_OK);
                     finish();
@@ -144,6 +148,8 @@ public class AddPhotoActivity extends AppCompatActivity {
             contentDTO.setExplain(addphoto_edit_explain.getText().toString());
             // Insert timestamp
             contentDTO.setTimestamp(System.currentTimeMillis());
+            //좋아요 초기값
+            contentDTO.getFavorites().put("0",true);
             firestore.collection("images").document().set(contentDTO);
             setResult(Activity.RESULT_OK);
             finish();

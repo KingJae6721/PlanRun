@@ -56,32 +56,7 @@
                     android:background="#9DD6FA" />
             </RelativeLayout>
 
-            <RelativeLayout
-                android:id="@+id/club_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@id/post_btn"
-                android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@id/post_btn"
-                android:gravity="center">
 
-                <TextView
-                    android:id="@+id/club"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:layout_marginBottom="3dp"
-                    android:text="클럽"
-                    android:textColor="#595858"
-                    android:textSize="15dp" />
-
-                <View
-                    android:id="@+id/club_line"
-                    android:layout_width="30dp"
-                    android:layout_height="3dp"
-                    android:layout_below="@+id/club"
-                    android:background="#AFAFAF" />
-            </RelativeLayout>
             <ImageView
                 android:id="@+id/add_post"
                 android:layout_width="25dp"

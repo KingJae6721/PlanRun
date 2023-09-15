@@ -1,5 +1,6 @@
 package com.yj.planrun;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class ContentDTO {
@@ -9,7 +10,7 @@ public class ContentDTO {
     private String userId;
     private Long timestamp;
     private int favoriteCount;
-    private Map<String, Boolean> favorites;
+    private Map<String, Boolean> favorites = new HashMap<>();
     private String documentId;
     public ContentDTO() {
         // 기본 생성자
@@ -18,8 +19,7 @@ public class ContentDTO {
     public ContentDTO(String explain, String imageUrl, String uid, String userId, Long timestamp, int favoriteCount, Map<String, Boolean> favorites) {
         this.explain = explain;
         this.imageUrl = imageUrl;
-        this.uid =
-                uid;
+        this.uid = uid;
         this.userId = userId;
         this.timestamp = timestamp;
         this.favoriteCount = favoriteCount;
