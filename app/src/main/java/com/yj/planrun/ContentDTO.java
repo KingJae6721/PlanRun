@@ -8,27 +8,32 @@ public class ContentDTO {
     private String imageUrl;
     private String uid;
     private String userId;
+    private String nickname; // 사용자의 닉네임 추가
     private Long timestamp;
     private int favoriteCount;
     private Map<String, Boolean> favorites = new HashMap<>();
     private String documentId;
+
     public ContentDTO() {
         // 기본 생성자
     }
 
-    public ContentDTO(String explain, String imageUrl, String uid, String userId, Long timestamp, int favoriteCount, Map<String, Boolean> favorites) {
+    public ContentDTO(String explain, String imageUrl, String uid, String userId, String nickname, Long timestamp, int favoriteCount, Map<String, Boolean> favorites, String documentId) {
         this.explain = explain;
         this.imageUrl = imageUrl;
         this.uid = uid;
         this.userId = userId;
+        this.nickname = nickname; // 사용자의 닉네임 추가
         this.timestamp = timestamp;
         this.favoriteCount = favoriteCount;
         this.favorites = favorites;
+        this.documentId = documentId;
     }
 
     public String getDocumentId() {
         return documentId;
     }
+
     public void setDocumentId(String documentId) {
         this.documentId = documentId;
     }
@@ -65,6 +70,14 @@ public class ContentDTO {
         this.userId = userId;
     }
 
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
     public Long getTimestamp() {
         return timestamp;
     }
@@ -95,16 +108,19 @@ public class ContentDTO {
         private String comment;
         private Long timestamp;
         private String documentId; // 추가된 필드
+        private String nickname; // 사용자의 닉네임 추가
 
         public Comment() {
             // 기본 생성자
         }
 
-        public Comment(String uid, String userId, String comment, Long timestamp) {
+        public Comment(String uid, String userId, String comment, Long timestamp, String documentId, String nickname) {
             this.uid = uid;
             this.userId = userId;
             this.comment = comment;
             this.timestamp = timestamp;
+            this.documentId = documentId;
+            this.nickname = nickname; // 사용자의 닉네임 추가
         }
 
         public String getUid() {
@@ -139,9 +155,20 @@ public class ContentDTO {
             this.timestamp = timestamp;
         }
 
-        public String getDocumentId() {return documentId;}
+        public String getDocumentId() {
+            return documentId;
+        }
 
-        public void setDocumentId(String documentId) {this.documentId = documentId;
+        public void setDocumentId(String documentId) {
+            this.documentId = documentId;
+        }
+
+        public String getNickname() {
+            return nickname;
+        }
+
+        public void setNickname(String nickname) {
+            this.nickname = nickname;
         }
     }
 }

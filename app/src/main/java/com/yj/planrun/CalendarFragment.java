@@ -48,7 +48,8 @@ public class CalendarFragment extends Fragment {
 
 
     public MaterialCalendarView calendarView;
-    public TextView diaryTextView, tv_pace,tv_distance,tv_date,no_data;;
+    public TextView diaryTextView, tv_pace,tv_distance,tv_date,no_data;
+
 
 
     private FirebaseDatabase mDatabase;
@@ -115,10 +116,14 @@ public class CalendarFragment extends Fragment {
                         tv_date=(TextView) additionalView.findViewById(R.id.tv_date);
                         tv_pace=(TextView)additionalView.findViewById(R.id.tv_pace);
                         tv_distance=(TextView)additionalView.findViewById(R.id.tv_distance);
+                        TextView tv_time = (TextView) additionalView.findViewById(R.id.tv_time);
+                        TextView tv_calorie = (TextView) additionalView.findViewById(R.id.tv_kcal);
 
                         tv_distance.setText(a1.getDistance());
                         tv_date.setText(a1.getDate()+" "+a1.getDate_time());
                         tv_pace.setText(a1.getPace());
+                        tv_time.setText(a1.getTime());
+                        tv_calorie.setText(a1.getCalories());
 
                         layout_record.addView(additionalView);
 

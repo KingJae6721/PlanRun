@@ -97,16 +97,6 @@ public class AddPhotoActivity extends AppCompatActivity {
         String imageFileName = "IMAGE_" + timestamp + "_.png";
         StorageReference storageRef = storage.getReference().child("images").child(imageFileName);
 
-        /*
-        // File upload
-        if (photoUri != null) {
-            storageRef.putFile(photoUri).addOnSuccessListener(taskSnapshot -> {
-                Toast.makeText(AddPhotoActivity.this, "upload", Toast.LENGTH_LONG).show();
-                finish();
-            });
-        }
-        */
-
         // FileUpload
         // Upload image if photoUri is not null
 
@@ -130,8 +120,11 @@ public class AddPhotoActivity extends AppCompatActivity {
                     contentDTO.setExplain(addphoto_edit_explain.getText().toString());
                     // Insert timestamp
                     contentDTO.setTimestamp(System.currentTimeMillis());
-                    //좋아요 초기값
-                    contentDTO.getFavorites().put("0",true);
+
+                    // 여기에서 사용자의 닉네임을 가져와서 저장
+                    String userNickname = DataLoadingActivity.nickname; // DataLoadingActivity에서 가져온 닉네임					//이부분
+                    contentDTO.setNickname(userNickname);
+
                     firestore.collection("images").document().set(contentDTO);
                     setResult(Activity.RESULT_OK);
                     finish();
@@ -148,8 +141,11 @@ public class AddPhotoActivity extends AppCompatActivity {
             contentDTO.setExplain(addphoto_edit_explain.getText().toString());
             // Insert timestamp
             contentDTO.setTimestamp(System.currentTimeMillis());
-            //좋아요 초기값
-            contentDTO.getFavorites().put("0",true);
+
+            // 여기에서 사용자의 닉네임을 가져와서 저장
+            String userNickname = DataLoadingActivity.nickname; // DataLoadingActivity에서 가져온 닉네임
+            contentDTO.setNickname(userNickname);
+
             firestore.collection("images").document().set(contentDTO);
             setResult(Activity.RESULT_OK);
             finish();
