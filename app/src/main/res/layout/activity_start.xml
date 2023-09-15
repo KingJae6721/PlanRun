@@ -52,6 +52,7 @@
         android:layout_marginTop="5dp"
         android:layout_marginBottom="13dp"
         android:textColor="#DDDDDF"/>
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="185dp"
@@ -67,13 +68,6 @@
             android:background="@drawable/google_login2"
             android:scaleType="fitCenter" />
 
-        <ImageButton
-            android:id="@+id/btn_kakao"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:adjustViewBounds="true"
-            android:background="@drawable/kakao_login2"
-            android:scaleType="fitCenter" />
     </LinearLayout>
 
 </LinearLayout>

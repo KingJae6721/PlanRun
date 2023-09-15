@@ -64,7 +64,7 @@ public class StartActivity extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
 
-
+        getHashKey();
         SharedPreferences sharedPreferences = getSharedPreferences("sharedPreferences", Activity.MODE_PRIVATE);
         boolean autoLogin = sharedPreferences.getBoolean("checkbox_state", false);
 
@@ -76,7 +76,7 @@ public class StartActivity extends AppCompatActivity {
         }
 
         Button btn_login = (Button) findViewById(R.id.btn_login);
-         btn_kakao = (ImageButton) findViewById(R.id.btn_kakao);
+
          btn_login.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -87,7 +87,7 @@ public class StartActivity extends AppCompatActivity {
         });
 
     //카카오로그인
-        btn_kakao.setOnClickListener(new View.OnClickListener() {
+      /*  btn_kakao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -114,7 +114,7 @@ public class StartActivity extends AppCompatActivity {
                 }
             }
         });
-
+*/
 
         //여기서부터 구글로그인
         String id = sharedPreferences.getString("id", null);
