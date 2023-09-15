@@ -263,7 +263,7 @@ public class CommunityFragment extends Fragment {
             View view = viewHolder.itemView;
 
             // UserId
-            viewHolder.profileTextView.setText(contentDTO.getNickname());										//이부분
+            viewHolder.profileTextView.setText(contentDTO.getNickname());
 
             // Check if an image is available
             if (contentDTO.getImageUrl() != null && !contentDTO.getImageUrl().isEmpty()) {

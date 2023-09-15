@@ -141,7 +141,7 @@ public class AddPhotoActivity extends AppCompatActivity {
             contentDTO.setTimestamp(System.currentTimeMillis());
 
             // 여기에서 사용자의 닉네임을 가져와서 저장
-            String userNickname = DataLoadingActivity.nickname; // DataLoadingActivity에서 가져온 닉네임						//이부분
+            String userNickname = DataLoadingActivity.nickname; // DataLoadingActivity에서 가져온 닉네임
             contentDTO.setNickname(userNickname);
 
             firestore.collection("images").document().set(contentDTO);
