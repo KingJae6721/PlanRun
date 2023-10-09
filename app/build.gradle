@@ -52,6 +52,8 @@ dependencies {
     implementation 'androidx.preference:preference:1.2.0'
     implementation 'androidx.preference:preference-ktx:1.2.0'
     implementation 'com.sothree.slidinguppanel:library:3.4.0'
+    implementation 'com.google.firebase:firebase-firestore-ktx:24.8.1'
+    implementation 'com.google.firebase:firebase-storage-ktx:20.2.1'
     testImplementation 'junit:junit:4.13.2'
     implementation "com.kakao.sdk:v2-all:2.13.0" // 전체 모듈 설치, 2.11.0 버전부터 지원
     implementation 'com.google.android.gms:play-services-auth:20.5.0'
